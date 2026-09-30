@@ -1,0 +1,68 @@
+name: Apply loader v6.1.1
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/apply-v611.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Patch loader timing
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          replacements = [
+              ('const MIN_BOOT_MS = 3000;', 'const MIN_BOOT_MS = 1250;', 1),
+              ("transform .5s ease, opacity .5s ease, filter .5s ease", "transform .2s ease, opacity .2s ease, filter .2s ease", 1),
+              ('}, 360);', '}, 160);', 1),
+          ]
+          for old, new, count in replacements:
+              if old not in s:
+                  raise SystemExit(f'missing expected source: {old}')
+              s = s.replace(old, new, count)
+          if s.count('setTimeout(r, 450)') != 2:
+              raise SystemExit('unexpected 450ms wait count')
+          if s.count('setTimeout(r, 500)') != 2:
+              raise SystemExit('unexpected 500ms wait count')
+          if 'remaining - 500' not in s:
+              raise SystemExit('missing remaining wait expression')
+          s = s.replace('setTimeout(r, 450)', 'setTimeout(r, 180)')
+          s = s.replace('setTimeout(r, 500)', 'setTimeout(r, 120)')
+          s = s.replace('remaining - 500', 'remaining - 120', 1)
+          checks = [
+              'const MIN_BOOT_MS = 1250;',
+              "transform .2s ease, opacity .2s ease, filter .2s ease",
+              '}, 160);',
+              'remaining - 120',
+          ]
+          for token in checks:
+              if token not in s:
+                  raise SystemExit(f'verification failed: {token}')
+          if 'const MIN_BOOT_MS = 3000;' in s:
+              raise SystemExit('old 3000ms boot minimum still present')
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Verify v6.1.1
+        run: |
+          grep -q "UI LOADER v6.1" index.html
+          grep -q "const MIN_BOOT_MS = 1250;" index.html
+          grep -q "remaining - 120" index.html
+          ! grep -q "const MIN_BOOT_MS = 3000;" index.html
+      - name: Commit patch and remove one-time workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git rm .github/workflows/apply-v611.yml
+          git commit -m "Speed up interactive loader v6.1.1"
+          git push origin main
