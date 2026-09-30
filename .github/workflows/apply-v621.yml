@@ -1,0 +1,148 @@
+name: Apply v6.2.1 performance patch
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/apply-v621.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: RED - performance patch not present yet
+        id: red
+        continue-on-error: true
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('index.html').read_text(encoding='utf-8')
+          assert 'id="v621-performance-patch"' in s
+          assert 'data-loader-version="6.2.1"' in s
+          assert 'MIN=1150,HARD=1850' in s
+          PY
+
+      - name: Confirm RED failed as expected
+        shell: bash
+        run: |
+          test "${{ steps.red.outcome }}" = "failure"
+
+      - name: Apply performance optimization and slower loader
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+
+          def once(old,new,label):
+              global s
+              if old not in s:
+                  raise SystemExit(f'missing source for {label}')
+              s=s.replace(old,new,1)
+
+          once('data-loader-version="6.2.0"','data-loader-version="6.2.1"','loader version')
+          once('MIN=760,HARD=1450','MIN=1150,HARD=1850','loader timing')
+
+          once(
+            "setupSwipe();setupParallax();updateLiveClock();setInterval(updateLiveClock,30000);renderOverview();renderDaily();renderPerson();renderHeatmap();renderAnalytics();syncTodayTomorrowButtons();",
+            "setupSwipe();setupParallax();updateLiveClock();setInterval(updateLiveClock,30000);renderOverview();syncTodayTomorrowButtons();",
+            'lazy initial rendering'
+          )
+
+          once(
+            "normalizeOff();renderOverview();renderDaily();renderPerson();renderHeatmap();renderAnalytics();",
+            "normalizeOff();renderOverview();",
+            'avoid duplicate startup renders'
+          )
+
+          old_parallax="""function setupParallax(){const hero=$('#heroStage');if(hero&&!matchMedia('(prefers-reduced-motion: reduce)').matches){hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect();hero.style.setProperty('--px',((e.clientX-r.left)/r.width-.5).toFixed(2));hero.style.setProperty('--py',((e.clientY-r.top)/r.height-.5).toFixed(2))})}document.addEventListener('pointermove',e=>{const card=e.target.closest('.hud-panel');if(!card)return;const r=card.getBoundingClientRect();card.style.setProperty('--mx',`${e.clientX-r.left}px`);card.style.setProperty('--my',`${e.clientY-r.top}px`)})}"""
+          new_parallax="""function setupParallax(){const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;const hero=$('#heroStage');let heroRAF=0,cardRAF=0,heroX=0,heroY=0,card=null,cardX=0,cardY=0;if(hero&&!reduced){hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect();heroX=((e.clientX-r.left)/r.width-.5).toFixed(2);heroY=((e.clientY-r.top)/r.height-.5).toFixed(2);if(heroRAF)return;heroRAF=requestAnimationFrame(()=>{hero.style.setProperty('--px',heroX);hero.style.setProperty('--py',heroY);heroRAF=0})},{passive:true})}if(!reduced)document.addEventListener('pointermove',e=>{card=e.target.closest('.hud-panel');if(!card)return;const r=card.getBoundingClientRect();cardX=`${e.clientX-r.left}px`;cardY=`${e.clientY-r.top}px`;if(cardRAF)return;cardRAF=requestAnimationFrame(()=>{if(card){card.style.setProperty('--mx',cardX);card.style.setProperty('--my',cardY)}cardRAF=0})},{passive:true})}"""
+          once(old_parallax,new_parallax,'requestAnimationFrame parallax throttle')
+
+          old_obs="const offObserver=new MutationObserver(()=>{offObserver.disconnect();normalizeOff();offObserver.observe(document.body,{subtree:true,childList:true})});offObserver.observe(document.body,{subtree:true,childList:true});"
+          new_obs="let offTimer=0;const offObserver=new MutationObserver(()=>{clearTimeout(offTimer);offTimer=setTimeout(()=>{offObserver.disconnect();normalizeOff();offObserver.observe(document.body,{subtree:true,childList:true})},90)});offObserver.observe(document.body,{subtree:true,childList:true});"
+          once(old_obs,new_obs,'debounced OFF observer')
+
+          css=r'''<style id="v621-performance-patch">
+/* v6.2.1 performance pass — preserve the futuristic look with less continuous repainting */
+body{background-attachment:scroll!important}
+body::after{animation:none!important;transform:none!important}
+.ambient.a,.ambient.b{animation:none!important;will-change:auto!important}
+.ambient{filter:blur(92px)!important}
+.command-bar{backdrop-filter:blur(12px)!important}
+.hud-panel{backdrop-filter:blur(8px)!important}
+.network-line{animation:none!important}
+.network-svg circle{display:none!important}
+.network-node .core-shell::after{animation:none!important}
+.network-core .core-shell::after{animation-duration:18s!important}
+.metric-orb::before{animation-duration:18s!important}
+.city-svg{transition:none!important}
+@media(max-width:860px){
+  .command-bar,.hud-panel{backdrop-filter:none!important}
+  .ambient{filter:blur(70px)!important;opacity:.10!important}
+  .star,.scan-beam{animation:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .ambient,.network-line,.network-node .core-shell::after,.metric-orb::before,.star,.scan-beam{animation:none!important}
+}
+</style>'''
+          if 'id="v621-performance-patch"' in s:
+              raise SystemExit('performance patch already present')
+          if '</head>' not in s:
+              raise SystemExit('missing </head>')
+          s=s.replace('</head>',css+'\n</head>',1)
+          p.write_text(s,encoding='utf-8')
+          PY
+
+      - name: GREEN - verify performance patch and syntax
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('index.html').read_text(encoding='utf-8')
+          checks={
+            'performance css':'id="v621-performance-patch"' in s,
+            'loader v621':'data-loader-version="6.2.1"' in s,
+            'loader timing':'MIN=1150,HARD=1850' in s,
+            'lazy startup':'setupSwipe();setupParallax();updateLiveClock();setInterval(updateLiveClock,30000);renderOverview();syncTodayTomorrowButtons();' in s,
+            'no eager all-view startup':'setupSwipe();setupParallax();updateLiveClock();setInterval(updateLiveClock,30000);renderOverview();renderDaily();renderPerson();renderHeatmap();renderAnalytics();syncTodayTomorrowButtons();' not in s,
+            'debounced observer':'let offTimer=0;const offObserver=new MutationObserver' in s,
+            'rAF throttle':'let heroRAF=0,cardRAF=0' in s,
+            'no document.write':'document.write(' not in s,
+            'no runtime gzip':'DecompressionStream' not in s,
+          }
+          print(checks)
+          bad=[k for k,v in checks.items() if not v]
+          if bad: raise SystemExit('Verification failed: '+', '.join(bad))
+          PY
+          python - <<'PY'
+          from pathlib import Path
+          import re, subprocess
+          s=Path('index.html').read_text(encoding='utf-8')
+          scripts=re.findall(r'<script(?:\s[^>]*)?>(.*?)</script>',s,re.S|re.I)
+          for i,code in enumerate(scripts):
+              f=Path(f'/tmp/v621-script-{i}.js');f.write_text(code,encoding='utf-8')
+              r=subprocess.run(['node','--check',str(f)],capture_output=True,text=True)
+              if r.returncode:
+                  print(r.stderr);raise SystemExit(f'JS syntax failed in script {i}')
+          print(f'JS syntax OK: {len(scripts)} scripts')
+          PY
+
+      - name: Commit patch and remove one-time workflow
+        shell: bash
+        run: |
+          rm -f .github/workflows/apply-v621.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Optimize dashboard performance and loader v6.2.1'
+          git push origin HEAD:main
