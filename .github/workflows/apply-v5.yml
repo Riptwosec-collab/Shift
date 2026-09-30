@@ -1,0 +1,60 @@
+name: Apply Shift UI v5
+
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-v5.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply-v5:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inject v5 readability CSS into standalone dashboard
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, gzip, base64
+
+          index = Path('index.html')
+          text = index.read_text(encoding='utf-8')
+          match = re.search(r"const b64=['`]([^'`]+)['`]", text)
+          if not match:
+              raise SystemExit('compressed dashboard payload not found')
+
+          html = gzip.decompress(base64.b64decode(match.group(1))).decode('utf-8')
+          css = Path('v5.css').read_text(encoding='utf-8')
+
+          if '/* UI READABILITY V5 */' not in html:
+              if '</style>' not in html:
+                  raise SystemExit('style closing tag not found')
+              html = html.replace('</style>', css + '\n</style>', 1)
+
+          # Safety: original workforce data must still be present unchanged.
+          staff = re.search(r'<script>\s*(const staff=\[.*?\];)', html, re.S)
+          if not staff:
+              raise SystemExit('staff array missing after patch')
+          if staff.group(1).count('name:') != 10:
+              raise SystemExit('unexpected employee count')
+
+          payload = base64.b64encode(gzip.compress(html.encode('utf-8'), compresslevel=9)).decode('ascii')
+          text = text[:match.start(1)] + payload + text[match.end(1):]
+          index.write_text(text, encoding='utf-8')
+          PY
+      - name: Commit updated dashboard
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          if git diff --cached --quiet; then
+            echo 'No index changes needed.'
+            exit 0
+          fi
+          git commit -m 'Apply v5 readability and calendar styling'
+          git push
