@@ -2,9 +2,10 @@ name: Apply loader v6.1.3
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
-      - '.github/workflows/apply-v613.yml'
+      - .github/workflows/apply-v613.yml
 
 permissions:
   contents: write
@@ -13,151 +14,30 @@ jobs:
   apply:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Reproduce current hang pattern
-        shell: bash
+      - name: Apply patch
+        run: python .github/apply_v613.py
+      - name: Verify JavaScript syntax
         run: |
           python - <<'PY'
           from pathlib import Path
+          import re, subprocess
           s=Path('index.html').read_text(encoding='utf-8')
-          assert "new MutationObserver(normalizeOff).observe(document.body,{subtree:true,childList:true,characterData:true});" in s, 'unsafe observer pattern not found'
-          assert 'data-loader-version="6.1.2"' in s, 'expected v6.1.2 loader not found'
-          print('Reproduced: unsafe normalizeOff observer can self-trigger and starve loader handoff')
-          PY
-
-      - name: Apply v6.1.3 fix and merged loader design
-        shell: bash
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          import re
-
-          p=Path('index.html')
-          s=p.read_text(encoding='utf-8')
-
-          old_norm="const normalizeOff=()=>{document.querySelectorAll('.month-cell.off .code,.pattern-day.O b,.heatmap td.shift.O').forEach(el=>{const t=el.textContent.trim();if(t==='—'||t==='O')el.textContent='OFF'});const f=document.querySelector('.footer');if(f)f.textContent=f.textContent.replace('O = OFF','OFF = วันหยุด')};"
-          new_norm="const normalizeOff=()=>{document.querySelectorAll('.month-cell.off .code,.pattern-day.O b,.heatmap td.shift.O,.matrix-cell.O').forEach(el=>{const t=el.textContent.trim();if(t==='—'||t==='O')el.textContent='OFF'});const f=document.querySelector('.footer');if(f&&f.textContent.includes('O = OFF'))f.textContent=f.textContent.replace('O = OFF','OFF = วันหยุด')};"
-          if old_norm not in s:
-              raise SystemExit('normalizeOff source changed unexpectedly')
-          s=s.replace(old_norm,new_norm,1)
-
-          unsafe="new MutationObserver(normalizeOff).observe(document.body,{subtree:true,childList:true,characterData:true});"
-          safe="const offObserver=new MutationObserver(()=>{offObserver.disconnect();normalizeOff();offObserver.observe(document.body,{subtree:true,childList:true})});offObserver.observe(document.body,{subtree:true,childList:true});"
-          if unsafe not in s:
-              raise SystemExit('unsafe observer missing before replacement')
-          s=s.replace(unsafe,safe,1)
-
-          def replace_tag_block(src, tag, id_value, replacement):
-              start_token=f'<{tag} id="{id_value}"'
-              start=src.find(start_token)
-              if start<0:
-                  raise SystemExit(f'{id_value} not found')
-              end=src.find(f'</{tag}>',start)
-              if end<0:
-                  raise SystemExit(f'{id_value} closing tag not found')
-              end+=len(f'</{tag}>')
-              return src[:start]+replacement+src[end:]
-
-          def replace_div_by_id(src,id_value,replacement):
-              start=src.find(f'<div id="{id_value}"')
-              if start<0: raise SystemExit(f'{id_value} not found')
-              token_re=re.compile(r'<div\b[^>]*>|</div>',re.I)
-              depth=0
-              end=None
-              for m in token_re.finditer(src,start):
-                  if m.group(0).lower().startswith('<div'):
-                      depth+=1
-                  else:
-                      depth-=1
-                      if depth==0:
-                          end=m.end(); break
-              if end is None: raise SystemExit(f'unbalanced div for {id_value}')
-              return src[:start]+replacement+src[end:]
-
-          css=r'''<style id="v613-loader-style">
-#bootOverlay{position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;padding:20px;background:radial-gradient(circle at 20% 10%,rgba(56,232,255,.12),transparent 28%),radial-gradient(circle at 82% 18%,rgba(119,91,255,.11),transparent 30%),linear-gradient(180deg,#020710,#06111f 66%,#040b14);color:#eefbff;font-family:"Leelawadee UI","Segoe UI",Tahoma,system-ui,sans-serif;transition:opacity .18s ease,visibility .18s ease;overflow:hidden}
-#bootOverlay::before{content:"";position:absolute;inset:0;opacity:.28;background-image:linear-gradient(30deg,rgba(56,232,255,.11) 1px,transparent 1px),linear-gradient(150deg,rgba(56,232,255,.11) 1px,transparent 1px);background-size:64px 112px;mask-image:radial-gradient(circle at center,#000,transparent 82%)}
-#bootOverlay.out{opacity:0;visibility:hidden;pointer-events:none}
-.boot613-shell{position:relative;width:min(760px,94vw);border:1px solid rgba(56,232,255,.2);border-radius:28px;background:linear-gradient(180deg,rgba(9,22,39,.88),rgba(4,13,24,.88));box-shadow:0 28px 90px rgba(0,0,0,.55),inset 0 1px rgba(255,255,255,.05);backdrop-filter:blur(18px);padding:24px;overflow:hidden}
-.boot613-shell::before,.boot613-shell::after{content:"";position:absolute;width:110px;height:110px;border:1px solid rgba(56,232,255,.25);pointer-events:none}.boot613-shell::before{left:10px;top:10px;border-right:0;border-bottom:0;border-radius:18px 0 0}.boot613-shell::after{right:10px;bottom:10px;border-left:0;border-top:0;border-radius:0 0 18px}
-.boot613-top{display:flex;align-items:center;gap:14px;margin-bottom:18px}.boot613-logo{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(56,232,255,.18),rgba(39,139,255,.12),rgba(119,91,255,.17));border:1px solid rgba(56,232,255,.24);box-shadow:0 0 34px rgba(56,232,255,.12)}.boot613-logo::before{content:"";width:28px;height:28px;clip-path:polygon(50% 0,100% 86%,71% 86%,50% 50%,29% 86%,0 86%);background:linear-gradient(180deg,#71f4ff,#278bff);filter:drop-shadow(0 0 10px rgba(56,232,255,.4))}.boot613-title small{display:block;color:#7599b6;font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:800}.boot613-title h2{margin:3px 0 3px;font-size:clamp(22px,3vw,34px);letter-spacing:-.035em}.boot613-title p{margin:0;color:#9ab9d0;font-size:13px}.boot613-live{margin-left:auto;border:1px solid rgba(34,230,168,.28);background:rgba(34,230,168,.05);border-radius:999px;padding:9px 12px;color:#98f6d6;font-size:11px;font-weight:800;white-space:nowrap}.boot613-main{display:grid;grid-template-columns:260px 1fr;gap:18px;align-items:center}.boot613-radar{height:260px;display:grid;place-items:center;position:relative;border:1px solid rgba(56,232,255,.13);border-radius:24px;background:radial-gradient(circle,rgba(56,232,255,.08),rgba(8,20,35,.34) 45%,rgba(3,12,22,.72));overflow:hidden}.boot613-orbit{position:relative;width:170px;height:170px;border-radius:50%;border:1px solid rgba(56,232,255,.18);box-shadow:0 0 60px rgba(56,232,255,.08),inset 0 0 35px rgba(39,139,255,.04)}.boot613-arc{position:absolute;border-radius:50%;border:3px solid transparent;inset:18px;animation:b613spin .72s linear infinite}.boot613-arc.a{border-top-color:#38e8ff;border-right-color:#278bff}.boot613-arc.b{inset:34px;border-width:2px;border-top-color:#775bff;border-left-color:#775bff;animation-duration:1s;animation-direction:reverse}.boot613-arc.c{inset:49px;border-width:2px;border-bottom-color:#ffb43a;border-right-color:#ffb43a;animation-duration:1.25s}.boot613-core{position:absolute;inset:66px;border-radius:50%;background:radial-gradient(circle,#dffcff 0 8%,#38e8ff 10%,rgba(56,232,255,.13) 45%,transparent 70%);box-shadow:0 0 28px rgba(56,232,255,.28);animation:b613pulse .75s ease-in-out infinite alternate}.boot613-orbit::before{content:"";position:absolute;inset:-22px;border:1px dashed rgba(119,91,255,.15);border-radius:50%;animation:b613spin 10s linear infinite reverse}.boot613-info{display:grid;gap:12px}.boot613-card{padding:15px 16px;border:1px solid rgba(56,232,255,.14);border-radius:18px;background:rgba(8,20,35,.7)}.boot613-card-head{display:flex;justify-content:space-between;gap:10px;margin-bottom:10px}.boot613-card-head b{font-size:15px}.boot613-card-head span{font-size:12px;color:#88a8c0}.boot613-progress{height:12px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.05)}.boot613-progress i{display:block;height:100%;width:8%;border-radius:inherit;background:linear-gradient(90deg,#38e8ff,#278bff,#775bff);box-shadow:0 0 18px rgba(56,232,255,.3);transition:width .16s ease}.boot613-readout{display:flex;justify-content:space-between;align-items:flex-end;margin-top:8px}.boot613-pct{font-size:30px;font-weight:900;letter-spacing:-.04em}.boot613-phase{color:#7f9db5;font-size:11px;text-align:right}.boot613-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.boot613-mini{padding:10px;border:1px solid rgba(255,255,255,.055);border-radius:14px;background:rgba(255,255,255,.018)}.boot613-mini span{display:block;color:#6e8aa2;font-size:9px;letter-spacing:.1em;text-transform:uppercase}.boot613-mini b{display:block;margin-top:4px;font-size:14px}.boot613-mini:nth-child(1) b{color:#38e8ff}.boot613-mini:nth-child(2) b{color:#9b7cff}.boot613-mini:nth-child(3) b{color:#ffbf4a}.boot613-scan{height:8px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.035)}.boot613-scan i{display:block;width:34%;height:100%;background:linear-gradient(90deg,transparent,#38e8ff,transparent);animation:b613scan .75s ease-in-out infinite}
-@keyframes b613spin{to{transform:rotate(360deg)}}@keyframes b613pulse{to{transform:scale(1.13);opacity:.78}}@keyframes b613scan{from{transform:translateX(-120%)}to{transform:translateX(320%)}}
-@media(max-width:720px){.boot613-shell{padding:18px}.boot613-main{grid-template-columns:1fr}.boot613-radar{height:210px}.boot613-orbit{width:150px;height:150px}.boot613-live{display:none}.boot613-grid{grid-template-columns:1fr 1fr}.boot613-mini:last-child{grid-column:1/-1}}
-@media(prefers-reduced-motion:reduce){.boot613-arc,.boot613-core,.boot613-orbit::before,.boot613-scan i{animation-duration:.01ms!important;animation-iteration-count:1!important}}
-</style>'''
-
-          html=r'''<div id="bootOverlay" data-loader-version="6.1.3" aria-live="polite" aria-label="Loading Shift Command Center">
-  <div class="boot613-shell">
-    <div class="boot613-top"><div class="boot613-logo"></div><div class="boot613-title"><small>Boot Sequence</small><h2>Loading Shift Command Center</h2><p>กำลังเชื่อมต่อ Shift Matrix และ Command UI…</p></div><div class="boot613-live">● LIVE BOOT</div></div>
-    <div class="boot613-main">
-      <div class="boot613-radar"><div class="boot613-orbit"><i class="boot613-arc a"></i><i class="boot613-arc b"></i><i class="boot613-arc c"></i><i class="boot613-core"></i></div></div>
-      <div class="boot613-info">
-        <div class="boot613-card"><div class="boot613-card-head"><b id="boot613Phase">Initializing Core Systems</b><span id="boot613Status">Starting…</span></div><div class="boot613-progress"><i id="boot613Bar"></i></div><div class="boot613-readout"><div class="boot613-pct" id="boot613Pct">8%</div><div class="boot613-phase" id="boot613Meta">phase 1 / 4<br>Secure startup</div></div></div>
-        <div class="boot613-grid"><div class="boot613-mini"><span>Module</span><b>Command UI</b></div><div class="boot613-mini"><span>Matrix</span><b>October 2569</b></div><div class="boot613-mini"><span>Status</span><b id="boot613State">BOOTING</b></div></div>
-        <div class="boot613-scan"><i></i></div>
-      </div>
-    </div>
-  </div>
-</div>'''
-
-          js=r'''<script id="v613-loader-runtime">
-(() => {
-  const overlay=document.getElementById('bootOverlay');
-  if(!overlay)return;
-  const bar=document.getElementById('boot613Bar'),pct=document.getElementById('boot613Pct'),phase=document.getElementById('boot613Phase'),status=document.getElementById('boot613Status'),meta=document.getElementById('boot613Meta'),state=document.getElementById('boot613State');
-  const phases=[['Initializing Core Systems','Starting…','phase 1 / 4<br>Secure startup'],['Verifying Shift Matrix','Checking schedule…','phase 2 / 4<br>Data verify'],['Linking Command Grid','Connecting widgets…','phase 3 / 4<br>Nexus link'],['Rendering Interface','Ready to enter','phase 4 / 4<br>Final render']];
-  const started=performance.now(),MIN=760,HARD=1450;
-  let done=false,raf=0;
-  const paint=()=>{if(done)return;const e=performance.now()-started,p=Math.min(96,8+e/HARD*100),i=p<28?0:p<56?1:p<82?2:3;bar.style.width=p+'%';pct.textContent=Math.round(p)+'%';phase.textContent=phases[i][0];status.textContent=phases[i][1];meta.innerHTML=phases[i][2];raf=requestAnimationFrame(paint)};
-  const exit=()=>{if(done)return;done=true;cancelAnimationFrame(raf);bar.style.width='100%';pct.textContent='100%';state.textContent='READY';const wait=Math.max(0,MIN-(performance.now()-started));setTimeout(()=>{overlay.classList.add('out');setTimeout(()=>overlay.remove(),190)},wait)};
-  requestAnimationFrame(paint);
-  if(document.readyState==='complete'||document.readyState==='interactive')setTimeout(exit,40);else document.addEventListener('DOMContentLoaded',exit,{once:true});
-  setTimeout(exit,HARD);
-})();
-</script>'''
-
-          s=replace_tag_block(s,'style','v612-loader-style',css)
-          s=replace_div_by_id(s,'bootOverlay',html)
-          s=replace_tag_block(s,'script','v612-loader-runtime',js)
-          p.write_text(s,encoding='utf-8')
-          PY
-
-      - name: Verify regression and syntax
-        shell: bash
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          import re, subprocess, tempfile
-          s=Path('index.html').read_text(encoding='utf-8')
-          checks={
-            'unsafe observer removed':"new MutationObserver(normalizeOff).observe(document.body,{subtree:true,childList:true,characterData:true});" not in s,
-            'safe observer present':'offObserver.disconnect();normalizeOff();offObserver.observe(document.body,{subtree:true,childList:true})' in s,
-            'footer write guarded':"f&&f.textContent.includes('O = OFF')" in s,
-            'merged loader v6.1.3':'data-loader-version="6.1.3"' in s and 'boot613-orbit' in s,
-            'hard exit':'HARD=1450' in s,
-            'direct dashboard':'id="overviewView"' in s,
-            'no document.write':'document.write(html)' not in s,
-            'no runtime decompression':'DecompressionStream' not in s,
-          }
-          print(checks)
-          bad=[k for k,v in checks.items() if not v]
-          if bad: raise SystemExit('Verification failed: '+', '.join(bad))
           scripts=re.findall(r'<script[^>]*>(.*?)</script>',s,re.S|re.I)
           for i,body in enumerate(scripts):
-              f=Path(f'/tmp/check-{i}.js');f.write_text(body,encoding='utf-8')
+              f=Path(f'/tmp/check-{i}.js')
+              f.write_text(body,encoding='utf-8')
               r=subprocess.run(['node','--check',str(f)],capture_output=True,text=True)
               if r.returncode:
-                  print(r.stderr);raise SystemExit(f'JS syntax failed in script {i}')
-          print('All embedded JS syntax checks passed:',len(scripts))
+                  print(r.stderr)
+                  raise SystemExit(f'JS syntax failed in script {i}')
+          print('JS syntax checks passed:',len(scripts))
           PY
-
-      - name: Commit fix and remove one-time workflow
-        shell: bash
+      - name: Commit result
         run: |
-          rm -f .github/workflows/apply-v613.yml
+          rm -f .github/workflows/apply-v613.yml .github/apply_v613.py
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A
