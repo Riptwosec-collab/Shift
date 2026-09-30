@@ -1,0 +1,138 @@
+name: Apply Shift v6.1
+
+on:
+  push:
+    branches:
+      - v61-stage-20260930
+
+permissions:
+  contents: write
+
+concurrency:
+  group: shift-v61-apply
+  cancel-in-progress: true
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout staging branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply v6.1 runtime patch
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import base64, re
+
+          index = Path('index.html')
+          source = index.read_text(encoding='utf-8')
+          patch_b64 = ''.join(Path(f'.v61/patch{i:02d}').read_text(encoding='utf-8').strip() for i in range(9))
+          patch_html = base64.b64decode(patch_b64).decode('utf-8')
+
+          assert len(patch_b64) == 21756, len(patch_b64)
+          assert 'v61-status-patch' in patch_html
+          assert 'v61-runtime-patch' in patch_html
+          assert 'renderAnalytics=function()' in patch_html
+          assert 'detailOverlap' in patch_html
+
+          payload_anchor = "const payloadBytes = Math.round((payloadB64.length * 3 / 4) / 1024);"
+          assert payload_anchor in source
+          source = source.replace(
+              payload_anchor,
+              payload_anchor + "\nconst V61_PATCH_B64 = '" + patch_b64 + "';",
+              1,
+          )
+
+          assert '<div class="badge">UI LOADER v6</div>' in source
+          source = source.replace(
+              '<div class="badge">UI LOADER v6</div>',
+              '<div class="badge">UI LOADER v6.1</div>',
+              1,
+          )
+
+          state_anchor = "let fake = 0;\nlet target = 0;"
+          assert state_anchor in source
+          source = source.replace(
+              state_anchor,
+              "const MIN_BOOT_MS = 3000;\nconst bootStartedAt = performance.now();\nlet fake = 0;\nlet target = 0;",
+              1,
+          )
+
+          start = source.index('async function boot(){')
+          end = source.index("\n}\n\nel.skip.addEventListener", start) + 2
+          new_boot = '''async function boot(){
+            try {
+              requestAnimationFrame(tick);
+              target = 18;
+              await new Promise(r => setTimeout(r, 450));
+              target = 40;
+              const bin = Uint8Array.from(atob(payloadB64), c => c.charCodeAt(0));
+              await new Promise(r => setTimeout(r, 500));
+              target = 62;
+              const ds = new DecompressionStream('gzip');
+              htmlCache = await new Response(new Blob([bin]).stream().pipeThrough(ds)).text();
+              const patchHtml = new TextDecoder().decode(Uint8Array.from(atob(V61_PATCH_B64), c => c.charCodeAt(0)));
+              htmlCache = htmlCache.replace('</body>', patchHtml + '</body>');
+              await new Promise(r => setTimeout(r, 450));
+              target = 82;
+              readyToEnter = true;
+              el.m3.textContent = 'SYNCING';
+              if (skipRequested) return enterApp(htmlCache);
+              const elapsed = performance.now() - bootStartedAt;
+              const remaining = Math.max(0, MIN_BOOT_MS - elapsed);
+              target = 94;
+              await new Promise(r => setTimeout(r, Math.max(0, remaining - 500)));
+              target = 100;
+              el.m3.textContent = 'SYNCED';
+              await new Promise(r => setTimeout(r, 500));
+              enterApp(htmlCache);
+            } catch (e) {
+              console.error(e);
+              el.title.textContent = 'Unable to load dashboard';
+              el.status.textContent = 'Browser does not support the loader or payload failed to decode.';
+              el.m3.textContent = 'ERROR';
+              document.querySelector('.hint').textContent = 'ลองเปิดด้วย Chrome เวอร์ชันใหม่ หรือรีเฟรชอีกครั้ง';
+            }
+          }'''
+          source = source[:start] + new_boot + source[end:]
+
+          assert 'UI LOADER v6.1' in source
+          assert 'MIN_BOOT_MS = 3000' in source
+          assert 'V61_PATCH_B64' in source
+          assert "htmlCache = htmlCache.replace('</body>', patchHtml + '</body>');" in source
+          index.write_text(source, encoding='utf-8')
+
+          script = re.search(r'<script id="v61-runtime-patch">([\s\S]*?)</script>', patch_html)
+          assert script
+          Path('/tmp/v61-runtime.js').write_text(script.group(1), encoding='utf-8')
+          PY
+
+          node --check /tmp/v61-runtime.js
+          grep -q 'UI LOADER v6.1' index.html
+          grep -q 'MIN_BOOT_MS = 3000' index.html
+          grep -q 'V61_PATCH_B64' index.html
+
+      - name: Publish clean v6.1 to main
+        shell: bash
+        run: |
+          rm -rf .v61
+          rm -f .github/workflows/apply-v61.yml
+          rmdir .github/workflows 2>/dev/null || true
+          rmdir .github 2>/dev/null || true
+
+          test -f index.html
+          test ! -e .v61
+          test ! -e .github/workflows/apply-v61.yml
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Apply v6.1 shift colors analytics and loader'
+          git fetch origin main
+          git merge-base --is-ancestor origin/main HEAD
+          git push origin HEAD:main
