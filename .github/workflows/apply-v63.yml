@@ -24,15 +24,24 @@ jobs:
           tar -tzf /tmp/v63.tgz
           tar -xzf /tmp/v63.tgz
 
-      - name: Test source before build
+      - name: Test source logic before build
         shell: bash
-        run: npm test
+        run: |
+          node --test \
+            tests/data.test.mjs \
+            tests/cache.test.mjs \
+            tests/core.test.mjs \
+            tests/loader.test.mjs \
+            tests/daily-risk.test.mjs \
+            tests/network.test.mjs \
+            tests/analytics.test.mjs \
+            tests/command-palette.test.mjs
 
       - name: Build standalone production index
         shell: bash
         run: npm run build
 
-      - name: Test built production package
+      - name: Test complete built production package
         shell: bash
         run: npm test
 
