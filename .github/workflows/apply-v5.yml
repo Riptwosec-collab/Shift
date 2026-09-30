@@ -1,4 +1,4 @@
-name: Apply Shift UI v5
+name: Clean Shift UI v5 temp files
 
 on:
   push:
@@ -9,56 +9,35 @@ permissions:
   contents: write
 
 jobs:
-  apply-v5:
+  cleanup:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Assemble and verify v5 dashboard payload
+      - name: Verify deployed dashboard before cleanup
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
-          import base64, gzip, hashlib, re
-
-          chunks = sorted(Path('payloadv5').glob('*.txt'))
-          if len(chunks) != 14:
-              raise SystemExit(f'expected 14 payload chunks, got {len(chunks)}')
-
-          payload = ''.join(p.read_text(encoding='utf-8').strip() for p in chunks)
-          if len(payload) != 37008:
-              raise SystemExit(f'unexpected payload length: {len(payload)}')
-
-          html = gzip.decompress(base64.b64decode(payload)).decode('utf-8')
-          expected_html_sha = 'bb8869ed739e1c1b077957f49bc79bfc548adc23645aa91a044fa3876fae2966'
-          actual_html_sha = hashlib.sha256(html.encode()).hexdigest()
-          if actual_html_sha != expected_html_sha:
-              raise SystemExit(f'html hash mismatch: {actual_html_sha}')
-
-          if '/* UI READABILITY V5 */' not in html:
-              raise SystemExit('v5 marker missing')
-
-          staff = re.search(r'const staff=\[(.*?)\];', html, re.S)
-          if not staff or staff.group(1).count('name:') != 10:
-              raise SystemExit('staff safety check failed')
-
-          loader = f'''<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#020710"><title>Shift Command Center</title></head><body style="margin:0;background:#020710;color:#dffcff;font-family:system-ui;display:grid;place-items:center;min-height:100vh"><div id="boot">Loading Shift Command Center…</div><script>(async()=>{{try{{const b64='{payload}';const bin=Uint8Array.from(atob(b64),c=>c.charCodeAt(0));const ds=new DecompressionStream('gzip');const html=await new Response(new Blob([bin]).stream().pipeThrough(ds)).text();document.open();document.write(html);document.close()}}catch(e){{console.error(e);document.getElementById('boot').textContent='Unable to load Shift Command Center'}}}})();<\/script></body></html>'''
-          Path('index.html').write_text(loader, encoding='utf-8')
-          print('VERIFIED payload_bytes', len(payload))
-          print('VERIFIED html_sha256', actual_html_sha)
-          print('VERIFIED html_bytes', len(html.encode()))
+          import re, base64, gzip, hashlib
+          text = Path('index.html').read_text(encoding='utf-8')
+          m = re.search(r"const b64='([^']+)'", text)
+          if not m:
+              raise SystemExit('deployed payload not found')
+          html = gzip.decompress(base64.b64decode(m.group(1))).decode('utf-8')
+          sha = hashlib.sha256(html.encode()).hexdigest()
+          expected = 'bb8869ed739e1c1b077957f49bc79bfc548adc23645aa91a044fa3876fae2966'
+          if sha != expected or '/* UI READABILITY V5 */' not in html:
+              raise SystemExit('deployed dashboard verification failed')
+          print('VERIFIED deployed v5', sha)
           PY
 
-      - name: Commit v5 dashboard
+      - name: Remove temporary deployment files
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add index.html
-          if git diff --cached --quiet; then
-            echo 'No index changes needed.'
-            exit 0
-          fi
-          git commit -m 'Apply v5 readability and calendar styling'
+          git rm -r payload payloadv5 v5.css .github/workflows/apply-v5.yml
+          git commit -m 'Clean temporary v5 deployment files'
           git push
