@@ -1,5 +1,4 @@
 name: Apply v6.2.1 performance patch
-# one-time workflow; self-removes after successful patch
 
 on:
   push:
@@ -72,21 +71,21 @@ jobs:
           once(old_obs,new_obs,'debounced OFF observer')
 
           css=r'''<style id="v621-performance-patch">
-body{background-attachment:scroll!important}
-body::after{animation:none!important;transform:none!important}
-.ambient.a,.ambient.b{animation:none!important;will-change:auto!important}
-.ambient{filter:blur(92px)!important}
-.command-bar{backdrop-filter:blur(12px)!important}
-.hud-panel{backdrop-filter:blur(8px)!important}
-.network-line{animation:none!important}
-.network-svg circle{display:none!important}
-.network-node .core-shell::after{animation:none!important}
-.network-core .core-shell::after{animation-duration:18s!important}
-.metric-orb::before{animation-duration:18s!important}
-.city-svg{transition:none!important}
-@media(max-width:860px){.command-bar,.hud-panel{backdrop-filter:none!important}.ambient{filter:blur(70px)!important;opacity:.10!important}.star,.scan-beam{animation:none!important}}
-@media(prefers-reduced-motion:reduce){.ambient,.network-line,.network-node .core-shell::after,.metric-orb::before,.star,.scan-beam{animation:none!important}}
-</style>'''
+          body{background-attachment:scroll!important}
+          body::after{animation:none!important;transform:none!important}
+          .ambient.a,.ambient.b{animation:none!important;will-change:auto!important}
+          .ambient{filter:blur(92px)!important}
+          .command-bar{backdrop-filter:blur(12px)!important}
+          .hud-panel{backdrop-filter:blur(8px)!important}
+          .network-line{animation:none!important}
+          .network-svg circle{display:none!important}
+          .network-node .core-shell::after{animation:none!important}
+          .network-core .core-shell::after{animation-duration:18s!important}
+          .metric-orb::before{animation-duration:18s!important}
+          .city-svg{transition:none!important}
+          @media(max-width:860px){.command-bar,.hud-panel{backdrop-filter:none!important}.ambient{filter:blur(70px)!important;opacity:.10!important}.star,.scan-beam{animation:none!important}}
+          @media(prefers-reduced-motion:reduce){.ambient,.network-line,.network-node .core-shell::after,.metric-orb::before,.star,.scan-beam{animation:none!important}}
+          </style>'''
           if 'id="v621-performance-patch"' in s:
               raise SystemExit('performance patch already present')
           if '</head>' not in s:
