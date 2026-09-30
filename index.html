@@ -292,7 +292,7 @@ const el = {
 };
 el.m2.textContent = payloadBytes + ' KB';
 
-const MIN_BOOT_MS = 3000;
+const MIN_BOOT_MS = 1250;
 const bootStartedAt = performance.now();
 let fake = 0;
 let target = 0;
@@ -329,7 +329,7 @@ function enterApp(html){
   entered = true;
   el.m3.textContent = 'READY';
   paintProgress(100);
-  el.panel.style.transition = 'transform .5s ease, opacity .5s ease, filter .5s ease';
+  el.panel.style.transition = 'transform .2s ease, opacity .2s ease, filter .2s ease';
   el.panel.style.transform = 'scale(.985) translateY(10px)';
   el.panel.style.opacity = '.0';
   el.panel.style.filter = 'blur(10px)';
@@ -337,23 +337,23 @@ function enterApp(html){
     document.open();
     document.write(html);
     document.close();
-  }, 360);
+  }, 160);
 }
 
 async function boot(){
   try {
     requestAnimationFrame(tick);
     target = 18;
-    await new Promise(r => setTimeout(r, 450));
+    await new Promise(r => setTimeout(r, 180));
     target = 40;
     const bin = Uint8Array.from(atob(payloadB64), c => c.charCodeAt(0));
-    await new Promise(r => setTimeout(r, 500));
+    await new Promise(r => setTimeout(r, 120));
     target = 62;
     const ds = new DecompressionStream('gzip');
     htmlCache = await new Response(new Blob([bin]).stream().pipeThrough(ds)).text();
     const patchHtml = new TextDecoder().decode(Uint8Array.from(atob(V61_PATCH_B64), c => c.charCodeAt(0)));
     htmlCache = htmlCache.replace('</body>', patchHtml + '</body>');
-    await new Promise(r => setTimeout(r, 450));
+    await new Promise(r => setTimeout(r, 180));
     target = 82;
     readyToEnter = true;
     el.m3.textContent = 'SYNCING';
@@ -361,10 +361,10 @@ async function boot(){
     const elapsed = performance.now() - bootStartedAt;
     const remaining = Math.max(0, MIN_BOOT_MS - elapsed);
     target = 94;
-    await new Promise(r => setTimeout(r, Math.max(0, remaining - 500)));
+    await new Promise(r => setTimeout(r, Math.max(0, remaining - 120)));
     target = 100;
     el.m3.textContent = 'SYNCED';
-    await new Promise(r => setTimeout(r, 500));
+    await new Promise(r => setTimeout(r, 120));
     enterApp(htmlCache);
   } catch (e) {
     console.error(e);
