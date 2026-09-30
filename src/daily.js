@@ -1,0 +1,4 @@
+import {formatStatus} from './data.js';
+export function compareAdjacentDay(day,cache){const cur=cache.dayStats[day],pack=x=>x?{D:x.D-cur.D,N:x.N-cur.N,OFF:x.OFF-cur.OFF,working:x.working-cur.working,coverage:x.coverage-cur.coverage}:null;return {previous:day>1?pack(cache.dayStats[day-1]):null,next:day<31?pack(cache.dayStats[day+1]):null}}
+export function shiftTransitions(day,staff){if(day>=31)return [];return staff.map((p,i)=>({i,name:p.name,from:formatStatus(p.s[day-1]),to:formatStatus(p.s[day])})).filter(x=>x.from!==x.to)}
+export function dailyModel(day,cache,staff){const lists={D:[],N:[],OFF:[]};staff.forEach((p,i)=>{const c=p.s[day-1],k=c==='O'?'OFF':c;lists[k].push({i,name:p.name,status:k})});return {...lists,counts:cache.dayStats[day],coverage:cache.dayStats[day].coverage,comparison:compareAdjacentDay(day,cache),transitions:shiftTransitions(day,staff)}}

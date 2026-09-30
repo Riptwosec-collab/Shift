@@ -1,0 +1,1 @@
+export function analyticsModel(cache){return {people:cache.personStats.map(p=>({...p,deltaFromAvg:+(p.working-cache.teamStats.avgWork).toFixed(1)})),daily:cache.dayStats.slice(1),team:cache.teamStats}}

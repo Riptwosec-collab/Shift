@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {STAFF} from '../src/data.js';import {createScheduleCache} from '../src/cache.js';import {compareAdjacentDay,shiftTransitions,dailyModel} from '../src/daily.js';import {RISK_THRESHOLDS,evaluateDayRisk} from '../src/risk.js';
+const c=createScheduleCache(STAFF);
+test('boundary comparisons do not wrap',()=>{assert.equal(compareAdjacentDay(1,c).previous,null);assert.equal(compareAdjacentDay(31,c).next,null);});
+test('daily model exposes D N OFF and coverage',()=>{const m=dailyModel(1,c,STAFF);assert.equal(m.D.length+m.N.length+m.OFF.length,10);assert.equal(m.coverage,c.dayStats[1].coverage);assert.ok(m.OFF.every(x=>x.status==='OFF'));assert.ok(Array.isArray(shiftTransitions(1,STAFF)));});
+test('risk thresholds are fixed',()=>{assert.deepEqual(RISK_THRESHOLDS,{LOW_STAFFING:6,LOW_NIGHT_COVERAGE:2,CONSECUTIVE_WORK:3,LONG_NIGHT_STREAK:3,D_N_IMBALANCE:3,HIGH_OFF_COUNT:5});assert.ok(Array.isArray(evaluateDayRisk(1,c,STAFF)));});

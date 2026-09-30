@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {loaderPhaseAt,LOADER_TARGET_MS,LOADER_HARD_EXIT_MS} from '../src/loader.js';
+test('loader uses three second target and 3.6 second safety',()=>{assert.equal(LOADER_TARGET_MS,3000);assert.equal(LOADER_HARD_EXIT_MS,3600);});
+test('loader phases advance in order',()=>{assert.equal(loaderPhaseAt(0).label,'CORE INITIALIZE');assert.equal(loaderPhaseAt(900).label,'SHIFT MATRIX VERIFY');assert.equal(loaderPhaseAt(1700).label,'COMMAND GRID LINK');assert.equal(loaderPhaseAt(2700).label,'INTERFACE READY');assert.equal(loaderPhaseAt(3000).progress,100);});

@@ -1,0 +1,4 @@
+import fs from 'node:fs';import path from 'node:path';
+const root=process.cwd();const order=['data.js','cache.js','core.js','performance.js','loader.js','risk.js','daily.js','network.js','analytics.js','command-palette.js','overview.js','person.js','month.js','mobile.js','app.js'];
+const strip=s=>s.replace(/^import .*?;\s*$/gm,'').replace(/\bexport\s+(?=(const|let|var|function|class)\b)/g,'').replace(/^export\s*\{[^}]*\};?\s*$/gm,'');
+const js=order.map(f=>`// ${f}\n${strip(fs.readFileSync(path.join(root,'src',f),'utf8'))}`).join('\n');const css=fs.readFileSync('src/styles.css','utf8');let html=fs.readFileSync('src/template.html','utf8').replace('/*__CSS__*/',()=>css).replace('/*__JS__*/',()=>js);fs.writeFileSync('index.html',html);console.log(`built index.html ${Buffer.byteLength(html)} bytes`);

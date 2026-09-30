@@ -1,0 +1,4 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {createAppState,createViewRegistry} from '../src/core.js';import {createPerformanceController} from '../src/performance.js';
+test('state defaults and clamps inputs',()=>{const s=createAppState();assert.equal(s.activeView,'overview');assert.equal(s.selectedDay,1);s.setSelectedDay(99);assert.equal(s.selectedDay,31);s.setSelectedDay(-4);assert.equal(s.selectedDay,1);});
+test('view mount runs once',()=>{let m=0,u=0;const r=createViewRegistry();r.register('daily',()=>m++,()=>u++);r.show('daily');r.show('daily');assert.equal(m,1);assert.equal(u,1);});
+test('visual mode starts balanced and changes in-memory',()=>{const p=createPerformanceController();assert.equal(p.getVisualMode(),'BALANCED');p.setVisualMode('ECO');assert.equal(p.getVisualMode(),'ECO');});

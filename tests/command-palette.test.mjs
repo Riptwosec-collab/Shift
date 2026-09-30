@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {parseCommandQuery,shouldOpenPalette} from '../src/command-palette.js';
+test('parser handles dates views status and names',()=>{assert.equal(parseCommandQuery('15')[0].type,'day');assert.equal(parseCommandQuery('analytics')[0].view,'analytics');assert.equal(parseCommandQuery('night')[0].code,'N');assert.ok(parseCommandQuery('กิตติ').some(x=>x.type==='person'));});
+test('keyboard shortcut ignores editable targets',()=>{assert.equal(shouldOpenPalette({key:'/',ctrlKey:false,metaKey:false,targetTag:'INPUT',contentEditable:false}),false);assert.equal(shouldOpenPalette({key:'k',ctrlKey:true,metaKey:false,targetTag:'DIV',contentEditable:false}),true);});

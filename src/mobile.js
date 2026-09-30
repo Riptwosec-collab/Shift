@@ -1,0 +1,1 @@
+export function setupMobileSwipe(el,onDelta){if(!el)return;let sx=0,sy=0;el.addEventListener('touchstart',e=>{const t=e.touches[0];sx=t.clientX;sy=t.clientY},{passive:true});el.addEventListener('touchend',e=>{const t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.2)onDelta(dx<0?1:-1)},{passive:true})}

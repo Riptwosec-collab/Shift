@@ -1,0 +1,2 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {STAFF} from '../src/data.js';import {createScheduleCache} from '../src/cache.js';import {analyticsModel} from '../src/analytics.js';
+test('analytics exposes workload metrics for ten people',()=>{const a=analyticsModel(createScheduleCache(STAFF));assert.equal(a.people.length,10);for(const p of a.people){assert.equal(p.D+p.N+p.OFF,31);assert.ok(p.nightPct>=0&&p.nightPct<=100);}assert.equal(a.daily.length,31);});
