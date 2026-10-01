@@ -3,10 +3,10 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 
-test('production index is standalone v6.5 legacy shell',()=>{
+test('production index is standalone v6.5.1 legacy shell',()=>{
   const s=fs.readFileSync('index.html','utf8');
   assert.match(s,/<!doctype html>/i);
-  assert.match(s,/data-app-version="6\.5"/);
+  assert.match(s,/data-app-version="6\.5\.1"/);
   for(const marker of ['command-bar','hero-stage','cyber-scene','overviewNetwork','overviewMonthMatrix','insights-panel']) assert.ok(s.includes(marker),`missing ${marker}`);
   assert.doesNotMatch(s,/<script\s+src=/i);
   assert.doesNotMatch(s,/<link[^>]+rel=["']stylesheet/i);

@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'work/v6.5-sharp-ui-smooth-boot-i18n'
+      - 'work/v6.5.1-engineer-oncall'
   workflow_dispatch:
 
 jobs:
@@ -23,4 +24,4 @@ jobs:
       - name: Test
         run: npm test
       - name: Verify release gates
-        run: node --test tests/v65-*.test.mjs tests/v64-release.test.mjs tests/build.test.mjs tests/cloudflare.test.mjs tests/legacy-visual-contract.test.mjs tests/v64-interactive.test.mjs
+        run: node --test tests/v65-*.test.mjs tests/v651-*.test.mjs tests/v64-release.test.mjs tests/build.test.mjs tests/cloudflare.test.mjs tests/legacy-visual-contract.test.mjs tests/v64-interactive.test.mjs
