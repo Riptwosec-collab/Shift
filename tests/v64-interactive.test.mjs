@@ -9,5 +9,5 @@ test('legacy timeline analytics points and month cells converge on shared select
   assert.ok(code.includes('openCellModal'));
   assert.ok(code.includes('v64State.setSelectedDay'));
   const baseline=fs.readFileSync('src/legacy-baseline.html','utf8');
-  assert.ok(baseline.includes('onclick="setSelectedDay('),'legacy timeline must keep its original day interaction');
+  assert.ok(baseline.includes("$$('.date-node').forEach(b=>b.onclick=()=>setSelectedDay(+b.dataset.day))"),'legacy timeline must keep its original shared-day event binding');
 });
