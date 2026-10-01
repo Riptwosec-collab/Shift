@@ -3,3 +3,4 @@
    New selectors in this file may add feature surfaces or performance profiles,
    but must not replace or hide legacy structural components. */
 :root{--v64-safe-bottom:max(0px,env(safe-area-inset-bottom));}
+/* visual baseline locked from pre-v6.3 */
