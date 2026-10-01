@@ -533,7 +533,20 @@ function dailyModel(day,cache,staff){
 // risk.js
 
 const RISK_THRESHOLDS={LOW_STAFFING:6,LOW_NIGHT_COVERAGE:2,CONSECUTIVE_WORK:3,LONG_NIGHT_STREAK:3,D_N_IMBALANCE:3,HIGH_OFF_COUNT:5};
-function evaluateDayRisk(day,cache,staff){const s=cache.dayStats[day],out=[];if(s.working<RISK_THRESHOLDS.LOW_STAFFING)out.push({level:'critical',code:'LOW STAFFING',text:`เข้าเวร ${s.working} คน`});if(s.N<RISK_THRESHOLDS.LOW_NIGHT_COVERAGE)out.push({level:'warning',code:'LOW NIGHT COVERAGE',text:`เวร N ${s.N} คน`});if(Math.abs(s.D-s.N)>=RISK_THRESHOLDS.D_N_IMBALANCE)out.push({level:'warning',code:'D/N IMBALANCE',text:`D ${s.D} / N ${s.N}`});if(s.OFF>=RISK_THRESHOLDS.HIGH_OFF_COUNT)out.push({level:'info',code:'HIGH OFF COUNT',text:`OFF ${s.OFF} คน`});staff.forEach((p,i)=>{const w=currentWorkStreak(staff,i,day),n=currentNightStreak(staff,i,day);if(w>=RISK_THRESHOLDS.CONSECUTIVE_WORK)out.push({level:'info',code:'WORK STREAK',text:`${p.name} ${w} วัน`});if(n>=RISK_THRESHOLDS.LONG_NIGHT_STREAK)out.push({level:'warning',code:'NIGHT STREAK',text:`${p.name} N ${n} คืน`})});return out}
+
+function evaluateDayRisk(day,cache,staff){
+  const s=cache.dayStats[day],out=[];
+  if(s.working<RISK_THRESHOLDS.LOW_STAFFING)out.push({level:'critical',code:'LOW STAFFING',values:{working:s.working},text:`เข้าเวร ${s.working} คน`});
+  if(s.N<RISK_THRESHOLDS.LOW_NIGHT_COVERAGE)out.push({level:'warning',code:'LOW NIGHT COVERAGE',values:{night:s.N},text:`เวร N ${s.N} คน`});
+  if(Math.abs(s.D-s.N)>=RISK_THRESHOLDS.D_N_IMBALANCE)out.push({level:'warning',code:'D/N IMBALANCE',values:{day:s.D,night:s.N},text:`D ${s.D} / N ${s.N}`});
+  if(s.OFF>=RISK_THRESHOLDS.HIGH_OFF_COUNT)out.push({level:'info',code:'HIGH OFF COUNT',values:{off:s.OFF},text:`OFF ${s.OFF} คน`});
+  staff.forEach((p,i)=>{
+    const w=currentWorkStreak(staff,i,day),n=currentNightStreak(staff,i,day);
+    if(w>=RISK_THRESHOLDS.CONSECUTIVE_WORK)out.push({level:'info',code:'WORK STREAK',values:{name:p.name,days:w},text:`${p.name} ${w} วัน`});
+    if(n>=RISK_THRESHOLDS.LONG_NIGHT_STREAK)out.push({level:'warning',code:'NIGHT STREAK',values:{name:p.name,nights:n},text:`${p.name} N ${n} คืน`});
+  });
+  return out;
+}
 
 // network-model.js
 function pairRelation(center,other,cache){
@@ -561,7 +574,26 @@ function analyticsModel(cache){
 // command-palette.js
 
 const paletteViews=['overview','daily','person','month','analytics','team'];
-function parseCommandQuery(q){q=String(q||'').trim().toLowerCase();if(!q)return [];const out=[];const n=parseInt(q,10);if(n>=1&&n<=31)out.push({type:'day',day:n,label:`วันที่ ${n} ตุลาคม`});for(const v of paletteViews)if(v.includes(q)||q.includes(v))out.push({type:'view',view:v==='team'?'overview':v,label:v});const status=q==='d'||q.includes('day')||q.includes('กลางวัน')?'D':q==='n'||q.includes('night')||q.includes('กลางคืน')?'N':q.includes('off')?'O':null;if(status)out.push({type:'status',code:status,label:status==='O'?'OFF':status});STAFF.forEach((p,i)=>{if(p.name.toLowerCase().includes(q))out.push({type:'person',i,label:p.name})});return out}
+
+function parseCommandQuery(q,options={}){
+  q=String(q||'').trim().toLowerCase();
+  if(!q)return [];
+  const out=[],locale=options.locale||'th',t=typeof options.t==='function'?options.t:null,formatDate=typeof options.formatDate==='function'?options.formatDate:null;
+  const n=parseInt(q,10);
+  if(n>=1&&n<=31)out.push({type:'day',day:n,label:formatDate?formatDate(n):(locale==='en'?`${n} October 2026`:`วันที่ ${n} ตุลาคม`)});
+  for(const v of paletteViews){
+    if(v.includes(q)||q.includes(v)){
+      const view=v==='team'?'overview':v;
+      const key=v==='team'?'network.title':`nav.${v}`;
+      out.push({type:'view',view,source:v,label:t?t(key,{},locale):v});
+    }
+  }
+  const status=q==='d'||q.includes('day')||q.includes('กลางวัน')?'D':q==='n'||q.includes('night')||q.includes('กลางคืน')?'N':q.includes('off')?'O':null;
+  if(status)out.push({type:'status',code:status,label:status==='O'?'OFF':status});
+  STAFF.forEach((p,i)=>{if(p.name.toLowerCase().includes(q))out.push({type:'person',i,label:p.name})});
+  return out;
+}
+
 function shouldOpenPalette(e){if(['INPUT','TEXTAREA','SELECT'].includes(e.targetTag)||e.contentEditable)return false;return e.key==='/'||((e.ctrlKey||e.metaKey)&&String(e.key).toLowerCase()==='k')}
 
 // mobile.js
@@ -601,11 +633,25 @@ const v64Mounted=new Set(['overview']);
 let v64PaletteIndex=0;
 let v64PaletteItems=[];
 
+const v64FallbackCopy={
+  'accessibility.performance':'Visual performance mode',
+  'common.previous':'วันก่อน','common.next':'วันถัดไป','common.employee':'พนักงาน','common.coverage':'กำลังคน',
+  'daily.title':'ภาพรวมปฏิบัติการรายวัน','daily.adjacent':'ADJACENT DAYS','daily.transitions':'SHIFT TRANSITIONS','daily.risk':'STAFFING RISK','daily.streaks':'CURRENT STREAKS','daily.noTransitions':'ไม่มีการเปลี่ยนสถานะไปวันถัดไป','daily.workStreak':'ทำงานต่อเนื่อง {count} วัน','daily.nightStreak':'เวรกลางคืนต่อเนื่อง {count} คืน',
+  'risk.allClear':'ไม่พบสัญญาณเสี่ยงตาม threshold',
+  'network.top':'TOP TEAMMATE','network.strength':'STRENGTH','network.handoff':'Handoff','network.same':'Same shift {count}',
+  'analytics.title':'สมดุลภาระงานของทีม','analytics.avgWork':'AVG WORK','analytics.avgNight':'AVG N','analytics.highest':'HIGH','analytics.lowest':'LOW',
+  'palette.placeholder':'ค้นหา วันที่ / ชื่อ / night / off / analytics','palette.empty':'พิมพ์วันที่ ชื่อพนักงาน หรือชื่อหน้า','palette.choose':'เลือก','palette.open':'เปิด',
+  'modes.high':'HIGH','modes.balanced':'BALANCED','modes.eco':'ECO'
+};
+
 function v64El(id){return document.getElementById(id)}
-function v64Esc(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
+function v64Esc(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[ch]))}
 function v64StatusClass(code){return code==='D'?'d':code==='N'?'n':'o'}
 function v64StatusLabel(code){return code==='O'?'OFF':code}
 function v64ClampDay(day){return Math.max(1,Math.min(31,Number(day)||1))}
+function v64I18n(){return globalThis.v65I18n||null}
+function v64T(key,values={}){const i=v64I18n();if(i?.t)return i.t(key,values);return String(v64FallbackCopy[key]??key).replace(/\{([^}]+)\}/g,(_,name)=>values[name]??`{${name}}`)}
+function v64RiskText(risk){return v64I18n()?.formatRisk?.(risk)??risk.text??risk.code}
 
 function setVisualMode(mode){
   const next=['HIGH','BALANCED','ECO'].includes(mode)?mode:'BALANCED';
@@ -620,8 +666,8 @@ function mountV64Quality(){
   if(!actions||actions.querySelector('.v64-quality'))return;
   const control=document.createElement('div');
   control.className='v64-quality';
-  control.setAttribute('aria-label','Visual performance mode');
-  control.innerHTML=['HIGH','BALANCED','ECO'].map(mode=>`<button type="button" data-mode="${mode}" title="${mode}">${mode[0]}</button>`).join('');
+  control.setAttribute('aria-label',v64T('accessibility.performance'));
+  control.innerHTML=['HIGH','BALANCED','ECO'].map(mode=>`<button type="button" data-mode="${mode}" title="${v64T(`modes.${mode.toLowerCase()}`)}">${mode[0]}</button>`).join('');
   control.addEventListener('click',event=>{const button=event.target.closest('button[data-mode]');if(button)setVisualMode(button.dataset.mode)});
   actions.insertBefore(control,actions.firstChild);
   setVisualMode('BALANCED');
@@ -635,7 +681,7 @@ function ensureV64DailyOps(){
     block=document.createElement('section');
     block.id='v64DailyOps';
     block.className='hud-panel trace v64-daily-ops';
-    block.innerHTML='<div class="timeline-head"><div><div class="eyebrow">DAILY INTELLIGENCE • v6.4</div><div class="section-title">ภาพรวมปฏิบัติการรายวัน</div></div><span class="v64-risk-badge" id="v64DailyRiskBadge">STABLE</span></div><div class="v64-op-grid"><section><div class="eyebrow">ADJACENT DAYS</div><div id="v64DayCompare" class="v64-compare"></div></section><section><div class="eyebrow">SHIFT TRANSITIONS</div><div id="v64Transitions" class="v64-transition-list"></div></section><section><div class="eyebrow">STAFFING RISK</div><div id="v64RiskList" class="v64-risk-list"></div></section><section><div class="eyebrow">CURRENT STREAKS</div><div id="v64StreakList" class="v64-streak-list"></div></section></div>';
+    block.innerHTML=`<div class="timeline-head"><div><div class="eyebrow">DAILY INTELLIGENCE • v6.4</div><div class="section-title">${v64T('daily.title')}</div></div><span class="v64-risk-badge" id="v64DailyRiskBadge">STABLE</span></div><div class="v64-op-grid"><section><div class="eyebrow">${v64T('daily.adjacent')}</div><div id="v64DayCompare" class="v64-compare"></div></section><section><div class="eyebrow">${v64T('daily.transitions')}</div><div id="v64Transitions" class="v64-transition-list"></div></section><section><div class="eyebrow">${v64T('daily.risk')}</div><div id="v64RiskList" class="v64-risk-list"></div></section><section><div class="eyebrow">${v64T('daily.streaks')}</div><div id="v64StreakList" class="v64-streak-list"></div></section></div>`;
     view.appendChild(block);
   }
   if(!v64El('v64StickyDaily')){
@@ -655,23 +701,24 @@ function v64Delta(value,suffix=''){
 
 function renderV64Daily(){
   ensureV64DailyOps();
+  const title=v64El('v64DailyOps')?.querySelector('.section-title');if(title)title.textContent=v64T('daily.title');
   const model=dailyModel(selectedDay,v64Cache,STAFF);
   const risks=evaluateDayRisk(selectedDay,v64Cache,STAFF);
   const compare=v64El('v64DayCompare');
   if(compare){
     const card=(title,data)=>`<div class="v64-compare-card"><b>${title}</b>${data?`<span>D ${v64Delta(data.D)}</span><span>N ${v64Delta(data.N)}</span><span>OFF ${v64Delta(data.OFF)}</span><span>WORK ${v64Delta(data.working)}</span><span>COVER ${v64Delta(data.coverage,'%')}</span>`:'<span class="muted">N/A</span>'}</div>`;
-    compare.innerHTML=card('← วันก่อน',model.comparison.previous)+card('วันถัดไป →',model.comparison.next);
+    compare.innerHTML=card(`← ${v64T('common.previous')}`,model.comparison.previous)+card(`${v64T('common.next')} →`,model.comparison.next);
   }
   const transitions=v64El('v64Transitions');
-  if(transitions)transitions.innerHTML=model.transitions.length?model.transitions.map(row=>`<button type="button" class="v64-transition" data-person="${row.i}"><b>${v64Esc(row.name)}</b><span>${v64StatusLabel(row.from)} → ${v64StatusLabel(row.to)}</span></button>`).join(''):'<div class="v64-empty">ไม่มีการเปลี่ยนสถานะไปวันถัดไป</div>';
+  if(transitions)transitions.innerHTML=model.transitions.length?model.transitions.map(row=>`<button type="button" class="v64-transition" data-person="${row.i}"><b>${v64Esc(row.name)}</b><span>${v64StatusLabel(row.from)} → ${v64StatusLabel(row.to)}</span></button>`).join(''):`<div class="v64-empty">${v64Esc(v64T('daily.noTransitions'))}</div>`;
   const riskList=v64El('v64RiskList');
-  if(riskList)riskList.innerHTML=risks.length?risks.slice(0,8).map(r=>`<div class="v64-risk ${r.level}"><b>${v64Esc(r.code)}</b><span>${v64Esc(r.text)}</span></div>`).join(''):'<div class="v64-risk ok"><b>STABLE</b><span>ไม่พบสัญญาณเสี่ยงตาม threshold</span></div>';
+  if(riskList)riskList.innerHTML=risks.length?risks.slice(0,8).map(r=>`<div class="v64-risk ${r.level}"><b>${v64Esc(r.code)}</b><span>${v64Esc(v64RiskText(r))}</span></div>`).join(''):`<div class="v64-risk ok"><b>STABLE</b><span>${v64Esc(v64T('risk.allClear'))}</span></div>`;
   const badge=v64El('v64DailyRiskBadge');
   if(badge){const critical=risks.some(x=>x.level==='critical'),warning=risks.some(x=>x.level==='warning');badge.className=`v64-risk-badge ${critical?'critical':warning?'warning':'ok'}`;badge.textContent=critical?'CRITICAL':warning?'WATCH':'STABLE'}
   const streaks=v64El('v64StreakList');
-  if(streaks)streaks.innerHTML=model.working.map(row=>`<button type="button" class="v64-streak" data-person="${row.i}"><b>${v64Esc(row.name)}</b><span>WORK ${row.workStreak} วัน${row.nightStreak?` • NIGHT ${row.nightStreak} คืน`:''}</span></button>`).join('');
+  if(streaks)streaks.innerHTML=model.working.map(row=>`<button type="button" class="v64-streak" data-person="${row.i}"><b>${v64Esc(row.name)}</b><span>${v64Esc(v64T('daily.workStreak',{count:row.workStreak}))}${row.nightStreak?` • ${v64Esc(v64T('daily.nightStreak',{count:row.nightStreak}))}`:''}</span></button>`).join('');
   const sticky=v64El('v64StickyDaily');
-  if(sticky)sticky.innerHTML=`<span class="d">D <b>${model.counts.D}</b></span><span class="n">N <b>${model.counts.N}</b></span><span class="o">OFF <b>${model.counts.OFF}</b></span><span>COVER <b>${model.coverage}%</b></span>`;
+  if(sticky)sticky.innerHTML=`<span class="d">D <b>${model.counts.D}</b></span><span class="n">N <b>${model.counts.N}</b></span><span class="o">OFF <b>${model.counts.OFF}</b></span><span>${v64Esc(v64T('common.coverage'))} <b>${model.coverage}%</b></span>`;
 }
 
 function ensureV64NetworkDetails(){
@@ -689,7 +736,7 @@ function renderV64Network(center=(selectedRosterPerson??selectedPerson??0)){
   const limit=innerWidth<=640?4:innerWidth<=1050?5:6;
   const model=networkModel(center,v64Cache,limit);
   const top=model.top;
-  details.innerHTML=`<div class="v64-network-summary"><span><b>NETWORK 2.0</b><small>${v64Esc(STAFF[center]?.name||'—')}</small></span><span><small>TOP TEAMMATE</small><b>${top?v64Esc(STAFF[top.other].name):'—'}</b></span><span><small>STRENGTH</small><b>${top?top.strength:0}%</b></span></div><div class="v64-relation-strip">${model.relations.map(rel=>`<button type="button" data-network-person="${rel.other}" title="Same Shift ${rel.sameShift} • D ${rel.sameD} • N ${rel.sameN} • Handoff ${rel.handoff} • Strength ${rel.strength}%"><b>${v64Esc(STAFF[rel.other].name)}</b><span>SAME ${rel.sameShift} · D ${rel.sameD} · N ${rel.sameN} · H ${rel.handoff}</span><strong>${rel.strength}%</strong></button>`).join('')}</div>`;
+  details.innerHTML=`<div class="v64-network-summary"><span><b>NETWORK 2.0</b><small>${v64Esc(STAFF[center]?.name||'—')}</small></span><span><small>${v64Esc(v64T('network.top'))}</small><b>${top?v64Esc(STAFF[top.other].name):'—'}</b></span><span><small>${v64Esc(v64T('network.strength'))}</small><b>${top?top.strength:0}%</b></span></div><div class="v64-relation-strip">${model.relations.map(rel=>`<button type="button" data-network-person="${rel.other}" title="${v64Esc(v64T('network.same',{count:rel.sameShift}))} • D ${rel.sameD} • N ${rel.sameN} • ${v64Esc(v64T('network.handoff'))} ${rel.handoff} • ${v64Esc(v64T('network.strength'))} ${rel.strength}%"><b>${v64Esc(STAFF[rel.other].name)}</b><span>${v64Esc(v64T('network.same',{count:rel.sameShift}))} · D ${rel.sameD} · N ${rel.sameN} · H ${rel.handoff}</span><strong>${rel.strength}%</strong></button>`).join('')}</div>`;
   details.querySelectorAll('[data-network-person]').forEach(button=>button.addEventListener('click',()=>{
     const index=Number(button.dataset.networkPerson);
     selectedPerson=index;selectedRosterPerson=index;v64State.setSelectedPerson(index);
@@ -709,7 +756,7 @@ function ensureV64Workload(){
 function renderV64Workload(){
   const block=ensureV64Workload();if(!block)return;
   const model=analyticsModel(v64Cache);
-  block.innerHTML=`<div class="timeline-head"><div><div class="eyebrow">WORKLOAD BALANCE • v6.4</div><div class="section-title">สมดุลภาระงานของทีม</div></div><div class="v64-team-kpis"><span>AVG WORK <b>${model.team.avgWork}</b></span><span>AVG N <b>${model.team.avgN}</b></span><span>HIGH <b>${model.team.highestWork}</b></span><span>LOW <b>${model.team.lowestWork}</b></span></div></div><div class="v64-workload-head"><span>พนักงาน</span><span>D</span><span>N</span><span>OFF</span><span>WORK</span><span>N%</span><span>WORK STREAK</span><span>N STREAK</span><span>Δ AVG</span></div><div class="v64-workload-rows">${model.people.map((p,i)=>`<button type="button" class="v64-workload-row" data-person="${i}"><b>${v64Esc(p.name)}</b><span class="d">${p.D}</span><span class="n">${p.N}</span><span class="o">${p.OFF}</span><span>${p.working}</span><span>${p.nightPct}%</span><span>${p.longestWorkStreak}</span><span>${p.longestNightStreak}</span><strong>${p.deltaFromAvg>0?'+':''}${p.deltaFromAvg}</strong></button>`).join('')}</div>`;
+  block.innerHTML=`<div class="timeline-head"><div><div class="eyebrow">WORKLOAD BALANCE • v6.4</div><div class="section-title">${v64Esc(v64T('analytics.title'))}</div></div><div class="v64-team-kpis"><span>${v64Esc(v64T('analytics.avgWork'))} <b>${model.team.avgWork}</b></span><span>${v64Esc(v64T('analytics.avgNight'))} <b>${model.team.avgN}</b></span><span>${v64Esc(v64T('analytics.highest'))} <b>${model.team.highestWork}</b></span><span>${v64Esc(v64T('analytics.lowest'))} <b>${model.team.lowestWork}</b></span></div></div><div class="v64-workload-head"><span>${v64Esc(v64T('common.employee'))}</span><span>D</span><span>N</span><span>OFF</span><span>WORK</span><span>N%</span><span>WORK STREAK</span><span>N STREAK</span><span>Δ AVG</span></div><div class="v64-workload-rows">${model.people.map((p,i)=>`<button type="button" class="v64-workload-row" data-person="${i}"><b>${v64Esc(p.name)}</b><span class="d">${p.D}</span><span class="n">${p.N}</span><span class="o">${p.OFF}</span><span>${p.working}</span><span>${p.nightPct}%</span><span>${p.longestWorkStreak}</span><span>${p.longestNightStreak}</span><strong>${p.deltaFromAvg>0?'+':''}${p.deltaFromAvg}</strong></button>`).join('')}</div>`;
   block.querySelectorAll('[data-person]').forEach(button=>button.addEventListener('click',()=>{selectedPerson=Number(button.dataset.person);v64State.setSelectedPerson(selectedPerson);showView('person')}));
 }
 
@@ -722,14 +769,14 @@ function enhanceV64ActivityChart(){
 function renderV64InsightAlerts(){
   const list=v64El('overviewInsightList');if(!list)return;
   const risks=evaluateDayRisk(selectedDay,v64Cache,STAFF);
-  list.innerHTML=risks.length?risks.slice(0,6).map(r=>`<div class="insight-item"><span class="insight-icon">${r.level==='critical'?'!':r.level==='warning'?'△':'i'}</span><span><b>${v64Esc(r.code)}</b><span>${v64Esc(r.text)}</span></span><span class="insight-value">${r.level.toUpperCase()}</span></div>`).join(''):'<div class="insight-item"><span class="insight-icon">✓</span><span><b>STABLE</b><span>ไม่พบ Staffing Risk ในวันที่เลือก</span></span><span class="insight-value">OK</span></div>';
+  list.innerHTML=risks.length?risks.slice(0,6).map(r=>`<div class="insight-item"><span class="insight-icon">${r.level==='critical'?'!':r.level==='warning'?'△':'i'}</span><span><b>${v64Esc(r.code)}</b><span>${v64Esc(v64RiskText(r))}</span></span><span class="insight-value">${r.level.toUpperCase()}</span></div>`).join(''):`<div class="insight-item"><span class="insight-icon">✓</span><span><b>STABLE</b><span>${v64Esc(v64T('risk.allClear'))}</span></span><span class="insight-value">OK</span></div>`;
 }
 
 function ensureV64Palette(){
   let overlay=v64El('v64Palette');if(overlay)return overlay;
   overlay=document.createElement('div');
   overlay.id='v64Palette';overlay.className='v64-palette';overlay.setAttribute('aria-hidden','true');
-  overlay.innerHTML='<div class="v64-palette-box" role="dialog" aria-modal="true" aria-label="Command Palette"><div class="v64-palette-head"><span>⌘</span><input id="v64PaletteInput" autocomplete="off" placeholder="ค้นหา วันที่ / ชื่อ / night / off / analytics"><kbd>ESC</kbd></div><div id="v64PaletteResults" class="v64-palette-results"></div><div class="v64-palette-foot"><span>↑↓ เลือก</span><span>ENTER เปิด</span><span>Ctrl+K / ⌘K</span></div></div>';
+  overlay.innerHTML=`<div class="v64-palette-box" role="dialog" aria-modal="true" aria-label="Command Palette"><div class="v64-palette-head"><span>⌘</span><input id="v64PaletteInput" autocomplete="off" placeholder="${v64Esc(v64T('palette.placeholder'))}"><kbd>ESC</kbd></div><div id="v64PaletteResults" class="v64-palette-results"></div><div class="v64-palette-foot"><span>↑↓ ${v64Esc(v64T('palette.choose'))}</span><span>ENTER ${v64Esc(v64T('palette.open'))}</span><span>Ctrl+K / ⌘K</span></div></div>`;
   document.body.appendChild(overlay);
   overlay.addEventListener('click',event=>{if(event.target===overlay)closeV64Palette()});
   const input=v64El('v64PaletteInput');
@@ -749,9 +796,10 @@ function openV64Palette(seed=''){
 }
 function closeV64Palette(){const overlay=v64El('v64Palette');if(!overlay)return;overlay.classList.remove('show');overlay.setAttribute('aria-hidden','true');v64PaletteItems=[];v64PaletteIndex=0}
 function renderV64Palette(query){
-  v64PaletteItems=parseCommandQuery(query);v64PaletteIndex=0;
+  const i=v64I18n();
+  v64PaletteItems=parseCommandQuery(query,{locale:i?.getLocale?.()||'th',t:(key,values,locale)=>i?.t?.(key,values,locale)||v64T(key,values),formatDate:day=>i?.formatDate?.(day)||`วันที่ ${day} ตุลาคม 2569`});v64PaletteIndex=0;
   const box=v64El('v64PaletteResults');if(!box)return;
-  box.innerHTML=v64PaletteItems.length?v64PaletteItems.map((item,index)=>`<button type="button" data-k="${index}"><span>${v64Esc(item.label)}</span><small>${v64Esc(item.type)}</small></button>`).join(''):'<div class="v64-palette-empty">พิมพ์วันที่ ชื่อพนักงาน หรือชื่อหน้า</div>';
+  box.innerHTML=v64PaletteItems.length?v64PaletteItems.map((item,index)=>`<button type="button" data-k="${index}"><span>${v64Esc(item.label)}</span><small>${v64Esc(item.type)}</small></button>`).join(''):`<div class="v64-palette-empty">${v64Esc(v64T('palette.empty'))}</div>`;
   box.querySelectorAll('[data-k]').forEach(button=>button.addEventListener('click',()=>applyV64Palette(v64PaletteItems[Number(button.dataset.k)])));
   paintV64PaletteSelection();
 }
@@ -760,7 +808,7 @@ function applyV64Palette(item){
   if(!item)return;
   if(item.type==='day'){showView('daily');setSelectedDay(item.day)}
   else if(item.type==='person'){selectedPerson=item.i;selectedRosterPerson=item.i;v64State.setSelectedPerson(item.i);showView('person')}
-  else if(item.type==='view'){showView(item.view);if(item.label==='team')setTimeout(()=>v64El('overviewNetwork')?.scrollIntoView({behavior:'smooth',block:'center'}),50)}
+  else if(item.type==='view'){showView(item.view);if(item.source==='team')setTimeout(()=>v64El('overviewNetwork')?.scrollIntoView({behavior:'smooth',block:'center'}),50)}
   else if(item.type==='status'){showView('daily');setTimeout(()=>v64El(item.code==='D'?'dayPeople':item.code==='N'?'nightPeople':'offPeople')?.scrollIntoView({behavior:'smooth',block:'center'}),50)}
   closeV64Palette();
 }
@@ -788,6 +836,17 @@ function updateV64Mounted(){
   if(v64Mounted.has('analytics')){renderV64Workload();enhanceV64ActivityChart()}
   renderV64Network(selectedRosterPerson??selectedPerson??0);
 }
+
+function refreshV64LocalizedSurfaces(){
+  const quality=document.querySelector('.v64-quality');if(quality)quality.setAttribute('aria-label',v64T('accessibility.performance'));
+  const palette=v64El('v64PaletteInput');if(palette)palette.placeholder=v64T('palette.placeholder');
+  if(v64El('v64DailyOps'))renderV64Daily();
+  if(v64El('v64NetworkDetails'))renderV64Network(selectedRosterPerson??selectedPerson??0);
+  if(v64El('v64WorkloadBalance'))renderV64Workload();
+  if(v64El('overviewInsightList')&&document.querySelector('[data-insight-mode="alerts"].active'))renderV64InsightAlerts();
+}
+
+globalThis.refreshV64LocalizedSurfaces=refreshV64LocalizedSurfaces;
 
 function installV64Wrappers(){
   const legacyShowView=window.showView;
