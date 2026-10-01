@@ -1060,7 +1060,19 @@ function v651DateLabel(row){if(!row)return '—';const year=v651Locale()==='th'?
 function v651IsActive(row,now=new Date()){return now.getFullYear()===2026&&now.getMonth()+1===row.month&&now.getDate()>=row.start&&now.getDate()<=row.end}
 function v651Escape(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
 
-function removeDailyOpsHeading(){document.querySelector('#v64DailyOps .section-title')?.remove()}
+function suppressV64DailyOps(){
+  const view=document.getElementById('dailyView');
+  if(!view)return null;
+  document.getElementById('v64DailyOps')?.remove();
+  if(!document.getElementById('v64StickyDaily')){
+    const sticky=document.createElement('div');
+    sticky.id='v64StickyDaily';
+    sticky.className='v64-sticky-daily';
+    view.insertBefore(sticky,view.firstChild);
+  }
+  return null;
+}
+if(typeof ensureV64DailyOps==='function')ensureV64DailyOps=suppressV64DailyOps;
 
 function renderV651Oncall(){
   const host=document.getElementById('oncallView');if(!host)return;
@@ -1090,9 +1102,9 @@ function mountV651View(){
 }
 function installV651ViewBridge(){
   const prior=window.showView;if(typeof prior!=='function'||prior.__v651)return;
-  const wrapped=function(name){const result=prior.apply(this,arguments);if(name==='daily')queueMicrotask(removeDailyOpsHeading);if(name==='oncall')renderV651Oncall();return result};wrapped.__v651=true;window.showView=wrapped;
+  const wrapped=function(name){const result=prior.apply(this,arguments);if(name==='daily')queueMicrotask(suppressV64DailyOps);if(name==='oncall')renderV651Oncall();return result};wrapped.__v651=true;window.showView=wrapped;
 }
-function initV651(){mountV651Navigation();mountV651View();installV651ViewBridge();removeDailyOpsHeading();document.addEventListener('v65:localechange',()=>{mountV651Navigation();renderV651Oncall();removeDailyOpsHeading()});document.documentElement.dataset.appVersion='6.5.1'}
+function initV651(){mountV651Navigation();mountV651View();installV651ViewBridge();suppressV64DailyOps();document.addEventListener('v65:localechange',()=>{mountV651Navigation();renderV651Oncall();suppressV64DailyOps()});document.documentElement.dataset.appVersion='6.5.1'}
 if(typeof document!=='undefined'){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initV651,{once:true});else initV651()}
 
 })();</script>
