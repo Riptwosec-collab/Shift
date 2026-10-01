@@ -15,9 +15,6 @@ on:
       - 'work/v6.5.9-year-end-matrix'
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -30,18 +27,6 @@ jobs:
         run: npm install --ignore-scripts
       - name: Build
         run: npm run build
-      - name: Sync generated v6.5.9 index once
-        run: |
-          if [ "$GITHUB_ACTOR" = "github-actions[bot]" ]; then
-            exit 0
-          fi
-          if ! git diff --quiet -- index.html; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add index.html
-            git commit -m "build: sync generated v6.5.9 index"
-            git push
-          fi
       - name: Verify tracked index matches source build
         run: git diff --exit-code -- index.html
       - name: Test
