@@ -20,13 +20,13 @@ test('Engineer Oncall receives the v6.5.4 command-deck redesign',()=>{
   assert.match(css,/backdrop-filter/);
 });
 
-test('v6.5.4 redesign remains shipped in v6.5.6 without changing schedule data',()=>{
+test('v6.5.4 redesign remains shipped in v6.5.7 without changing schedule data',()=>{
   const build=fs.readFileSync('scripts/build.mjs','utf8');
   const html=fs.readFileSync('index.html','utf8');
   assert.match(build,/v654-ui\.css/);
   assert.match(build,/v654-ui-style/);
-  assert.match(build,/data-app-version=\"6\.5\.6\"/);
-  assert.match(html,/data-app-version="6\.5\.6"/);
+  assert.match(build,/data-app-version=\"6\.5\.7\"/);
+  assert.match(html,/data-app-version="6\.5\.7"/);
   assert.match(html,/id="v654-ui-style"/);
   assert.ok(html.includes('OOOOODDDDOODDDDOOOODDOOOONNNNNN'));
   assert.ok(html.includes('นาย นลิทัศน์ นากรณ์'));
