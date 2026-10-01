@@ -30,13 +30,14 @@ test('oncall schedule matches the approved Oct-Dec 2026 rotation',async()=>{
   assert.equal(mod.getOncallForDate(new Date(2026,11,31)),null);
 });
 
-test('v6.5.1 removes only the daily heading and adds Engineer Oncall navigation',()=>{
+test('v6.5.1 suppresses the whole Daily Operations panel and adds Engineer Oncall navigation',()=>{
   const v651=fs.readFileSync('src/v651-engine.js','utf8');
   const css=fs.readFileSync('src/v651-oncall.css','utf8');
   const i18n=fs.readFileSync('src/i18n-copy.js','utf8');
   const build=fs.readFileSync('scripts/build.mjs','utf8');
-  assert.match(v651,/removeDailyOpsHeading/);
-  assert.match(v651,/#v64DailyOps \.section-title/);
+  assert.match(v651,/function suppressV64DailyOps/);
+  assert.match(v651,/document\.getElementById\('v64DailyOps'\)\?\.remove\(\)/);
+  assert.match(v651,/ensureV64DailyOps=suppressV64DailyOps/);
   assert.match(v651,/data-view=["']oncall["']/);
   assert.match(v651,/oncallView/);
   assert.match(v651,/Engineer Oncall/);
