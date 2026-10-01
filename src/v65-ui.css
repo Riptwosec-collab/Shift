@@ -1,0 +1,144 @@
+/* v6.5 visual fidelity layer: sharper rendering, readable TH/EN typography, no structural redesign. */
+:root{
+  --v65-text-xs:10px;
+  --v65-text-sm:11px;
+  --v65-text-md:12px;
+  --v65-text-lg:14px;
+  --v65-line-th:1.68;
+  --v65-glow-tight:0 0 8px rgba(56,232,255,.20),0 0 18px rgba(39,139,255,.09);
+  --v65-border-crisp:rgba(91,225,255,.28);
+  --v65-muted:#86a5ba;
+  --v65-panel-edge:rgba(72,211,255,.22);
+}
+
+html[data-locale="th"] body,
+html[data-locale="th"] button,
+html[data-locale="th"] input{
+  font-family:"Leelawadee UI","Noto Sans Thai",Tahoma,"Segoe UI",sans-serif;
+  line-height:var(--v65-line-th);
+  letter-spacing:normal;
+}
+html[data-locale="en"] body,
+html[data-locale="en"] button,
+html[data-locale="en"] input{
+  font-family:Inter,"Segoe UI",system-ui,sans-serif;
+  line-height:1.45;
+}
+html[data-locale="en"] .mobile-nav button,
+html[data-locale="en"] .nav-btn b{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.2;}
+
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+.hero-title,.metric-value,.metric strong,.date-node,.month-cell,.heat-cell,.v64-team-kpis b,.v64-workload-row span,.v64-workload-row strong{font-variant-numeric:tabular-nums;}
+
+/* Crisp cyber geometry: tighter glow, brighter one-pixel edges, less diffuse bloom around text. */
+.hud-panel,.command-bar,.nav-tabs,.v64-palette-box,.v65-language,.v64-quality{border-color:var(--v65-panel-edge);}
+.hud-panel{box-shadow:0 18px 58px rgba(0,0,0,.52),inset 0 1px rgba(255,255,255,.04);}
+.hud-panel.trace:hover{box-shadow:0 18px 60px rgba(0,0,0,.48),var(--v65-glow-tight);}
+.hud-panel::after{opacity:.82;}
+.cyber-scene{filter:contrast(1.04) saturate(1.04);}
+.cyber-scene::after{opacity:.38;}
+.city-svg{filter:contrast(1.05) drop-shadow(0 0 7px rgba(56,232,255,.08));}
+.scan-beam{box-shadow:0 0 8px rgba(56,232,255,.72),0 0 16px rgba(56,232,255,.25);}
+.network-line,.network-edges line{shape-rendering:geometricPrecision;stroke-linecap:round;}
+.network-line{filter:drop-shadow(0 0 3px rgba(56,232,255,.28));}
+.month-cell,.heat-cell,.date-node,.cal-cell{border-width:1px;border-style:solid;}
+.month-cell,.heat-cell{outline:1px solid rgba(255,255,255,.018);outline-offset:-1px;}
+.date-node.active,.cal-cell:hover{box-shadow:inset 0 0 0 1px rgba(56,232,255,.2),var(--v65-glow-tight);}
+
+/* Muted copy remains secondary, but is no longer washed out. */
+.muted,.hint,.hierarchy,.brand-copy p,.brand-copy small,.nav-btn span,.v64-network-summary small,.v64-team-kpis span{color:var(--v65-muted);}
+.eyebrow,.kicker{font-size:var(--v65-text-xs);line-height:1.35;}
+.section-title,.section-head h2{line-height:1.3;}
+
+/* Lift meaningful operational detail out of the old 6–8px range. */
+.v64-risk b,.v64-risk span{font-size:var(--v65-text-xs);line-height:1.45;}
+.v64-transition b,.v64-transition span{font-size:var(--v65-text-xs);line-height:1.4;}
+.v64-streak b,.v64-streak span{font-size:var(--v65-text-xs);line-height:1.4;}
+.v64-network-summary b{font-size:var(--v65-text-sm);}
+.v64-network-summary small{font-size:var(--v65-text-xs);}
+.v64-relation-strip b,.v64-relation-strip span{font-size:var(--v65-text-xs);line-height:1.4;}
+.v64-relation-strip strong{font-size:var(--v65-text-sm);}
+.v64-team-kpis span{font-size:var(--v65-text-xs);}
+.v64-workload-head{font-size:var(--v65-text-xs);}
+.v64-workload-row b,.v64-workload-row span,.v64-workload-row strong{font-size:var(--v65-text-xs);line-height:1.35;}
+.v64-palette-head input{font-size:var(--v65-text-md);}
+.v64-palette-results button span{font-size:var(--v65-text-sm);}
+.v64-palette-results button small,.v64-palette-foot,.v64-palette-empty{font-size:var(--v65-text-xs);}
+.insight-item b,.insight-item span,.mini-person b,.person-row b,.network-relations b{line-height:1.4;}
+
+/* Compact in-place language control. */
+.v65-language{display:flex;align-items:center;gap:2px;padding:3px;border:1px solid rgba(56,232,255,.16);border-radius:10px;background:rgba(3,14,26,.72);white-space:nowrap;}
+.v65-language>span{font-size:10px;color:rgba(113,153,179,.45);padding:0 1px;}
+.v65-language button{min-width:32px;height:28px;padding:0 7px;border:0;border-radius:7px;background:transparent;color:#7193aa;font-size:10px;font-weight:900;cursor:pointer;transition:transform .14s ease,background-color .14s ease,color .14s ease,box-shadow .14s ease;}
+.v65-language button:hover{color:#dffcff;background:rgba(56,232,255,.055);}
+.v65-language button.active{color:#efffff;background:linear-gradient(180deg,rgba(39,139,255,.28),rgba(20,92,255,.08));box-shadow:inset 0 0 0 1px rgba(56,232,255,.3),0 0 9px rgba(56,232,255,.10);}
+.v65-language button:focus-visible,.v64-quality button:focus-visible,.mobile-nav button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;}
+
+/* Boot gate: only the loader animates while the application warms up. */
+html[data-v65-booting="1"] .ambient,
+html[data-v65-booting="1"] .scan-beam,
+html[data-v65-booting="1"] .cyber-scene::after,
+html[data-v65-booting="1"] .star,
+html[data-v65-booting="1"] .network-line,
+html[data-v65-booting="1"] .network-host::before,
+html[data-v65-booting="1"] .core-shell::after,
+html[data-v65-booting="1"] .metric-orb::before{animation:none!important;}
+html[data-v65-booting="1"] .city-svg{transform:none!important;transition:none!important;}
+html[data-v65-booting="1"] .ambient{opacity:.025;filter:blur(52px);}
+html[data-v65-booting="1"] .scan-beam{opacity:.08;box-shadow:none;}
+html[data-v65-booting="1"] .network-line{filter:none;}
+
+/* HIGH — full legacy cyber experience. */
+html[data-v64-mode="HIGH"] .ambient.a{animation:ambientA 18s ease-in-out infinite;opacity:.13;filter:blur(88px);}
+html[data-v64-mode="HIGH"] .ambient.b{animation:ambientB 22s ease-in-out infinite;opacity:.13;filter:blur(88px);}
+html[data-v64-mode="HIGH"] .cyber-scene::after{animation:gridFlow 8s linear infinite;opacity:.38;}
+html[data-v64-mode="HIGH"] .scan-beam{animation:scanBeam 6s ease-in-out infinite;opacity:.5;}
+html[data-v64-mode="HIGH"] .network-line{animation:dash 8s linear infinite;}
+html[data-v64-mode="HIGH"] .network-host::before{animation:orbit 20s linear infinite;}
+html[data-v64-mode="HIGH"] .command-bar,html[data-v64-mode="HIGH"] .hud-panel{backdrop-filter:blur(18px);}
+html[data-v64-mode="HIGH"] .hud-panel:hover::before{opacity:1;}
+
+/* BALANCED — visibly calmer, not just slower. Decorative loops are removed. */
+html[data-v64-mode="BALANCED"] .ambient{animation:none!important;opacity:.055;filter:blur(70px);}
+html[data-v64-mode="BALANCED"] .scan-beam{animation:none!important;opacity:.14;box-shadow:0 0 7px rgba(56,232,255,.25);}
+html[data-v64-mode="BALANCED"] .cyber-scene::after{animation:none!important;opacity:.21;}
+html[data-v64-mode="BALANCED"] .city-svg{transform:none!important;transition:none!important;}
+html[data-v64-mode="BALANCED"] .network-line,html[data-v64-mode="BALANCED"] .network-host::before,html[data-v64-mode="BALANCED"] .core-shell::after,html[data-v64-mode="BALANCED"] .metric-orb::before{animation:none!important;}
+html[data-v64-mode="BALANCED"] .network-line{filter:none;opacity:.55;}
+html[data-v64-mode="BALANCED"] .command-bar,html[data-v64-mode="BALANCED"] .hud-panel{backdrop-filter:blur(7px);}
+html[data-v64-mode="BALANCED"] .hud-panel{box-shadow:0 14px 42px rgba(0,0,0,.46),inset 0 1px rgba(255,255,255,.035);}
+html[data-v64-mode="BALANCED"] .hud-panel:hover::before{opacity:.28;}
+html[data-v64-mode="BALANCED"] .hud-panel.trace:hover{box-shadow:0 14px 45px rgba(0,0,0,.46),0 0 8px rgba(56,232,255,.05);}
+
+/* ECO — crisp static HUD. All information/geometry stays present, decorative motion stops. */
+html[data-v64-mode="ECO"] .ambient,html[data-v64-mode="ECO"] .cyber-scene::after,html[data-v64-mode="ECO"] .scan-beam,html[data-v64-mode="ECO"] .star,html[data-v64-mode="ECO"] .network-line,html[data-v64-mode="ECO"] .network-host::before,html[data-v64-mode="ECO"] .core-shell::after,html[data-v64-mode="ECO"] .metric-orb::before,html[data-v64-mode="ECO"] .date-node.active::before,html[data-v64-mode="ECO"] .date-node.active::after{animation:none!important;}
+html[data-v64-mode="ECO"] .ambient{opacity:.018;filter:blur(44px);}
+html[data-v64-mode="ECO"] .scan-beam{opacity:0;box-shadow:none;}
+html[data-v64-mode="ECO"] .cyber-scene::after{opacity:.12;}
+html[data-v64-mode="ECO"] .city-svg{transform:none!important;transition:none!important;filter:contrast(1.03);}
+html[data-v64-mode="ECO"] .network-line{filter:none;opacity:.38;}
+html[data-v64-mode="ECO"] .command-bar,html[data-v64-mode="ECO"] .hud-panel,html[data-v64-mode="ECO"] .mobile-nav,html[data-v64-mode="ECO"] .v64-palette{backdrop-filter:none;}
+html[data-v64-mode="ECO"] .hud-panel{box-shadow:0 8px 22px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.025);background:rgba(4,14,26,.94);}
+html[data-v64-mode="ECO"] .hud-panel::before{display:none;}
+html[data-v64-mode="ECO"] .hud-panel.trace:hover{box-shadow:0 8px 24px rgba(0,0,0,.36);}
+html[data-v64-mode="ECO"] *{transition-duration:.08s;}
+
+/* Keep all approved structural graphics present. These selectors intentionally contain no hiding rules. */
+.cyber-scene,.roster-card,.insights-panel,.network-host,.month-snapshot{contain:layout style;}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-v64-mode] .ambient,html[data-v64-mode] .cyber-scene::after,html[data-v64-mode] .scan-beam,html[data-v64-mode] .star,html[data-v64-mode] .network-line,html[data-v64-mode] .network-host::before,html[data-v64-mode] .core-shell::after,html[data-v64-mode] .metric-orb::before,html[data-v64-mode] .date-node.active::before,html[data-v64-mode] .date-node.active::after{animation:none!important;}
+  .city-svg{transform:none!important;transition:none!important;}
+  *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;}
+}
+
+@media(max-width:860px){
+  :root{--v65-text-xs:10px;--v65-text-sm:11px;--v65-text-md:12px;}
+  .command-actions{flex-wrap:wrap;row-gap:5px;}
+  .v65-language button{min-width:40px;min-height:40px;height:40px;}
+  .v64-quality button{min-width:40px;min-height:40px;height:40px;}
+  .mobile-nav{padding-bottom:calc(8px + var(--v64-safe-bottom));}
+  .mobile-nav button{min-height:44px;white-space:normal;line-height:1.2;}
+  .v64-workload-row b,.v64-workload-row span,.v64-workload-row strong{font-size:10px;}
+  .v64-palette-head input{font-size:12px;}
+}

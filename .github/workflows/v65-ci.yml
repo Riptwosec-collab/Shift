@@ -1,0 +1,26 @@
+name: v6.5 Sharp UI CI
+
+on:
+  push:
+    branches:
+      - 'work/v6.5-sharp-ui-i18n'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install
+        run: npm install --ignore-scripts
+      - name: Build
+        run: npm run build
+      - name: Test
+        run: npm test
+      - name: Verify tracked production artifact
+        run: git diff --exit-code -- index.html
+      - name: Verify Cloudflare gates
+        run: node --test tests/build.test.mjs tests/cloudflare.test.mjs tests/legacy-visual-contract.test.mjs
