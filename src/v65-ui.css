@@ -72,8 +72,49 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
 .v65-language button.active{color:#efffff;background:linear-gradient(180deg,rgba(39,139,255,.28),rgba(20,92,255,.08));box-shadow:inset 0 0 0 1px rgba(56,232,255,.3),0 0 9px rgba(56,232,255,.10);}
 .v65-language button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;}
 
+/* HIGH — full legacy cyber experience. */
+html[data-v64-mode="HIGH"] .ambient.a{animation:ambientA 18s ease-in-out infinite;opacity:.13;filter:blur(88px);}
+html[data-v64-mode="HIGH"] .ambient.b{animation:ambientB 22s ease-in-out infinite;opacity:.13;filter:blur(88px);}
+html[data-v64-mode="HIGH"] .cyber-scene::after{animation:gridFlow 8s linear infinite;opacity:.38;}
+html[data-v64-mode="HIGH"] .scan-beam{animation:scanBeam 6s ease-in-out infinite;opacity:.5;}
+html[data-v64-mode="HIGH"] .network-line{animation:dash 8s linear infinite;}
+html[data-v64-mode="HIGH"] .network-host::before{animation:orbit 20s linear infinite;}
+html[data-v64-mode="HIGH"] .command-bar,html[data-v64-mode="HIGH"] .hud-panel{backdrop-filter:blur(18px);}
+html[data-v64-mode="HIGH"] .hud-panel:hover::before{opacity:1;}
+
+/* BALANCED — visibly calmer, not just slower. Decorative loops are removed. */
+html[data-v64-mode="BALANCED"] .ambient{animation:none!important;opacity:.055;filter:blur(70px);}
+html[data-v64-mode="BALANCED"] .scan-beam{animation:none!important;opacity:.14;box-shadow:0 0 7px rgba(56,232,255,.25);}
+html[data-v64-mode="BALANCED"] .cyber-scene::after{animation:none!important;opacity:.21;}
+html[data-v64-mode="BALANCED"] .city-svg{transform:none!important;transition:none!important;}
+html[data-v64-mode="BALANCED"] .network-line,html[data-v64-mode="BALANCED"] .network-host::before,html[data-v64-mode="BALANCED"] .core-shell::after,html[data-v64-mode="BALANCED"] .metric-orb::before{animation:none!important;}
+html[data-v64-mode="BALANCED"] .network-line{filter:none;opacity:.55;}
+html[data-v64-mode="BALANCED"] .command-bar,html[data-v64-mode="BALANCED"] .hud-panel{backdrop-filter:blur(7px);}
+html[data-v64-mode="BALANCED"] .hud-panel{box-shadow:0 14px 42px rgba(0,0,0,.46),inset 0 1px rgba(255,255,255,.035);}
+html[data-v64-mode="BALANCED"] .hud-panel:hover::before{opacity:.28;}
+html[data-v64-mode="BALANCED"] .hud-panel.trace:hover{box-shadow:0 14px 45px rgba(0,0,0,.46),0 0 8px rgba(56,232,255,.05);}
+
+/* ECO — crisp static HUD. All information/geometry stays present, decorative motion stops. */
+html[data-v64-mode="ECO"] .ambient,html[data-v64-mode="ECO"] .cyber-scene::after,html[data-v64-mode="ECO"] .scan-beam,html[data-v64-mode="ECO"] .star,html[data-v64-mode="ECO"] .network-line,html[data-v64-mode="ECO"] .network-host::before,html[data-v64-mode="ECO"] .core-shell::after,html[data-v64-mode="ECO"] .metric-orb::before,html[data-v64-mode="ECO"] .date-node.active::before,html[data-v64-mode="ECO"] .date-node.active::after{animation:none!important;}
+html[data-v64-mode="ECO"] .ambient{opacity:.018;filter:blur(44px);}
+html[data-v64-mode="ECO"] .scan-beam{opacity:0;box-shadow:none;}
+html[data-v64-mode="ECO"] .cyber-scene::after{opacity:.12;}
+html[data-v64-mode="ECO"] .city-svg{transform:none!important;transition:none!important;filter:contrast(1.03);}
+html[data-v64-mode="ECO"] .network-line{filter:none;opacity:.38;}
+html[data-v64-mode="ECO"] .command-bar,html[data-v64-mode="ECO"] .hud-panel,html[data-v64-mode="ECO"] .mobile-nav,html[data-v64-mode="ECO"] .v64-palette{backdrop-filter:none;}
+html[data-v64-mode="ECO"] .hud-panel{box-shadow:0 8px 22px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.025);background:rgba(4,14,26,.94);}
+html[data-v64-mode="ECO"] .hud-panel::before{display:none;}
+html[data-v64-mode="ECO"] .hud-panel.trace:hover{box-shadow:0 8px 24px rgba(0,0,0,.36);}
+html[data-v64-mode="ECO"] *{transition-duration:.08s;}
+
 /* Keep all approved structural graphics present. These selectors intentionally contain no hiding rules. */
 .cyber-scene,.roster-card,.insights-panel,.network-host,.month-snapshot{contain:layout style;}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-v64-mode] .ambient,html[data-v64-mode] .cyber-scene::after,html[data-v64-mode] .scan-beam,html[data-v64-mode] .star,html[data-v64-mode] .network-line,html[data-v64-mode] .network-host::before,html[data-v64-mode] .core-shell::after,html[data-v64-mode] .metric-orb::before,html[data-v64-mode] .date-node.active::before,html[data-v64-mode] .date-node.active::after{animation:none!important;}
+  .city-svg{transform:none!important;transition:none!important;}
+  *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;}
+}
 
 @media(max-width:860px){
   :root{--v65-text-xs:10px;--v65-text-sm:11px;--v65-text-md:12px;}
