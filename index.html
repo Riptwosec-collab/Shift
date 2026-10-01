@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="th" data-app-version="6.5.5" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">
+<html lang="th" data-app-version="6.5.6" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -736,11 +736,228 @@ html[data-v65-mode="ECO"] .command-bar,html[data-v65-mode="ECO"] .hud-panel,html
 }
 
 </style>
+<style id="v656-ui-style">
+/* Shift v6.5.6 — vivid contrast pass + focused Engineer Oncall overview */
+:root{
+  --v656-cyan:#2ff3ff;
+  --v656-blue:#3e8cff;
+  --v656-violet:#9d5cff;
+  --v656-pink:#ff4fc6;
+  --v656-green:#2cffad;
+  --v656-amber:#ffcb4d;
+  --v656-red:#ff5575;
+  --v656-ink:#020611;
+  --v656-panel:rgba(5,14,30,.90);
+  --v656-panel2:rgba(8,21,43,.86);
+  --v656-line:rgba(79,224,255,.34);
+  --v656-soft-line:rgba(132,184,255,.16);
+  --v656-text:#f5fbff;
+  --v656-muted:#8fb5cd;
+  --v656-depth:0 24px 70px rgba(0,0,0,.46),0 0 36px rgba(44,188,255,.07),inset 0 1px rgba(255,255,255,.06);
+}
+
+/* More saturated global canvas while keeping a dark premium base. */
+html,body{background:#01040c!important;color:var(--v656-text)}
+body{
+  background:
+    radial-gradient(980px 680px at -6% -8%,rgba(24,222,255,.28),transparent 56%),
+    radial-gradient(860px 620px at 105% 0%,rgba(132,69,255,.28),transparent 57%),
+    radial-gradient(760px 520px at 76% 78%,rgba(255,42,190,.13),transparent 58%),
+    radial-gradient(700px 500px at 4% 90%,rgba(34,255,169,.10),transparent 58%),
+    linear-gradient(150deg,#01040c 0%,#041326 36%,#080a24 66%,#10071f 100%)!important;
+}
+body::before{
+  background:
+    linear-gradient(rgba(47,243,255,.075) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(47,243,255,.075) 1px,transparent 1px),
+    linear-gradient(rgba(157,92,255,.026) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(157,92,255,.026) 1px,transparent 1px)!important;
+  background-size:60px 60px,60px 60px,15px 15px,15px 15px!important;
+  opacity:.88!important;
+}
+body::after{
+  background:
+    radial-gradient(36% 34% at 18% 18%,rgba(47,243,255,.14),transparent 72%),
+    radial-gradient(32% 30% at 83% 17%,rgba(157,92,255,.15),transparent 72%),
+    radial-gradient(28% 28% at 73% 82%,rgba(255,79,198,.10),transparent 74%),
+    radial-gradient(23% 25% at 18% 80%,rgba(44,255,173,.07),transparent 76%),
+    repeating-linear-gradient(115deg,transparent 0 92px,rgba(255,255,255,.012) 93px,transparent 94px)!important;
+  opacity:1!important;
+}
+
+/* Global surface contrast: clearer borders, brighter highlights, stronger hierarchy. */
+.command-bar,.hud-panel,.insights-panel,.network-panel,.month-snapshot,.roster-card,
+.card,.panel,.metric-card,.summary-card,.view-card,.legend,.modal,.popover,.drawer,
+.v652-control-deck,.v655-engineer-strip-wrap,.v655-selected-day-detail{
+  border-color:var(--v656-soft-line)!important;
+  background:
+    linear-gradient(135deg,rgba(47,243,255,.065),transparent 32%),
+    linear-gradient(220deg,rgba(157,92,255,.055),transparent 35%),
+    linear-gradient(180deg,var(--v656-panel),rgba(3,9,22,.92))!important;
+  box-shadow:var(--v656-depth)!important;
+  backdrop-filter:blur(18px) saturate(155%)!important;
+}
+.command-bar{
+  border-color:rgba(47,243,255,.28)!important;
+  background:linear-gradient(180deg,rgba(3,11,26,.95),rgba(3,8,21,.92))!important;
+  box-shadow:0 18px 54px rgba(0,0,0,.42),0 0 30px rgba(47,243,255,.07),inset 0 1px rgba(255,255,255,.055)!important;
+}
+.section-title,h1,h2,h3{color:#fff!important;text-shadow:0 0 24px rgba(47,243,255,.10),0 0 40px rgba(157,92,255,.055)!important}
+.eyebrow,.kicker{color:#76dfff!important}
+.muted,p{color:var(--v656-muted)}
+
+/* Navigation should read instantly: inactive = cool slate, active = cyan/violet energy. */
+.nav-tabs,.v652-view-tabs{background:rgba(0,6,18,.58)!important;border-color:rgba(98,175,255,.15)!important}
+.nav-btn,.nav-item,.v652-view-tabs button{
+  color:#8eabc1!important;
+  border-color:transparent!important;
+}
+.nav-btn:hover,.nav-item:hover,.v652-view-tabs button:hover{
+  color:#eaffff!important;
+  background:linear-gradient(180deg,rgba(47,243,255,.10),rgba(62,140,255,.055))!important;
+  border-color:rgba(47,243,255,.24)!important;
+  box-shadow:0 0 22px rgba(47,243,255,.08)!important;
+}
+.nav-btn.active,.nav-item.active,.v652-view-tabs button.active{
+  color:#fff!important;
+  background:linear-gradient(120deg,rgba(47,243,255,.23),rgba(62,140,255,.16) 48%,rgba(157,92,255,.20))!important;
+  border-color:rgba(47,243,255,.48)!important;
+  box-shadow:0 0 26px rgba(47,243,255,.15),0 0 38px rgba(157,92,255,.09),inset 0 0 20px rgba(255,255,255,.035)!important;
+}
+
+/* Buttons, chips and inputs get stronger state feedback without changing layout. */
+button,.button,.btn,[role="button"],input,select{
+  border-color:rgba(118,175,220,.16);
+}
+button:hover,.button:hover,.btn:hover,[role="button"]:hover{
+  border-color:rgba(47,243,255,.38)!important;
+  box-shadow:0 9px 26px rgba(26,108,255,.13),inset 0 0 20px rgba(47,243,255,.045)!important;
+}
+button:focus-visible,.button:focus-visible,.btn:focus-visible,[role="button"]:focus-visible,input:focus-visible,select:focus-visible{
+  outline:2px solid var(--v656-cyan)!important;
+  outline-offset:2px!important;
+  box-shadow:0 0 0 4px rgba(47,243,255,.09),0 0 28px rgba(47,243,255,.16)!important;
+}
+.badge,.chip,.pill,.tag{
+  border-color:rgba(117,196,255,.23)!important;
+  background:rgba(8,22,43,.76)!important;
+  color:#dff9ff!important;
+}
+
+/* Tables: clearer header/body separation and visible hover line. */
+table{background:rgba(1,7,18,.44)!important}
+thead,table thead{
+  background:linear-gradient(90deg,rgba(47,243,255,.14),rgba(62,140,255,.10) 42%,rgba(157,92,255,.11) 72%,rgba(255,79,198,.055))!important;
+}
+th{color:#a9d9f2!important;border-bottom-color:rgba(47,243,255,.20)!important}
+td{border-bottom-color:rgba(114,170,215,.10)!important}
+tbody tr:hover td{background:rgba(47,243,255,.045)!important}
+
+/* Person colors are intentionally stronger for instant recognition. */
+.person-pao{--v655-person:var(--v656-cyan)!important}
+.person-earth{--v655-person:var(--v656-violet)!important}
+.person-tum{--v655-person:var(--v656-amber)!important}
+.person-am{--v655-person:var(--v656-pink)!important}
+
+/* Engineer Oncall Overview: current + next only, with much clearer visual separation. */
+.v655-oncall-hero{
+  grid-template-columns:minmax(260px,.68fr) minmax(600px,1.55fr)!important;
+  min-height:260px!important;
+  padding:26px!important;
+  gap:24px!important;
+  border:1px solid rgba(47,243,255,.38)!important;
+  background:
+    radial-gradient(520px 360px at 0% 0%,rgba(47,243,255,.22),transparent 66%),
+    radial-gradient(560px 360px at 100% 2%,rgba(157,92,255,.24),transparent 67%),
+    radial-gradient(420px 300px at 74% 110%,rgba(255,79,198,.11),transparent 68%),
+    linear-gradient(128deg,rgba(5,28,52,.98),rgba(3,10,25,.98) 52%,rgba(13,8,42,.98))!important;
+  box-shadow:0 30px 80px rgba(0,0,0,.46),0 0 45px rgba(47,243,255,.10),0 0 70px rgba(157,92,255,.07),inset 0 1px rgba(255,255,255,.07)!important;
+}
+.v655-hero-copy h2{
+  background:linear-gradient(105deg,#fff 5%,#aefaff 40%,#8ec5ff 58%,#c6a8ff 77%,#ff9add 100%)!important;
+  -webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;
+  text-shadow:none!important;
+}
+.v655-now-columns{gap:14px!important}
+.v655-now-panel{
+  border-width:1px!important;
+  border-radius:20px!important;
+  padding:15px!important;
+  background:linear-gradient(155deg,rgba(10,30,55,.96),rgba(2,9,22,.92))!important;
+  box-shadow:0 18px 46px rgba(0,0,0,.30),inset 0 1px rgba(255,255,255,.055)!important;
+}
+.v655-now-panel.live{
+  border-color:rgba(44,255,173,.48)!important;
+  background:
+    radial-gradient(360px 220px at 8% 0%,rgba(44,255,173,.14),transparent 68%),
+    linear-gradient(155deg,rgba(5,42,42,.96),rgba(2,13,26,.94))!important;
+  box-shadow:0 18px 46px rgba(0,0,0,.30),0 0 34px rgba(44,255,173,.11),inset 0 0 30px rgba(44,255,173,.025)!important;
+}
+.v655-now-panel.live::before{width:3px!important;background:var(--v656-green)!important;box-shadow:0 0 22px var(--v656-green)!important}
+.v655-now-panel.next{
+  border-color:rgba(157,92,255,.52)!important;
+  background:
+    radial-gradient(360px 220px at 92% 0%,rgba(157,92,255,.18),transparent 68%),
+    linear-gradient(155deg,rgba(25,17,60,.96),rgba(4,10,27,.94))!important;
+  box-shadow:0 18px 46px rgba(0,0,0,.30),0 0 34px rgba(157,92,255,.12),inset 0 0 30px rgba(157,92,255,.03)!important;
+}
+.v655-now-panel.next::before{width:3px!important;background:linear-gradient(var(--v656-violet),var(--v656-pink))!important;box-shadow:0 0 22px var(--v656-violet)!important}
+.v655-now-panel.live>header strong{color:#aaffdf!important;text-shadow:0 0 18px rgba(44,255,173,.14)}
+.v655-now-panel.next>header strong{color:#d8c1ff!important;text-shadow:0 0 18px rgba(157,92,255,.16)}
+.v655-person-mini{
+  border-color:rgba(143,195,235,.14)!important;
+  background:linear-gradient(145deg,rgba(8,23,43,.88),rgba(2,8,20,.82))!important;
+}
+.v655-person-mini.live{border-color:rgba(44,255,173,.24)!important;box-shadow:inset 0 0 30px rgba(44,255,173,.045)!important}
+.v655-person-mini.next{border-color:rgba(157,92,255,.25)!important;box-shadow:inset 0 0 30px rgba(157,92,255,.05)!important}
+.v655-person-avatar,.v655-engineer-avatar{
+  border-width:1px!important;
+  box-shadow:0 0 18px color-mix(in srgb,var(--v655-person) 24%,transparent)!important;
+}
+
+/* Matrix / Timeline stay available in their own tabs and become easier to scan. */
+.v652-matrix-cell.active{
+  border-color:color-mix(in srgb,var(--v655-person) 58%,transparent)!important;
+  background:color-mix(in srgb,var(--v655-person) 18%,rgba(4,12,26,.92))!important;
+  box-shadow:inset 0 0 18px color-mix(in srgb,var(--v655-person) 8%,transparent),0 0 12px color-mix(in srgb,var(--v655-person) 8%,transparent)!important;
+}
+.v652-matrix-cell.v655-live{
+  border-color:rgba(44,255,173,.75)!important;
+  background:rgba(44,255,173,.18)!important;
+  box-shadow:0 0 20px rgba(44,255,173,.18),inset 0 0 18px rgba(44,255,173,.07)!important;
+}
+.v652-matrix-cell.v655-next{
+  border-color:rgba(157,92,255,.72)!important;
+  background:rgba(157,92,255,.16)!important;
+  box-shadow:0 0 20px rgba(157,92,255,.16),inset 0 0 18px rgba(157,92,255,.07)!important;
+}
+.v652-matrix-day.today,.v652-matrix-cell.today{box-shadow:inset 0 0 0 1px rgba(47,243,255,.52),0 0 14px rgba(47,243,255,.10)!important}
+.v652-matrix-day.v655-selected-day,.v652-matrix-cell.v655-selected-day{background:linear-gradient(180deg,rgba(47,243,255,.12),rgba(157,92,255,.10))!important}
+.v652-timeline-segment.active{filter:saturate(1.28) brightness(1.12);box-shadow:0 0 24px color-mix(in srgb,var(--v655-person) 22%,transparent)!important}
+
+/* Keep visual modes meaningful. */
+html[data-v65-mode="HIGH"] body::after{opacity:1!important;filter:saturate(1.08)}
+html[data-v65-mode="HIGH"] .hud-panel,html[data-v65-mode="HIGH"] .command-bar{backdrop-filter:blur(20px) saturate(168%)!important}
+html[data-v65-mode="BALANCED"] body::after{opacity:.82!important}
+html[data-v65-mode="BALANCED"] .hud-panel,html[data-v65-mode="BALANCED"] .command-bar{backdrop-filter:blur(16px) saturate(148%)!important}
+html[data-v65-mode="ECO"] body::after{animation:none!important;opacity:.48!important}
+html[data-v65-mode="ECO"] .hud-panel,html[data-v65-mode="ECO"] .command-bar{backdrop-filter:blur(8px) saturate(120%)!important;box-shadow:0 14px 36px rgba(0,0,0,.34)!important}
+
+@media(max-width:900px){
+  .v655-oncall-hero{grid-template-columns:1fr!important;padding:18px!important;min-height:0!important}
+  .v655-now-columns{grid-template-columns:1fr!important}
+}
+@media(prefers-reduced-motion:reduce){
+  body::after,.app::after{animation:none!important}
+  *,*::before,*::after{scroll-behavior:auto!important}
+}
+
+</style>
 </head>
 <!-- REFERENCE LOCK V4 -->
 <body>
 
-<div id="bootOverlay" data-loader-version="6.5.5" aria-label="Loading Shift Command Center"><div class="boot613-shell"><div class="boot613-top"><div class="boot613-logo"></div><div class="boot613-title"><small>Boot Sequence</small><h2>Loading Shift Command Center</h2><p>กำลังเชื่อมต่อ Shift Matrix และ Command UI…</p></div><div class="boot613-live">● LIVE BOOT</div></div><div class="boot613-main"><div class="boot613-radar"><div class="boot613-orbit"><i class="boot613-arc a"></i><i class="boot613-arc b"></i><i class="boot613-arc c"></i><i class="boot613-core"></i></div></div><div class="boot613-info"><div class="boot613-card"><div class="boot613-card-head"><b id="boot613Phase">Initializing Core Systems</b><span id="boot613Status">Starting…</span></div><div class="boot613-progress"><i id="boot613Bar"></i></div><div class="boot613-readout"><div class="boot613-pct" id="boot613Pct">8%</div><div class="boot613-phase" id="boot613Meta">phase 1 / 4<br>Secure startup</div></div></div><div class="boot613-grid"><div class="boot613-mini"><span>Module</span><b>Command UI</b></div><div class="boot613-mini"><span>Matrix</span><b>October 2569</b></div><div class="boot613-mini"><span>Status</span><b id="boot613State">BOOTING</b></div></div><div class="boot613-scan"><i></i></div></div></div></div></div>
+<div id="bootOverlay" data-loader-version="6.5.6" aria-label="Loading Shift Command Center"><div class="boot613-shell"><div class="boot613-top"><div class="boot613-logo"></div><div class="boot613-title"><small>Boot Sequence</small><h2>Loading Shift Command Center</h2><p>กำลังเชื่อมต่อ Shift Matrix และ Command UI…</p></div><div class="boot613-live">● LIVE BOOT</div></div><div class="boot613-main"><div class="boot613-radar"><div class="boot613-orbit"><i class="boot613-arc a"></i><i class="boot613-arc b"></i><i class="boot613-arc c"></i><i class="boot613-core"></i></div></div><div class="boot613-info"><div class="boot613-card"><div class="boot613-card-head"><b id="boot613Phase">Initializing Core Systems</b><span id="boot613Status">Starting…</span></div><div class="boot613-progress"><i id="boot613Bar"></i></div><div class="boot613-readout"><div class="boot613-pct" id="boot613Pct">8%</div><div class="boot613-phase" id="boot613Meta">phase 1 / 4<br>Secure startup</div></div></div><div class="boot613-grid"><div class="boot613-mini"><span>Module</span><b>Command UI</b></div><div class="boot613-mini"><span>Matrix</span><b>October 2569</b></div><div class="boot613-mini"><span>Status</span><b id="boot613State">BOOTING</b></div></div><div class="boot613-scan"><i></i></div></div></div></div></div>
 
 <div class="ambient a"></div><div class="ambient b"></div><div class="ambient c"></div>
 <div class="app">
@@ -1672,6 +1889,13 @@ function renderV652Oncall(){
 function installV652Bridge(){const prior=window.showView;if(typeof prior!=='function'||prior.__v652)return;const wrapped=function(name){const out=prior.apply(this,arguments);if(name==='oncall')queueMicrotask(renderV652Oncall);return out};wrapped.__v652=true;window.showView=wrapped}
 function initV652(){if(typeof mountV651Navigation==='function')mountV651Navigation();if(typeof mountV651View==='function')mountV651View();installV652Bridge();renderV652Oncall();document.addEventListener('v65:localechange',renderV652Oncall);document.documentElement.dataset.appVersion='6.5.5'}
 if(typeof document!=='undefined'){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initV652,{once:true});else initV652()}
+
+// v656-overrides.js
+// Shift v6.5.6 — focused Engineer Oncall overview.
+// Keep Overview intentionally minimal: only the people on call now and the next handoff.
+function v652Overview(now){
+  return `${v655RenderTodayNext(now)}`;
+}
 
 })();</script>
 </body>
