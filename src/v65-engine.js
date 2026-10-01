@@ -8,7 +8,7 @@ const V65_LITERAL_PAIRS=Object.freeze([
   ['ความสัมพันธ์ของทีม','Team Network'],['สมดุลภาระงานของทีม','Team Workload Balance'],['สมดุลเวรทั้งทีม','Team Shift Balance'],
   ['พนักงาน','Employee'],['วันก่อน','Previous Day'],['วันถัดไป','Next Day'],['ไม่มี','None'],
   ['ไม่มีการเปลี่ยนสถานะ','No status changes'],['ไม่พบสัญญาณเสี่ยง','No staffing risk signals'],
-  ['ตารางเวร','Shift Schedule'],['วันทำงาน','Work Days'],['เวรกลางคืน','Night Shifts'],['วันหยุด','Off Days']
+  ['ตารางเวร','Shift Schedule'],['วันทำงาน','Work Days']
 ]);
 
 let v65I18n=null;
@@ -32,7 +32,10 @@ function v65TranslateLiteral(text,locale){
       .replace(/(\d+)\s*คืน/g,'$1 nights')
       .replace(/(\d+)\s*คน/g,'$1 staff');
   }
-  return raw;
+  return raw
+    .replace(/(\d+)\s*days?\b/gi,'$1 วัน')
+    .replace(/(\d+)\s*nights?\b/gi,'$1 คืน')
+    .replace(/(\d+)\s*staff\b/gi,'$1 คน');
 }
 
 function v65TranslateTree(root,locale=v65Locale()){
@@ -69,6 +72,26 @@ export function mountV65LanguageControl(doc=v65Root(),i18n=v65I18n){
   return control;
 }
 
+export function enhanceV65ModeControl(doc=v65Root(),i18n=v65I18n){
+  const control=doc?.querySelector?.('.v64-quality');
+  if(!control)return null;
+  control.setAttribute('role','group');
+  const sync=()=>{
+    control.setAttribute('aria-label',i18n?.t?.('accessibility.performance')||'Performance mode');
+    control.querySelectorAll('button[data-mode]').forEach(button=>{
+      const mode=button.dataset.mode||'BALANCED',active=button.classList.contains('active');
+      button.setAttribute('aria-pressed',String(active));
+      button.setAttribute('aria-label',`${i18n?.t?.(`modes.${mode.toLowerCase()}`)||mode} — ${i18n?.t?.('accessibility.performance')||'Performance mode'}`);
+    });
+  };
+  sync();
+  if(control.dataset.v65A11yBound!=='1'){
+    control.dataset.v65A11yBound='1';
+    control.addEventListener('click',()=>queueMicrotask(sync));
+  }
+  return control;
+}
+
 export function translateLegacyStatic(root=v65Root(),i18n=v65I18n){
   if(!root||!i18n)return;
   const locale=i18n.getLocale();
@@ -81,6 +104,7 @@ export function translateLegacyStatic(root=v65Root(),i18n=v65I18n){
     const label=i18n.t(v65NavKey(view));
     const target=button.querySelector?.('b')||button.querySelector?.('.nav-label')||button;
     v65SetText(target,label);
+    button.setAttribute?.('aria-label',label);
   });
 
   root.querySelectorAll?.('[data-v65-i18n]').forEach(node=>v65SetText(node,i18n.t(node.dataset.v65I18n)));
@@ -93,8 +117,10 @@ export function translateLegacyStatic(root=v65Root(),i18n=v65I18n){
       const active=button.dataset.locale===locale;
       button.classList.toggle('active',active);
       button.setAttribute('aria-pressed',String(active));
+      button.setAttribute('aria-label',`${button.textContent} — ${i18n.t('accessibility.language')}`);
     });
   }
+  enhanceV65ModeControl(root,i18n);
 
   const search=root.querySelector?.('.smart-search input');
   if(search)search.placeholder=locale==='en'?'Search date, employee, or shift':'ค้นหา วันที่ พนักงาน หรือเวร';
@@ -145,6 +171,7 @@ export function initV65({storage=typeof localStorage!=='undefined'?localStorage:
   v65I18n=createI18nController({storage,root,storageKey:'shift.locale'});
   globalThis.v65I18n=v65I18n;
   mountV65LanguageControl(document,v65I18n);
+  enhanceV65ModeControl(document,v65I18n);
   installV65RenderAdapters();
   v65I18n.subscribe(()=>refreshV65Locale());
   refreshV65Locale();
