@@ -11,7 +11,7 @@ export function parseCommandQuery(q,options={}){
     if(v.includes(q)||q.includes(v)){
       const view=v==='team'?'overview':v;
       const key=v==='team'?'network.title':`nav.${v}`;
-      out.push({type:'view',view,label:t?t(key,{},locale):v});
+      out.push({type:'view',view,source:v,label:t?t(key,{},locale):v});
     }
   }
   const status=q==='d'||q.includes('day')||q.includes('กลางวัน')?'D':q==='n'||q.includes('night')||q.includes('กลางคืน')?'N':q.includes('off')?'O':null;
