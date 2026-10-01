@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="th" data-app-version="6.5.6" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">
+<html lang="th" data-app-version="6.5.7" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -953,11 +953,219 @@ html[data-v65-mode="ECO"] .hud-panel,html[data-v65-mode="ECO"] .command-bar{back
 }
 
 </style>
+<style id="v657-ui-style">
+/* Shift v6.5.7 — graphite command-center + Current/Next overview matrix */
+:root{
+  --v657-graphite:#05070d;
+  --v657-navy:#071222;
+  --v657-cyan:#37eaff;
+  --v657-blue:#3888ff;
+  --v657-violet:#8c6bff;
+  --v657-grid:rgba(74,199,255,.075);
+  --v657-panel:rgba(5,12,24,.92);
+  --v657-panel2:rgba(8,18,34,.88);
+  --v657-line:rgba(82,206,255,.24);
+  --v657-text:#f5fbff;
+  --v657-muted:#8ca9bf;
+  --v657-shadow:0 26px 72px rgba(0,0,0,.52),0 0 38px rgba(55,234,255,.055),inset 0 1px rgba(255,255,255,.045);
+}
+
+html,body{background:var(--v657-graphite)!important;color:var(--v657-text)}
+body{
+  background:
+    radial-gradient(820px 540px at 8% -8%,rgba(55,234,255,.12),transparent 62%),
+    radial-gradient(780px 520px at 98% 4%,rgba(56,136,255,.10),transparent 64%),
+    radial-gradient(680px 520px at 72% 92%,rgba(140,107,255,.08),transparent 66%),
+    linear-gradient(155deg,#03050a 0%,#07101e 42%,#080d1b 72%,#05070d 100%)!important;
+}
+body::before{
+  background:
+    linear-gradient(var(--v657-grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--v657-grid) 1px,transparent 1px),
+    linear-gradient(rgba(56,136,255,.022) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(56,136,255,.022) 1px,transparent 1px)!important;
+  background-size:64px 64px,64px 64px,16px 16px,16px 16px!important;
+  opacity:.78!important;
+}
+body::after{
+  background:
+    repeating-linear-gradient(0deg,transparent 0 4px,rgba(255,255,255,.008) 4px 5px),
+    linear-gradient(115deg,transparent 0 28%,rgba(55,234,255,.022) 28.5%,transparent 29%),
+    radial-gradient(40% 34% at 18% 20%,rgba(55,234,255,.07),transparent 72%),
+    radial-gradient(36% 32% at 84% 18%,rgba(140,107,255,.065),transparent 74%)!important;
+  opacity:.82!important;
+}
+
+.command-bar,.hud-panel,.insights-panel,.network-panel,.month-snapshot,.roster-card,
+.card,.panel,.metric-card,.summary-card,.view-card,.legend,.modal,.popover,.drawer,
+.v652-control-deck,.v655-engineer-strip-wrap,.v655-selected-day-detail{
+  border-color:rgba(86,176,226,.16)!important;
+  background:
+    linear-gradient(135deg,rgba(55,234,255,.035),transparent 32%),
+    linear-gradient(225deg,rgba(140,107,255,.028),transparent 36%),
+    linear-gradient(180deg,var(--v657-panel2),var(--v657-panel))!important;
+  box-shadow:var(--v657-shadow)!important;
+  backdrop-filter:blur(16px) saturate(125%)!important;
+}
+.command-bar{
+  border-color:rgba(55,234,255,.24)!important;
+  box-shadow:0 18px 58px rgba(0,0,0,.5),0 0 26px rgba(55,234,255,.045),inset 0 1px rgba(255,255,255,.045)!important;
+}
+.section-title,h1,h2,h3{color:#fff!important;text-shadow:0 0 22px rgba(55,234,255,.075)!important}
+.eyebrow,.kicker{color:#83dfff!important;letter-spacing:.14em}
+.muted,p{color:var(--v657-muted)}
+
+.nav-tabs,.v652-view-tabs{background:rgba(1,6,15,.66)!important;border-color:rgba(76,153,210,.13)!important}
+.nav-btn,.nav-item,.v652-view-tabs button{color:#819db4!important}
+.nav-btn:hover,.nav-item:hover,.v652-view-tabs button:hover{
+  color:#eafcff!important;
+  background:linear-gradient(180deg,rgba(55,234,255,.075),rgba(56,136,255,.035))!important;
+  border-color:rgba(55,234,255,.22)!important;
+}
+.nav-btn.active,.nav-item.active,.v652-view-tabs button.active{
+  color:#fff!important;
+  background:linear-gradient(120deg,rgba(55,234,255,.15),rgba(56,136,255,.12) 55%,rgba(140,107,255,.13))!important;
+  border-color:rgba(55,234,255,.38)!important;
+  box-shadow:0 0 24px rgba(55,234,255,.095),inset 0 0 18px rgba(255,255,255,.025)!important;
+}
+
+/* Reduce the rainbow effect from v6.5.6 to one coherent cool-spectrum system. */
+.person-pao{--v655-person:var(--v657-cyan)!important}
+.person-earth{--v655-person:#59b8ff!important}
+.person-tum{--v655-person:var(--v657-blue)!important}
+.person-am{--v655-person:var(--v657-violet)!important}
+
+.v655-oncall-hero{
+  border-color:rgba(55,234,255,.27)!important;
+  background:
+    linear-gradient(90deg,rgba(55,234,255,.055),transparent 27%),
+    linear-gradient(270deg,rgba(140,107,255,.07),transparent 31%),
+    repeating-linear-gradient(90deg,transparent 0 79px,rgba(80,181,255,.018) 80px),
+    linear-gradient(128deg,#071728 0%,#050b16 52%,#0c0d24 100%)!important;
+  box-shadow:0 28px 80px rgba(0,0,0,.48),0 0 34px rgba(55,234,255,.055),inset 0 1px rgba(255,255,255,.05)!important;
+  overflow:hidden;
+}
+.v655-oncall-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(105deg,transparent 0 46%,rgba(55,234,255,.035) 49%,transparent 52% 100%);
+  transform:translateX(-85%);animation:v657Sweep 8s linear infinite;
+}
+.v655-hero-copy h2{
+  background:linear-gradient(105deg,#fff 4%,#bff9ff 34%,#8cc8ff 64%,#baa9ff 88%)!important;
+  -webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;text-shadow:none!important;
+}
+.v655-now-panel{
+  position:relative;overflow:hidden;
+  background:linear-gradient(160deg,rgba(8,21,38,.94),rgba(3,8,18,.94))!important;
+  border-color:rgba(86,176,226,.16)!important;
+}
+.v655-now-panel::after{
+  content:"";position:absolute;inset:auto 12px 10px 12px;height:1px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(55,234,255,.34),transparent);
+}
+.v655-now-panel.live{
+  border-color:rgba(55,234,255,.42)!important;
+  background:radial-gradient(320px 190px at 8% 0%,rgba(55,234,255,.11),transparent 70%),linear-gradient(160deg,rgba(5,28,43,.96),rgba(2,10,21,.96))!important;
+  box-shadow:0 18px 44px rgba(0,0,0,.34),0 0 26px rgba(55,234,255,.075),inset 0 0 26px rgba(55,234,255,.018)!important;
+}
+.v655-now-panel.live::before{background:var(--v657-cyan)!important;box-shadow:0 0 18px rgba(55,234,255,.72)!important}
+.v655-now-panel.next{
+  border-color:rgba(140,107,255,.42)!important;
+  background:radial-gradient(320px 190px at 92% 0%,rgba(140,107,255,.12),transparent 70%),linear-gradient(160deg,rgba(17,18,49,.96),rgba(4,9,22,.96))!important;
+  box-shadow:0 18px 44px rgba(0,0,0,.34),0 0 26px rgba(140,107,255,.075),inset 0 0 26px rgba(140,107,255,.02)!important;
+}
+.v655-now-panel.next::before{background:var(--v657-violet)!important;box-shadow:0 0 18px rgba(140,107,255,.72)!important}
+.v655-now-panel.live>header strong{color:#bff8ff!important;text-shadow:0 0 14px rgba(55,234,255,.12)!important}
+.v655-now-panel.next>header strong{color:#d0c8ff!important;text-shadow:0 0 14px rgba(140,107,255,.13)!important}
+.v655-person-mini.live{border-color:rgba(55,234,255,.21)!important;box-shadow:inset 0 0 26px rgba(55,234,255,.028)!important}
+.v655-person-mini.next{border-color:rgba(140,107,255,.21)!important;box-shadow:inset 0 0 26px rgba(140,107,255,.03)!important}
+
+.v657-overview-stack{display:grid;gap:16px}
+.v657-overview-matrix{
+  position:relative;overflow:hidden;padding:18px 18px 16px!important;
+  border:1px solid rgba(55,234,255,.24)!important;
+  background:
+    linear-gradient(90deg,rgba(55,234,255,.035),transparent 24%,transparent 76%,rgba(140,107,255,.035)),
+    repeating-linear-gradient(0deg,transparent 0 31px,rgba(69,159,215,.022) 32px),
+    linear-gradient(180deg,rgba(5,16,31,.96),rgba(3,8,18,.96))!important;
+  box-shadow:0 24px 64px rgba(0,0,0,.44),0 0 30px rgba(55,234,255,.055),inset 0 1px rgba(255,255,255,.04)!important;
+}
+.v657-overview-matrix::before{
+  content:"";position:absolute;inset:9px;pointer-events:none;border:1px solid transparent;
+  border-image:linear-gradient(120deg,rgba(55,234,255,.28),transparent 24%,transparent 76%,rgba(140,107,255,.24)) 1;
+  clip-path:polygon(0 0,42px 0,42px 1px,1px 1px,1px 42px,0 42px,0 0,100% 0,100% 42px,99% 42px,99% 1px,calc(100% - 42px) 1px,calc(100% - 42px) 0,100% 0,100% 100%,calc(100% - 42px) 100%,calc(100% - 42px) 99%,99% 99%,99% calc(100% - 42px),100% calc(100% - 42px),100% 100%,0 100%,0 calc(100% - 42px),1px calc(100% - 42px),1px 99%,42px 99%,42px 100%);
+}
+.v657-matrix-head{position:relative;z-index:2;display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:14px;padding:0 2px}
+.v657-matrix-head h3{margin:4px 0 2px;font-size:clamp(18px,2vw,28px);letter-spacing:-.03em}
+.v657-matrix-head p{margin:0;font-size:11px}
+.v657-handoff-line{display:flex;align-items:center;gap:8px;min-width:260px;padding:8px 10px;border:1px solid rgba(79,173,229,.15);border-radius:999px;background:rgba(2,8,18,.72);font-size:8px;letter-spacing:.13em;color:#87a6be;font-weight:900}
+.v657-handoff-line span:first-child{color:var(--v657-cyan)}
+.v657-handoff-line span:last-child{color:#b8aaff}
+.v657-handoff-line b{color:#dceeff;font-size:8px;white-space:nowrap}
+.v657-handoff-line i{height:1px;flex:1;background:linear-gradient(90deg,rgba(55,234,255,.18),rgba(56,136,255,.72),rgba(140,107,255,.20));position:relative}
+.v657-handoff-line i::after{content:"";position:absolute;right:-1px;top:-2px;width:5px;height:5px;border-top:1px solid #79c8ff;border-right:1px solid #79c8ff;transform:rotate(45deg)}
+.v657-data-scan{position:absolute;z-index:1;left:-16%;top:0;width:18%;height:100%;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(55,234,255,.045),transparent);transform:skewX(-13deg);animation:v657Scan 7s linear infinite}
+
+.v657-mini-scroll{position:relative;z-index:2;overflow-x:auto;overflow-y:hidden;padding-bottom:4px;scrollbar-width:thin;scrollbar-color:rgba(55,234,255,.25) rgba(255,255,255,.025)}
+.v657-mini-grid{--v657-name:176px;display:grid;grid-template-columns:var(--v657-name) repeat(var(--v657-days),minmax(30px,1fr));min-width:calc(var(--v657-name) + var(--v657-days) * 31px);border:1px solid rgba(69,158,214,.13);border-radius:13px;overflow:hidden;background:rgba(1,6,14,.54)}
+.v657-mini-corner,.v657-mini-day{min-height:46px;border-right:1px solid rgba(82,157,207,.09);border-bottom:1px solid rgba(82,157,207,.10);background:linear-gradient(180deg,rgba(13,28,45,.82),rgba(5,13,25,.82))}
+.v657-mini-corner{position:sticky;left:0;z-index:5;display:flex;flex-direction:column;justify-content:center;padding:0 12px}
+.v657-mini-corner b{font-size:10px;color:#dff7ff}.v657-mini-corner small{font-size:8px;color:#6689a2;margin-top:2px}
+.v657-mini-day{display:grid;place-items:center;gap:0;padding:4px 0;color:#6f90a8}.v657-mini-day small{font-size:7px}.v657-mini-day b{font-size:10px;color:#a7bfd1}.v657-mini-day.today{background:linear-gradient(180deg,rgba(55,234,255,.12),rgba(56,136,255,.055));box-shadow:inset 0 -2px var(--v657-cyan)}
+.v657-pair-row{display:contents}
+.v657-pair-person{position:sticky;left:0;z-index:4;min-height:54px;display:flex;align-items:center;gap:9px;padding:7px 10px;border-right:1px solid rgba(82,157,207,.13);border-bottom:1px solid rgba(82,157,207,.09);background:linear-gradient(90deg,rgba(7,19,34,.98),rgba(5,13,25,.96))}
+.v657-pair-person>span{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;font-size:12px;font-weight:950;color:#eaffff;border:1px solid color-mix(in srgb,var(--v655-person) 40%,transparent);background:color-mix(in srgb,var(--v655-person) 8%,rgba(3,11,22,.92));box-shadow:0 0 16px color-mix(in srgb,var(--v655-person) 11%,transparent)}
+.v657-pair-person div{min-width:0;display:grid}.v657-pair-person small{font-size:7px;letter-spacing:.1em;color:#7192aa;font-weight:900}.v657-pair-person strong{font-size:12px;color:#eefcff}.v657-pair-person em{font-style:normal;font-size:8px;color:#65839a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v657-pair-row[data-v657-state="live"] .v657-pair-person{box-shadow:inset 3px 0 var(--v657-cyan)}
+.v657-pair-row[data-v657-state="live"] .v657-pair-person small{color:#80edff}
+.v657-pair-row[data-v657-state="next"] .v657-pair-person{box-shadow:inset 3px 0 var(--v657-violet)}
+.v657-pair-row[data-v657-state="next"] .v657-pair-person small{color:#b8aaff}
+.v657-mini-cell{min-height:54px;display:grid;place-items:center;border-right:1px solid rgba(82,157,207,.075);border-bottom:1px solid rgba(82,157,207,.075);background:rgba(3,9,18,.48);position:relative;color:#436177}
+.v657-mini-cell i{width:3px;height:3px;border-radius:50%;background:rgba(111,155,184,.23)}
+.v657-mini-cell.active{background:linear-gradient(180deg,color-mix(in srgb,var(--v655-person) 12%,rgba(4,11,22,.92)),rgba(3,9,18,.92));box-shadow:inset 0 0 16px color-mix(in srgb,var(--v655-person) 5%,transparent)}
+.v657-mini-cell.active b{font-size:8px;letter-spacing:.05em;color:color-mix(in srgb,var(--v655-person) 78%,white);text-shadow:0 0 10px color-mix(in srgb,var(--v655-person) 22%,transparent)}
+.v657-pair-row[data-v657-state="live"] .v657-mini-cell.today{outline:1px solid rgba(55,234,255,.72);outline-offset:-2px;background:rgba(55,234,255,.13);box-shadow:inset 0 0 18px rgba(55,234,255,.07),0 0 15px rgba(55,234,255,.08)}
+.v657-pair-row[data-v657-state="next"] .v657-mini-cell.handoff{outline:1px solid rgba(140,107,255,.75);outline-offset:-2px;background:rgba(140,107,255,.13);box-shadow:inset 0 0 18px rgba(140,107,255,.07),0 0 15px rgba(140,107,255,.08)}
+.v657-mini-cell.handoff::after{content:"";position:absolute;top:4px;right:4px;width:5px;height:5px;border-radius:50%;background:var(--v657-violet);box-shadow:0 0 10px rgba(140,107,255,.75)}
+.v657-pair-empty{grid-column:1/-1;padding:20px;text-align:center;color:#718ba0;font-size:11px}
+
+/* Full Matrix / Timeline stay complete but use restrained cool-spectrum emphasis. */
+.v652-matrix-cell.active{filter:saturate(.9)!important}
+.v652-matrix-cell.v655-live{border-color:rgba(55,234,255,.7)!important;background:rgba(55,234,255,.12)!important;box-shadow:0 0 16px rgba(55,234,255,.11),inset 0 0 14px rgba(55,234,255,.05)!important}
+.v652-matrix-cell.v655-next{border-color:rgba(140,107,255,.66)!important;background:rgba(140,107,255,.11)!important;box-shadow:0 0 16px rgba(140,107,255,.10),inset 0 0 14px rgba(140,107,255,.045)!important}
+.v652-matrix-day.v655-selected-day,.v652-matrix-cell.v655-selected-day{background:linear-gradient(180deg,rgba(55,234,255,.075),rgba(56,136,255,.045))!important}
+
+@keyframes v657Scan{0%{transform:translateX(0) skewX(-13deg);opacity:0}10%{opacity:1}88%{opacity:.8}100%{transform:translateX(720%) skewX(-13deg);opacity:0}}
+@keyframes v657Sweep{0%{transform:translateX(-85%)}100%{transform:translateX(120%)}}
+
+html[data-v65-mode="HIGH"] .v657-data-scan{animation-duration:5.5s}
+html[data-v65-mode="HIGH"] .v657-overview-matrix,html[data-v65-mode="HIGH"] .v655-oncall-hero{backdrop-filter:blur(18px) saturate(132%)!important}
+html[data-v65-mode="BALANCED"] .v657-data-scan{animation-duration:8s;opacity:.75}
+html[data-v65-mode="BALANCED"] .v657-overview-matrix,html[data-v65-mode="BALANCED"] .v655-oncall-hero{backdrop-filter:blur(14px) saturate(120%)!important}
+html[data-v65-mode="ECO"] .v657-data-scan,html[data-v65-mode="ECO"] .v655-oncall-hero::after{display:none!important}
+html[data-v65-mode="ECO"] .v657-overview-matrix,html[data-v65-mode="ECO"] .v655-oncall-hero{backdrop-filter:blur(6px) saturate(108%)!important;box-shadow:0 14px 34px rgba(0,0,0,.42)!important}
+
+@media (max-width:980px){
+  .v657-matrix-head{align-items:stretch;flex-direction:column}.v657-handoff-line{min-width:0;width:100%}
+  .v657-mini-grid{--v657-name:148px}.v655-oncall-hero{grid-template-columns:1fr!important}
+}
+@media (max-width:640px){
+  .v657-overview-stack{gap:11px}.v657-overview-matrix{padding:13px 10px 11px!important;border-radius:16px!important}
+  .v657-mini-grid{--v657-name:132px;grid-template-columns:var(--v657-name) repeat(var(--v657-days),29px);min-width:calc(var(--v657-name) + var(--v657-days) * 29px)}
+  .v657-pair-person{padding:6px 7px;gap:7px}.v657-pair-person>span{width:28px;height:28px}.v657-pair-person strong{font-size:11px}.v657-pair-person em{max-width:84px}
+  .v657-mini-cell{min-height:49px}.v657-mini-day{min-height:42px}.v657-handoff-line{gap:5px;padding:7px 8px}.v657-handoff-line b{font-size:7px}
+}
+@media (prefers-reduced-motion:reduce){
+  .v657-data-scan,.v655-oncall-hero::after{animation:none!important;display:none!important}
+  .v657-overview-matrix,.v655-oncall-hero,.v657-mini-cell{transition:none!important}
+}
+
+</style>
 </head>
 <!-- REFERENCE LOCK V4 -->
 <body>
 
-<div id="bootOverlay" data-loader-version="6.5.6" aria-label="Loading Shift Command Center"><div class="boot613-shell"><div class="boot613-top"><div class="boot613-logo"></div><div class="boot613-title"><small>Boot Sequence</small><h2>Loading Shift Command Center</h2><p>กำลังเชื่อมต่อ Shift Matrix และ Command UI…</p></div><div class="boot613-live">● LIVE BOOT</div></div><div class="boot613-main"><div class="boot613-radar"><div class="boot613-orbit"><i class="boot613-arc a"></i><i class="boot613-arc b"></i><i class="boot613-arc c"></i><i class="boot613-core"></i></div></div><div class="boot613-info"><div class="boot613-card"><div class="boot613-card-head"><b id="boot613Phase">Initializing Core Systems</b><span id="boot613Status">Starting…</span></div><div class="boot613-progress"><i id="boot613Bar"></i></div><div class="boot613-readout"><div class="boot613-pct" id="boot613Pct">8%</div><div class="boot613-phase" id="boot613Meta">phase 1 / 4<br>Secure startup</div></div></div><div class="boot613-grid"><div class="boot613-mini"><span>Module</span><b>Command UI</b></div><div class="boot613-mini"><span>Matrix</span><b>October 2569</b></div><div class="boot613-mini"><span>Status</span><b id="boot613State">BOOTING</b></div></div><div class="boot613-scan"><i></i></div></div></div></div></div>
+<div id="bootOverlay" data-loader-version="6.5.7" aria-label="Loading Shift Command Center"><div class="boot613-shell"><div class="boot613-top"><div class="boot613-logo"></div><div class="boot613-title"><small>Boot Sequence</small><h2>Loading Shift Command Center</h2><p>กำลังเชื่อมต่อ Shift Matrix และ Command UI…</p></div><div class="boot613-live">● LIVE BOOT</div></div><div class="boot613-main"><div class="boot613-radar"><div class="boot613-orbit"><i class="boot613-arc a"></i><i class="boot613-arc b"></i><i class="boot613-arc c"></i><i class="boot613-core"></i></div></div><div class="boot613-info"><div class="boot613-card"><div class="boot613-card-head"><b id="boot613Phase">Initializing Core Systems</b><span id="boot613Status">Starting…</span></div><div class="boot613-progress"><i id="boot613Bar"></i></div><div class="boot613-readout"><div class="boot613-pct" id="boot613Pct">8%</div><div class="boot613-phase" id="boot613Meta">phase 1 / 4<br>Secure startup</div></div></div><div class="boot613-grid"><div class="boot613-mini"><span>Module</span><b>Command UI</b></div><div class="boot613-mini"><span>Matrix</span><b>October 2569</b></div><div class="boot613-mini"><span>Status</span><b id="boot613State">BOOTING</b></div></div><div class="boot613-scan"><i></i></div></div></div></div></div>
 
 <div class="ambient a"></div><div class="ambient b"></div><div class="ambient c"></div>
 <div class="app">
@@ -1895,6 +2103,56 @@ if(typeof document!=='undefined'){if(document.readyState==='loading')document.ad
 // Keep Overview intentionally minimal: only the people on call now and the next handoff.
 function v652Overview(now){
   return `${v655RenderTodayNext(now)}`;
+}
+
+// v657-overrides.js
+// Shift v6.5.7 — Current/Next overview mini matrix + command-center graphics.
+function v657OverviewPairPeople(now){
+  const current=getOncallAssignmentsForDate(now);
+  const next=getNextOncallAssignments(now);
+  const seen=new Set();
+  const pair=[];
+  for(const row of current){if(!seen.has(row.name)){seen.add(row.name);pair.push({name:row.name,state:'live',assignment:row})}}
+  for(const row of next){if(!seen.has(row.name)){seen.add(row.name);pair.push({name:row.name,state:'next',assignment:row})}}
+  return pair;
+}
+
+function v657PairStateLabel(state){
+  return state==='live'?(v652Locale()==='th'?'กำลังเข้าเวร':'ON CALL NOW'):(v652Locale()==='th'?'รับช่วงถัดไป':'NEXT HANDOFF');
+}
+
+function v657RenderOverviewPairMatrix(now){
+  const model=getOncallMonthMatrix(v652Month);
+  const pair=v657OverviewPairPeople(now);
+  const week=V652_WEEK[v652Locale()];
+  const headers=model.days.map(item=>{
+    const dow=week[new Date(2026,v652Month-1,item.day).getDay()];
+    const today=v652IsToday(v652Month,item.day,now);
+    return `<span class="v657-mini-day ${today?'today':''}" aria-label="${v652Esc(`${item.day} ${v652MonthName(v652Month)} ${v652Year()}`)}"><small>${dow}</small><b>${item.day}</b></span>`;
+  }).join('');
+  const rows=pair.map(person=>{
+    const stateAttr=person.state==='live'?'data-v657-state="live"':'data-v657-state="next"';
+    const handoffDay=person.state==='next'&&person.assignment.month===v652Month?person.assignment.start:null;
+    const cells=model.days.map(item=>{
+      const active=item.assignments.some(row=>row.name===person.name);
+      const today=v652IsToday(v652Month,item.day,now);
+      const handoff=handoffDay===item.day;
+      return `<span class="v657-mini-cell ${active?'active':''} ${today?'today':''} ${handoff?'handoff':''}" title="${v652Esc(`${person.name} • ${item.day} ${v652MonthName(v652Month)}${active?' • OC':''}`)}">${active?'<b>OC</b>':'<i></i>'}</span>`;
+    }).join('');
+    return `<div class="v657-pair-row" ${stateAttr}><div class="v657-pair-person person-${v652PersonClass(person.name)}"><span>${v652Esc(person.name.slice(0,1))}</span><div><small>${v657PairStateLabel(person.state)}</small><strong>${v652Esc(person.name)}</strong><em>${v652Range(person.assignment)}</em></div></div>${cells}</div>`;
+  }).join('');
+  const empty=pair.length?rows:`<div class="v657-pair-empty">${v652Text('unassigned')}</div>`;
+  return `<section class="v657-overview-matrix hud-panel trace"><i class="v657-data-scan" aria-hidden="true"></i><div class="v657-matrix-head"><div><span class="eyebrow">LIVE HANDOFF MATRIX</span><h3>${v652Locale()==='th'?'Matrix คนปัจจุบัน + คนถัดไป':'Current + Next Matrix'}</h3><p>${v652Locale()==='th'?'แสดงเฉพาะคนที่กำลัง On-call และคนที่จะรับช่วงต่อ':'Only the active engineer and the next handoff are shown here'}</p></div><div class="v657-handoff-line" aria-hidden="true"><span>NOW</span><i></i><b>HANDOFF</b><i></i><span>NEXT</span></div></div><div class="v657-mini-scroll"><div class="v657-mini-grid" style="--v657-days:${model.daysInMonth}"><div class="v657-mini-corner"><b>${v652Text('engineer')}</b><small>${v652MonthName(v652Month)} ${v652Year()}</small></div>${headers}${empty}</div></div></section>`;
+}
+
+function v652Overview(now){
+  return `<div class="v657-overview-stack">${v655RenderTodayNext(now)}${v657RenderOverviewPairMatrix(now)}</div>`;
+}
+
+function v657StampVersion(){document.documentElement.dataset.appVersion='6.5.7'}
+if(typeof document!=='undefined'){
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',v657StampVersion,{once:true});
+  else v657StampVersion();
 }
 
 })();</script>
