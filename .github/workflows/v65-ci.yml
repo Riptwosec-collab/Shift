@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'work/v6.5-sharp-ui-smooth-boot-i18n'
+      - 'work/v6.5.1-engineer-oncall'
   workflow_dispatch:
 
 jobs:
