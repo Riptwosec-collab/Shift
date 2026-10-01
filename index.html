@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="th" data-app-version="6.5" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">
+<html lang="th" data-app-version="6.5.1" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -282,11 +282,24 @@ html[data-v65-booting="1"] .city-svg{transform:none!important;transition:none!im
 @media(max-width:560px){.v65-language button{min-width:32px}.section-title{line-height:1.3}.brand-copy h1{font-size:17px}.v64-palette-head input{font-size:12px!important}}
 
 </style>
+<style id="v651-oncall-style">
+/* v6.5.1 Engineer Oncall — additive visual layer */
+.v651-oncall{display:grid;gap:10px;margin-top:8px}.v651-oncall-hero{position:relative;min-height:190px;padding:22px;overflow:hidden;background:radial-gradient(circle at 78% 24%,rgba(56,232,255,.15),transparent 24%),radial-gradient(circle at 58% 70%,rgba(119,91,255,.12),transparent 30%),linear-gradient(145deg,rgba(6,24,43,.96),rgba(3,12,24,.94));border:1px solid rgba(56,232,255,.2);border-radius:18px;box-shadow:0 22px 70px rgba(0,0,0,.48),inset 0 1px rgba(255,255,255,.035)}
+.v651-oncall-hero::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(56,232,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(56,232,255,.035) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(90deg,transparent 0,#000 42%,#000 100%);opacity:.48}.v651-oncall-hero::after{content:"";position:absolute;width:310px;height:310px;right:-90px;top:-115px;border-radius:50%;border:1px solid rgba(56,232,255,.18);box-shadow:0 0 0 30px rgba(39,139,255,.025),0 0 0 62px rgba(119,91,255,.02),0 0 50px rgba(56,232,255,.08);animation:v651Orbit 18s linear infinite}.v651-oncall-copy{position:relative;z-index:2;max-width:680px}.v651-oncall-kicker{font-size:9px;font-weight:900;letter-spacing:.18em;color:#61dff1;text-transform:uppercase}.v651-oncall-title{margin:6px 0 4px;font-size:clamp(28px,4vw,52px);font-weight:950;letter-spacing:-.045em;color:#f5fdff;text-shadow:0 0 24px rgba(56,232,255,.16)}.v651-oncall-sub{font-size:11px;color:#7f9eb4;line-height:1.55}.v651-oncall-current{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:8px;margin-top:18px}.v651-current-card,.v651-next-card{padding:13px 14px;border:1px solid rgba(255,255,255,.065);border-radius:13px;background:rgba(2,12,24,.72);backdrop-filter:blur(10px)}.v651-current-card{border-color:rgba(34,230,168,.3);box-shadow:inset 0 0 25px rgba(34,230,168,.025),0 0 20px rgba(34,230,168,.035)}.v651-oncall-label{display:block;font-size:8px;font-weight:900;letter-spacing:.14em;color:#67879f;text-transform:uppercase}.v651-oncall-name{display:block;margin-top:5px;font-size:23px;font-weight:950;color:#eafff8}.v651-oncall-range{display:block;margin-top:3px;font-size:10px;color:#83a3b8}.v651-live-badge{display:inline-flex;align-items:center;gap:6px;margin-left:7px;padding:3px 7px;border:1px solid rgba(34,230,168,.38);border-radius:999px;color:#7cf4cc;background:rgba(34,230,168,.06);font-size:7px;letter-spacing:.09em;vertical-align:middle}.v651-live-badge::before{content:"";width:6px;height:6px;border-radius:50%;background:#22e6a8;box-shadow:0 0 11px #22e6a8;animation:v651Pulse 2.2s ease-out infinite}
+.v651-month-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.v651-month-card{padding:14px}.v651-month-head{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:10px}.v651-month-head b{font-size:14px}.v651-month-head span{font-size:8px;color:#66879f;letter-spacing:.08em}.v651-rotation{display:grid;gap:6px}.v651-slot{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:8px 9px;border:1px solid rgba(255,255,255,.05);border-radius:9px;background:rgba(255,255,255,.018)}.v651-slot.active{border-color:rgba(56,232,255,.36);background:linear-gradient(90deg,rgba(39,139,255,.09),rgba(56,232,255,.025));box-shadow:inset 3px 0 #38e8ff,0 0 17px rgba(39,139,255,.06)}.v651-slot b{font-size:11px}.v651-slot span{font-size:8px;color:#7796ad}.v651-slot .v651-person{display:flex;align-items:center;gap:7px}.v651-avatar{width:25px;height:25px;display:grid;place-items:center;border-radius:8px;background:linear-gradient(145deg,rgba(56,232,255,.15),rgba(119,91,255,.12));border:1px solid rgba(56,232,255,.17);color:#bff8ff;font-size:9px;font-weight:950}
+.v651-table-panel{padding:14px}.v651-table-head{display:flex;justify-content:space-between;align-items:flex-end;gap:10px}.v651-table-head .section-title{font-size:18px}.v651-oncall-table-wrap{overflow:auto;margin-top:11px;border:1px solid rgba(255,255,255,.05);border-radius:12px}.v651-oncall-table{width:100%;border-collapse:collapse;min-width:640px}.v651-oncall-table th{padding:9px 11px;text-align:left;background:#061728;color:#6f91aa;font-size:8px;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid rgba(56,232,255,.12)}.v651-oncall-table td{padding:10px 11px;font-size:10px;border-bottom:1px solid rgba(255,255,255,.045);color:#b8cedd}.v651-oncall-table tr:last-child td{border-bottom:0}.v651-oncall-table tbody tr{transition:.16s ease}.v651-oncall-table tbody tr:hover{background:rgba(56,232,255,.035)}.v651-oncall-table tbody tr.active{background:linear-gradient(90deg,rgba(34,230,168,.08),rgba(34,230,168,.015));box-shadow:inset 2px 0 #22e6a8}.v651-oncall-table .who{font-weight:950;color:#f3fbff}.v651-oncall-table .status{display:inline-flex;padding:3px 7px;border:1px solid rgba(255,255,255,.08);border-radius:999px;color:#7f9eb4;font-size:7px;font-weight:900;letter-spacing:.07em}.v651-oncall-table tr.active .status{color:#78f2ca;border-color:rgba(34,230,168,.3);background:rgba(34,230,168,.05)}
+html[data-v65-mode="BALANCED"] .v651-oncall-hero::after{animation-duration:42s;opacity:.55}html[data-v65-mode="ECO"] .v651-oncall-hero::after,html[data-v65-mode="ECO"] .v651-live-badge::before{animation:none!important}html[data-v65-mode="ECO"] .v651-current-card,html[data-v65-mode="ECO"] .v651-next-card{backdrop-filter:none}
+@keyframes v651Orbit{to{transform:rotate(360deg)}}@keyframes v651Pulse{70%{box-shadow:0 0 0 8px rgba(34,230,168,0)}}
+@media(max-width:900px){.v651-month-grid{grid-template-columns:1fr}.v651-oncall-current{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.v651-oncall-hero{padding:16px;min-height:0}.v651-oncall-current{grid-template-columns:1fr}.v651-oncall-title{font-size:34px}.v651-table-panel{padding:10px}.v651-oncall-table th,.v651-oncall-table td{padding:9px}}
+@media(prefers-reduced-motion:reduce){.v651-oncall-hero::after,.v651-live-badge::before{animation:none!important}}
+
+</style>
 </head>
 <!-- REFERENCE LOCK V4 -->
 <body>
 
-<div id="bootOverlay" data-loader-version="6.5" aria-label="Loading Shift Command Center"><div class="boot613-shell"><div class="boot613-top"><div class="boot613-logo"></div><div class="boot613-title"><small>Boot Sequence</small><h2>Loading Shift Command Center</h2><p>กำลังเชื่อมต่อ Shift Matrix และ Command UI…</p></div><div class="boot613-live">● LIVE BOOT</div></div><div class="boot613-main"><div class="boot613-radar"><div class="boot613-orbit"><i class="boot613-arc a"></i><i class="boot613-arc b"></i><i class="boot613-arc c"></i><i class="boot613-core"></i></div></div><div class="boot613-info"><div class="boot613-card"><div class="boot613-card-head"><b id="boot613Phase">Initializing Core Systems</b><span id="boot613Status">Starting…</span></div><div class="boot613-progress"><i id="boot613Bar"></i></div><div class="boot613-readout"><div class="boot613-pct" id="boot613Pct">8%</div><div class="boot613-phase" id="boot613Meta">phase 1 / 4<br>Secure startup</div></div></div><div class="boot613-grid"><div class="boot613-mini"><span>Module</span><b>Command UI</b></div><div class="boot613-mini"><span>Matrix</span><b>October 2569</b></div><div class="boot613-mini"><span>Status</span><b id="boot613State">BOOTING</b></div></div><div class="boot613-scan"><i></i></div></div></div></div></div>
+<div id="bootOverlay" data-loader-version="6.5.1" aria-label="Loading Shift Command Center"><div class="boot613-shell"><div class="boot613-top"><div class="boot613-logo"></div><div class="boot613-title"><small>Boot Sequence</small><h2>Loading Shift Command Center</h2><p>กำลังเชื่อมต่อ Shift Matrix และ Command UI…</p></div><div class="boot613-live">● LIVE BOOT</div></div><div class="boot613-main"><div class="boot613-radar"><div class="boot613-orbit"><i class="boot613-arc a"></i><i class="boot613-arc b"></i><i class="boot613-arc c"></i><i class="boot613-core"></i></div></div><div class="boot613-info"><div class="boot613-card"><div class="boot613-card-head"><b id="boot613Phase">Initializing Core Systems</b><span id="boot613Status">Starting…</span></div><div class="boot613-progress"><i id="boot613Bar"></i></div><div class="boot613-readout"><div class="boot613-pct" id="boot613Pct">8%</div><div class="boot613-phase" id="boot613Meta">phase 1 / 4<br>Secure startup</div></div></div><div class="boot613-grid"><div class="boot613-mini"><span>Module</span><b>Command UI</b></div><div class="boot613-mini"><span>Matrix</span><b>October 2569</b></div><div class="boot613-mini"><span>Status</span><b id="boot613State">BOOTING</b></div></div><div class="boot613-scan"><i></i></div></div></div></div></div>
 
 <div class="ambient a"></div><div class="ambient b"></div><div class="ambient c"></div>
 <div class="app">
@@ -493,7 +506,7 @@ normalizeOff();renderOverview();
 
 <script id="v65-loader-runtime">(()=>{const root=document.documentElement,o=document.getElementById('bootOverlay');if(!o)return;const b=document.getElementById('boot613Bar'),p=document.getElementById('boot613Pct'),ph=document.getElementById('boot613Phase'),st=document.getElementById('boot613Status'),m=document.getElementById('boot613Meta'),state=document.getElementById('boot613State');let locale='th';try{locale=localStorage.getItem('shift.locale')==='en'?'en':'th'}catch{}root.lang=locale;root.dataset.locale=locale;root.dataset.v65Booting='1';const copy=locale==='en'?[['Initializing Core Systems','Starting…'],['Verifying Shift Matrix','Checking schedule…'],['Linking Command Grid','Connecting widgets…'],['Rendering Interface','Finalizing command center…']]:[['กำลังเริ่มระบบหลัก','กำลังเริ่ม…'],['กำลังตรวจตารางเวร','กำลังตรวจข้อมูล…'],['กำลังเชื่อม Command Grid','กำลังเชื่อมวิดเจ็ต…'],['กำลังเตรียมอินเทอร์เฟซ','กำลังเตรียมหน้าจอ…']];const t0=performance.now(),TARGET=3000,HARD=3600;let domReady=document.readyState!=='loading',done=false,raf=0;if(b){b.style.transformOrigin='left center';b.style.transform='scaleX(0)'}if(!domReady)document.addEventListener('DOMContentLoaded',()=>{domReady=true},{once:true});const release=()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{delete root.dataset.v65Booting;document.dispatchEvent(new CustomEvent('v65:bootrelease'))}));const finish=()=>{if(done)return;done=true;cancelAnimationFrame(raf);if(b)b.style.transform='scaleX(1)';if(p)p.textContent='100%';if(ph)ph.textContent=locale==='en'?'Interface Ready':'อินเทอร์เฟซพร้อม';if(st)st.textContent=locale==='en'?'Ready':'พร้อมใช้งาน';if(m)m.innerHTML='phase 4 / 4<br>READY';if(state)state.textContent='READY';o.classList.add('out');release();setTimeout(()=>o.remove(),230)};const paint=()=>{if(done)return;const elapsed=performance.now()-t0,ratio=Math.min(1,elapsed/TARGET),pct=Math.min(elapsed>=TARGET&&!domReady?99:100,Math.round(ratio*100)),i=pct<25?0:pct<52?1:pct<80?2:3;if(b)b.style.transform='scaleX('+(pct/100)+')';if(p)p.textContent=pct+'%';if(ph)ph.textContent=copy[i][0];if(st)st.textContent=copy[i][1];if(m)m.innerHTML='phase '+(i+1)+' / 4<br>'+(i===3?'FINAL RENDER':'SECURE STARTUP');if(elapsed>=TARGET&&domReady){finish();return}raf=requestAnimationFrame(paint)};raf=requestAnimationFrame(paint);setTimeout(finish,HARD)})();</script>
 
-<script id="v65-engine">(()=>{
+<script id="v651-engine">(()=>{
 // data.js
 const DAYS_IN_MONTH = 31;
 const STAFF = Object.freeze([
@@ -909,7 +922,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 // i18n-copy.js
 const I18N=Object.freeze({
   th:{
-    nav:{overview:'ภาพรวม',daily:'รายวัน',person:'รายบุคคล',month:'รายเดือน',analytics:'ข้อมูล',home:'หน้าหลัก',stats:'สถิติ'},
+    nav:{overview:'ภาพรวม',daily:'รายวัน',person:'รายบุคคล',month:'รายเดือน',analytics:'ข้อมูล',oncall:'Engineer Oncall',home:'หน้าหลัก',stats:'สถิติ'},
     common:{previous:'วันก่อน',next:'วันถัดไป',employee:'พนักงาน',coverage:'ครอบคลุม',work:'ทำงาน',off:'OFF',stable:'ปกติ',watch:'เฝ้าระวัง',critical:'วิกฤต',strength:'ความสัมพันธ์',topTeammate:'เพื่อนร่วมทีมเด่น',signals:'สัญญาณ',none:'ไม่มี'},
     loader:{phase1:'กำลังเริ่มระบบหลัก',phase2:'กำลังตรวจตารางเวร',phase3:'กำลังเชื่อม Command Grid',phase4:'อินเทอร์เฟซพร้อม',starting:'กำลังเริ่ม…',checking:'กำลังตรวจข้อมูล…',linking:'กำลังเชื่อมวิดเจ็ต…',finalizing:'กำลังเตรียมหน้าจอ…',ready:'พร้อมใช้งาน'},
     daily:{title:'ภาพรวมปฏิบัติการรายวัน',adjacent:'วันข้างเคียง',transitions:'การเปลี่ยนเวร',risk:'ความเสี่ยงกำลังคน',streaks:'เวรต่อเนื่อง',noTransition:'ไม่มีการเปลี่ยนสถานะไปวันถัดไป',noRisk:'ไม่พบสัญญาณเสี่ยงตามเกณฑ์',workStreak:'ทำงานต่อเนื่อง {count} วัน',nightStreak:'เวรกลางคืนต่อเนื่อง {count} คืน'},
@@ -919,13 +932,13 @@ const I18N=Object.freeze({
     person:{title:'ข้อมูลรายบุคคล',schedule:'ตารางเวร',workload:'ภาระงาน'},
     month:{title:'ตารางเวรรายเดือน',matrix:'ตารางเดือน'},
     palette:{placeholder:'ค้นหา วันที่ / ชื่อ / night / off / analytics',empty:'พิมพ์วันที่ ชื่อพนักงาน หรือชื่อหน้า',choose:'เลือก',open:'เปิด'},
-    mobile:{home:'หน้าหลัก',daily:'รายวัน',person:'บุคคล',month:'เดือน',stats:'สถิติ'},
+    mobile:{home:'หน้าหลัก',daily:'รายวัน',person:'บุคคล',month:'เดือน',stats:'สถิติ',oncall:'Oncall'},
     modes:{HIGH:'สูง',BALANCED:'สมดุล',ECO:'ประหยัด'},
     accessibility:{language:'เลือกภาษา',visualMode:'โหมดประสิทธิภาพภาพ'},
     date:{october:'ตุลาคม'}
   },
   en:{
-    nav:{overview:'Overview',daily:'Daily',person:'Personnel',month:'Monthly',analytics:'Analytics',home:'Home',stats:'Stats'},
+    nav:{overview:'Overview',daily:'Daily',person:'Personnel',month:'Monthly',analytics:'Analytics',oncall:'Engineer Oncall',home:'Home',stats:'Stats'},
     common:{previous:'Previous day',next:'Next day',employee:'Employee',coverage:'Coverage',work:'Work',off:'OFF',stable:'Stable',watch:'Watch',critical:'Critical',strength:'Strength',topTeammate:'Top teammate',signals:'Signals',none:'None'},
     loader:{phase1:'Initializing Core Systems',phase2:'Verifying Shift Matrix',phase3:'Linking Command Grid',phase4:'Interface Ready',starting:'Starting…',checking:'Checking schedule…',linking:'Connecting widgets…',finalizing:'Finalizing command center…',ready:'Ready'},
     daily:{title:'Daily Operations Intelligence',adjacent:'Adjacent Days',transitions:'Shift Transitions',risk:'Staffing Risk',streaks:'Current Streaks',noTransition:'No shift transition to the next day',noRisk:'No staffing risk signals at current thresholds',workStreak:'{count}-day work streak',nightStreak:'{count}-night night-shift streak'},
@@ -935,13 +948,12 @@ const I18N=Object.freeze({
     person:{title:'Personnel',schedule:'Schedule',workload:'Workload'},
     month:{title:'Monthly Shift Matrix',matrix:'Month Matrix'},
     palette:{placeholder:'Search date / name / night / off / analytics',empty:'Type a date, employee name, status, or view',choose:'Choose',open:'Open'},
-    mobile:{home:'Home',daily:'Daily',person:'Person',month:'Month',stats:'Stats'},
+    mobile:{home:'Home',daily:'Daily',person:'Person',month:'Month',stats:'Stats',oncall:'Oncall'},
     modes:{HIGH:'High',BALANCED:'Balanced',ECO:'Eco'},
     accessibility:{language:'Language',visualMode:'Visual performance mode'},
     date:{october:'October'}
   }
 });
-
 // i18n.js
 
 
@@ -993,6 +1005,95 @@ function installV65RenderHooks(){const wrap=name=>{const fn=window[name];if(type
 function installV65ModeBridge(){document.documentElement.dataset.v65Mode='BALANCED';document.querySelector('.v64-quality')?.addEventListener('click',e=>{const b=e.target.closest('button[data-mode]');if(!b)return;const mode=b.dataset.mode;document.documentElement.dataset.v65Mode=mode;document.documentElement.dataset.v65Motion=visualProfile(mode).continuousMotion?'on':'off'});document.documentElement.dataset.v65Motion='on'}
 function initV65(){mountV65LanguageControl();installV65ModeBridge();installV65RenderHooks();refreshV65Locale();document.documentElement.dataset.v65Ready='1'}
 if(typeof document!=='undefined'){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initV65,{once:true});else initV65()}
+
+// oncall.js
+const ONCALL_SCHEDULE=Object.freeze([
+  {month:10,start:1,end:7,name:'ป้อ'},
+  {month:10,start:8,end:14,name:'เอิร์ท'},
+  {month:10,start:15,end:21,name:'ตั้ม'},
+  {month:10,start:22,end:28,name:'แอม'},
+  {month:10,start:29,end:31,name:'ป้อ'},
+  {month:11,start:1,end:4,name:'ป้อ'},
+  {month:11,start:5,end:11,name:'เอิร์ท'},
+  {month:11,start:12,end:18,name:'ตั้ม'},
+  {month:11,start:19,end:25,name:'แอม'},
+  {month:11,start:26,end:30,name:'ป้อ'},
+  {month:12,start:1,end:2,name:'ป้อ'},
+  {month:12,start:3,end:9,name:'เอิร์ท'},
+  {month:12,start:10,end:16,name:'ตั้ม'},
+  {month:12,start:17,end:23,name:'แอม'},
+  {month:12,start:24,end:30,name:'ป้อ'}
+]);
+
+function getOncallForDate(date){
+  if(!(date instanceof Date)||Number.isNaN(date.getTime())||date.getFullYear()!==2026)return null;
+  const month=date.getMonth()+1,day=date.getDate();
+  return ONCALL_SCHEDULE.find(row=>row.month===month&&day>=row.start&&day<=row.end)||null;
+}
+
+function getNextOncall(date=new Date()){
+  const stamp=new Date(date.getFullYear(),date.getMonth(),date.getDate()).getTime();
+  return ONCALL_SCHEDULE.map(row=>({...row,date:new Date(2026,row.month-1,row.start)})).find(row=>row.date.getTime()>stamp)||null;
+}
+
+function oncallByMonth(month){return ONCALL_SCHEDULE.filter(row=>row.month===Number(month))}
+
+// v651-engine.js
+// v6.5.1 Engineer Oncall: additive tab + approved rotation, preserving the legacy shell.
+const V651_MONTHS={
+  th:{10:'ตุลาคม',11:'พฤศจิกายน',12:'ธันวาคม'},
+  en:{10:'October',11:'November',12:'December'}
+};
+
+function v651Locale(){return typeof v65I18n!=='undefined'?v65I18n.getLocale():(document.documentElement.dataset.locale||'th')}
+function v651Text(key){
+  const locale=v651Locale();
+  const copy={
+    th:{title:'Engineer Oncall',sub:'ตารางเวร Engineer On-call • ตุลาคม–ธันวาคม 2569',current:'ON-CALL วันนี้',next:'ส่งต่อเวรถัดไป',none:'ไม่มี Engineer On-call วันนี้',schedule:'ตาราง Engineer Oncall',scheduleSub:'ON-CALL ROTATION • 2569',month:'เดือน',engineer:'Engineer',period:'ช่วงวันที่',status:'สถานะ',active:'ACTIVE ONCALL',scheduled:'SCHEDULED',handoff:'เริ่มเวรถัดไป'},
+    en:{title:'Engineer Oncall',sub:'Engineer on-call rotation • October–December 2026',current:'ON-CALL TODAY',next:'NEXT HANDOFF',none:'No Engineer On-call today',schedule:'Engineer Oncall Schedule',scheduleSub:'ON-CALL ROTATION • 2026',month:'Month',engineer:'Engineer',period:'Period',status:'Status',active:'ACTIVE ONCALL',scheduled:'SCHEDULED',handoff:'Next rotation starts'}
+  };
+  return copy[locale]?.[key]??copy.th[key]??key;
+}
+function v651Month(month){return V651_MONTHS[v651Locale()]?.[month]||String(month)}
+function v651Range(row){const year=v651Locale()==='th'?'2569':'2026';return `${row.start}–${row.end} ${v651Month(row.month)} ${year}`}
+function v651DateLabel(row){if(!row)return '—';const year=v651Locale()==='th'?'2569':'2026';return `${row.start} ${v651Month(row.month)} ${year}`}
+function v651IsActive(row,now=new Date()){return now.getFullYear()===2026&&now.getMonth()+1===row.month&&now.getDate()>=row.start&&now.getDate()<=row.end}
+function v651Escape(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
+
+function removeDailyOpsHeading(){document.querySelector('#v64DailyOps .section-title')?.remove()}
+
+function renderV651Oncall(){
+  const host=document.getElementById('oncallView');if(!host)return;
+  const now=new Date(),current=getOncallForDate(now),next=getNextOncall(now);
+  const monthCards=[10,11,12].map(month=>{
+    const rows=oncallByMonth(month);
+    return `<section class="hud-panel trace v651-month-card"><div class="v651-month-head"><b>${v651Month(month)} <span>${v651Locale()==='th'?'2569':'2026'}</span></b><span>${rows.length} ROTATIONS</span></div><div class="v651-rotation">${rows.map(row=>`<div class="v651-slot ${v651IsActive(row,now)?'active':''}"><span class="v651-person"><i class="v651-avatar">${v651Escape(row.name.slice(0,1))}</i><b>${v651Escape(row.name)}</b></span><span>${v651Range(row)}</span></div>`).join('')}</div></section>`
+  }).join('');
+  const tableRows=ONCALL_SCHEDULE.map(row=>`<tr class="${v651IsActive(row,now)?'active':''}"><td>${v651Month(row.month)}</td><td class="who">${v651Escape(row.name)}</td><td>${v651Range(row)}</td><td><span class="status">${v651IsActive(row,now)?v651Text('active'):v651Text('scheduled')}</span></td></tr>`).join('');
+  host.innerHTML=`<div class="v651-oncall"><section class="v651-oncall-hero"><div class="v651-oncall-copy"><div class="v651-oncall-kicker">ENGINEER DUTY GRID • v6.5.1</div><h2 class="v651-oncall-title">${v651Text('title')}</h2><div class="v651-oncall-sub">${v651Text('sub')}</div></div><div class="v651-oncall-current"><div class="v651-current-card"><span class="v651-oncall-label">${v651Text('current')}</span><strong class="v651-oncall-name">${current?v651Escape(current.name):v651Text('none')}${current?'<em class="v651-live-badge">LIVE</em>':''}</strong><span class="v651-oncall-range">${current?v651Range(current):'—'}</span></div><div class="v651-next-card"><span class="v651-oncall-label">${v651Text('next')}</span><strong class="v651-oncall-name">${next?v651Escape(next.name):'—'}</strong><span class="v651-oncall-range">${next?`${v651Text('handoff')} • ${v651DateLabel(next)}`:'—'}</span></div></div></section><div class="v651-month-grid">${monthCards}</div><section class="hud-panel trace v651-table-panel"><div class="v651-table-head"><div><div class="eyebrow">${v651Text('scheduleSub')}</div><div class="section-title">${v651Text('schedule')}</div></div><span class="muted">15 ROTATIONS</span></div><div class="v651-oncall-table-wrap"><table class="v651-oncall-table"><thead><tr><th>${v651Text('month')}</th><th>${v651Text('engineer')}</th><th>${v651Text('period')}</th><th>${v651Text('status')}</th></tr></thead><tbody>${tableRows}</tbody></table></div></section></div>`;
+}
+
+function mountV651Navigation(){
+  const desktop=document.querySelector('.nav-tabs');
+  if(desktop&&!desktop.querySelector('[data-view="oncall"]')){
+    const button=document.createElement('button');button.className='nav-btn';button.dataset.view='oncall';button.setAttribute('aria-label','Engineer Oncall');button.innerHTML='<b>⌁ Engineer</b><span>Oncall</span>';button.onclick=()=>window.showView('oncall');desktop.appendChild(button);
+  }
+  const mobile=document.getElementById('mobileNav')||document.querySelector('.mobile-nav');
+  if(mobile&&!mobile.querySelector('[data-view="oncall"]')){
+    const button=document.createElement('button');button.type='button';button.dataset.view='oncall';button.innerHTML='<b>⌁</b><span>Oncall</span>';button.setAttribute('aria-label','Engineer Oncall');button.onclick=()=>window.showView('oncall');mobile.appendChild(button);
+  }
+}
+function mountV651View(){
+  if(document.getElementById('oncallView'))return;
+  const view=document.createElement('section');view.className='view';view.id='oncallView';view.setAttribute('aria-label','Engineer Oncall');
+  const footer=document.querySelector('.footer');(footer?.parentElement||document.querySelector('.app')||document.body).insertBefore(view,footer||null);renderV651Oncall();
+}
+function installV651ViewBridge(){
+  const prior=window.showView;if(typeof prior!=='function'||prior.__v651)return;
+  const wrapped=function(name){const result=prior.apply(this,arguments);if(name==='daily')queueMicrotask(removeDailyOpsHeading);if(name==='oncall')renderV651Oncall();return result};wrapped.__v651=true;window.showView=wrapped;
+}
+function initV651(){mountV651Navigation();mountV651View();installV651ViewBridge();removeDailyOpsHeading();document.addEventListener('v65:localechange',()=>{mountV651Navigation();renderV651Oncall();removeDailyOpsHeading()});document.documentElement.dataset.appVersion='6.5.1'}
+if(typeof document!=='undefined'){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initV651,{once:true});else initV651()}
 
 })();</script>
 </body>
