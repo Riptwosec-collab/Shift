@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   sync:
@@ -25,12 +26,16 @@ jobs:
         run: npm run build
       - name: Commit generated index
         run: |
-          if git diff --quiet -- index.html; then
+          if ! git diff --quiet -- index.html; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add index.html
+            git commit -m "build: sync v6.5 production index"
+            git push origin HEAD:work/v6.5-sharp-ui-i18n
+          else
             echo "index.html already synchronized"
-            exit 0
           fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html
-          git commit -m "build: sync v6.5 production index"
-          git push origin HEAD:work/v6.5-sharp-ui-i18n
+      - name: Verify synchronized branch head
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run v65-ci.yml --ref work/v6.5-sharp-ui-i18n
