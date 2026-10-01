@@ -16,6 +16,8 @@ export const ONCALL_SCHEDULE=Object.freeze([
   {month:12,start:24,end:30,name:'ป้อ'}
 ]);
 
+export const ONCALL_ENGINEERS=Object.freeze(['ป้อ','เอิร์ท','ตั้ม','แอม']);
+
 export function getOncallForDate(date){
   if(!(date instanceof Date)||Number.isNaN(date.getTime())||date.getFullYear()!==2026)return null;
   const month=date.getMonth()+1,day=date.getDate();
@@ -28,3 +30,13 @@ export function getNextOncall(date=new Date()){
 }
 
 export function oncallByMonth(month){return ONCALL_SCHEDULE.filter(row=>row.month===Number(month))}
+
+export function getOncallMonthMatrix(month){
+  const m=Number(month),daysInMonth=new Date(2026,m,0).getDate(),rows=oncallByMonth(m);
+  const days=Array.from({length:daysInMonth},(_,index)=>{
+    const day=index+1,row=rows.find(item=>day>=item.start&&day<=item.end)||null;
+    return {day,name:row?.name||null,start:row?.start??null,end:row?.end??null};
+  });
+  const totals=Object.fromEntries(ONCALL_ENGINEERS.map(name=>[name,days.filter(item=>item.name===name).length]));
+  return {month:m,daysInMonth,engineers:[...ONCALL_ENGINEERS],days,totals,unassigned:days.filter(item=>!item.name).length};
+}
