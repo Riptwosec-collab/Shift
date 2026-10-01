@@ -11,11 +11,11 @@ const cache=createScheduleCache(STAFF);
 const i18n=createI18nController({storage:null,root:{dataset:{}}});
 
 test('risk records expose structured values for bilingual presentation',()=>{
-  const risks=evaluateDayRisk(1,cache,STAFF);
+  const day=3,risks=evaluateDayRisk(day,cache,STAFF);
   assert.ok(risks.length>0);
   for(const risk of risks) assert.ok(risk.values&&typeof risk.values==='object',`missing values for ${risk.code}`);
   const low=risks.find(x=>x.code==='LOW STAFFING');
-  if(low){assert.equal(low.values.working,cache.dayStats[1].working);assert.match(i18n.formatRisk(low,'en'),/staff on duty/)}
+  if(low){assert.equal(low.values.working,cache.dayStats[day].working);assert.match(i18n.formatRisk(low,'en'),/staff on duty/)}
   const named=risks.find(x=>x.code==='WORK STREAK'||x.code==='NIGHT STREAK');
   if(named) assert.ok(STAFF.some(p=>i18n.formatRisk(named,'en').includes(p.name)));
 });
