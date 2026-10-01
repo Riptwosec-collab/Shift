@@ -29,14 +29,15 @@ jobs:
       - name: Test
         run: npm test
       - name: Sync generated v6.5.5 index
-        if: github.ref_name == 'work/v6.5.5-global-neon-oncall' && github.event.head_commit.message != 'build: sync generated v6.5.5 index'
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html
-          if ! git diff --cached --quiet; then
-            git commit -m "build: sync generated v6.5.5 index"
-            git push origin HEAD:${GITHUB_REF_NAME}
+          if [ "$GITHUB_REF_NAME" = "work/v6.5.5-global-neon-oncall" ] && [ "$(git log -1 --pretty=%s)" != "build: sync generated v6.5.5 index" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add index.html
+            if ! git diff --cached --quiet; then
+              git commit -m "build: sync generated v6.5.5 index"
+              git push origin HEAD:$GITHUB_REF_NAME
+            fi
           fi
       - name: Verify tracked index matches source build
         run: git diff --exit-code -- index.html
