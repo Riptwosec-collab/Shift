@@ -11,9 +11,6 @@ on:
       - 'work/v6.5.5-global-neon-oncall'
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -26,20 +23,9 @@ jobs:
         run: npm install --ignore-scripts
       - name: Build
         run: npm run build
-      - name: Test
-        run: npm test
-      - name: Sync generated v6.5.5 index
-        run: |
-          if [ "$GITHUB_REF_NAME" = "work/v6.5.5-global-neon-oncall" ] && [ "$(git log -1 --pretty=%s)" != "build: sync generated v6.5.5 index" ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add index.html
-            if ! git diff --cached --quiet; then
-              git commit -m "build: sync generated v6.5.5 index"
-              git push origin HEAD:$GITHUB_REF_NAME
-            fi
-          fi
       - name: Verify tracked index matches source build
         run: git diff --exit-code -- index.html
+      - name: Test
+        run: npm test
       - name: Verify release gates
         run: node --test tests/v65-*.test.mjs tests/v651-*.test.mjs tests/v652-*.test.mjs tests/v653-*.test.mjs tests/v654-*.test.mjs tests/v655-*.test.mjs tests/v64-release.test.mjs tests/build.test.mjs tests/cloudflare.test.mjs tests/legacy-visual-contract.test.mjs tests/v64-interactive.test.mjs
