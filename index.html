@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="th" data-app-version="6.5.8" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">
+<html lang="th" data-app-version="6.5.9" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -1709,11 +1709,187 @@ html[data-v65-mode="ECO"] .v657-overview-matrix,html[data-v65-mode="ECO"] .v655-
 }
 
 </style>
+<style id="v659-ui-style">
+/* Shift v6.5.9 — selected-month Overview + stacked year-end matrix */
+:root{
+  --v659-cyan:#4cecff;
+  --v659-blue:#438dff;
+  --v659-violet:#9a78ff;
+  --v659-panel:rgba(4,12,25,.96);
+  --v659-line:rgba(76,236,255,.18);
+  --v659-glow:0 28px 80px rgba(0,0,0,.46),0 0 34px rgba(76,236,255,.06);
+}
+
+.v659-overview-month{
+  width:min(1240px,100%);
+  margin-inline:auto;
+  padding:clamp(8px,1.6vw,22px) 0 clamp(20px,3vw,38px);
+}
+.v659-overview-month .v659-month-panel{
+  margin:0;
+  border-color:rgba(76,236,255,.34)!important;
+  box-shadow:0 34px 100px rgba(0,0,0,.52),0 0 42px rgba(76,236,255,.08)!important;
+}
+.v659-overview-month .v659-month-beacon span{color:#bdf8ff}
+.v659-overview-month .v659-month-beacon i{background:linear-gradient(90deg,var(--v659-cyan),var(--v659-blue))}
+
+.v659-year-end-matrix{
+  display:grid;
+  gap:0;
+  width:100%;
+  padding-bottom:24px;
+}
+.v659-month-panel{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden!important;
+  margin:0;
+  background:
+    radial-gradient(700px 280px at 8% -12%,rgba(76,236,255,.075),transparent 68%),
+    radial-gradient(620px 260px at 96% -8%,rgba(154,120,255,.065),transparent 70%),
+    linear-gradient(180deg,rgba(6,18,34,.98),var(--v659-panel))!important;
+  border:1px solid var(--v659-line)!important;
+  box-shadow:var(--v659-glow)!important;
+}
+.v659-month-panel::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:
+    linear-gradient(90deg,transparent 0 10%,rgba(76,236,255,.018) 10.2%,transparent 10.4% 90%,rgba(154,120,255,.018) 90.2%,transparent 90.4%),
+    repeating-linear-gradient(0deg,transparent 0 6px,rgba(255,255,255,.007) 6px 7px);
+}
+.v659-month-panel[data-v659-month="10"]{border-color:rgba(76,236,255,.28)!important}
+.v659-month-panel[data-v659-month="11"]{border-color:rgba(67,141,255,.28)!important}
+.v659-month-panel[data-v659-month="12"]{border-color:rgba(154,120,255,.30)!important}
+.v659-month-panel[data-v659-month="10"] .v659-month-beacon i{background:linear-gradient(90deg,var(--v659-cyan),var(--v659-blue))}
+.v659-month-panel[data-v659-month="11"] .v659-month-beacon i{background:linear-gradient(90deg,var(--v659-blue),#6f7cff)}
+.v659-month-panel[data-v659-month="12"] .v659-month-beacon i{background:linear-gradient(90deg,#6f7cff,var(--v659-violet))}
+.v659-month-panel>.v659-month-beacon,
+.v659-month-panel>.v652-section-head,
+.v659-month-panel>.v659-matrix-scroll,
+.v659-month-panel>.v652-matrix-legend{position:relative;z-index:2}
+
+.v659-month-beacon{
+  display:grid;
+  grid-template-columns:auto minmax(48px,1fr) auto;
+  gap:12px;
+  align-items:center;
+  margin:-2px 0 14px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.14em;
+  color:#6f91a9;
+}
+.v659-month-beacon i{
+  height:1px;
+  background:linear-gradient(90deg,var(--v659-cyan),var(--v659-blue),var(--v659-violet));
+  box-shadow:0 0 12px rgba(76,236,255,.22);
+}
+.v659-month-beacon b{color:#9eb8ca;font-size:8px}
+.v659-month-panel .v652-section-head{
+  padding-bottom:14px!important;
+  margin-bottom:14px!important;
+  border-bottom:1px solid rgba(93,183,237,.10);
+}
+.v659-month-panel .v652-section-head .section-title{
+  font-size:clamp(22px,2.2vw,32px)!important;
+  letter-spacing:-.035em!important;
+}
+
+.v659-matrix-scroll{
+  overflow-x:auto;
+  overflow-y:hidden;
+  overscroll-behavior-inline:contain;
+  border-radius:15px;
+  border:1px solid rgba(76,236,255,.11);
+  background:rgba(1,7,15,.72);
+  scrollbar-width:thin;
+  scrollbar-color:rgba(76,236,255,.30) rgba(255,255,255,.025);
+}
+.v659-matrix{
+  min-width:max-content;
+  background:
+    linear-gradient(rgba(76,236,255,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(76,236,255,.035) 1px,transparent 1px),
+    rgba(2,8,17,.90)!important;
+}
+.v659-month-panel .v652-matrix-corner,
+.v659-month-panel .v652-matrix-name{
+  position:sticky;
+  left:0;
+  z-index:12;
+  background:linear-gradient(90deg,rgba(8,23,40,.995),rgba(4,13,26,.99))!important;
+  box-shadow:10px 0 22px rgba(0,0,0,.22);
+}
+.v659-month-panel .v652-matrix-corner{z-index:14}
+.v659-month-panel .v652-matrix-day.today{
+  color:#fff!important;
+  background:linear-gradient(180deg,rgba(76,236,255,.20),rgba(67,141,255,.08))!important;
+  box-shadow:inset 0 -2px var(--v659-cyan),0 0 18px rgba(76,236,255,.10)!important;
+}
+.v659-month-panel .v652-matrix-cell.v655-live{
+  border-color:rgba(76,236,255,.70)!important;
+  box-shadow:inset 0 0 26px rgba(76,236,255,.14),0 0 20px rgba(76,236,255,.13)!important;
+}
+.v659-month-panel .v652-matrix-cell.v655-next{
+  border-color:rgba(154,120,255,.62)!important;
+  box-shadow:inset 0 0 24px rgba(154,120,255,.12),0 0 18px rgba(154,120,255,.10)!important;
+}
+.v659-month-panel .v652-matrix-cell.v655-selected-day,
+.v659-month-panel .v652-matrix-day.v655-selected-day{
+  outline:1px solid rgba(67,141,255,.68)!important;
+  outline-offset:-1px;
+}
+
+.v659-month-divider{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:14px;
+  align-items:center;
+  min-height:54px;
+  padding:0 18px;
+  color:#526e85;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.18em;
+}
+.v659-month-divider span{
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(76,236,255,.22));
+}
+.v659-month-divider span:last-child{background:linear-gradient(90deg,rgba(154,120,255,.22),transparent)}
+.v659-month-divider b{color:#66869d;font-size:8px}
+
+html[data-v65-mode="HIGH"] .v659-month-panel{box-shadow:0 30px 90px rgba(0,0,0,.48),0 0 38px rgba(76,236,255,.075)!important}
+html[data-v65-mode="HIGH"] .v659-month-beacon i{animation:v659Signal 3.4s ease-in-out infinite}
+html[data-v65-mode="BALANCED"] .v659-month-beacon i{animation:v659Signal 7s ease-in-out infinite}
+html[data-v65-mode="ECO"] .v659-month-panel{box-shadow:0 20px 50px rgba(0,0,0,.34)!important;backdrop-filter:none!important}
+html[data-v65-mode="ECO"] .v659-month-beacon i{animation:none!important}
+
+@keyframes v659Signal{0%,100%{opacity:.45;filter:brightness(.9)}50%{opacity:1;filter:brightness(1.35)}}
+
+@media (max-width:760px){
+  .v659-overview-month{padding-inline:0}
+  .v659-month-panel{border-radius:16px!important;padding:14px!important}
+  .v659-month-divider{min-height:42px;padding:0 8px}
+  .v659-month-beacon{gap:8px}
+}
+@media (prefers-reduced-motion:reduce){
+  .v659-month-beacon i{animation:none!important}
+  .v659-month-panel,.v659-month-panel *{transition-duration:.001ms!important;animation-duration:.001ms!important;animation-iteration-count:1!important}
+}
+
+</style>
 </head>
 <!-- REFERENCE LOCK V4 -->
 <body>
 
-<div id="bootOverlay" data-loader-version="6.5.8" aria-label="Loading Shift Command Center"><div class="boot613-shell"><div class="boot613-top"><div class="boot613-logo"></div><div class="boot613-title"><small>Boot Sequence</small><h2>Loading Shift Command Center</h2><p>กำลังเชื่อมต่อ Shift Matrix และ Command UI…</p></div><div class="boot613-live">● LIVE BOOT</div></div><div class="boot613-main"><div class="boot613-radar"><div class="boot613-orbit"><i class="boot613-arc a"></i><i class="boot613-arc b"></i><i class="boot613-arc c"></i><i class="boot613-core"></i></div></div><div class="boot613-info"><div class="boot613-card"><div class="boot613-card-head"><b id="boot613Phase">Initializing Core Systems</b><span id="boot613Status">Starting…</span></div><div class="boot613-progress"><i id="boot613Bar"></i></div><div class="boot613-readout"><div class="boot613-pct" id="boot613Pct">8%</div><div class="boot613-phase" id="boot613Meta">phase 1 / 4<br>Secure startup</div></div></div><div class="boot613-grid"><div class="boot613-mini"><span>Module</span><b>Command UI</b></div><div class="boot613-mini"><span>Matrix</span><b>October 2569</b></div><div class="boot613-mini"><span>Status</span><b id="boot613State">BOOTING</b></div></div><div class="boot613-scan"><i></i></div></div></div></div></div>
+<div id="bootOverlay" data-loader-version="6.5.9" aria-label="Loading Shift Command Center"><div class="boot613-shell"><div class="boot613-top"><div class="boot613-logo"></div><div class="boot613-title"><small>Boot Sequence</small><h2>Loading Shift Command Center</h2><p>กำลังเชื่อมต่อ Shift Matrix และ Command UI…</p></div><div class="boot613-live">● LIVE BOOT</div></div><div class="boot613-main"><div class="boot613-radar"><div class="boot613-orbit"><i class="boot613-arc a"></i><i class="boot613-arc b"></i><i class="boot613-arc c"></i><i class="boot613-core"></i></div></div><div class="boot613-info"><div class="boot613-card"><div class="boot613-card-head"><b id="boot613Phase">Initializing Core Systems</b><span id="boot613Status">Starting…</span></div><div class="boot613-progress"><i id="boot613Bar"></i></div><div class="boot613-readout"><div class="boot613-pct" id="boot613Pct">8%</div><div class="boot613-phase" id="boot613Meta">phase 1 / 4<br>Secure startup</div></div></div><div class="boot613-grid"><div class="boot613-mini"><span>Module</span><b>Command UI</b></div><div class="boot613-mini"><span>Matrix</span><b>October 2569</b></div><div class="boot613-mini"><span>Status</span><b id="boot613State">BOOTING</b></div></div><div class="boot613-scan"><i></i></div></div></div></div></div>
 
 <div class="ambient a"></div><div class="ambient b"></div><div class="ambient c"></div>
 <div class="app">
@@ -2713,6 +2889,83 @@ function v658StampVersion(){document.documentElement.dataset.appVersion='6.5.8'}
 if(typeof document!=='undefined'){
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',v658StampVersion,{once:true});
   else v658StampVersion();
+}
+
+// v659-overrides.js
+// Shift v6.5.9 — selected-month Overview + stacked Oct-Dec year-end Matrix.
+const V659_MONTHS=[10,11,12];
+
+function v659RenderMonthMatrix(month,now,{overview=false,model=null}={}){
+  const monthModel=model||getOncallMonthMatrix(month);
+  const week=V652_WEEK[v652Locale()];
+  const currentNames=new Set(getOncallAssignmentsForDate(now).map(row=>row.name));
+  const nextRows=getNextOncallAssignments(now);
+  const selectedMonth=Number(month)===Number(v652Month);
+  const coverage=monthModel.daysInMonth-monthModel.unassigned;
+  const headers=monthModel.days.map(item=>{
+    const dow=week[new Date(2026,month-1,item.day).getDay()];
+    const today=v652IsToday(month,item.day,now);
+    const selected=selectedMonth&&item.day===v655SelectedDay;
+    return `<button type="button" data-v659-month="${month}" data-v659-day="${item.day}" class="v652-matrix-day ${today?'today':''} ${selected?'v655-selected-day':''}" aria-pressed="${selected?'true':'false'}" aria-label="${v652Esc(`${item.day} ${v652MonthName(month)} ${v652Year()}`)}"><small>${dow}</small><b>${item.day}</b></button>`;
+  }).join('');
+  const rows=monthModel.engineers.map(name=>{
+    const person=v652PersonClass(name),focused=v655FocusedEngineer===name;
+    const cells=monthModel.days.map(item=>{
+      const assignment=item.assignments.find(row=>row.name===name),active=Boolean(assignment),today=v652IsToday(month,item.day,now),selected=selectedMonth&&item.day===v655SelectedDay;
+      const live=active&&today&&currentNames.has(name);
+      const next=active&&nextRows.some(row=>row.name===name&&row.month===month&&row.start===assignment.start&&row.end===assignment.end);
+      const label=active?`${name} • OC • ${item.day} ${v652MonthName(month)} • ${assignment.start}-${assignment.end}`:`${name} • ${item.day} ${v652MonthName(month)} • ${v652Text('unassigned')}`;
+      return `<button type="button" data-v659-month="${month}" data-v659-day="${item.day}" data-v659-cell="${v652Esc(name)}" class="v652-matrix-cell ${active?'active person-'+person:''} ${today?'today':''} ${selected?'v655-selected-day':''} ${focused?'v655-focused-row':''} ${live?'v655-live':''} ${next?'v655-next':''} ${!active?'v655-unassigned':''}" title="${v652Esc(label)}" aria-label="${v652Esc(label)}">${active?'<b>OC</b>':'<span>·</span>'}</button>`;
+    }).join('');
+    return `<button type="button" data-v659-engineer="${v652Esc(name)}" class="v652-matrix-name person-${person} ${focused?'v655-focused-row':''}" aria-pressed="${focused?'true':'false'}" aria-label="${v652Esc(`${v652Text('focus')} ${name}`)}"><i>${v652Esc(name.slice(0,1))}</i><b>${v652Esc(name)}</b><small>${monthModel.totals[name]} ${v652Text('days')}</small></button>${cells}`;
+  }).join('');
+  return `<section class="hud-panel trace v652-matrix-panel v655-matrix-panel v659-month-panel ${overview?'v659-overview-panel':''}" data-v659-month="${month}"><div class="v659-month-beacon"><span>${String(month).padStart(2,'0')} / 2026</span><i></i><b>${coverage}/${monthModel.daysInMonth}</b></div><div class="v652-section-head"><div><div class="eyebrow">${overview?(v652Locale()==='th'?'ภาพรวมเดือนที่เลือก':'SELECTED MONTH OVERVIEW'):(v652Locale()==='th'?'YEAR-END ONCALL MATRIX':'YEAR-END ONCALL MATRIX')}</div><div class="section-title">${v652MonthName(month)} ${v652Year()}</div><p>${v652Text('matrixSub')}</p></div><span>${monthModel.daysInMonth} ${v652Text('days')}</span></div><div class="v652-matrix-scroll v655-matrix-scroll v659-matrix-scroll"><div class="v652-matrix v655-matrix v659-matrix" style="--v652-days:${monthModel.daysInMonth}"><div class="v652-matrix-corner"><b>${v652Text('engineer')}</b><small>${v652MonthName(month)} ${v652Year()}</small></div>${headers}${rows}</div></div><div class="v652-matrix-legend">${monthModel.engineers.map(name=>`<span class="person-${v652PersonClass(name)}"><i></i>${v652Esc(name)} <b>${monthModel.totals[name]}</b></span>`).join('')}${monthModel.unassigned?`<span class="unassigned"><i></i>${v652Text('unassigned')} <b>${monthModel.unassigned}</b></span>`:''}</div></section>`;
+}
+
+function v659RenderOverviewMonth(now){
+  const selectedModel=getOncallMonthMatrix(v652Month);
+  return `<div class="v659-overview-month">${v659RenderMonthMatrix(v652Month,now,{overview:true,model:selectedModel})}</div>`;
+}
+
+function v659RenderYearEndMatrix(now){
+  const panels=[10,11,12].map(month=>v659RenderMonthMatrix(month,now));
+  return `<div class="v659-year-end-matrix">${panels.map((panel,index)=>`${index?'<div class="v659-month-divider" aria-hidden="true"><span></span><b>YEAR-END // '+String(10+index).padStart(2,'0')+'</b><span></span></div>':''}${panel}`).join('')}</div>`;
+}
+
+function v659SelectMonthDay(month,day){
+  const m=Number(month),d=Number(day);
+  if(!V659_MONTHS.includes(m))return;
+  const model=getOncallMonthMatrix(m);
+  if(!Number.isInteger(d)||d<1||d>model.daysInMonth)return;
+  v652Month=m;
+  v655SelectedDay=d;
+  renderV652Oncall();
+}
+
+function v659FocusEngineer(name){
+  if(!ONCALL_ENGINEERS.includes(name))return;
+  v655FocusedEngineer=v655FocusedEngineer===name?null:name;
+  renderV652Oncall();
+}
+
+function v659BindInteractions(){
+  if(typeof document==='undefined'||document.documentElement.dataset.v659Bound==='1')return;
+  document.documentElement.dataset.v659Bound='1';
+  document.addEventListener('click',event=>{
+    const day=event.target.closest?.('[data-v659-day]');
+    if(day){v659SelectMonthDay(day.dataset.v659Month,day.dataset.v659Day);return}
+    const engineer=event.target.closest?.('[data-v659-engineer]');
+    if(engineer)v659FocusEngineer(engineer.dataset.v659Engineer);
+  });
+}
+
+function v652Overview(now){return v659RenderOverviewMonth(now)}
+function v652Matrix(now){return `${v659RenderYearEndMatrix(now)}${v655RenderSelectedDay(now)}`}
+
+function v659StampVersion(){document.documentElement.dataset.appVersion='6.5.9';v659BindInteractions()}
+if(typeof document!=='undefined'){
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',v659StampVersion,{once:true});
+  else v659StampVersion();
 }
 
 })();</script>
