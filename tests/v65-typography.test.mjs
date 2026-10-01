@@ -9,10 +9,11 @@ test('v6.5 uses local readable Thai and English typography',()=>{
   assert.doesNotMatch(s,/@import|https?:\/\/|@font-face/i);
   assert.match(s,/--v65-text-xs\s*:\s*10px/);
   assert.match(s,/--v65-text-sm\s*:\s*(11|12)px/);
+  assert.match(s,/--v65-line-th\s*:\s*1\.68/);
   assert.ok(s.includes('"Leelawadee UI"'));
   assert.ok(s.includes('"Noto Sans Thai"'));
   assert.ok(s.includes('Inter'));
-  assert.match(s,/html\[data-locale="th"\][\s\S]*line-height\s*:\s*1\.[5-9]/);
+  assert.match(s,/html\[data-locale="th"\][\s\S]*line-height\s*:\s*var\(--v65-line-th\)/);
   assert.match(s,/font-variant-numeric\s*:\s*tabular-nums/);
 });
 
