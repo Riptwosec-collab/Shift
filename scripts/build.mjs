@@ -14,6 +14,6 @@ html=html.replace('data-loader-version="6.2.1"','data-loader-version="6.4"');
 html=html.replace('MIN=1150,HARD=1850','MIN=3000,HARD=3600');
 html=html.replace('</head>',`<style id="v64-additive-style">\n${addCss}\n</style>\n</head>`);
 html=html.replace('</body>',`<script id="v64-engine-base">(()=>{\n${addJs}\n})();</script>\n</body>`);
-fs.writeFileSync(path.join(root,'index.html'),html);
+fs.writeFileSync('index.html',html);
 const dist=path.join(root,'dist');fs.rmSync(dist,{recursive:true,force:true});fs.mkdirSync(dist,{recursive:true});fs.writeFileSync(path.join(dist,'index.html'),html);
 console.log(`built v6.4 legacy index.html ${Buffer.byteLength(html)} bytes`);
