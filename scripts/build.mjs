@@ -4,7 +4,7 @@ import path from 'node:path';
 const root=process.cwd();
 const strip=s=>s.replace(/^import .*?;\s*$/gm,'').replace(/\bexport\s+(?=(const|let|var|function|class)\b)/g,'').replace(/^export\s*\{[^}]*\};?\s*$/gm,'');
 const addCss=fs.readFileSync(path.join(root,'src','legacy-ui.css'),'utf8');
-const modules=['legacy-overview.js'];
+const modules=['data.js','cache.js','state.js','view-registry.js','performance.js','daily-model.js','risk.js','network-model.js','analytics-model.js','command-palette.js','mobile.js','legacy-overview.js','v64-engine.js'];
 const addJs=modules.map(f=>`// ${f}\n${strip(fs.readFileSync(path.join(root,'src',f),'utf8'))}`).join('\n');
 let html=fs.readFileSync(path.join(root,'src','legacy-baseline.html'),'utf8');
 html=html.replace('<html lang="th">','<html lang="th" data-app-version="6.4" data-v64-mode="BALANCED">');
