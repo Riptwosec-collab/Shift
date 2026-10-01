@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="th" data-app-version="6.5.3" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">
+<html lang="th" data-app-version="6.5.4" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -345,11 +345,163 @@ html[data-v65-mode="HIGH"] .v653-oncall-surface .v652-hero:after{animation:v653H
 @media(prefers-reduced-motion:reduce){.v653-oncall-surface .v652-hero:after,.v653-oncall-surface .v652-timeline-segment.active{animation:none!important}}
 
 </style>
+<style id="v654-ui-style">
+/* v6.5.4 — global cyber-space background + Engineer Oncall command-deck redesign */
+:root{
+  --v654-cyan:#4beaff;--v654-blue:#4c8dff;--v654-violet:#9368ff;--v654-green:#2cf2bb;
+  --v654-grid:rgba(75,234,255,.055);--v654-panel:rgba(3,12,24,.78);--v654-line:rgba(91,224,255,.17);
+  --v654-shadow:0 28px 90px rgba(0,0,0,.52);--v654-edge:0 0 0 1px rgba(75,234,255,.08) inset;
+}
+
+/* Global background system — deep-space horizon, circuit grid and restrained aurora. */
+body{
+  background:
+    radial-gradient(1100px 720px at 8% -8%,rgba(0,186,255,.14),transparent 56%),
+    radial-gradient(900px 620px at 96% 10%,rgba(117,78,255,.14),transparent 55%),
+    radial-gradient(780px 560px at 52% 105%,rgba(0,255,197,.055),transparent 54%),
+    linear-gradient(160deg,#01050d 0%,#03111f 34%,#030817 68%,#08091d 100%)!important;
+  background-attachment:fixed!important;
+}
+body::before{
+  content:""!important;position:fixed!important;inset:0!important;z-index:-5!important;pointer-events:none!important;
+  background:
+    linear-gradient(var(--v654-grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--v654-grid) 1px,transparent 1px),
+    linear-gradient(rgba(87,126,255,.022) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(87,126,255,.022) 1px,transparent 1px)!important;
+  background-size:56px 56px,56px 56px,14px 14px,14px 14px!important;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.86),rgba(0,0,0,.42) 62%,transparent 100%)!important;
+  opacity:.72!important;transform:none!important;
+}
+body::after{
+  content:""!important;position:fixed!important;inset:-20%!important;z-index:-4!important;pointer-events:none!important;
+  background:
+    conic-gradient(from 205deg at 52% 58%,transparent 0 21%,rgba(65,224,255,.035) 27%,transparent 33% 61%,rgba(136,93,255,.032) 67%,transparent 74%),
+    repeating-linear-gradient(118deg,transparent 0 70px,rgba(255,255,255,.008) 71px,transparent 72px)!important;
+  mix-blend-mode:screen!important;opacity:.85!important;filter:blur(.2px);animation:v654AuroraDrift 32s ease-in-out infinite alternate!important;
+}
+.app{position:relative;isolation:isolate}
+.app::before{
+  content:"";position:fixed;left:50%;bottom:-39vw;width:110vw;height:70vw;z-index:-3;pointer-events:none;transform:translateX(-50%) perspective(900px) rotateX(67deg);
+  border-radius:50%;border:1px solid rgba(75,234,255,.08);
+  background:repeating-radial-gradient(circle at 50% 50%,transparent 0 68px,rgba(75,234,255,.028) 69px 70px),linear-gradient(90deg,transparent 49.8%,rgba(75,234,255,.06) 50%,transparent 50.2%);
+  box-shadow:0 -45px 120px rgba(23,112,255,.045),inset 0 35px 80px rgba(66,219,255,.025);
+  animation:v654HorizonFloat 18s ease-in-out infinite alternate;
+}
+.command-bar,.hud-panel,.insights-panel,.network-panel,.month-snapshot,.roster-card{
+  border-color:rgba(83,218,255,.17)!important;
+  box-shadow:var(--v654-shadow),var(--v654-edge)!important;
+}
+.command-bar{background:linear-gradient(180deg,rgba(2,10,22,.9),rgba(2,8,18,.8))!important}
+
+/* Engineer Oncall: command-deck surface */
+.v654-oncall-surface{position:relative;isolation:isolate;padding:2px 0 4px}
+.v654-oncall-surface::before{
+  content:"";position:absolute;inset:-14px -10px auto;height:390px;z-index:-1;pointer-events:none;
+  background:radial-gradient(circle at 10% 15%,rgba(57,230,255,.12),transparent 36%),radial-gradient(circle at 87% 10%,rgba(134,91,255,.14),transparent 34%),linear-gradient(115deg,transparent 36%,rgba(64,221,255,.025) 50%,transparent 64%);
+  filter:blur(12px);opacity:.9;
+}
+.v654-oncall-surface::after{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(90deg,transparent 0 7%,rgba(75,234,255,.025) 7.1% 7.25%,transparent 7.35% 92%,rgba(147,104,255,.025) 92.1% 92.25%,transparent 92.35%);
+}
+.v654-oncall-surface .v652-control-deck{
+  position:sticky;top:78px;z-index:28;display:grid;grid-template-columns:auto minmax(220px,1fr) auto;align-items:center;gap:12px;
+  margin:0 0 12px;padding:8px 10px;border:1px solid rgba(75,234,255,.23);border-radius:16px;
+  background:linear-gradient(180deg,rgba(3,16,30,.88),rgba(2,9,19,.82));backdrop-filter:blur(18px) saturate(145%);
+  box-shadow:0 16px 55px rgba(0,0,0,.34),0 0 28px rgba(56,232,255,.035),inset 0 1px rgba(255,255,255,.045);
+}
+.v654-oncall-surface .v652-view-tabs,.v654-oncall-surface .v652-month-switch{display:flex;gap:4px;padding:3px;border:1px solid rgba(255,255,255,.055);border-radius:11px;background:rgba(255,255,255,.018)}
+.v654-oncall-surface .v652-view-tabs button,.v654-oncall-surface .v652-month-switch button{position:relative;min-height:37px;border-radius:9px;overflow:hidden;transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease,background .16s ease}
+.v654-oncall-surface .v652-view-tabs button::before,.v654-oncall-surface .v652-month-switch button::before{content:"";position:absolute;left:14%;right:14%;bottom:1px;height:1px;background:linear-gradient(90deg,transparent,var(--v654-cyan),transparent);opacity:0;transition:opacity .16s ease}
+.v654-oncall-surface .v652-view-tabs button.active,.v654-oncall-surface .v652-month-switch button.active{color:#f4fdff;border-color:rgba(75,234,255,.45);background:linear-gradient(180deg,rgba(54,193,255,.16),rgba(50,101,255,.075));box-shadow:inset 0 0 18px rgba(75,234,255,.045),0 0 18px rgba(52,149,255,.1)}
+.v654-oncall-surface .v652-view-tabs button.active::before,.v654-oncall-surface .v652-month-switch button.active::before{opacity:.95}
+.v654-oncall-surface .v653-deck-status{position:relative;justify-self:center;border:0;padding:4px 24px;text-align:center}
+.v654-oncall-surface .v653-deck-status::before,.v654-oncall-surface .v653-deck-status::after{content:"";position:absolute;top:50%;width:32px;height:1px;background:linear-gradient(90deg,transparent,rgba(75,234,255,.38))}
+.v654-oncall-surface .v653-deck-status::before{right:100%}.v654-oncall-surface .v653-deck-status::after{left:100%;transform:scaleX(-1)}
+
+/* Hero rebuilt visually as a split command bay. */
+.v654-oncall-surface .v652-hero{
+  min-height:178px;display:grid;grid-template-columns:minmax(360px,.95fr) minmax(520px,1.3fr);gap:18px;align-items:stretch;padding:20px 22px!important;
+  border:1px solid rgba(75,234,255,.28)!important;border-radius:22px!important;overflow:hidden;clip-path:polygon(0 0,calc(100% - 26px) 0,100% 26px,100% 100%,26px 100%,0 calc(100% - 26px));
+  background:radial-gradient(circle at 10% 20%,rgba(50,220,255,.14),transparent 31%),radial-gradient(circle at 92% 2%,rgba(137,91,255,.18),transparent 35%),linear-gradient(120deg,rgba(5,25,43,.94),rgba(2,11,22,.96) 57%,rgba(9,12,34,.96))!important;
+  box-shadow:0 26px 85px rgba(0,0,0,.42),inset 0 1px rgba(255,255,255,.06),0 0 38px rgba(41,138,255,.055)!important;
+}
+.v654-oncall-surface .v652-hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(75,234,255,.045) 1px,transparent 1px),linear-gradient(rgba(75,234,255,.035) 1px,transparent 1px);background-size:38px 38px;mask-image:linear-gradient(90deg,#000,transparent 58%);opacity:.45}
+.v654-oncall-surface .v652-hero>div:first-child{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;padding:4px 10px 4px 4px}
+.v654-oncall-surface .v652-kicker{display:inline-flex;align-self:flex-start;padding:5px 8px;border:1px solid rgba(75,234,255,.16);border-radius:999px;background:rgba(75,234,255,.035);color:#78efff!important;letter-spacing:.13em!important}
+.v654-oncall-surface .v652-hero h2{margin:7px 0 2px!important;font-size:clamp(38px,4vw,66px)!important;line-height:.92!important;letter-spacing:-.055em!important;background:linear-gradient(100deg,#fff 14%,#bff8ff 48%,#b7bbff 82%);-webkit-background-clip:text;background-clip:text;color:transparent!important;text-shadow:0 0 34px rgba(75,234,255,.08)}
+.v654-oncall-surface .v652-hero p{max-width:580px;margin-top:8px!important;color:#88aabc!important;font-size:10px!important}
+.v654-oncall-surface .v652-now-grid{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-self:stretch}
+.v654-oncall-surface .v652-now-card{min-height:132px;padding:14px 16px!important;border-radius:16px!important;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%);background:linear-gradient(155deg,rgba(7,25,42,.96),rgba(2,11,22,.9))!important}
+.v654-oncall-surface .v652-now-card::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:2px;background:linear-gradient(transparent,var(--v654-blue),transparent);box-shadow:0 0 12px var(--v654-blue)}
+.v654-oncall-surface .v652-now-card.live::before{background:linear-gradient(transparent,var(--v654-green),transparent);box-shadow:0 0 14px var(--v654-green)}
+.v654-oncall-surface .v652-now-card small{letter-spacing:.11em!important;text-transform:uppercase}.v654-oncall-surface .v652-now-card strong{font-size:23px!important;letter-spacing:-.025em}.v654-oncall-surface .v652-now-card em{margin-top:auto!important}
+
+/* KPI row — compact telemetry modules rather than flat cards. */
+.v654-oncall-surface .v652-stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:9px 0 12px}
+.v654-oncall-surface .v652-stat{position:relative;min-height:76px;padding:11px 12px!important;border:1px solid rgba(255,255,255,.07)!important;border-radius:14px!important;overflow:hidden;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);background:linear-gradient(155deg,rgba(6,22,38,.9),rgba(2,10,20,.84))!important;box-shadow:0 12px 34px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.03)!important}
+.v654-oncall-surface .v652-stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:currentColor;opacity:.82;box-shadow:0 0 14px currentColor}
+.v654-oncall-surface .v652-stat::after{content:"";position:absolute;right:-20px;top:-34px;width:92px;height:92px;border:1px solid currentColor;border-radius:50%;opacity:.07}
+.v654-oncall-surface .v652-stat-orb{width:36px!important;height:36px!important;border-radius:10px!important;box-shadow:inset 0 0 18px color-mix(in srgb,currentColor 9%,transparent),0 0 14px color-mix(in srgb,currentColor 8%,transparent)}
+.v654-oncall-surface .v652-stat strong{font-size:26px!important;line-height:1!important}.v654-oncall-surface .v652-stat strong em{font-size:7px!important;letter-spacing:.1em!important;text-transform:uppercase}
+
+/* Overview table becomes a mission roster. */
+.v654-oncall-surface .v652-overview-table,.v654-oncall-surface .v652-matrix-panel,.v654-oncall-surface .v652-timeline-panel{border-radius:19px!important;border:1px solid rgba(75,234,255,.16)!important;background:linear-gradient(180deg,rgba(4,17,31,.9),rgba(2,9,19,.86))!important;box-shadow:0 20px 65px rgba(0,0,0,.3),inset 0 1px rgba(255,255,255,.025)!important}
+.v654-oncall-surface .v652-section-head{position:relative;padding:14px 16px 12px!important;border-bottom:1px solid rgba(75,234,255,.08)!important}
+.v654-oncall-surface .v652-section-head::after{content:"";position:absolute;left:16px;bottom:-1px;width:120px;height:1px;background:linear-gradient(90deg,var(--v654-cyan),transparent);box-shadow:0 0 10px rgba(75,234,255,.45)}
+.v654-oncall-surface .v652-section-head .section-title{font-size:21px!important;letter-spacing:-.03em!important}.v654-oncall-surface .v652-section-head .eyebrow{color:#65dff2!important}
+.v654-oncall-surface .v652-table-wrap{margin:10px 12px 12px!important;border:1px solid rgba(75,234,255,.075)!important;border-radius:13px!important;overflow:hidden;background:rgba(0,7,15,.36)!important}
+.v654-oncall-surface .v652-table-wrap thead{background:linear-gradient(90deg,rgba(24,100,135,.11),rgba(42,42,128,.07))}
+.v654-oncall-surface .v652-table-wrap th{height:34px;color:#678ca5!important;font-size:8px!important;letter-spacing:.1em;text-transform:uppercase}
+.v654-oncall-surface .v652-table-wrap tbody tr{height:46px;border-top:1px solid rgba(255,255,255,.035)!important;background:linear-gradient(90deg,transparent,rgba(75,234,255,0));transition:background .15s ease,box-shadow .15s ease,transform .15s ease}
+.v654-oncall-surface .v652-table-wrap tbody tr:hover{background:linear-gradient(90deg,rgba(75,234,255,.04),transparent 58%)!important;box-shadow:inset 2px 0 var(--v654-cyan);transform:translateX(1px)}
+.v654-oncall-surface .v652-table-wrap tbody tr.active{background:linear-gradient(90deg,rgba(44,242,187,.07),transparent 62%)!important;box-shadow:inset 2px 0 var(--v654-green)}
+.v654-oncall-surface .v652-status{border-radius:999px!important;padding:4px 8px!important;letter-spacing:.06em!important}
+
+/* Matrix — brighter command-grid hierarchy while preserving exact data. */
+.v654-oncall-surface .v652-matrix-scroll{margin:10px 12px 0!important;border:1px solid rgba(75,234,255,.11)!important;border-radius:14px!important;background:rgba(0,7,15,.38)!important;box-shadow:inset 18px 0 34px rgba(0,0,0,.16),inset -18px 0 34px rgba(0,0,0,.16)}
+.v654-oncall-surface .v652-matrix-day{background:linear-gradient(180deg,#082035,#04131f)!important;border-bottom-color:rgba(75,234,255,.09)!important}.v654-oncall-surface .v652-matrix-day small{color:#4f7894!important}.v654-oncall-surface .v652-matrix-day b{color:#d8f8ff!important}
+.v654-oncall-surface .v652-matrix-name{background:linear-gradient(90deg,#071e32,#051421)!important;border-right-color:rgba(75,234,255,.1)!important}
+.v654-oncall-surface .v652-matrix-cell{background:rgba(2,11,20,.64)!important;border-color:rgba(255,255,255,.035)!important}.v654-oncall-surface .v652-matrix-cell.active{background:linear-gradient(180deg,color-mix(in srgb,currentColor 23%,#061322),color-mix(in srgb,currentColor 12%,#020a12))!important;box-shadow:inset 0 0 16px color-mix(in srgb,currentColor 9%,transparent),0 0 10px color-mix(in srgb,currentColor 8%,transparent)!important}
+.v654-oncall-surface .v652-matrix-cell.today,.v654-oncall-surface .v652-matrix-day.today{outline:1px solid rgba(255,255,255,.9)!important;outline-offset:-2px;box-shadow:inset 0 0 20px rgba(75,234,255,.08),0 0 14px rgba(75,234,255,.12)!important}
+.v654-oncall-surface .v652-matrix-legend{padding:8px 12px 12px!important}.v654-oncall-surface .v652-matrix-legend span{border-radius:999px!important;background:rgba(255,255,255,.02)!important}
+
+/* Timeline — luminous transit rail. */
+.v654-oncall-surface .v652-timeline{margin:10px 12px 0!important;padding:10px!important;border-radius:14px!important;background:linear-gradient(180deg,rgba(0,8,17,.72),rgba(5,19,33,.75))!important;border:1px solid rgba(75,234,255,.1)!important}
+.v654-oncall-surface .v652-timeline-scale{background:linear-gradient(180deg,rgba(3,16,29,.98),rgba(3,16,29,.84),transparent)!important}.v654-oncall-surface .v652-timeline-scale span{color:#577b92!important}.v654-oncall-surface .v652-timeline-scale span.today{color:#fff!important;text-shadow:0 0 14px var(--v654-cyan)!important}
+.v654-oncall-surface .v652-timeline-track{border:1px solid rgba(75,234,255,.1)!important;border-radius:12px!important;background:repeating-linear-gradient(90deg,rgba(75,234,255,.025) 0 1px,transparent 1px calc(100%/var(--v652-days))),linear-gradient(180deg,#041321,#061a2c)!important}
+.v654-oncall-surface .v652-timeline-track::after{content:"";position:absolute;left:10px;right:10px;top:50%;height:2px;background:linear-gradient(90deg,transparent,var(--v654-cyan) 20%,var(--v654-blue) 50%,var(--v654-violet) 78%,transparent);opacity:.22;box-shadow:0 0 16px var(--v654-cyan)}
+.v654-oncall-surface .v652-timeline-segment{clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%);border-radius:9px!important;background:linear-gradient(180deg,color-mix(in srgb,currentColor 14%,#081b2d),#03101c)!important;box-shadow:0 9px 24px rgba(0,0,0,.28),inset 2px 0 currentColor!important}
+.v654-oncall-surface .v652-handoff-list{padding:10px 12px 13px!important}.v654-oncall-surface .v652-handoff{border-radius:12px!important;clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,0 100%);background:linear-gradient(155deg,rgba(7,23,39,.82),rgba(2,10,20,.76))!important}.v654-oncall-surface .v652-handoff.active{box-shadow:inset 2px 0 var(--v654-green),0 0 18px rgba(44,242,187,.05)!important}
+
+/* Performance profiles keep the new world visually distinct without forcing motion. */
+html[data-v65-mode="HIGH"] body::after{animation:v654AuroraDrift 24s ease-in-out infinite alternate!important;opacity:.95!important}
+html[data-v65-mode="HIGH"] .app::before{animation:v654HorizonFloat 14s ease-in-out infinite alternate;opacity:1}
+html[data-v65-mode="HIGH"] .v654-oncall-surface .v652-hero::before{animation:v654GridPulse 7s ease-in-out infinite}
+html[data-v65-mode="BALANCED"] body::after{animation:v654AuroraDrift 48s ease-in-out infinite alternate!important;opacity:.54!important}
+html[data-v65-mode="BALANCED"] .app::before{animation:none;opacity:.72}
+html[data-v65-mode="BALANCED"] .v654-oncall-surface .v652-hero::before{animation:none;opacity:.3}
+html[data-v65-mode="ECO"] body{background:linear-gradient(160deg,#020711,#04101b 52%,#06081a 100%)!important;background-attachment:scroll!important}
+html[data-v65-mode="ECO"] body::after,html[data-v65-mode="ECO"] .app::before{display:none!important}
+html[data-v65-mode="ECO"] body::before{opacity:.28!important;background-size:72px 72px,72px 72px,18px 18px,18px 18px!important}
+html[data-v65-mode="ECO"] .v654-oncall-surface .v652-control-deck,html[data-v65-mode="ECO"] .v654-oncall-surface .v652-hero,html[data-v65-mode="ECO"] .v654-oncall-surface .v652-stat,html[data-v65-mode="ECO"] .v654-oncall-surface .v652-overview-table,html[data-v65-mode="ECO"] .v654-oncall-surface .v652-matrix-panel,html[data-v65-mode="ECO"] .v654-oncall-surface .v652-timeline-panel{backdrop-filter:none!important;box-shadow:0 10px 24px rgba(0,0,0,.34)!important}
+
+@keyframes v654AuroraDrift{0%{transform:translate3d(-1.2%,-.8%,0) rotate(-1deg)}100%{transform:translate3d(1.2%,.8%,0) rotate(1deg)}}
+@keyframes v654HorizonFloat{0%{transform:translateX(-50%) perspective(900px) rotateX(67deg) translateY(0)}100%{transform:translateX(-50%) perspective(900px) rotateX(67deg) translateY(-18px)}}
+@keyframes v654GridPulse{50%{opacity:.62;filter:brightness(1.08)}}
+
+@media(max-width:1180px){.v654-oncall-surface .v652-hero{grid-template-columns:1fr}.v654-oncall-surface .v652-now-grid{grid-template-columns:1fr 1fr}.v654-oncall-surface .v652-control-deck{grid-template-columns:1fr auto}.v654-oncall-surface .v653-deck-status{display:none}.v654-oncall-surface .v652-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){body{background-attachment:scroll!important}.app::before{display:none}.v654-oncall-surface .v652-control-deck{position:relative;top:auto;grid-template-columns:1fr;padding:7px}.v654-oncall-surface .v652-view-tabs,.v654-oncall-surface .v652-month-switch{overflow:auto}.v654-oncall-surface .v652-hero{min-height:0;padding:16px!important;clip-path:none;border-radius:17px!important}.v654-oncall-surface .v652-hero h2{font-size:38px!important}.v654-oncall-surface .v652-now-grid{grid-template-columns:1fr}.v654-oncall-surface .v652-stat-grid{grid-template-columns:1fr 1fr}.v654-oncall-surface .v652-section-head{padding:12px!important}.v654-oncall-surface .v652-table-wrap{margin:8px!important}.v654-oncall-surface .v652-matrix-scroll,.v654-oncall-surface .v652-timeline{margin-left:8px!important;margin-right:8px!important}}
+@media(max-width:440px){.v654-oncall-surface .v652-stat-grid{grid-template-columns:1fr}.v654-oncall-surface .v652-now-card{min-height:112px}}
+@media(prefers-reduced-motion:reduce){body::after,.app::before,.v654-oncall-surface .v652-hero::before{animation:none!important}.v654-oncall-surface *{transition-duration:.01ms!important}}
+
+</style>
 </head>
 <!-- REFERENCE LOCK V4 -->
 <body>
 
-<div id="bootOverlay" data-loader-version="6.5.3" aria-label="Loading Shift Command Center"><div class="boot613-shell"><div class="boot613-top"><div class="boot613-logo"></div><div class="boot613-title"><small>Boot Sequence</small><h2>Loading Shift Command Center</h2><p>กำลังเชื่อมต่อ Shift Matrix และ Command UI…</p></div><div class="boot613-live">● LIVE BOOT</div></div><div class="boot613-main"><div class="boot613-radar"><div class="boot613-orbit"><i class="boot613-arc a"></i><i class="boot613-arc b"></i><i class="boot613-arc c"></i><i class="boot613-core"></i></div></div><div class="boot613-info"><div class="boot613-card"><div class="boot613-card-head"><b id="boot613Phase">Initializing Core Systems</b><span id="boot613Status">Starting…</span></div><div class="boot613-progress"><i id="boot613Bar"></i></div><div class="boot613-readout"><div class="boot613-pct" id="boot613Pct">8%</div><div class="boot613-phase" id="boot613Meta">phase 1 / 4<br>Secure startup</div></div></div><div class="boot613-grid"><div class="boot613-mini"><span>Module</span><b>Command UI</b></div><div class="boot613-mini"><span>Matrix</span><b>October 2569</b></div><div class="boot613-mini"><span>Status</span><b id="boot613State">BOOTING</b></div></div><div class="boot613-scan"><i></i></div></div></div></div></div>
+<div id="bootOverlay" data-loader-version="6.5.4" aria-label="Loading Shift Command Center"><div class="boot613-shell"><div class="boot613-top"><div class="boot613-logo"></div><div class="boot613-title"><small>Boot Sequence</small><h2>Loading Shift Command Center</h2><p>กำลังเชื่อมต่อ Shift Matrix และ Command UI…</p></div><div class="boot613-live">● LIVE BOOT</div></div><div class="boot613-main"><div class="boot613-radar"><div class="boot613-orbit"><i class="boot613-arc a"></i><i class="boot613-arc b"></i><i class="boot613-arc c"></i><i class="boot613-core"></i></div></div><div class="boot613-info"><div class="boot613-card"><div class="boot613-card-head"><b id="boot613Phase">Initializing Core Systems</b><span id="boot613Status">Starting…</span></div><div class="boot613-progress"><i id="boot613Bar"></i></div><div class="boot613-readout"><div class="boot613-pct" id="boot613Pct">8%</div><div class="boot613-phase" id="boot613Meta">phase 1 / 4<br>Secure startup</div></div></div><div class="boot613-grid"><div class="boot613-mini"><span>Module</span><b>Command UI</b></div><div class="boot613-mini"><span>Matrix</span><b>October 2569</b></div><div class="boot613-mini"><span>Status</span><b id="boot613State">BOOTING</b></div></div><div class="boot613-scan"><i></i></div></div></div></div></div>
 
 <div class="ambient a"></div><div class="ambient b"></div><div class="ambient c"></div>
 <div class="app">
@@ -1170,7 +1322,7 @@ function initV651(){mountV651Navigation();mountV651View();installV651ViewBridge(
 if(typeof document!=='undefined'){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initV651,{once:true});else initV651()}
 
 // v652-engine.js
-// v6.5.3 Engineer Oncall — Overview / Matrix / Timeline with fixed timeline grid.
+// v6.5.4 Engineer Oncall — Overview / Matrix / Timeline with command-deck redesign hooks.
 const V652_MONTHS={th:{10:'ตุลาคม',11:'พฤศจิกายน',12:'ธันวาคม'},en:{10:'October',11:'November',12:'December'}};
 const V652_WEEK={th:['อา','จ','อ','พ','พฤ','ศ','ส'],en:['Su','Mo','Tu','We','Th','Fr','Sa']};
 let v652Mode='overview';
@@ -1197,7 +1349,7 @@ function v652Overview(now){
   const current=getOncallForDate(now),next=getNextOncall(now),matrix=getOncallMonthMatrix(v652Month),rows=oncallByMonth(v652Month);
   const stats=matrix.engineers.map(name=>`<div class="v652-stat person-${v652PersonClass(name)}"><span class="v652-stat-orb">${v652Esc(name.slice(0,1))}</span><span><small>${v652Text('total')}</small><b>${v652Esc(name)}</b></span><strong>${matrix.totals[name]}<em>${v652Text('days')}</em></strong></div>`).join('');
   const table=rows.map(row=>`<tr class="${v652ActiveRow(row,now)?'active':''}"><td><span class="v652-person-chip person-${v652PersonClass(row.name)}"><i>${v652Esc(row.name.slice(0,1))}</i>${v652Esc(row.name)}</span></td><td>${v652Range(row)}</td><td><span class="v652-status ${v652ActiveRow(row,now)?'live':''}">${v652ActiveRow(row,now)?v652Text('active'):v652Text('scheduled')}</span></td></tr>`).join('');
-  return `<section class="v652-hero"><div><div class="v652-kicker">${v652Text('dutyGrid')} • v6.5.3</div><h2>Engineer Oncall</h2><p>${v652Text('hint')}</p></div><div class="v652-now-grid"><article class="v652-now-card live"><small>${v652Text('current')}</small><strong>${current?v652Esc(current.name):v652Text('unassigned')}</strong><span>${current?v652Range(current):'—'}</span><em>● LIVE</em></article><article class="v652-now-card"><small>${v652Text('next')}</small><strong>${next?v652Esc(next.name):'—'}</strong><span>${next?v652Range(next):'—'}</span><em>↦ HANDOFF</em></article></div></section><div class="v652-stat-grid">${stats}</div><section class="hud-panel trace v652-overview-table"><div class="v652-section-head"><div><div class="eyebrow">${v652MonthName(v652Month).toUpperCase()} ${v652Year()}</div><div class="section-title">${v652Text('monthSchedule')}</div></div><span>${rows.length} ${v652Text('rotation')}</span></div><div class="v652-table-wrap"><table><thead><tr><th>${v652Text('engineer')}</th><th>${v652Text('period')}</th><th>${v652Text('status')}</th></tr></thead><tbody>${table}</tbody></table></div></section>`;
+  return `<section class="v652-hero"><div><div class="v652-kicker">${v652Text('dutyGrid')} • v6.5.4</div><h2>Engineer Oncall</h2><p>${v652Text('hint')}</p></div><div class="v652-now-grid"><article class="v652-now-card live"><small>${v652Text('current')}</small><strong>${current?v652Esc(current.name):v652Text('unassigned')}</strong><span>${current?v652Range(current):'—'}</span><em>● LIVE</em></article><article class="v652-now-card"><small>${v652Text('next')}</small><strong>${next?v652Esc(next.name):'—'}</strong><span>${next?v652Range(next):'—'}</span><em>↦ HANDOFF</em></article></div></section><div class="v652-stat-grid">${stats}</div><section class="hud-panel trace v652-overview-table"><div class="v652-section-head"><div><div class="eyebrow">${v652MonthName(v652Month).toUpperCase()} ${v652Year()}</div><div class="section-title">${v652Text('monthSchedule')}</div></div><span>${rows.length} ${v652Text('rotation')}</span></div><div class="v652-table-wrap"><table><thead><tr><th>${v652Text('engineer')}</th><th>${v652Text('period')}</th><th>${v652Text('status')}</th></tr></thead><tbody>${table}</tbody></table></div></section>`;
 }
 
 function v652Matrix(now){
@@ -1218,13 +1370,13 @@ function renderV652Oncall(){
   const host=document.getElementById('oncallView');if(!host)return;
   const now=new Date();
   const content=v652Mode==='matrix'?v652Matrix(now):v652Mode==='timeline'?v652Timeline(now):v652Overview(now);
-  host.innerHTML=`<div class="v652-oncall v653-oncall-surface">${v652Tabs()}<div class="v652-pane" data-pane="${v652Mode}">${content}</div></div>`;
+  host.innerHTML=`<div class="v652-oncall v653-oncall-surface v654-oncall-surface">${v652Tabs()}<div class="v652-pane" data-pane="${v652Mode}">${content}</div></div>`;
   host.querySelectorAll('[data-oncall-mode]').forEach(button=>button.addEventListener('click',()=>setV652Mode(button.dataset.oncallMode)));
   host.querySelectorAll('[data-oncall-month]').forEach(button=>button.addEventListener('click',()=>setV652Month(button.dataset.oncallMonth)));
 }
 
 function installV652Bridge(){const prior=window.showView;if(typeof prior!=='function'||prior.__v652)return;const wrapped=function(name){const out=prior.apply(this,arguments);if(name==='oncall')queueMicrotask(renderV652Oncall);return out};wrapped.__v652=true;window.showView=wrapped}
-function initV652(){if(typeof mountV651Navigation==='function')mountV651Navigation();if(typeof mountV651View==='function')mountV651View();installV652Bridge();renderV652Oncall();document.addEventListener('v65:localechange',renderV652Oncall);document.documentElement.dataset.appVersion='6.5.3'}
+function initV652(){if(typeof mountV651Navigation==='function')mountV651Navigation();if(typeof mountV651View==='function')mountV651View();installV652Bridge();renderV652Oncall();document.addEventListener('v65:localechange',renderV652Oncall);document.documentElement.dataset.appVersion='6.5.4'}
 if(typeof document!=='undefined'){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initV652,{once:true});else initV652()}
 
 })();</script>
