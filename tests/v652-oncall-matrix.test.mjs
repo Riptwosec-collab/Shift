@@ -23,7 +23,7 @@ test('oncall matrix exposes one owner per covered date and month metadata',async
   assert.equal(december.days[30].name,null);
 });
 
-test('v6.5.2 Engineer Oncall foundation remains in v6.5.3 with Overview Matrix Timeline and month controls',()=>{
+test('v6.5.2 Engineer Oncall foundation remains in v6.5.4 with Overview Matrix Timeline and month controls',()=>{
   const engine=fs.readFileSync('src/v652-engine.js','utf8');
   const css=fs.readFileSync('src/v652-oncall.css','utf8');
   const build=fs.readFileSync('scripts/build.mjs','utf8');
@@ -34,7 +34,7 @@ test('v6.5.2 Engineer Oncall foundation remains in v6.5.3 with Overview Matrix T
   assert.match(engine,/aria-label/);
   assert.match(build,/v652-engine\.js/);
   assert.match(build,/v652-oncall\.css/);
-  assert.match(build,/data-app-version=\"6\.5\.3\"/);
+  assert.match(build,/data-app-version=\"6\.5\.4\"/);
 });
 
 test('v6.5.2 keeps the approved oncall source rotation immutable',()=>{
