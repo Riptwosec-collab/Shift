@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="th" data-app-version="6.4" data-v64-mode="BALANCED">
+<html lang="th" data-app-version="6.5" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -226,11 +226,67 @@ html[data-v64-mode="ECO"] *{transition-duration:.1s}
 @media(max-width:560px){.v64-compare{grid-template-columns:1fr}.v64-network-summary{grid-template-columns:1fr}.v64-quality{gap:1px}.v64-quality button{min-width:27px;padding:0 4px}}
 
 </style>
+<style id="v65-ui-style">
+/* v6.5 visual fidelity layer: sharp typography + distinct runtime profiles. */
+:root{--v65-text-xs:10px;--v65-text-sm:11px;--v65-text-md:12px;--v65-line-th:1.55;--v65-glow-tight:0 0 14px rgba(56,232,255,.18);--v65-border-crisp:1px;--v65-safe-bottom:max(0px,env(safe-area-inset-bottom));}
+html[data-locale="th"] body{font-family:"Leelawadee UI","Noto Sans Thai",Tahoma,"Segoe UI",sans-serif;line-height:var(--v65-line-th);letter-spacing:0}
+html[data-locale="en"] body{font-family:Inter,"Segoe UI",system-ui,sans-serif;line-height:1.42}
+body,.hud-panel,.command-bar,.roster-card,.insights-panel,.network-panel,.month-snapshot{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+.metric strong,.big,.count,.day-number,.month-table,.timeline,.v64-team-kpis,.v64-workload-row{font-variant-numeric:tabular-nums}
+.eyebrow,.hint,.muted,.brand-copy p,.brand-copy small,.v64-risk b,.v64-risk span,.v64-transition b,.v64-transition span,.v64-streak b,.v64-streak span,.v64-network-summary small,.v64-relation-strip span,.v64-workload-head,.v64-workload-row span{font-size:var(--v65-text-xs)!important;line-height:1.38}
+.nav-btn b,.section-title,.person-row b,.insight-item b,.v64-network-summary b,.v64-relation-strip b{font-size:var(--v65-text-sm)!important}
+.smart-search input,.v64-palette-head input{font-size:var(--v65-text-md)!important}
+.hud-panel,.command-bar,.v64-quality,.v65-language,.v64-palette-box{border-width:var(--v65-border-crisp);border-color:rgba(72,213,255,.2)}
+.timeline svg path,.activity-chart svg path,.network-line,.network-edges line{shape-rendering:geometricPrecision;vector-effect:non-scaling-stroke}
+.muted,.hint,.nav-btn span,.brand-copy p{color:#8fa9bd!important}
+.v65-language{display:flex;align-items:center;gap:2px;padding:3px;border:1px solid rgba(56,232,255,.16);border-radius:10px;background:rgba(3,14,26,.72)}
+.v65-language button{min-width:34px;height:28px;border:0;border-radius:7px;background:transparent;color:#7896aa;font-size:10px;font-weight:900;cursor:pointer}
+.v65-language button.active{color:#efffff;background:rgba(39,139,255,.22);box-shadow:inset 0 0 0 1px rgba(56,232,255,.24),var(--v65-glow-tight)}
+
+/* HIGH — full cyber experience */
+html[data-v65-mode="HIGH"] .ambient.a{opacity:.14;filter:blur(88px);animation:ambientA 18s ease-in-out infinite}
+html[data-v65-mode="HIGH"] .ambient.b{opacity:.13;filter:blur(88px);animation:ambientB 22s ease-in-out infinite}
+html[data-v65-mode="HIGH"] .cyber-scene::after{animation:gridFlow 8s linear infinite;opacity:.36}
+html[data-v65-mode="HIGH"] .scan-beam{display:block;animation:scanBeam 6s ease-in-out infinite}
+html[data-v65-mode="HIGH"] .network-line{animation:dash 8s linear infinite}
+html[data-v65-mode="HIGH"] .network-host::before{animation:orbit 20s linear infinite}
+html[data-v65-mode="HIGH"] .command-bar,html[data-v65-mode="HIGH"] .hud-panel{backdrop-filter:blur(20px);box-shadow:0 20px 65px rgba(0,0,0,.52),0 0 20px rgba(39,139,255,.08)}
+html[data-v65-mode="HIGH"] .hud-panel:hover{box-shadow:0 20px 65px rgba(0,0,0,.5),0 0 28px rgba(56,232,255,.11)}
+
+/* BALANCED — visibly calmer, fewer continuous layers */
+html[data-v65-mode="BALANCED"] .ambient.a{opacity:.07;filter:blur(62px);animation:ambientA 42s ease-in-out infinite}
+html[data-v65-mode="BALANCED"] .ambient.b{opacity:.05;filter:blur(62px);animation:none}
+html[data-v65-mode="BALANCED"] .cyber-scene::after{animation:none;opacity:.22}
+html[data-v65-mode="BALANCED"] .scan-beam{animation:none;opacity:.18}
+html[data-v65-mode="BALANCED"] .city-svg{transform:none!important;transition:none!important}
+html[data-v65-mode="BALANCED"] .network-line{animation:dash 24s linear infinite;opacity:.42}
+html[data-v65-mode="BALANCED"] .network-host::before{animation:none;opacity:.24}
+html[data-v65-mode="BALANCED"] .command-bar,html[data-v65-mode="BALANCED"] .hud-panel{backdrop-filter:blur(9px);box-shadow:0 15px 42px rgba(0,0,0,.44)}
+html[data-v65-mode="BALANCED"] .hud-panel:hover{box-shadow:0 16px 44px rgba(0,0,0,.46),0 0 10px rgba(56,232,255,.045)}
+
+/* ECO — crisp static HUD */
+html[data-v65-mode="ECO"] .ambient,html[data-v65-mode="ECO"] .cyber-scene::after,html[data-v65-mode="ECO"] .scan-beam,html[data-v65-mode="ECO"] .star,html[data-v65-mode="ECO"] .network-line,html[data-v65-mode="ECO"] .network-host::before,html[data-v65-mode="ECO"] .core-shell::after,html[data-v65-mode="ECO"] .metric-orb::before,html[data-v65-mode="ECO"] .date-node.active::before,html[data-v65-mode="ECO"] .date-node.active::after{animation:none!important}
+html[data-v65-mode="ECO"] .ambient{opacity:.025;filter:none}
+html[data-v65-mode="ECO"] .scan-beam{opacity:0}
+html[data-v65-mode="ECO"] .city-svg{transform:none!important;transition:none!important}
+html[data-v65-mode="ECO"] .command-bar,html[data-v65-mode="ECO"] .hud-panel,html[data-v65-mode="ECO"] .mobile-nav{backdrop-filter:none!important;background-color:rgba(4,13,25,.96)}
+html[data-v65-mode="ECO"] .hud-panel{box-shadow:0 8px 20px rgba(0,0,0,.36);border-color:rgba(72,213,255,.15)}
+html[data-v65-mode="ECO"] *{transition-duration:.08s!important}
+
+/* Suspend heavy decoration while loader owns the frame. */
+html[data-v65-booting="1"] .ambient,html[data-v65-booting="1"] .cyber-scene::after,html[data-v65-booting="1"] .scan-beam,html[data-v65-booting="1"] .star,html[data-v65-booting="1"] .network-line,html[data-v65-booting="1"] .network-host::before{animation-play-state:paused!important}
+html[data-v65-booting="1"] .city-svg{transform:none!important;transition:none!important}
+
+@media (prefers-reduced-motion: reduce){html *{scroll-behavior:auto!important}html .ambient,html .cyber-scene::after,html .scan-beam,html .star,html .network-line,html .network-host::before,html .core-shell::after,html .metric-orb::before{animation:none!important;transition-duration:.01ms!important}}
+@media(max-width:860px){.v65-language button,.v64-quality button,.mobile-nav button{min-height:36px;min-width:36px}.v65-language{flex:0 0 auto}.command-actions{flex-wrap:wrap}.v64-network-summary b,.v64-relation-strip b,.v64-workload-row b,.v64-workload-row span{overflow-wrap:anywhere}.mobile-nav{padding-bottom:calc(8px + var(--v65-safe-bottom))}}
+@media(max-width:560px){.v65-language button{min-width:32px}.section-title{line-height:1.3}.brand-copy h1{font-size:17px}.v64-palette-head input{font-size:12px!important}}
+
+</style>
 </head>
 <!-- REFERENCE LOCK V4 -->
 <body>
 
-<div id="bootOverlay" data-loader-version="6.4" aria-label="Loading Shift Command Center"><div class="boot613-shell"><div class="boot613-top"><div class="boot613-logo"></div><div class="boot613-title"><small>Boot Sequence</small><h2>Loading Shift Command Center</h2><p>กำลังเชื่อมต่อ Shift Matrix และ Command UI…</p></div><div class="boot613-live">● LIVE BOOT</div></div><div class="boot613-main"><div class="boot613-radar"><div class="boot613-orbit"><i class="boot613-arc a"></i><i class="boot613-arc b"></i><i class="boot613-arc c"></i><i class="boot613-core"></i></div></div><div class="boot613-info"><div class="boot613-card"><div class="boot613-card-head"><b id="boot613Phase">Initializing Core Systems</b><span id="boot613Status">Starting…</span></div><div class="boot613-progress"><i id="boot613Bar"></i></div><div class="boot613-readout"><div class="boot613-pct" id="boot613Pct">8%</div><div class="boot613-phase" id="boot613Meta">phase 1 / 4<br>Secure startup</div></div></div><div class="boot613-grid"><div class="boot613-mini"><span>Module</span><b>Command UI</b></div><div class="boot613-mini"><span>Matrix</span><b>October 2569</b></div><div class="boot613-mini"><span>Status</span><b id="boot613State">BOOTING</b></div></div><div class="boot613-scan"><i></i></div></div></div></div></div>
+<div id="bootOverlay" data-loader-version="6.5" aria-label="Loading Shift Command Center"><div class="boot613-shell"><div class="boot613-top"><div class="boot613-logo"></div><div class="boot613-title"><small>Boot Sequence</small><h2>Loading Shift Command Center</h2><p>กำลังเชื่อมต่อ Shift Matrix และ Command UI…</p></div><div class="boot613-live">● LIVE BOOT</div></div><div class="boot613-main"><div class="boot613-radar"><div class="boot613-orbit"><i class="boot613-arc a"></i><i class="boot613-arc b"></i><i class="boot613-arc c"></i><i class="boot613-core"></i></div></div><div class="boot613-info"><div class="boot613-card"><div class="boot613-card-head"><b id="boot613Phase">Initializing Core Systems</b><span id="boot613Status">Starting…</span></div><div class="boot613-progress"><i id="boot613Bar"></i></div><div class="boot613-readout"><div class="boot613-pct" id="boot613Pct">8%</div><div class="boot613-phase" id="boot613Meta">phase 1 / 4<br>Secure startup</div></div></div><div class="boot613-grid"><div class="boot613-mini"><span>Module</span><b>Command UI</b></div><div class="boot613-mini"><span>Matrix</span><b>October 2569</b></div><div class="boot613-mini"><span>Status</span><b id="boot613State">BOOTING</b></div></div><div class="boot613-scan"><i></i></div></div></div></div></div>
 
 <div class="ambient a"></div><div class="ambient b"></div><div class="ambient c"></div>
 <div class="app">
@@ -435,9 +491,9 @@ normalizeOff();renderOverview();
 })();
 </script>
 
-<script id="v64-loader-runtime">(()=>{const o=document.getElementById('bootOverlay');if(!o)return;const b=document.getElementById('boot613Bar'),p=document.getElementById('boot613Pct'),ph=document.getElementById('boot613Phase'),st=document.getElementById('boot613Status'),m=document.getElementById('boot613Meta'),state=document.getElementById('boot613State');const phases=[['Initializing Core Systems','Starting…','phase 1 / 4<br>Secure startup'],['Verifying Shift Matrix','Checking schedule…','phase 2 / 4<br>Data verify'],['Linking Command Grid','Connecting widgets…','phase 3 / 4<br>Nexus link'],['Rendering Interface','Finalizing command center…','phase 4 / 4<br>Final render']];const t0=performance.now(),TARGET=3000,HARD=3600;let domReady=document.readyState!=='loading',done=false,raf=0;if(!domReady)document.addEventListener('DOMContentLoaded',()=>{domReady=true},{once:true});const finish=()=>{if(done)return;done=true;cancelAnimationFrame(raf);if(b)b.style.width='100%';if(p)p.textContent='100%';if(ph)ph.textContent='Interface Ready';if(st)st.textContent='Ready to enter';if(m)m.innerHTML='phase 4 / 4<br>READY';if(state)state.textContent='READY';o.classList.add('out');setTimeout(()=>o.remove(),230)};const paint=()=>{if(done)return;const elapsed=performance.now()-t0,ratio=Math.min(1,elapsed/TARGET),pct=Math.min(elapsed>=TARGET&&!domReady?99:100,Math.round(ratio*100)),i=pct<25?0:pct<52?1:pct<80?2:3;if(b)b.style.width=pct+'%';if(p)p.textContent=pct+'%';if(ph)ph.textContent=phases[i][0];if(st)st.textContent=phases[i][1];if(m)m.innerHTML=phases[i][2];if(elapsed>=TARGET&&domReady){finish();return}raf=requestAnimationFrame(paint)};raf=requestAnimationFrame(paint);setTimeout(finish,HARD)})();</script>
+<script id="v65-loader-runtime">(()=>{const root=document.documentElement,o=document.getElementById('bootOverlay');if(!o)return;const b=document.getElementById('boot613Bar'),p=document.getElementById('boot613Pct'),ph=document.getElementById('boot613Phase'),st=document.getElementById('boot613Status'),m=document.getElementById('boot613Meta'),state=document.getElementById('boot613State');let locale='th';try{locale=localStorage.getItem('shift.locale')==='en'?'en':'th'}catch{}root.lang=locale;root.dataset.locale=locale;root.dataset.v65Booting='1';const copy=locale==='en'?[['Initializing Core Systems','Starting…'],['Verifying Shift Matrix','Checking schedule…'],['Linking Command Grid','Connecting widgets…'],['Rendering Interface','Finalizing command center…']]:[['กำลังเริ่มระบบหลัก','กำลังเริ่ม…'],['กำลังตรวจตารางเวร','กำลังตรวจข้อมูล…'],['กำลังเชื่อม Command Grid','กำลังเชื่อมวิดเจ็ต…'],['กำลังเตรียมอินเทอร์เฟซ','กำลังเตรียมหน้าจอ…']];const t0=performance.now(),TARGET=3000,HARD=3600;let domReady=document.readyState!=='loading',done=false,raf=0;if(b){b.style.transformOrigin='left center';b.style.transform='scaleX(0)'}if(!domReady)document.addEventListener('DOMContentLoaded',()=>{domReady=true},{once:true});const release=()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{delete root.dataset.v65Booting;document.dispatchEvent(new CustomEvent('v65:bootrelease'))}));const finish=()=>{if(done)return;done=true;cancelAnimationFrame(raf);if(b)b.style.transform='scaleX(1)';if(p)p.textContent='100%';if(ph)ph.textContent=locale==='en'?'Interface Ready':'อินเทอร์เฟซพร้อม';if(st)st.textContent=locale==='en'?'Ready':'พร้อมใช้งาน';if(m)m.innerHTML='phase 4 / 4<br>READY';if(state)state.textContent='READY';o.classList.add('out');release();setTimeout(()=>o.remove(),230)};const paint=()=>{if(done)return;const elapsed=performance.now()-t0,ratio=Math.min(1,elapsed/TARGET),pct=Math.min(elapsed>=TARGET&&!domReady?99:100,Math.round(ratio*100)),i=pct<25?0:pct<52?1:pct<80?2:3;if(b)b.style.transform='scaleX('+(pct/100)+')';if(p)p.textContent=pct+'%';if(ph)ph.textContent=copy[i][0];if(st)st.textContent=copy[i][1];if(m)m.innerHTML='phase '+(i+1)+' / 4<br>'+(i===3?'FINAL RENDER':'SECURE STARTUP');if(elapsed>=TARGET&&domReady){finish();return}raf=requestAnimationFrame(paint)};raf=requestAnimationFrame(paint);setTimeout(finish,HARD)})();</script>
 
-<script id="v64-engine-base">(()=>{
+<script id="v65-engine">(()=>{
 // data.js
 const DAYS_IN_MONTH = 31;
 const STAFF = Object.freeze([
@@ -496,7 +552,12 @@ function createLazyViewRegistry(){
 }
 
 // performance.js
-function createPerformanceController(root=typeof document!=='undefined'?document.documentElement:null){let mode='BALANCED';return {getVisualMode:()=>mode,setVisualMode(v){if(!['HIGH','BALANCED','ECO'].includes(v))return mode;mode=v;if(root){root.dataset.visual=mode.toLowerCase()}return mode}}}
+const VISUAL_PROFILES=Object.freeze({
+HIGH:Object.freeze({ambient:true,scan:true,parallax:true,networkMotion:true,glass:true,richHover:true,continuousMotion:true}),
+BALANCED:Object.freeze({ambient:true,scan:false,parallax:false,networkMotion:true,glass:true,richHover:false,continuousMotion:true}),
+ECO:Object.freeze({ambient:false,scan:false,parallax:false,networkMotion:false,glass:false,richHover:false,continuousMotion:false})});
+const visualProfile=mode=>VISUAL_PROFILES[mode]||VISUAL_PROFILES.BALANCED;
+function createPerformanceController(root=typeof document!=='undefined'?document.documentElement:null){let mode='BALANCED';return {getVisualMode:()=>mode,getProfile:()=>visualProfile(mode),setVisualMode(v){if(!['HIGH','BALANCED','ECO'].includes(v))return mode;mode=v;if(root){root.dataset.visual=mode.toLowerCase();root.dataset.v65Mode=mode}return mode}}}
 const scheduleIdle=fn=>typeof requestIdleCallback==='function'?requestIdleCallback(fn,{timeout:800}):setTimeout(fn,80);
 function rafThrottle(fn){let raf=0,args;return(...a)=>{args=a;if(raf)return;raf=requestAnimationFrame(()=>{raf=0;fn(...args)})}}
 
@@ -533,7 +594,7 @@ function dailyModel(day,cache,staff){
 // risk.js
 
 const RISK_THRESHOLDS={LOW_STAFFING:6,LOW_NIGHT_COVERAGE:2,CONSECUTIVE_WORK:3,LONG_NIGHT_STREAK:3,D_N_IMBALANCE:3,HIGH_OFF_COUNT:5};
-function evaluateDayRisk(day,cache,staff){const s=cache.dayStats[day],out=[];if(s.working<RISK_THRESHOLDS.LOW_STAFFING)out.push({level:'critical',code:'LOW STAFFING',text:`เข้าเวร ${s.working} คน`});if(s.N<RISK_THRESHOLDS.LOW_NIGHT_COVERAGE)out.push({level:'warning',code:'LOW NIGHT COVERAGE',text:`เวร N ${s.N} คน`});if(Math.abs(s.D-s.N)>=RISK_THRESHOLDS.D_N_IMBALANCE)out.push({level:'warning',code:'D/N IMBALANCE',text:`D ${s.D} / N ${s.N}`});if(s.OFF>=RISK_THRESHOLDS.HIGH_OFF_COUNT)out.push({level:'info',code:'HIGH OFF COUNT',text:`OFF ${s.OFF} คน`});staff.forEach((p,i)=>{const w=currentWorkStreak(staff,i,day),n=currentNightStreak(staff,i,day);if(w>=RISK_THRESHOLDS.CONSECUTIVE_WORK)out.push({level:'info',code:'WORK STREAK',text:`${p.name} ${w} วัน`});if(n>=RISK_THRESHOLDS.LONG_NIGHT_STREAK)out.push({level:'warning',code:'NIGHT STREAK',text:`${p.name} N ${n} คืน`})});return out}
+function evaluateDayRisk(day,cache,staff){const s=cache.dayStats[day],out=[];if(s.working<RISK_THRESHOLDS.LOW_STAFFING)out.push({level:'critical',code:'LOW STAFFING',text:`เข้าเวร ${s.working} คน`,values:{working:s.working}});if(s.N<RISK_THRESHOLDS.LOW_NIGHT_COVERAGE)out.push({level:'warning',code:'LOW NIGHT COVERAGE',text:`เวร N ${s.N} คน`,values:{night:s.N}});if(Math.abs(s.D-s.N)>=RISK_THRESHOLDS.D_N_IMBALANCE)out.push({level:'warning',code:'D/N IMBALANCE',text:`D ${s.D} / N ${s.N}`,values:{day:s.D,night:s.N}});if(s.OFF>=RISK_THRESHOLDS.HIGH_OFF_COUNT)out.push({level:'info',code:'HIGH OFF COUNT',text:`OFF ${s.OFF} คน`,values:{off:s.OFF}});staff.forEach((p,i)=>{const w=currentWorkStreak(staff,i,day),n=currentNightStreak(staff,i,day);if(w>=RISK_THRESHOLDS.CONSECUTIVE_WORK)out.push({level:'info',code:'WORK STREAK',text:`${p.name} ${w} วัน`,values:{name:p.name,days:w}});if(n>=RISK_THRESHOLDS.LONG_NIGHT_STREAK)out.push({level:'warning',code:'NIGHT STREAK',text:`${p.name} N ${n} คืน`,values:{name:p.name,nights:n}})});return out}
 
 // network-model.js
 function pairRelation(center,other,cache){
@@ -561,7 +622,7 @@ function analyticsModel(cache){
 // command-palette.js
 
 const paletteViews=['overview','daily','person','month','analytics','team'];
-function parseCommandQuery(q){q=String(q||'').trim().toLowerCase();if(!q)return [];const out=[];const n=parseInt(q,10);if(n>=1&&n<=31)out.push({type:'day',day:n,label:`วันที่ ${n} ตุลาคม`});for(const v of paletteViews)if(v.includes(q)||q.includes(v))out.push({type:'view',view:v==='team'?'overview':v,label:v});const status=q==='d'||q.includes('day')||q.includes('กลางวัน')?'D':q==='n'||q.includes('night')||q.includes('กลางคืน')?'N':q.includes('off')?'O':null;if(status)out.push({type:'status',code:status,label:status==='O'?'OFF':status});STAFF.forEach((p,i)=>{if(p.name.toLowerCase().includes(q))out.push({type:'person',i,label:p.name})});return out}
+function parseCommandQuery(q,options={}){q=String(q||'').trim().toLowerCase();if(!q)return [];const {locale='th',formatDate=(d,l)=>l==='en'?`${d} October 2026`:`วันที่ ${d} ตุลาคม`}=options;const out=[];const n=parseInt(q,10);if(n>=1&&n<=31)out.push({type:'day',day:n,label:formatDate(n,locale)});for(const v of paletteViews)if(v.includes(q)||q.includes(v))out.push({type:'view',view:v==='team'?'overview':v,label:v});const status=q==='d'||q.includes('day')||q.includes('กลางวัน')?'D':q==='n'||q.includes('night')||q.includes('กลางคืน')?'N':q.includes('off')?'O':null;if(status)out.push({type:'status',code:status,label:status==='O'?'OFF':status});STAFF.forEach((p,i)=>{if(p.name.toLowerCase().includes(q))out.push({type:'person',i,label:p.name})});return out}
 function shouldOpenPalette(e){if(['INPUT','TEXTAREA','SELECT'].includes(e.targetTag)||e.contentEditable)return false;return e.key==='/'||((e.ctrlKey||e.metaKey)&&String(e.key).toLowerCase()==='k')}
 
 // mobile.js
@@ -844,6 +905,94 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     return result;
   };
 })();
+
+// i18n-copy.js
+const I18N=Object.freeze({
+  th:{
+    nav:{overview:'ภาพรวม',daily:'รายวัน',person:'รายบุคคล',month:'รายเดือน',analytics:'ข้อมูล',home:'หน้าหลัก',stats:'สถิติ'},
+    common:{previous:'วันก่อน',next:'วันถัดไป',employee:'พนักงาน',coverage:'ครอบคลุม',work:'ทำงาน',off:'OFF',stable:'ปกติ',watch:'เฝ้าระวัง',critical:'วิกฤต',strength:'ความสัมพันธ์',topTeammate:'เพื่อนร่วมทีมเด่น',signals:'สัญญาณ',none:'ไม่มี'},
+    loader:{phase1:'กำลังเริ่มระบบหลัก',phase2:'กำลังตรวจตารางเวร',phase3:'กำลังเชื่อม Command Grid',phase4:'อินเทอร์เฟซพร้อม',starting:'กำลังเริ่ม…',checking:'กำลังตรวจข้อมูล…',linking:'กำลังเชื่อมวิดเจ็ต…',finalizing:'กำลังเตรียมหน้าจอ…',ready:'พร้อมใช้งาน'},
+    daily:{title:'ภาพรวมปฏิบัติการรายวัน',adjacent:'วันข้างเคียง',transitions:'การเปลี่ยนเวร',risk:'ความเสี่ยงกำลังคน',streaks:'เวรต่อเนื่อง',noTransition:'ไม่มีการเปลี่ยนสถานะไปวันถัดไป',noRisk:'ไม่พบสัญญาณเสี่ยงตามเกณฑ์',workStreak:'ทำงานต่อเนื่อง {count} วัน',nightStreak:'เวรกลางคืนต่อเนื่อง {count} คืน'},
+    risk:{LOW_STAFFING:'กำลังคนต่ำ',LOW_NIGHT_COVERAGE:'เวรกลางคืนต่ำ',D_N_IMBALANCE:'D/N ไม่สมดุล',HIGH_OFF_COUNT:'จำนวน OFF สูง',WORK_STREAK:'ทำงานต่อเนื่อง',NIGHT_STREAK:'เวรกลางคืนต่อเนื่อง'},
+    network:{title:'ความสัมพันธ์ของทีม',same:'ร่วมกะ',handoff:'ส่งต่องาน',strength:'ความสัมพันธ์',top:'เพื่อนร่วมทีมเด่น'},
+    analytics:{title:'สมดุลภาระงานของทีม',avgWork:'ค่าเฉลี่ยวันทำงาน',avgNight:'ค่าเฉลี่ยเวร N',highest:'สูงสุด',lowest:'ต่ำสุด',personLoad:'ภาระงานรายบุคคล'},
+    person:{title:'ข้อมูลรายบุคคล',schedule:'ตารางเวร',workload:'ภาระงาน'},
+    month:{title:'ตารางเวรรายเดือน',matrix:'ตารางเดือน'},
+    palette:{placeholder:'ค้นหา วันที่ / ชื่อ / night / off / analytics',empty:'พิมพ์วันที่ ชื่อพนักงาน หรือชื่อหน้า',choose:'เลือก',open:'เปิด'},
+    mobile:{home:'หน้าหลัก',daily:'รายวัน',person:'บุคคล',month:'เดือน',stats:'สถิติ'},
+    modes:{HIGH:'สูง',BALANCED:'สมดุล',ECO:'ประหยัด'},
+    accessibility:{language:'เลือกภาษา',visualMode:'โหมดประสิทธิภาพภาพ'},
+    date:{october:'ตุลาคม'}
+  },
+  en:{
+    nav:{overview:'Overview',daily:'Daily',person:'Personnel',month:'Monthly',analytics:'Analytics',home:'Home',stats:'Stats'},
+    common:{previous:'Previous day',next:'Next day',employee:'Employee',coverage:'Coverage',work:'Work',off:'OFF',stable:'Stable',watch:'Watch',critical:'Critical',strength:'Strength',topTeammate:'Top teammate',signals:'Signals',none:'None'},
+    loader:{phase1:'Initializing Core Systems',phase2:'Verifying Shift Matrix',phase3:'Linking Command Grid',phase4:'Interface Ready',starting:'Starting…',checking:'Checking schedule…',linking:'Connecting widgets…',finalizing:'Finalizing command center…',ready:'Ready'},
+    daily:{title:'Daily Operations Intelligence',adjacent:'Adjacent Days',transitions:'Shift Transitions',risk:'Staffing Risk',streaks:'Current Streaks',noTransition:'No shift transition to the next day',noRisk:'No staffing risk signals at current thresholds',workStreak:'{count}-day work streak',nightStreak:'{count}-night night-shift streak'},
+    risk:{LOW_STAFFING:'Low staffing',LOW_NIGHT_COVERAGE:'Low night coverage',D_N_IMBALANCE:'D/N imbalance',HIGH_OFF_COUNT:'High off count',WORK_STREAK:'Work streak',NIGHT_STREAK:'Night streak'},
+    network:{title:'Team Network',same:'Same shift',handoff:'Handoff',strength:'Strength',top:'Top teammate'},
+    analytics:{title:'Team Workload Balance',avgWork:'Average work days',avgNight:'Average N shifts',highest:'Highest',lowest:'Lowest',personLoad:'Person Load'},
+    person:{title:'Personnel',schedule:'Schedule',workload:'Workload'},
+    month:{title:'Monthly Shift Matrix',matrix:'Month Matrix'},
+    palette:{placeholder:'Search date / name / night / off / analytics',empty:'Type a date, employee name, status, or view',choose:'Choose',open:'Open'},
+    mobile:{home:'Home',daily:'Daily',person:'Person',month:'Month',stats:'Stats'},
+    modes:{HIGH:'High',BALANCED:'Balanced',ECO:'Eco'},
+    accessibility:{language:'Language',visualMode:'Visual performance mode'},
+    date:{october:'October'}
+  }
+});
+
+// i18n.js
+
+
+const SUPPORTED_LOCALES=Object.freeze(['th','en']);
+const normalizeLocale=value=>SUPPORTED_LOCALES.includes(String(value||'').toLowerCase())?String(value).toLowerCase():'th';
+const getPath=(obj,path)=>String(path).split('.').reduce((v,k)=>v&&v[k],obj);
+const interpolate=(s,values={})=>String(s).replace(/\{(\w+)\}/g,(_,k)=>values[k]??`{${k}}`);
+function createI18nController({dictionary=I18N,storage=typeof localStorage!=='undefined'?localStorage:null,root=typeof document!=='undefined'?document.documentElement:null,storageKey='shift.locale'}={}){
+  let locale='th';const listeners=new Set();
+  try{locale=normalizeLocale(storage?.getItem(storageKey))}catch{locale='th'}
+  const apply=()=>{if(root){root.lang=locale;root.dataset.locale=locale}};apply();
+  const t=(key,values={},forced=locale)=>interpolate(getPath(dictionary[normalizeLocale(forced)],key)??key,values);
+  const formatDate=(day,forced=locale)=>normalizeLocale(forced)==='en'?`${Number(day)} October 2026`:`${Number(day)} ตุลาคม 2569`;
+  const formatStatus=code=>code==='O'?'OFF':code;
+  const formatRisk=(risk,forced=locale)=>{const l=normalizeLocale(forced),v=risk?.values||{};switch(risk?.code){case'LOW STAFFING':return l==='en'?`${v.working} people on duty`:`เข้าเวร ${v.working} คน`;case'LOW NIGHT COVERAGE':return l==='en'?`N shift ${v.night} people`:`เวร N ${v.night} คน`;case'D/N IMBALANCE':return `D ${v.day} / N ${v.night}`;case'HIGH OFF COUNT':return l==='en'?`OFF ${v.off} people`:`OFF ${v.off} คน`;case'WORK STREAK':return l==='en'?`${v.name} ${v.days}-day work streak`:`${v.name} ${v.days} วัน`;case'NIGHT STREAK':return l==='en'?`${v.name} N ${v.nights} nights`:`${v.name} N ${v.nights} คืน`;default:return risk?.text||''}};
+  return {getLocale:()=>locale,setLocale(value){locale=normalizeLocale(value);try{storage?.setItem(storageKey,locale)}catch{}apply();for(const fn of listeners)fn(locale);return locale},t,formatDate,formatStatus,formatRisk,subscribe(fn){listeners.add(fn);return()=>listeners.delete(fn)}};
+}
+
+// v65-engine.js
+
+
+const v65I18n=createI18nController({dictionary:I18N});
+if(typeof window!=='undefined')window.v65I18n=v65I18n;
+const V65_VIEWS=['overview','daily','person','month','analytics'];
+const V65_PAIRS=[
+['ภาพรวม','Overview'],['รายวัน','Daily'],['รายบุคคล','Person'],['รายเดือน','Month'],['ข้อมูล','Analytics'],['หน้าหลัก','Home'],['สถิติ','Stats'],
+['เวรกลางวัน','Day Shift'],['เวรกลางคืน','Night Shift'],['วันหยุด','Off Duty'],['ความสัมพันธ์ของทีม','Team Network'],['ตารางเดือน','Month Matrix'],
+['ภาพรวมปฏิบัติการรายวัน','Daily Operations Intelligence'],['วันข้างเคียง','Adjacent Days'],['การเปลี่ยนเวร','Shift Transitions'],['ความเสี่ยงกำลังคน','Staffing Risk'],['เวรต่อเนื่อง','Current Streaks'],
+['สมดุลภาระงานของทีม','Team Workload Balance'],['พนักงาน','Employee'],['วันก่อน','Previous day'],['วันถัดไป','Next day'],['ค่าเฉลี่ยวันทำงาน','Average work days'],['ค่าเฉลี่ยเวร N','Average N shifts'],
+['เพื่อนร่วมทีมเด่น','Top teammate'],['ความสัมพันธ์','Strength'],['ไม่มีการเปลี่ยนสถานะไปวันถัดไป','No shift transition to the next day'],['ไม่พบสัญญาณเสี่ยงตาม threshold','No staffing risk signals at current thresholds'],
+['ไม่พบ Staffing Risk ในวันที่เลือก','No staffing risk on selected day'],['พิมพ์วันที่ ชื่อพนักงาน หรือชื่อหน้า','Type a date, employee name, status, or view'],['เลือก','Choose'],['เปิด','Open']
+];
+function v65Locale(){return v65I18n.getLocale()}
+function v65PairText(value,locale=v65Locale()){const s=String(value||'').trim();for(const [th,en] of V65_PAIRS)if(s===th||s===en)return locale==='en'?en:th;return null}
+function v65DynamicText(value,locale=v65Locale()){
+  let s=String(value||'');const exact=v65PairText(s,locale);if(exact!==null)return exact;
+  const day=s.match(/^(?:วันที่\s*)?(\d{1,2})\s+ตุลาคม(?:\s+2569)?$/);if(day&&locale==='en')return `${day[1]} October 2026`;
+  const enDay=s.match(/^(\d{1,2})\s+October\s+2026$/);if(enDay&&locale==='th')return `${enDay[1]} ตุลาคม 2569`;
+  if(locale==='en')return s.replace(/วัน/g,'days').replace(/คืน/g,'nights').replace(/คน/g,'people').replace(/ครอบคลุม/g,'Coverage').replace(/ร่วมกะ/g,'Same shift').replace(/ส่งต่องาน/g,'Handoff');
+  return s.replace(/Previous day/g,'วันก่อน').replace(/Next day/g,'วันถัดไป').replace(/Same shift/g,'ร่วมกะ').replace(/Handoff/g,'ส่งต่องาน');
+}
+function v65TranslateTree(root){if(!root)return;root.querySelectorAll?.('[data-i18n]').forEach(el=>{el.textContent=v65I18n.t(el.dataset.i18n)});root.querySelectorAll?.('[data-i18n-title]').forEach(el=>{el.title=v65I18n.t(el.dataset.i18nTitle)});const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);for(const node of nodes){if(!node.parentElement||['SCRIPT','STYLE'].includes(node.parentElement.tagName))continue;const raw=node.nodeValue,trim=raw.trim();if(!trim)continue;const next=v65DynamicText(trim);if(next!==trim)node.nodeValue=raw.replace(trim,next)}}
+function translateLegacyStatic(root=document){v65TranslateTree(root);const locale=v65Locale();document.documentElement.lang=locale;document.documentElement.dataset.locale=locale;document.querySelectorAll('.v65-language button').forEach(b=>b.classList.toggle('active',b.dataset.locale===locale));const input=document.getElementById('v64PaletteInput');if(input)input.placeholder=v65I18n.t('palette.placeholder');const oldInput=document.querySelector('.smart-search input');if(oldInput)oldInput.setAttribute('aria-label',locale==='en'?'Search shift dashboard':'ค้นหาในแดชบอร์ดเวร')}
+function translateLegacyView(viewName){if(!V65_VIEWS.includes(viewName))return false;const root=document.getElementById(`${viewName}View`);if(root)v65TranslateTree(root);return !!root}
+function refreshV65DynamicSurfaces(){for(const view of V65_VIEWS){const el=document.getElementById(`${view}View`);if(el&&(el.classList.contains('active')||v64Mounted?.has?.(view)))translateLegacyView(view)}const sticky=document.getElementById('v64StickyDaily');if(sticky)v65TranslateTree(sticky);const mobileNav=document.getElementById('mobileNav')||document.querySelector('.mobile-nav');if(mobileNav)v65TranslateTree(mobileNav)}
+function refreshV65Locale(){translateLegacyStatic(document);refreshV65DynamicSurfaces();if(typeof refreshV64LocalizedSurfaces==='function')refreshV64LocalizedSurfaces();document.dispatchEvent(new CustomEvent('v65:localechange',{detail:{locale:v65Locale()}}))}
+function mountV65LanguageControl(){const actions=document.querySelector('.command-actions');if(!actions||actions.querySelector('.v65-language'))return;const control=document.createElement('div');control.className='v65-language';control.setAttribute('aria-label',v65I18n.t('accessibility.language'));control.innerHTML='<button type="button" data-locale="th">TH</button><button type="button" data-locale="en">EN</button>';control.addEventListener('click',e=>{const b=e.target.closest('button[data-locale]');if(!b)return;v65I18n.setLocale(b.dataset.locale);refreshV65Locale()});const quality=actions.querySelector('.v64-quality');quality?.after(control)||actions.prepend(control)}
+function installV65RenderHooks(){const wrap=name=>{const fn=window[name];if(typeof fn!=='function'||fn.__v65)return;const wrapped=function(...args){const result=fn.apply(this,args);queueMicrotask(()=>refreshV65DynamicSurfaces());return result};wrapped.__v65=true;window[name]=wrapped};for(const name of ['showView','setSelectedDay','renderOverview','renderDaily','renderPerson','renderHeatmap','renderAnalytics','renderNetwork'])wrap(name)}
+function installV65ModeBridge(){document.documentElement.dataset.v65Mode='BALANCED';document.querySelector('.v64-quality')?.addEventListener('click',e=>{const b=e.target.closest('button[data-mode]');if(!b)return;const mode=b.dataset.mode;document.documentElement.dataset.v65Mode=mode;document.documentElement.dataset.v65Motion=visualProfile(mode).continuousMotion?'on':'off'});document.documentElement.dataset.v65Motion='on'}
+function initV65(){mountV65LanguageControl();installV65ModeBridge();installV65RenderHooks();refreshV65Locale();document.documentElement.dataset.v65Ready='1'}
+if(typeof document!=='undefined'){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initV65,{once:true});else initV65()}
 
 })();</script>
 </body>
