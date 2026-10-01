@@ -8,6 +8,7 @@ on:
       - 'work/v6.5.2-oncall-matrix'
       - 'work/v6.5.3-oncall-loader-polish'
       - 'work/v6.5.4-oncall-global-redesign'
+      - 'work/v6.5.5-global-neon-oncall'
   workflow_dispatch:
 
 jobs:
