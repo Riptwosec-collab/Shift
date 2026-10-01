@@ -18,7 +18,9 @@ jobs:
         run: npm install --ignore-scripts
       - name: Build
         run: npm run build
+      - name: Verify tracked index matches source build
+        run: git diff --exit-code -- index.html
       - name: Test
         run: npm test
       - name: Verify production
-        run: node --test tests/build.test.mjs tests/cloudflare.test.mjs tests/legacy-visual-contract.test.mjs
+        run: node --test tests/v64-release.test.mjs tests/build.test.mjs tests/cloudflare.test.mjs tests/legacy-visual-contract.test.mjs tests/v64-interactive.test.mjs
