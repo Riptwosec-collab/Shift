@@ -15,11 +15,11 @@ test('loader progress owns the full track and visibly settles at 100 percent',()
   assert.match(build,/b\.style\.transform='scaleX\(1\)'/);
   assert.match(build,/p\.textContent='100%'/);
   assert.match(build,/COMPLETE_HOLD=/);
-  assert.match(build,/data-app-version=\"6\.5\.3\"/);
-  assert.match(build,/data-loader-version=\"6\.5\.3\"/);
+  assert.match(build,/data-app-version=\"6\.5\.4\"/);
+  assert.match(build,/data-loader-version=\"6\.5\.4\"/);
 });
 
-test('v6.5.3 ships a dedicated futuristic oncall polish layer without changing schedule data',()=>{
+test('v6.5.3 futuristic oncall polish remains layered under v6.5.4 without changing schedule data',()=>{
   const css=fs.readFileSync('src/v653-oncall.css','utf8');
   const build=fs.readFileSync('scripts/build.mjs','utf8');
   const schedule=fs.readFileSync('src/oncall.js','utf8');
