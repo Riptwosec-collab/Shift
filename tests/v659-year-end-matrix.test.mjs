@@ -7,18 +7,18 @@ const branch='work/v6.5.9-year-end-matrix';
 test('v6.5.9 Overview renders one complete selected month only',()=>{
   assert.ok(fs.existsSync('src/v659-overrides.js'),'missing src/v659-overrides.js');
   const js=fs.readFileSync('src/v659-overrides.js','utf8');
-  assert.match(js,/function\s+v652Overview\s*\(now\)/);
-  assert.match(js,/v659RenderOverviewMonth\(now\)/);
+  assert.match(js,/function\s+v659RenderOverviewMonth\s*\(now\)/);
+  assert.match(js,/const selectedModel=getOncallMonthMatrix\(v652Month\)/);
+  assert.match(js,/v659RenderMonthMatrix\(v652Month,now,\{overview:true,model:selectedModel\}\)/);
   assert.match(js,/v659-overview-month/);
-  assert.match(js,/getOncallMonthMatrix\(v652Month\)/);
-  assert.doesNotMatch(js,/\[10,11,12\]\.map[\s\S]*v652Overview/);
+  assert.match(js,/function v652Overview\(now\)\{return v659RenderOverviewMonth\(now\)\}/);
 });
 
 test('v6.5.9 Matrix renders October November December in stacked year-end order',()=>{
   const js=fs.readFileSync('src/v659-overrides.js','utf8');
-  for(const marker of ['v659RenderYearEndMatrix','v659RenderMonthMatrix','v659-year-end-matrix','v659-month-panel','data-v659-month="10"','data-v659-month="11"','data-v659-month="12"']) assert.ok(js.includes(marker),`missing ${marker}`);
-  assert.match(js,/\[10,11,12\]\.map\(month=>v659RenderMonthMatrix\(month,now\)\)/);
-  assert.match(js,/function\s+v652Matrix\s*\(now\)[\s\S]*v659RenderYearEndMatrix\(now\)/);
+  for(const marker of ['const V659_MONTHS=[10,11,12]','v659RenderYearEndMatrix','v659RenderMonthMatrix','v659-year-end-matrix','v659-month-panel','data-v659-month="${month}"']) assert.ok(js.includes(marker),`missing ${marker}`);
+  assert.match(js,/const panels=\[10,11,12\]\.map\(month=>v659RenderMonthMatrix\(month,now\)\)/);
+  assert.match(js,/function\s+v652Matrix\s*\(now\)\{return `\$\{v659RenderYearEndMatrix\(now\)\}\$\{v655RenderSelectedDay\(now\)\}`\}/);
 });
 
 test('v6.5.9 year-end matrix styling preserves command-center and mobile behavior',()=>{
