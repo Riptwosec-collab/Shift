@@ -36,6 +36,28 @@ test('v6.5.5 matrix adds assignments while retaining v6.5.2 compatibility fields
   assert.equal(december.days[30].name,null);
 });
 
+test('v6.5.5 Engineer Oncall exposes individual Today Next strip matrix and selected-day states',()=>{
+  const engine=fs.readFileSync('src/v652-engine.js','utf8');
+  for(const marker of [
+    'data-oncall-mode="overview"','data-oncall-mode="matrix"','data-oncall-mode="timeline"',
+    'v655SelectedDay','v655FocusedEngineer','v655InitialSelectedDay','v655SelectDay','v655FocusEngineer',
+    'v655RenderTodayNext','v655RenderEngineerStrip','v655RenderMatrix','v655RenderSelectedDay',
+    'v655-today-list','v655-next-list','data-v655-engineer','data-v655-day','data-v655-cell','v655-selected-day-detail',
+    'getOncallAssignmentsForDate','getNextOncallAssignments','aria-label','tabindex'
+  ]) assert.ok(engine.includes(marker),`missing ${marker}`);
+  assert.match(engine,/dataset\.appVersion='6\.5\.5'/);
+  assert.match(engine,/v654-oncall-surface/);
+});
+
+test('v6.5.5 selection contract handles current month, first scheduled day, locale rerender and unassigned dates',()=>{
+  const engine=fs.readFileSync('src/v652-engine.js','utf8');
+  assert.match(engine,/now\.getFullYear\(\)===2026/);
+  assert.match(engine,/find\(item=>item\.assignments\.length>0\)/);
+  assert.match(engine,/document\.addEventListener\('v65:localechange',renderV652Oncall\)/);
+  assert.match(engine,/v655FocusedEngineer=null/);
+  assert.match(engine,/unassigned|Unassigned/);
+});
+
 test('v6.5.5 plan uses the approved feature branch',()=>{
   const workflow=fs.readFileSync('.github/workflows/v65-ci.yml','utf8');
   assert.ok(workflow.includes(branch));
