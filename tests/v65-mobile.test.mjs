@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
+test('mobile bilingual controls keep safe area and practical targets',()=>{const css=fs.readFileSync('src/v65-ui.css','utf8');assert.ok(css.includes('safe-area-inset-bottom'));assert.match(css,/@media\(max-width:860px\)[\s\S]*min-height:36px/);assert.ok(css.includes('.v65-language'));assert.ok(css.includes('overflow-wrap:anywhere'))});
+test('mobile locale refresh contract covers nav and sticky copy',()=>{const js=fs.readFileSync('src/v65-engine.js','utf8');for(const marker of ['mobileNav','v64StickyDaily','data-i18n'])assert.ok(js.includes(marker),`missing ${marker}`)});
