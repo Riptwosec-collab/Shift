@@ -13,6 +13,7 @@ on:
       - 'work/v6.5.7-overview-dual-matrix-graphics'
       - 'work/v6.5.8-oncall-command-center'
       - 'work/v6.5.9-year-end-matrix'
+      - 'work/v6.5.10-compact-three-month-matrix'
   workflow_dispatch:
 
 jobs:
@@ -32,4 +33,4 @@ jobs:
       - name: Test
         run: npm test
       - name: Verify release gates
-        run: node --test tests/v65-*.test.mjs tests/v651-*.test.mjs tests/v652-*.test.mjs tests/v653-*.test.mjs tests/v654-*.test.mjs tests/v655-*.test.mjs tests/v656-*.test.mjs tests/v657-*.test.mjs tests/v658-*.test.mjs tests/v659-*.test.mjs tests/v64-release.test.mjs tests/build.test.mjs tests/cloudflare.test.mjs tests/legacy-visual-contract.test.mjs tests/v64-interactive.test.mjs
+        run: node --test tests/v65-*.test.mjs tests/v651-*.test.mjs tests/v652-*.test.mjs tests/v653-*.test.mjs tests/v654-*.test.mjs tests/v655-*.test.mjs tests/v656-*.test.mjs tests/v657-*.test.mjs tests/v658-*.test.mjs tests/v659-*.test.mjs tests/v6510-*.test.mjs tests/v64-release.test.mjs tests/build.test.mjs tests/cloudflare.test.mjs tests/legacy-visual-contract.test.mjs tests/v64-interactive.test.mjs
