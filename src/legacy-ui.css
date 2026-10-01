@@ -1,6 +1,48 @@
 /* v6.4 additive-only layer.
    The approved legacy appearance remains embedded in src/legacy-baseline.html.
-   New selectors in this file may add feature surfaces or performance profiles,
-   but must not replace or hide legacy structural components. */
+   Performance modes change runtime cost only; structural legacy graphics stay present. */
 :root{--v64-safe-bottom:max(0px,env(safe-area-inset-bottom));}
-/* visual baseline locked from pre-v6.3 */
+
+.v64-quality{display:flex;gap:3px;padding:3px;border:1px solid rgba(56,232,255,.14);border-radius:10px;background:rgba(3,14,26,.68)}
+.v64-quality button{min-width:27px;height:28px;padding:0 7px;border:0;border-radius:7px;background:transparent;color:#6f8fa7;font-size:8px;font-weight:950;cursor:pointer}
+.v64-quality button.active{color:#eaffff;background:linear-gradient(180deg,rgba(39,139,255,.28),rgba(20,92,255,.08));box-shadow:inset 0 0 0 1px rgba(56,232,255,.24),0 0 12px rgba(56,232,255,.1)}
+
+/* HIGH = exact/full legacy visual target. Rules intentionally retain every structure. */
+html[data-v64-mode="HIGH"] .cyber-scene{opacity:1}
+html[data-v64-mode="HIGH"] .roster-card{visibility:visible}
+html[data-v64-mode="HIGH"] .insights-panel{visibility:visible}
+html[data-v64-mode="HIGH"] .network-host{visibility:visible}
+html[data-v64-mode="HIGH"] .month-snapshot{visibility:visible}
+html[data-v64-mode="HIGH"] .ambient.a{animation:ambientA 18s ease-in-out infinite}
+html[data-v64-mode="HIGH"] .ambient.b{animation:ambientB 22s ease-in-out infinite}
+html[data-v64-mode="HIGH"] .cyber-scene::after{animation:gridFlow 8s linear infinite}
+html[data-v64-mode="HIGH"] .scan-beam{animation:scanBeam 6s ease-in-out infinite}
+html[data-v64-mode="HIGH"] .network-line{animation:dash 8s linear infinite}
+html[data-v64-mode="HIGH"] .network-host::before{animation:orbit 20s linear infinite}
+
+/* BALANCED keeps the same artwork/layout while reducing continuous GPU repaint. */
+html[data-v64-mode="BALANCED"] .cyber-scene{opacity:1}
+html[data-v64-mode="BALANCED"] .roster-card{visibility:visible}
+html[data-v64-mode="BALANCED"] .insights-panel{visibility:visible}
+html[data-v64-mode="BALANCED"] .network-host{visibility:visible}
+html[data-v64-mode="BALANCED"] .month-snapshot{visibility:visible}
+html[data-v64-mode="BALANCED"] .ambient.a,html[data-v64-mode="BALANCED"] .ambient.b{animation-duration:36s;filter:blur(105px)}
+html[data-v64-mode="BALANCED"] .cyber-scene::after{animation-duration:18s}
+html[data-v64-mode="BALANCED"] .scan-beam{animation-duration:12s;opacity:.46}
+html[data-v64-mode="BALANCED"] .network-line{animation-duration:16s}
+html[data-v64-mode="BALANCED"] .network-host::before{animation-duration:38s}
+html[data-v64-mode="BALANCED"] .hud-panel{backdrop-filter:blur(12px)}
+
+/* ECO retains every structural graphic as static artwork. */
+html[data-v64-mode="ECO"] .cyber-scene{opacity:1}
+html[data-v64-mode="ECO"] .roster-card{visibility:visible}
+html[data-v64-mode="ECO"] .insights-panel{visibility:visible}
+html[data-v64-mode="ECO"] .network-host{visibility:visible}
+html[data-v64-mode="ECO"] .month-snapshot{visibility:visible}
+html[data-v64-mode="ECO"] .ambient,html[data-v64-mode="ECO"] .cyber-scene::after,html[data-v64-mode="ECO"] .scan-beam,html[data-v64-mode="ECO"] .star,html[data-v64-mode="ECO"] .network-line,html[data-v64-mode="ECO"] .network-host::before,html[data-v64-mode="ECO"] .core-shell::after,html[data-v64-mode="ECO"] .metric-orb::before,html[data-v64-mode="ECO"] .date-node.active::before,html[data-v64-mode="ECO"] .date-node.active::after{animation:none!important}
+html[data-v64-mode="ECO"] .city-svg{transform:none!important;transition:none!important}
+html[data-v64-mode="ECO"] .command-bar,html[data-v64-mode="ECO"] .hud-panel,html[data-v64-mode="ECO"] .mobile-nav{backdrop-filter:none}
+html[data-v64-mode="ECO"] .hud-panel{box-shadow:0 14px 38px rgba(0,0,0,.42),inset 0 1px rgba(255,255,255,.025)}
+html[data-v64-mode="ECO"] *{transition-duration:.1s}
+
+@media(max-width:860px){.v64-quality{order:2}.v64-quality button{min-width:30px;height:30px}}
