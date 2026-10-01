@@ -58,6 +58,20 @@ test('v6.5.5 selection contract handles current month, first scheduled day, loca
   assert.match(engine,/unassigned|Unassigned/);
 });
 
+test('v6.5.5 global neon design system styles shared surfaces and Engineer Oncall states',()=>{
+  assert.ok(fs.existsSync('src/v655-ui.css'),'missing src/v655-ui.css');
+  const css=fs.readFileSync('src/v655-ui.css','utf8');
+  for(const token of ['--v655-cyan','--v655-blue','--v655-violet','--v655-magenta','--v655-emerald','--v655-amber','--v655-panel','--v655-line','--v655-glow','--v655-depth']) assert.ok(css.includes(token),`missing ${token}`);
+  for(const marker of ['.command-bar','.hud-panel','.insights-panel','.network-panel','.month-snapshot','.roster-card','button','.v652-view-tabs','table','#bootOverlay','.v655-oncall-hero','.v655-engineer-strip','.v655-matrix-panel','.v655-selected-day-detail','.v655-live','.v655-next','.v655-selected-day','.v655-focused-row','.v655-unassigned','.v652-matrix-cell.active']) assert.ok(css.includes(marker),`missing ${marker}`);
+});
+
+test('v6.5.5 global neon effects preserve HIGH BALANCED ECO and reduced motion fallbacks',()=>{
+  assert.ok(fs.existsSync('src/v655-ui.css'),'missing src/v655-ui.css');
+  const css=fs.readFileSync('src/v655-ui.css','utf8');
+  for(const marker of ['data-v65-mode="HIGH"','data-v65-mode="BALANCED"','data-v65-mode="ECO"','prefers-reduced-motion']) assert.ok(css.includes(marker),`missing ${marker}`);
+  assert.match(css,/@keyframes v655/);
+});
+
 test('v6.5.5 plan uses the approved feature branch',()=>{
   const workflow=fs.readFileSync('.github/workflows/v65-ci.yml','utf8');
   assert.ok(workflow.includes(branch));
