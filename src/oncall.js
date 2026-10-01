@@ -18,25 +18,37 @@ export const ONCALL_SCHEDULE=Object.freeze([
 
 export const ONCALL_ENGINEERS=Object.freeze(['ป้อ','เอิร์ท','ตั้ม','แอม']);
 
-export function getOncallForDate(date){
-  if(!(date instanceof Date)||Number.isNaN(date.getTime())||date.getFullYear()!==2026)return null;
+function validOncallDate(date){return date instanceof Date&&!Number.isNaN(date.getTime())&&date.getFullYear()===2026}
+
+export function findOncallAssignments(schedule,date){
+  if(!Array.isArray(schedule)||!validOncallDate(date))return [];
   const month=date.getMonth()+1,day=date.getDate();
-  return ONCALL_SCHEDULE.find(row=>row.month===month&&day>=row.start&&day<=row.end)||null;
+  return schedule.filter(row=>row&&row.month===month&&day>=row.start&&day<=row.end);
 }
 
-export function getNextOncall(date=new Date()){
+export function getOncallAssignmentsForDate(date){return findOncallAssignments(ONCALL_SCHEDULE,date)}
+
+export function getOncallForDate(date){return getOncallAssignmentsForDate(date)[0]||null}
+
+export function getNextOncallAssignments(date=new Date()){
+  if(!(date instanceof Date)||Number.isNaN(date.getTime()))return [];
   const stamp=new Date(date.getFullYear(),date.getMonth(),date.getDate()).getTime();
-  return ONCALL_SCHEDULE.map(row=>({...row,date:new Date(2026,row.month-1,row.start)})).find(row=>row.date.getTime()>stamp)||null;
+  const future=ONCALL_SCHEDULE.map(row=>({...row,date:new Date(2026,row.month-1,row.start)})).filter(row=>row.date.getTime()>stamp);
+  if(!future.length)return [];
+  const nextStamp=Math.min(...future.map(row=>row.date.getTime()));
+  return future.filter(row=>row.date.getTime()===nextStamp).map(({date:rowDate,...row})=>row);
 }
+
+export function getNextOncall(date=new Date()){return getNextOncallAssignments(date)[0]||null}
 
 export function oncallByMonth(month){return ONCALL_SCHEDULE.filter(row=>row.month===Number(month))}
 
 export function getOncallMonthMatrix(month){
   const m=Number(month),daysInMonth=new Date(2026,m,0).getDate(),rows=oncallByMonth(m);
   const days=Array.from({length:daysInMonth},(_,index)=>{
-    const day=index+1,row=rows.find(item=>day>=item.start&&day<=item.end)||null;
-    return {day,name:row?.name||null,start:row?.start??null,end:row?.end??null};
+    const day=index+1,assignments=rows.filter(item=>day>=item.start&&day<=item.end),row=assignments[0]||null;
+    return {day,assignments,name:row?.name||null,start:row?.start??null,end:row?.end??null};
   });
-  const totals=Object.fromEntries(ONCALL_ENGINEERS.map(name=>[name,days.filter(item=>item.name===name).length]));
-  return {month:m,daysInMonth,engineers:[...ONCALL_ENGINEERS],days,totals,unassigned:days.filter(item=>!item.name).length};
+  const totals=Object.fromEntries(ONCALL_ENGINEERS.map(name=>[name,days.reduce((total,item)=>total+Number(item.assignments.some(row=>row.name===name)),0)]));
+  return {month:m,daysInMonth,engineers:[...ONCALL_ENGINEERS],days,totals,unassigned:days.filter(item=>item.assignments.length===0).length};
 }
