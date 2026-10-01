@@ -1,4 +1,4 @@
-// v6.5.3 Engineer Oncall — Overview / Matrix / Timeline with fixed timeline grid.
+// v6.5.4 Engineer Oncall — Overview / Matrix / Timeline with command-deck redesign hooks.
 const V652_MONTHS={th:{10:'ตุลาคม',11:'พฤศจิกายน',12:'ธันวาคม'},en:{10:'October',11:'November',12:'December'}};
 const V652_WEEK={th:['อา','จ','อ','พ','พฤ','ศ','ส'],en:['Su','Mo','Tu','We','Th','Fr','Sa']};
 let v652Mode='overview';
@@ -25,7 +25,7 @@ function v652Overview(now){
   const current=getOncallForDate(now),next=getNextOncall(now),matrix=getOncallMonthMatrix(v652Month),rows=oncallByMonth(v652Month);
   const stats=matrix.engineers.map(name=>`<div class="v652-stat person-${v652PersonClass(name)}"><span class="v652-stat-orb">${v652Esc(name.slice(0,1))}</span><span><small>${v652Text('total')}</small><b>${v652Esc(name)}</b></span><strong>${matrix.totals[name]}<em>${v652Text('days')}</em></strong></div>`).join('');
   const table=rows.map(row=>`<tr class="${v652ActiveRow(row,now)?'active':''}"><td><span class="v652-person-chip person-${v652PersonClass(row.name)}"><i>${v652Esc(row.name.slice(0,1))}</i>${v652Esc(row.name)}</span></td><td>${v652Range(row)}</td><td><span class="v652-status ${v652ActiveRow(row,now)?'live':''}">${v652ActiveRow(row,now)?v652Text('active'):v652Text('scheduled')}</span></td></tr>`).join('');
-  return `<section class="v652-hero"><div><div class="v652-kicker">${v652Text('dutyGrid')} • v6.5.3</div><h2>Engineer Oncall</h2><p>${v652Text('hint')}</p></div><div class="v652-now-grid"><article class="v652-now-card live"><small>${v652Text('current')}</small><strong>${current?v652Esc(current.name):v652Text('unassigned')}</strong><span>${current?v652Range(current):'—'}</span><em>● LIVE</em></article><article class="v652-now-card"><small>${v652Text('next')}</small><strong>${next?v652Esc(next.name):'—'}</strong><span>${next?v652Range(next):'—'}</span><em>↦ HANDOFF</em></article></div></section><div class="v652-stat-grid">${stats}</div><section class="hud-panel trace v652-overview-table"><div class="v652-section-head"><div><div class="eyebrow">${v652MonthName(v652Month).toUpperCase()} ${v652Year()}</div><div class="section-title">${v652Text('monthSchedule')}</div></div><span>${rows.length} ${v652Text('rotation')}</span></div><div class="v652-table-wrap"><table><thead><tr><th>${v652Text('engineer')}</th><th>${v652Text('period')}</th><th>${v652Text('status')}</th></tr></thead><tbody>${table}</tbody></table></div></section>`;
+  return `<section class="v652-hero"><div><div class="v652-kicker">${v652Text('dutyGrid')} • v6.5.4</div><h2>Engineer Oncall</h2><p>${v652Text('hint')}</p></div><div class="v652-now-grid"><article class="v652-now-card live"><small>${v652Text('current')}</small><strong>${current?v652Esc(current.name):v652Text('unassigned')}</strong><span>${current?v652Range(current):'—'}</span><em>● LIVE</em></article><article class="v652-now-card"><small>${v652Text('next')}</small><strong>${next?v652Esc(next.name):'—'}</strong><span>${next?v652Range(next):'—'}</span><em>↦ HANDOFF</em></article></div></section><div class="v652-stat-grid">${stats}</div><section class="hud-panel trace v652-overview-table"><div class="v652-section-head"><div><div class="eyebrow">${v652MonthName(v652Month).toUpperCase()} ${v652Year()}</div><div class="section-title">${v652Text('monthSchedule')}</div></div><span>${rows.length} ${v652Text('rotation')}</span></div><div class="v652-table-wrap"><table><thead><tr><th>${v652Text('engineer')}</th><th>${v652Text('period')}</th><th>${v652Text('status')}</th></tr></thead><tbody>${table}</tbody></table></div></section>`;
 }
 
 function v652Matrix(now){
@@ -46,12 +46,12 @@ function renderV652Oncall(){
   const host=document.getElementById('oncallView');if(!host)return;
   const now=new Date();
   const content=v652Mode==='matrix'?v652Matrix(now):v652Mode==='timeline'?v652Timeline(now):v652Overview(now);
-  host.innerHTML=`<div class="v652-oncall v653-oncall-surface">${v652Tabs()}<div class="v652-pane" data-pane="${v652Mode}">${content}</div></div>`;
+  host.innerHTML=`<div class="v652-oncall v653-oncall-surface v654-oncall-surface">${v652Tabs()}<div class="v652-pane" data-pane="${v652Mode}">${content}</div></div>`;
   host.querySelectorAll('[data-oncall-mode]').forEach(button=>button.addEventListener('click',()=>setV652Mode(button.dataset.oncallMode)));
   host.querySelectorAll('[data-oncall-month]').forEach(button=>button.addEventListener('click',()=>setV652Month(button.dataset.oncallMonth)));
 }
 
 function installV652Bridge(){const prior=window.showView;if(typeof prior!=='function'||prior.__v652)return;const wrapped=function(name){const out=prior.apply(this,arguments);if(name==='oncall')queueMicrotask(renderV652Oncall);return out};wrapped.__v652=true;window.showView=wrapped}
-function initV652(){if(typeof mountV651Navigation==='function')mountV651Navigation();if(typeof mountV651View==='function')mountV651View();installV652Bridge();renderV652Oncall();document.addEventListener('v65:localechange',renderV652Oncall);document.documentElement.dataset.appVersion='6.5.3'}
+function initV652(){if(typeof mountV651Navigation==='function')mountV651Navigation();if(typeof mountV651View==='function')mountV651View();installV652Bridge();renderV652Oncall();document.addEventListener('v65:localechange',renderV652Oncall);document.documentElement.dataset.appVersion='6.5.4'}
 if(typeof document!=='undefined'){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initV652,{once:true});else initV652()}
 export {renderV652Oncall,setV652Mode,setV652Month,initV652};
