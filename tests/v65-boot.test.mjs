@@ -1,0 +1,4 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
+import {LOADER_TARGET_MS,LOADER_HARD_EXIT_MS} from '../src/loader.js';
+test('loader keeps 3s target and compositor progress',()=>{assert.equal(LOADER_TARGET_MS,3000);assert.equal(LOADER_HARD_EXIT_MS,3600);const loader=fs.readFileSync('src/loader.js','utf8');assert.ok(loader.includes('scaleX'));assert.doesNotMatch(loader,/\.style\.width\s*=/)});
+test('build boot runtime suspends effects and uses two-frame release',()=>{const build=fs.readFileSync('scripts/build.mjs','utf8');const css=fs.readFileSync('src/v65-ui.css','utf8');assert.ok(build.includes('data-v65-booting="1"'));assert.match(build,/requestAnimationFrame[\s\S]*requestAnimationFrame/);assert.ok(css.includes('data-v65-booting="1"'));assert.doesNotMatch(build,/document\.write|DecompressionStream/)});
