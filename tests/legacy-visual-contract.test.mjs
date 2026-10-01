@@ -26,7 +26,7 @@ test('v6.4 uses the approved legacy visual shell as its source of truth', () => 
     html.indexOf('class="command-bar"'),
     html.indexOf('class="hero-grid"'),
     html.indexOf('id="timeline"'),
-    html.indexOf('class="roster-insights-grid"'),
+    html.indexOf('class="overview-main"'),
     html.indexOf('class="lower-grid"')
   ];
   assert.ok(order.every(x => x >= 0), 'legacy overview hierarchy markers must exist');
