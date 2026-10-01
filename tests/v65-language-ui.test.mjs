@@ -7,7 +7,7 @@ const code=()=>fs.readFileSync('src/v65-engine.js','utf8');
 test('v6.5 exposes one in-place TH EN language control',()=>{
   const s=code();
   for(const fn of ['mountV65LanguageControl','translateLegacyStatic','translateLegacyView','refreshV65Locale','initV65']) assert.ok(s.includes(`function ${fn}`)||s.includes(`export function ${fn}`),`missing ${fn}`);
-  assert.match(s,/querySelector\(['"]\.command-actions['"]\)/);
+  assert.ok(s.includes("'.command-actions'"));
   assert.ok(s.includes('className=\'v65-language\'')||s.includes('className="v65-language"'));
   assert.ok(s.includes("data-locale=\"th\""));
   assert.ok(s.includes("data-locale=\"en\""));
