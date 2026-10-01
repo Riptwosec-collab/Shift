@@ -2,23 +2,23 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
-const build=()=>fs.readFileSync('scripts/build.mjs','utf8');
+const production=()=>fs.readFileSync('index.html','utf8');
 const loader=()=>fs.readFileSync('src/loader.js','utf8');
 const css=()=>fs.readFileSync('src/v65-ui.css','utf8');
 
 test('production boot uses compositor progress and explicit boot flag',()=>{
-  const b=build();
-  assert.ok(b.includes('data-v65-booting="1"'));
-  assert.ok(b.includes('TARGET=3000,HARD=3600'));
-  assert.match(b,/style\.transform\s*=\s*`scaleX\(/);
-  assert.doesNotMatch(b,/\.style\.width\s*=/);
-  assert.doesNotMatch(b,/document\.write\(|DecompressionStream/);
+  const html=production();
+  assert.ok(html.includes('data-v65-booting="1"'));
+  assert.ok(html.includes('TARGET=3000,HARD=3600'));
+  assert.match(html,/style\.transform\s*=\s*`scaleX\(/);
+  assert.doesNotMatch(html,/\.style\.width\s*=/);
+  assert.doesNotMatch(html,/document\.write\(|DecompressionStream/);
 });
 
 test('boot release waits two animation frames before enabling heavy effects',()=>{
-  const b=build();
-  assert.ok(b.includes('requestAnimationFrame(()=>requestAnimationFrame('));
-  assert.ok(b.includes("delete document.documentElement.dataset.v65Booting"));
+  const html=production();
+  assert.ok(html.includes('requestAnimationFrame(()=>requestAnimationFrame('));
+  assert.ok(html.includes("delete document.documentElement.dataset.v65Booting"));
 });
 
 test('source loader keeps three second target and transform progress',()=>{
