@@ -1,4 +1,20 @@
-import fs from 'node:fs';import path from 'node:path';
-const root=process.cwd();const order=['data.js','cache.js','core.js','performance.js','loader.js','risk.js','daily.js','network.js','analytics.js','command-palette.js','overview.js','person.js','month.js','mobile.js','app.js'];
+import fs from 'node:fs';
+import path from 'node:path';
+
+const root=process.cwd();
 const strip=s=>s.replace(/^import .*?;\s*$/gm,'').replace(/\bexport\s+(?=(const|let|var|function|class)\b)/g,'').replace(/^export\s*\{[^}]*\};?\s*$/gm,'');
-const js=order.map(f=>`// ${f}\n${strip(fs.readFileSync(path.join(root,'src',f),'utf8'))}`).join('\n');const css=fs.readFileSync('src/styles.css','utf8');let html=fs.readFileSync('src/template.html','utf8').replace('/*__CSS__*/',()=>css).replace('/*__JS__*/',()=>js);const dist=path.join(root,'dist');fs.rmSync(dist,{recursive:true,force:true});fs.mkdirSync(dist,{recursive:true});fs.writeFileSync('index.html',html);fs.writeFileSync(path.join(dist,'index.html'),html);console.log(`built index.html + dist/index.html ${Buffer.byteLength(html)} bytes`);
+const addCss=fs.readFileSync(path.join(root,'src','legacy-ui.css'),'utf8');
+const modules=['data.js','cache.js','state.js','view-registry.js','performance.js','daily-model.js','risk.js','network-model.js','analytics-model.js','command-palette.js','mobile.js','legacy-overview.js','v64-engine.js','v64-interactive.js'];
+const addJs=modules.map(f=>`// ${f}\n${strip(fs.readFileSync(path.join(root,'src',f),'utf8'))}`).join('\n');
+const loaderRuntime=`<script id="v64-loader-runtime">(()=>{const o=document.getElementById('bootOverlay');if(!o)return;const b=document.getElementById('boot613Bar'),p=document.getElementById('boot613Pct'),ph=document.getElementById('boot613Phase'),st=document.getElementById('boot613Status'),m=document.getElementById('boot613Meta'),state=document.getElementById('boot613State');const phases=[['Initializing Core Systems','Starting…','phase 1 / 4<br>Secure startup'],['Verifying Shift Matrix','Checking schedule…','phase 2 / 4<br>Data verify'],['Linking Command Grid','Connecting widgets…','phase 3 / 4<br>Nexus link'],['Rendering Interface','Finalizing command center…','phase 4 / 4<br>Final render']];const t0=performance.now(),TARGET=3000,HARD=3600;let domReady=document.readyState!=='loading',done=false,raf=0;if(!domReady)document.addEventListener('DOMContentLoaded',()=>{domReady=true},{once:true});const finish=()=>{if(done)return;done=true;cancelAnimationFrame(raf);if(b)b.style.width='100%';if(p)p.textContent='100%';if(ph)ph.textContent='Interface Ready';if(st)st.textContent='Ready to enter';if(m)m.innerHTML='phase 4 / 4<br>READY';if(state)state.textContent='READY';o.classList.add('out');setTimeout(()=>o.remove(),230)};const paint=()=>{if(done)return;const elapsed=performance.now()-t0,ratio=Math.min(1,elapsed/TARGET),pct=Math.min(elapsed>=TARGET&&!domReady?99:100,Math.round(ratio*100)),i=pct<25?0:pct<52?1:pct<80?2:3;if(b)b.style.width=pct+'%';if(p)p.textContent=pct+'%';if(ph)ph.textContent=phases[i][0];if(st)st.textContent=phases[i][1];if(m)m.innerHTML=phases[i][2];if(elapsed>=TARGET&&domReady){finish();return}raf=requestAnimationFrame(paint)};raf=requestAnimationFrame(paint);setTimeout(finish,HARD)})();</script>`;
+let html=fs.readFileSync(path.join(root,'src','legacy-baseline.html'),'utf8');
+html=html.replace('<html lang="th">','<html lang="th" data-app-version="6.4" data-v64-mode="BALANCED">');
+html=html.replace(/<style id="v621-performance-patch">[\s\S]*?<\/style>/i,'');
+html=html.replace(/let offTimer=0;const offObserver=new MutationObserver\([\s\S]*?offObserver\.observe\(document\.body,\{subtree:true,childList:true\}\);/,'');
+html=html.replace('data-loader-version="6.2.1"','data-loader-version="6.4"');
+html=html.replace(/<script id="v613-loader-runtime">[\s\S]*?<\/script>/i,loaderRuntime);
+html=html.replace('</head>',`<style id="v64-additive-style">\n${addCss}\n</style>\n</head>`);
+html=html.replace('</body>',`<script id="v64-engine-base">(()=>{\n${addJs}\n})();</script>\n</body>`);
+fs.writeFileSync('index.html',html);
+const dist=path.join(root,'dist');fs.rmSync(dist,{recursive:true,force:true});fs.mkdirSync(dist,{recursive:true});fs.writeFileSync(path.join(dist,'index.html'),html);
+console.log(`built v6.4 legacy index.html ${Buffer.byteLength(html)} bytes`);
