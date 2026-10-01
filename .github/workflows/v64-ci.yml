@@ -16,9 +16,9 @@ jobs:
           node-version: '24'
       - name: Install
         run: npm install --ignore-scripts
-      - name: Test
-        run: npm test
       - name: Build
         run: npm run build
+      - name: Test
+        run: npm test
       - name: Verify production
         run: node --test tests/build.test.mjs tests/cloudflare.test.mjs tests/legacy-visual-contract.test.mjs
