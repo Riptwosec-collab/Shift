@@ -1,0 +1,53 @@
+/* v6.5 visual fidelity layer: sharp typography + distinct runtime profiles. */
+:root{--v65-text-xs:10px;--v65-text-sm:11px;--v65-text-md:12px;--v65-line-th:1.55;--v65-glow-tight:0 0 14px rgba(56,232,255,.18);--v65-border-crisp:1px;--v65-safe-bottom:max(0px,env(safe-area-inset-bottom));}
+html[data-locale="th"] body{font-family:"Leelawadee UI","Noto Sans Thai",Tahoma,"Segoe UI",sans-serif;line-height:var(--v65-line-th);letter-spacing:0}
+html[data-locale="en"] body{font-family:Inter,"Segoe UI",system-ui,sans-serif;line-height:1.42}
+body,.hud-panel,.command-bar,.roster-card,.insights-panel,.network-panel,.month-snapshot{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+.metric strong,.big,.count,.day-number,.month-table,.timeline,.v64-team-kpis,.v64-workload-row{font-variant-numeric:tabular-nums}
+.eyebrow,.hint,.muted,.brand-copy p,.brand-copy small,.v64-risk b,.v64-risk span,.v64-transition b,.v64-transition span,.v64-streak b,.v64-streak span,.v64-network-summary small,.v64-relation-strip span,.v64-workload-head,.v64-workload-row span{font-size:var(--v65-text-xs)!important;line-height:1.38}
+.nav-btn b,.section-title,.person-row b,.insight-item b,.v64-network-summary b,.v64-relation-strip b{font-size:var(--v65-text-sm)!important}
+.smart-search input,.v64-palette-head input{font-size:var(--v65-text-md)!important}
+.hud-panel,.command-bar,.v64-quality,.v65-language,.v64-palette-box{border-width:var(--v65-border-crisp);border-color:rgba(72,213,255,.2)}
+.timeline svg path,.activity-chart svg path,.network-line,.network-edges line{shape-rendering:geometricPrecision;vector-effect:non-scaling-stroke}
+.muted,.hint,.nav-btn span,.brand-copy p{color:#8fa9bd!important}
+.v65-language{display:flex;align-items:center;gap:2px;padding:3px;border:1px solid rgba(56,232,255,.16);border-radius:10px;background:rgba(3,14,26,.72)}
+.v65-language button{min-width:34px;height:28px;border:0;border-radius:7px;background:transparent;color:#7896aa;font-size:10px;font-weight:900;cursor:pointer}
+.v65-language button.active{color:#efffff;background:rgba(39,139,255,.22);box-shadow:inset 0 0 0 1px rgba(56,232,255,.24),var(--v65-glow-tight)}
+
+/* HIGH — full cyber experience */
+html[data-v65-mode="HIGH"] .ambient.a{opacity:.14;filter:blur(88px);animation:ambientA 18s ease-in-out infinite}
+html[data-v65-mode="HIGH"] .ambient.b{opacity:.13;filter:blur(88px);animation:ambientB 22s ease-in-out infinite}
+html[data-v65-mode="HIGH"] .cyber-scene::after{animation:gridFlow 8s linear infinite;opacity:.36}
+html[data-v65-mode="HIGH"] .scan-beam{display:block;animation:scanBeam 6s ease-in-out infinite}
+html[data-v65-mode="HIGH"] .network-line{animation:dash 8s linear infinite}
+html[data-v65-mode="HIGH"] .network-host::before{animation:orbit 20s linear infinite}
+html[data-v65-mode="HIGH"] .command-bar,html[data-v65-mode="HIGH"] .hud-panel{backdrop-filter:blur(20px);box-shadow:0 20px 65px rgba(0,0,0,.52),0 0 20px rgba(39,139,255,.08)}
+html[data-v65-mode="HIGH"] .hud-panel:hover{box-shadow:0 20px 65px rgba(0,0,0,.5),0 0 28px rgba(56,232,255,.11)}
+
+/* BALANCED — visibly calmer, fewer continuous layers */
+html[data-v65-mode="BALANCED"] .ambient.a{opacity:.07;filter:blur(62px);animation:ambientA 42s ease-in-out infinite}
+html[data-v65-mode="BALANCED"] .ambient.b{opacity:.05;filter:blur(62px);animation:none}
+html[data-v65-mode="BALANCED"] .cyber-scene::after{animation:none;opacity:.22}
+html[data-v65-mode="BALANCED"] .scan-beam{animation:none;opacity:.18}
+html[data-v65-mode="BALANCED"] .city-svg{transform:none!important;transition:none!important}
+html[data-v65-mode="BALANCED"] .network-line{animation:dash 24s linear infinite;opacity:.42}
+html[data-v65-mode="BALANCED"] .network-host::before{animation:none;opacity:.24}
+html[data-v65-mode="BALANCED"] .command-bar,html[data-v65-mode="BALANCED"] .hud-panel{backdrop-filter:blur(9px);box-shadow:0 15px 42px rgba(0,0,0,.44)}
+html[data-v65-mode="BALANCED"] .hud-panel:hover{box-shadow:0 16px 44px rgba(0,0,0,.46),0 0 10px rgba(56,232,255,.045)}
+
+/* ECO — crisp static HUD */
+html[data-v65-mode="ECO"] .ambient,html[data-v65-mode="ECO"] .cyber-scene::after,html[data-v65-mode="ECO"] .scan-beam,html[data-v65-mode="ECO"] .star,html[data-v65-mode="ECO"] .network-line,html[data-v65-mode="ECO"] .network-host::before,html[data-v65-mode="ECO"] .core-shell::after,html[data-v65-mode="ECO"] .metric-orb::before,html[data-v65-mode="ECO"] .date-node.active::before,html[data-v65-mode="ECO"] .date-node.active::after{animation:none!important}
+html[data-v65-mode="ECO"] .ambient{opacity:.025;filter:none}
+html[data-v65-mode="ECO"] .scan-beam{opacity:0}
+html[data-v65-mode="ECO"] .city-svg{transform:none!important;transition:none!important}
+html[data-v65-mode="ECO"] .command-bar,html[data-v65-mode="ECO"] .hud-panel,html[data-v65-mode="ECO"] .mobile-nav{backdrop-filter:none!important;background-color:rgba(4,13,25,.96)}
+html[data-v65-mode="ECO"] .hud-panel{box-shadow:0 8px 20px rgba(0,0,0,.36);border-color:rgba(72,213,255,.15)}
+html[data-v65-mode="ECO"] *{transition-duration:.08s!important}
+
+/* Suspend heavy decoration while loader owns the frame. */
+html[data-v65-booting="1"] .ambient,html[data-v65-booting="1"] .cyber-scene::after,html[data-v65-booting="1"] .scan-beam,html[data-v65-booting="1"] .star,html[data-v65-booting="1"] .network-line,html[data-v65-booting="1"] .network-host::before{animation-play-state:paused!important}
+html[data-v65-booting="1"] .city-svg{transform:none!important;transition:none!important}
+
+@media (prefers-reduced-motion: reduce){html *{scroll-behavior:auto!important}html .ambient,html .cyber-scene::after,html .scan-beam,html .star,html .network-line,html .network-host::before,html .core-shell::after,html .metric-orb::before{animation:none!important;transition-duration:.01ms!important}}
+@media(max-width:860px){.v65-language button,.v64-quality button,.mobile-nav button{min-height:36px;min-width:36px}.v65-language{flex:0 0 auto}.command-actions{flex-wrap:wrap}.v64-network-summary b,.v64-relation-strip b,.v64-workload-row b,.v64-workload-row span{overflow-wrap:anywhere}.mobile-nav{padding-bottom:calc(8px + var(--v65-safe-bottom))}}
+@media(max-width:560px){.v65-language button{min-width:32px}.section-title{line-height:1.3}.brand-copy h1{font-size:17px}.v64-palette-head input{font-size:12px!important}}

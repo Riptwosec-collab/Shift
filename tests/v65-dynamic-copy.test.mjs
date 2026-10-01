@@ -1,10 +1,6 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
-import {STAFF} from '../src/data.js';
-import {createScheduleCache} from '../src/cache.js';
-import {evaluateDayRisk} from '../src/risk.js';
-import {createI18nController,I18N} from '../src/i18n.js';
-import {parseCommandQuery} from '../src/command-palette.js';
+import {STAFF} from '../src/data.js';import {createScheduleCache} from '../src/cache.js';import {evaluateDayRisk} from '../src/risk.js';import {createI18nController,I18N} from '../src/i18n.js';import {parseCommandQuery} from '../src/command-palette.js';
 const storage={getItem:()=>null,setItem:()=>{}};const root={lang:'',dataset:{}};const i18n=createI18nController({dictionary:I18N,storage,root});const cache=createScheduleCache(STAFF);
 test('risk presentation is bilingual while names and schedule stay immutable',()=>{const before=JSON.stringify(STAFF);const risks=evaluateDayRisk(1,cache,STAFF);assert.ok(risks.every(r=>r.values&&typeof r.values==='object'));assert.ok(risks.some(r=>i18n.formatRisk(r,'th')!==i18n.formatRisk(r,'en')));assert.equal(JSON.stringify(STAFF),before)});
-test('palette can label October dates in both locales',()=>{const th=parseCommandQuery('9',{locale:'th',t:i18n.t,formatDate:i18n.formatDate});const en=parseCommandQuery('9',{locale:'en',t:i18n.t,formatDate:i18n.formatDate});assert.ok(th.some(x=>x.label.includes('ตุลาคม')));assert.ok(en.some(x=>x.label.includes('October')))});
-test('v64 dynamic layer exposes locale refresh hook',()=>{const s=fs.readFileSync('src/v64-engine.js','utf8');assert.ok(s.includes('function refreshV64LocalizedSurfaces'))});
+test('palette can label October dates in both locales',()=>{const th=parseCommandQuery('9',{locale:'th',formatDate:i18n.formatDate});const en=parseCommandQuery('9',{locale:'en',formatDate:i18n.formatDate});assert.ok(th.some(x=>x.label.includes('ตุลาคม')));assert.ok(en.some(x=>x.label.includes('October')))});
+test('v65 dynamic adapter refreshes already rendered v64 surfaces without rebuilding cache',()=>{const s=fs.readFileSync('src/v65-engine.js','utf8');assert.ok(s.includes('function refreshV65DynamicSurfaces'));assert.doesNotMatch(s,/createScheduleCache\(/)});
