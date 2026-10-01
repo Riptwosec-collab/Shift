@@ -13,6 +13,7 @@ test('oncall matrix exposes one owner per covered date and month metadata',async
   assert.deepEqual(october.engineers,names);
   assert.equal(october.days.length,31);
   assert.equal(october.days[0].name,'ป้อ');
+  assert.deepEqual(october.days[0].assignments.map(row=>row.name),['ป้อ']);
   assert.equal(october.days[7].name,'เอิร์ท');
   assert.equal(october.days[14].name,'ตั้ม');
   assert.equal(october.days[21].name,'แอม');
@@ -21,6 +22,7 @@ test('oncall matrix exposes one owner per covered date and month metadata',async
   const december=mod.getOncallMonthMatrix(12);
   assert.equal(december.daysInMonth,31);
   assert.equal(december.days[30].name,null);
+  assert.deepEqual(december.days[30].assignments,[]);
 });
 
 test('v6.5.2 Engineer Oncall foundation remains in v6.5.4 with Overview Matrix Timeline and month controls',()=>{
