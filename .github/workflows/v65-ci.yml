@@ -12,7 +12,6 @@ on:
       - 'work/v6.5.6-vivid-overview-focus'
       - 'work/v6.5.7-overview-dual-matrix-graphics'
       - 'work/v6.5.8-oncall-command-center'
-      - 'work/v6.5.9-year-end-matrix'
   workflow_dispatch:
 
 jobs:
