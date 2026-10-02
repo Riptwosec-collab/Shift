@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="th" data-app-version="6.5.11" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">
+<html lang="th" data-app-version="6.5.12" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -2345,11 +2345,137 @@ html[data-v65-mode="ECO"] .v6511-duty-bar{box-shadow:none!important}
 }
 
 </style>
+<style id="v6512-ui-style">
+/* Shift v6.5.12 — Matrix typography clarity */
+.v6511-board,
+.v6511-board button,
+.v6511-board b,
+.v6511-board span,
+.v6511-board small,
+.v6511-board em{
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:geometricPrecision;
+}
+
+@media (min-width:901px){
+  .v6511-board{overflow:hidden}
+  .v6511-board-scroll{overflow:hidden}
+  .v6511-board-grid{--v6511-row-h:23px}
+
+  .v6511-month-head span{
+    color:rgba(190,232,244,.88);
+    font-size:8px;
+    font-weight:700;
+    letter-spacing:.08em;
+  }
+  .v6511-month-head b{
+    color:#f2fdff;
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:-.01em;
+    text-shadow:0 0 5px rgba(76,242,255,.10);
+  }
+  .v6511-month-status span{
+    color:rgba(218,246,255,.86);
+    font-size:8px;
+    font-weight:700;
+  }
+  .v6511-month-status em{
+    font-size:7px;
+    font-weight:800;
+    letter-spacing:.04em;
+  }
+
+  .v6511-corner b{
+    color:#f0fcff;
+    font-size:8px;
+    font-weight:800;
+  }
+  .v6511-corner small{
+    color:rgba(181,220,234,.72);
+    font-size:5px;
+    font-weight:700;
+  }
+
+  .v6511-day small{
+    color:rgba(177,214,227,.66);
+    font-size:5px;
+    font-weight:700;
+  }
+  .v6511-day b{
+    color:rgba(239,252,255,.96);
+    font-size:8px;
+    font-weight:800;
+    text-shadow:none;
+  }
+  .v6511-day.today b{
+    color:#91f8ff;
+    text-shadow:0 0 4px rgba(76,242,255,.48);
+  }
+
+  .v6511-engineer-name i{
+    font-size:6px;
+    font-weight:800;
+  }
+  .v6511-engineer-name b{
+    color:#f0fcff;
+    font-size:8px;
+    font-weight:800;
+    letter-spacing:-.01em;
+  }
+  .v6511-engineer-name small{
+    color:rgba(177,218,231,.67);
+    font-size:5px;
+    font-weight:700;
+  }
+
+  .v6511-duty-bar{
+    height:17px!important;
+    min-height:17px!important;
+    padding:0 5px!important;
+    background:linear-gradient(90deg,rgba(76,242,255,.17),rgba(67,141,255,.12))!important;
+  }
+  .v6511-duty-bar b{
+    color:#ddfdff;
+    font-size:7px;
+    font-weight:900;
+    letter-spacing:.02em;
+    text-shadow:0 0 4px rgba(76,242,255,.32);
+  }
+  .v6511-duty-bar span{
+    color:rgba(240,252,255,.92);
+    font-size:7px;
+    font-weight:800;
+  }
+  .v6511-duty-bar.v655-next b,
+  .v6511-duty-bar.v655-next span{color:#f0eaff}
+}
+
+@media (max-width:900px){
+  .v6511-board-scroll{overflow-x:auto;overflow-y:hidden}
+  .v6511-month-head span{font-size:9px;font-weight:700}
+  .v6511-month-head b{font-size:15px;font-weight:800;text-shadow:none}
+  .v6511-corner b{font-size:9px;font-weight:800}
+  .v6511-corner small{font-size:6px;font-weight:700}
+  .v6511-day small{font-size:6px;font-weight:700}
+  .v6511-day b{font-size:9px;font-weight:800}
+  .v6511-engineer-name b{font-size:9px;font-weight:800}
+  .v6511-engineer-name small{font-size:6px;font-weight:700}
+  .v6511-duty-bar b{font-size:8px;font-weight:900;text-shadow:none}
+  .v6511-duty-bar span{font-size:8px;font-weight:800}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .v6511-board *{text-shadow:none!important}
+}
+
+</style>
 </head>
 <!-- REFERENCE LOCK V4 -->
 <body>
 
-<div id="bootOverlay" data-loader-version="6.5.11" aria-label="Loading Shift Command Center"><div class="boot613-shell"><div class="boot613-top"><div class="boot613-logo"></div><div class="boot613-title"><small>Boot Sequence</small><h2>Loading Shift Command Center</h2><p>กำลังเชื่อมต่อ Shift Matrix และ Command UI…</p></div><div class="boot613-live">● LIVE BOOT</div></div><div class="boot613-main"><div class="boot613-radar"><div class="boot613-orbit"><i class="boot613-arc a"></i><i class="boot613-arc b"></i><i class="boot613-arc c"></i><i class="boot613-core"></i></div></div><div class="boot613-info"><div class="boot613-card"><div class="boot613-card-head"><b id="boot613Phase">Initializing Core Systems</b><span id="boot613Status">Starting…</span></div><div class="boot613-progress"><i id="boot613Bar"></i></div><div class="boot613-readout"><div class="boot613-pct" id="boot613Pct">8%</div><div class="boot613-phase" id="boot613Meta">phase 1 / 4<br>Secure startup</div></div></div><div class="boot613-grid"><div class="boot613-mini"><span>Module</span><b>Command UI</b></div><div class="boot613-mini"><span>Matrix</span><b>October 2569</b></div><div class="boot613-mini"><span>Status</span><b id="boot613State">BOOTING</b></div></div><div class="boot613-scan"><i></i></div></div></div></div></div>
+<div id="bootOverlay" data-loader-version="6.5.12" aria-label="Loading Shift Command Center"><div class="boot613-shell"><div class="boot613-top"><div class="boot613-logo"></div><div class="boot613-title"><small>Boot Sequence</small><h2>Loading Shift Command Center</h2><p>กำลังเชื่อมต่อ Shift Matrix และ Command UI…</p></div><div class="boot613-live">● LIVE BOOT</div></div><div class="boot613-main"><div class="boot613-radar"><div class="boot613-orbit"><i class="boot613-arc a"></i><i class="boot613-arc b"></i><i class="boot613-arc c"></i><i class="boot613-core"></i></div></div><div class="boot613-info"><div class="boot613-card"><div class="boot613-card-head"><b id="boot613Phase">Initializing Core Systems</b><span id="boot613Status">Starting…</span></div><div class="boot613-progress"><i id="boot613Bar"></i></div><div class="boot613-readout"><div class="boot613-pct" id="boot613Pct">8%</div><div class="boot613-phase" id="boot613Meta">phase 1 / 4<br>Secure startup</div></div></div><div class="boot613-grid"><div class="boot613-mini"><span>Module</span><b>Command UI</b></div><div class="boot613-mini"><span>Matrix</span><b>October 2569</b></div><div class="boot613-mini"><span>Status</span><b id="boot613State">BOOTING</b></div></div><div class="boot613-scan"><i></i></div></div></div></div></div>
 
 <div class="ambient a"></div><div class="ambient b"></div><div class="ambient c"></div>
 <div class="app">
@@ -3486,6 +3612,16 @@ function v6511StampVersion(){
 if(typeof document!=='undefined'){
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',v6511StampVersion,{once:true});
   else v6511StampVersion();
+}
+
+// v6512-overrides.js
+// Shift v6.5.12 — Matrix typography clarity visual layer only.
+function v6512StampVersion(){
+  if(typeof document!=='undefined')document.documentElement.dataset.appVersion='6.5.12';
+}
+if(typeof document!=='undefined'){
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',v6512StampVersion,{once:true});
+  else v6512StampVersion();
 }
 
 })();</script>
