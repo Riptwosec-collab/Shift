@@ -25,7 +25,14 @@ test('v6.5.9 year-end matrix styling preserves command-center and mobile behavio
   assert.ok(fs.existsSync('src/v659-ui.css'),'missing src/v659-ui.css');
   const css=fs.readFileSync('src/v659-ui.css','utf8');
   for(const marker of ['.v659-overview-month','.v659-year-end-matrix','.v659-month-panel','.v659-month-panel[data-v659-month="10"]','.v659-month-panel[data-v659-month="11"]','.v659-month-panel[data-v659-month="12"]','.v659-month-divider','overflow-x:auto','position:sticky','data-v65-mode="HIGH"','data-v65-mode="BALANCED"','data-v65-mode="ECO"','prefers-reduced-motion']) assert.ok(css.includes(marker),`missing ${marker}`);
-  assert.match(css,/linear-gradient/);assert.match(css,/radial-gradient/);
+  assert.match(css,/linear-gradient/);
+  assert.match(css,/radial-gradient/);
 });
 
-test('v6.5.9 layer remains shipped in v6.5.11',()=>{const build=fs.readFileSync('scripts/build.mjs','utf8');const workflow=fs.readFileSync('.github/workflows/v65-ci.yml','utf8');for(const marker of ['v659-ui.css','v659-overrides.js','v659-ui-style','data-app-version="6.5.11"','data-loader-version="6.5.11"','built v6.5.11'])assert.ok(build.includes(marker),`build missing ${marker}`);assert.ok(workflow.includes(branch),'missing v6.5.9 branch trigger');assert.ok(workflow.includes('tests/v659-*.test.mjs'),'missing v6.5.9 release gate')});
+test('v6.5.9 layer remains shipped in v6.5.11',()=>{
+  const build=fs.readFileSync('scripts/build.mjs','utf8');
+  const workflow=fs.readFileSync('.github/workflows/v65-ci.yml','utf8');
+  for(const marker of ['v659-ui.css','v659-overrides.js','v659-ui-style','data-app-version="6.5.11"','data-loader-version="6.5.11"','built v6.5.11']) assert.ok(build.includes(marker),`build missing ${marker}`);
+  assert.ok(workflow.includes(branch),'missing v6.5.9 branch trigger');
+  assert.ok(workflow.includes('tests/v659-*.test.mjs'),'missing v6.5.9 release gate');
+});
