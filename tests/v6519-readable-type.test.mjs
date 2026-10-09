@@ -9,7 +9,7 @@ test('month heatmap full name preserves exact original roster but breaks before 
   assert.ok(html.includes('v6519-full-name'));
   assert.match(build,/html\.replace\([^\n]*<th class=/);
   assert.match(html,/String\(p\.name\)\.trim\(\)\.replace\(\/\\s\+\(\\S\+\)\$\//);
-  assert.match(html,/aria-label="${p\.name}"/);
+  assert.ok(html.includes('aria-label="${p.name}"'));
   assert.ok(read('src/legacy-baseline.html').includes('rows=staff.map((p,pi)'));
 });
 test('month sticky name column accommodates two clear lines on desktop',()=>{
