@@ -26,6 +26,7 @@ on:
       - 'work/v6.5.20-mobile-pwa-install-repair'
       - 'work/v6.5.20-pwa-install-production-hotfix'
       - 'work/v6.5.21-mobile-toolbar-motion'
+      - 'work/v6.5.22-matrix-mobile-proportion'
   workflow_dispatch:
 
 jobs:
@@ -45,4 +46,4 @@ jobs:
       - name: Test
         run: npm test
       - name: Verify release gates
-        run: node --test tests/v65-*.test.mjs tests/v651-*.test.mjs tests/v652-*.test.mjs tests/v653-*.test.mjs tests/v654-*.test.mjs tests/v655-*.test.mjs tests/v656-*.test.mjs tests/v657-*.test.mjs tests/v658-*.test.mjs tests/v659-*.test.mjs tests/v6510-*.test.mjs tests/v6511-*.test.mjs tests/v6512-*.test.mjs tests/v6513-*.test.mjs tests/v6514-*.test.mjs tests/v6515-*.test.mjs tests/v6516-*.test.mjs tests/v6517-*.test.mjs tests/v6518-*.test.mjs tests/v6519-*.test.mjs tests/v6520-*.test.mjs tests/v6521-*.test.mjs tests/v64-release.test.mjs tests/build.test.mjs tests/cloudflare.test.mjs tests/legacy-visual-contract.test.mjs tests/v64-interactive.test.mjs
+        run: node --test tests/v65-*.test.mjs tests/v651-*.test.mjs tests/v652-*.test.mjs tests/v653-*.test.mjs tests/v654-*.test.mjs tests/v655-*.test.mjs tests/v656-*.test.mjs tests/v657-*.test.mjs tests/v658-*.test.mjs tests/v659-*.test.mjs tests/v6510-*.test.mjs tests/v6511-*.test.mjs tests/v6512-*.test.mjs tests/v6513-*.test.mjs tests/v6514-*.test.mjs tests/v6515-*.test.mjs tests/v6516-*.test.mjs tests/v6517-*.test.mjs tests/v6518-*.test.mjs tests/v6519-*.test.mjs tests/v6520-*.test.mjs tests/v6521-*.test.mjs tests/v6522-*.test.mjs tests/v64-release.test.mjs tests/build.test.mjs tests/cloudflare.test.mjs tests/legacy-visual-contract.test.mjs tests/v64-interactive.test.mjs
