@@ -21,7 +21,16 @@ function initV6513PWA(){
   button.setAttribute('aria-label','ติดตั้ง Shift เป็นแอป / Install Shift');
   button.setAttribute('title','ติดตั้ง Shift ลงหน้าจอโฮม');
   button.hidden=isStandalone();
-  host.appendChild(button);
+  // Reserve a real layout row for installation rather than a floating button
+  // overlapping Oncall/TH/EN/performance switches or the mobile bottom nav.
+  const dock=document.createElement('div');
+  dock.className='shift-install-dock';
+  dock.setAttribute('aria-label','PWA installation');
+  const header=document.querySelector('.command-bar');
+  if(header)header.insertAdjacentElement('afterend',dock);
+  else host.appendChild(dock);
+  dock.appendChild(button);
+  dock.hidden=isStandalone();
 
   const closeHelp=()=>{
     if(!helpBox)return;
@@ -131,14 +140,15 @@ function initV6513PWA(){
     event.preventDefault();
     pendingInstall=event;
     button.hidden=isStandalone();
+    dock.hidden=isStandalone();
   });
   window.addEventListener('appinstalled',()=>{
-    pendingInstall=null;button.hidden=true;
+    pendingInstall=null;button.hidden=true;dock.hidden=true;
     if(helpBox){helpBox.remove();helpBox=null}
   });
-  window.addEventListener('pageshow',()=>{button.hidden=isStandalone()});
+  window.addEventListener('pageshow',()=>{button.hidden=isStandalone();dock.hidden=isStandalone()});
   button.addEventListener('click',async()=>{
-    if(isStandalone()){button.hidden=true;return}
+    if(isStandalone()){button.hidden=true;dock.hidden=true;return}
     if(pendingInstall){
       const prompt=pendingInstall;
       pendingInstall=null;
@@ -151,6 +161,24 @@ function initV6513PWA(){
     }
     showHelp();
   });
+  // A single delegated, GPU-friendly tap response. No permanent timers,
+  // canvas, scroll handlers, or excessive reflows on mobile.
+  if(root.dataset.shiftMobileMotionReady!=='1'){
+    root.dataset.shiftMobileMotionReady='1';
+    document.addEventListener('pointerdown',event=>{
+      if(!window.matchMedia?.('(max-width:860px)')?.matches)return;
+      if(window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches)return;
+      if(root.dataset.v65Mode==='ECO'||event.pointerType==='mouse'||event.button!==0)return;
+      const target=event.target?.closest?.('button');
+      if(!target||target.disabled||!target.isConnected||!target.animate)return;
+      if(target.closest('.shift-pwa-help'))return;
+      target.animate([
+        {transform:'scale(1)'},
+        {transform:'scale(.965)',offset:.45},
+        {transform:'scale(1)'}
+      ],{duration:190,easing:'ease-out'});
+    },{passive:true});
+  }
   const canRegister=('serviceWorker' in navigator)&&secure();
   if(canRegister){
     const register=()=>{
