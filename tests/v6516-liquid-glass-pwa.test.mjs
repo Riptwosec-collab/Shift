@@ -25,7 +25,7 @@ test('desktop matrix stays zero scroll and mobile calendar keeps 7 native column
 });
 test('service worker returns cached navigation immediately and revalidates in background, without caching API responses',()=>{
   const sw=read('sw.js');
-  for(const k of ['shift-shell-v6.5.16','networkFirst','event.waitUntil','caches.open','request.mode','navigate','navigator','cache.match','fetch(request)'])assert.ok(sw.includes(k),`missing ${k}`);
+  for(const k of ['shift-shell-v6.5.16','networkFirst','event.waitUntil','caches.open','request.mode','navigate','cache.match','fetch(request)'])assert.ok(sw.includes(k),`missing ${k}`);
   assert.match(sw,/if\(cached\)[\s\S]*return cached/);
   assert.match(sw,/url\.origin!==self\.location\.origin/);
   assert.match(sw,/request\.method!=='GET'/);

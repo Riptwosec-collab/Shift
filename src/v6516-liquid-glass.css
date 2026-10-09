@@ -1,0 +1,194 @@
+/* Shift v6.5.16 — True Black x Liquid Glass / Vivid Scheduling
+   Glass is restricted to navigation/panels; transitions are transform/opacity-only. */
+:root{
+ --glass-bg:rgba(19,23,31,.72);
+ --glass-strong:rgba(29,33,44,.88);
+ --glass-edge:rgba(235,248,255,.23);
+ --glass-highlight:rgba(255,255,255,.16);
+ --glass-shadow:0 12px 28px rgba(0,0,0,.50),inset 0 1px 0 rgba(255,255,255,.14);
+ --glass-cyan:#50eaff;
+ --glass-blue:#5c9eff;
+ --glass-violet:#b59dff;
+ --glass-red:#ff667e;
+ --glass-green:#46edb1;
+ --glass-amber:#ffcc78;
+ --bg:#000000;--bg2:#000000;--bg3:#000000;
+ --panel:rgba(18,22,29,.82);--panel2:rgba(25,30,41,.88);
+ --text:#f5faff;--muted:#b7c5d9;
+ --cyan:#50eaff;--blue:#5c9eff;--purple:#b59dff;
+ --day:#ff667e;--night:#5c9eff;--off:#46edb1;
+ --success:#46edb1;--danger:#ff667e;
+ color-scheme:dark;
+}
+html{background:#000000!important;color-scheme:dark}
+body,body:where(:not(.whatever)),.app{
+ background:#000!important;background-image:none!important;
+ color:var(--text)!important;
+}
+body::before,body::after,.ambient,.ambient.a,.ambient.b,.ambient.c{display:none!important;animation:none!important}
+html[data-v65-mode="HIGH"] .ambient,html[data-v65-mode="BALANCED"] .ambient{display:none!important;animation:none!important}
+.cyber-scene{background:transparent!important}
+.cyber-scene::after{animation:none!important}
+.app{isolation:isolate}
+.command-bar,.hud-panel,.roster-card,.metric-card,.insights-panel,.network-panel,.month-snapshot,
+.analytics-card,.analytics-panel,.month-panel,.person-detail,.people-panel,
+.v652-hero,.v652-control-deck,.v652-timeline-panel,.v655-selected-day-detail,
+.v6511-month-board,.v6515-oncall-month,.v6515-shift-group{
+ position:relative;
+ background:var(--glass-bg)!important;
+ background-image:linear-gradient(135deg,rgba(255,255,255,.075),transparent 42%)!important;
+ border:1px solid var(--glass-edge)!important;
+ border-radius:18px!important;
+ box-shadow:var(--glass-shadow)!important;
+ color:#f5faff;
+}
+/* Liquid-glass surface: crisp specular edge, never blurry copy. */
+.command-bar,.nav-tabs,.v652-control-deck,.v652-view-tabs,.v652-month-switch,.v65-language,.v64-quality{
+ -webkit-backdrop-filter:blur(13px) saturate(140%);
+ backdrop-filter:blur(13px) saturate(140%);
+ background-color:var(--glass-bg)!important;
+ border:1px solid var(--glass-edge)!important;
+ box-shadow:var(--glass-shadow)!important;
+}
+.nav-tabs,.v652-view-tabs,.v652-month-switch{border-radius:14px!important}
+.nav-tabs button,.nav-btn,.mobile-nav button,.v652-view-tabs button,.v652-month-switch button,
+.v65-language button,.v64-quality button,.filter-btn,.range-btn,.ghost-btn,.sys-btn,.fullscreen-label{
+ color:#c8d8e9!important;
+ border-radius:12px!important;
+ transition:transform .14s cubic-bezier(.2,.75,.25,1),background-color .16s ease,border-color .16s ease,opacity .16s ease!important;
+}
+.nav-btn.active,.mobile-nav button.active,.v652-view-tabs button.active,.v652-month-switch button.active,
+.v65-language button.active,.v64-quality button.active,.filter-btn.active,.range-btn.active{
+ color:#fff!important;
+ background:linear-gradient(125deg,rgba(79,225,255,.30),rgba(115,98,238,.21))!important;
+ border-color:rgba(109,226,255,.69)!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.22),0 0 0 1px rgba(79,225,255,.17)!important;
+}
+.nav-btn:active,.mobile-nav button:active,.v652-view-tabs button:active,.v652-month-switch button:active,
+.filter-btn:active,.range-btn:active,.ghost-btn:active,.v6515-month-days button:active,.v6515-oncall-row:active{
+ transform:scale(.975)!important;
+}
+:where(.section-title,.brand-copy h1,.roster-title b,.v652-section-head .section-title,.v6515-month-title strong,.v6515-oncall-title strong){
+ color:#fff!important;text-shadow:none!important;font-weight:800!important;
+}
+:where(.eyebrow,.muted,.row-meta,.section-title+p,.v652-section-head p,.v6515-oncall-row small){
+ color:#b7c5d9!important;text-shadow:none!important;
+}
+:where(.metric-num,.daily-date,.analytics-card .value){color:#fff!important;text-shadow:none!important}
+:where(button,input,select,textarea){-webkit-tap-highlight-color:transparent}
+:where(button,input,select,textarea):focus-visible{outline:2px solid var(--glass-cyan)!important;outline-offset:2px}
+:where(.hud-panel,.metric-card,.roster-card,.analytics-card,.month-snapshot)::before{
+ pointer-events:none;
+}
+/* Clear, non-translucent text on transparent glass. */
+.smart-search input,.v64-palette-box,.search-results,.v652-person-chip,.v655-detail-person,
+.insight-item,.person-pick,.people-list button,.shift-row,.person-detail button{
+ background-color:rgba(20,29,43,.90)!important;color:#f7fbff!important;border-color:rgba(151,209,244,.27)!important;
+}
+.smart-search input::placeholder{color:#aec2d4!important}
+.roster-card.day,.metric-card.day,.v6515-shift-group.day{border-left:3px solid #ff667e!important}
+.roster-card.night,.metric-card.night,.v6515-shift-group.night{border-left:3px solid #5c9eff!important}
+.roster-card.off,.metric-card.off,.v6515-shift-group.off{border-left:3px solid #46edb1!important}
+:where(.metric-card.day,.roster-card.day) .metric-num{color:#ff99a8!important}
+:where(.metric-card.night,.roster-card.night) .metric-num{color:#a1c3ff!important}
+:where(.metric-card.off,.roster-card.off) .metric-num{color:#8cfcd2!important}
+:where(.analytics-card,.analytics-panel) svg .dayline{stroke:#ff667e!important;stroke-width:2.8!important}
+:where(.analytics-card,.analytics-panel) svg .nightline{stroke:#5c9eff!important;stroke-width:2.8!important}
+:where(.analytics-card,.analytics-panel) svg .offline{stroke:#46edb1!important;stroke-width:2.8!important}
+:where(.analytics-card,.analytics-panel) .workload-row .track i{background:linear-gradient(90deg,#5c9eff,#50eaff)!important}
+:where(.analytics-card,.analytics-panel) .staffing-stat.d{border-color:#ff667e!important}
+:where(.analytics-card,.analytics-panel) .staffing-stat.n{border-color:#5c9eff!important}
+:where(.analytics-card,.analytics-panel) .staffing-stat.o{border-color:#46edb1!important}
+/* Month mini-matrix: each status retains a vivid solid signal. */
+.mini-matrix,.table-wrap,.v652-matrix-scroll{background:rgba(9,13,20,.82)!important;border:1px solid rgba(195,224,251,.18)!important}
+.matrix-row,.matrix-header{border-color:rgba(165,195,228,.13)!important}
+.matrix-day-head,.heatmap th{color:#c3d8ec!important;background:rgba(18,25,38,.95)!important}
+.matrix-cell.D,.heatmap td.D{background:#933645!important;color:#fff!important;box-shadow:inset 0 0 0 1px rgba(255,102,126,.5)!important}
+.matrix-cell.N,.heatmap td.N{background:#284f9a!important;color:#fff!important;box-shadow:inset 0 0 0 1px rgba(92,158,255,.5)!important}
+.matrix-cell.O,.heatmap td.O{background:#184f40!important;color:#9cfbdc!important;box-shadow:inset 0 0 0 1px rgba(70,237,177,.23)!important}
+.matrix-cell.selected,.heatmap .selected-col{outline:2px solid #50eaff!important;outline-offset:-2px}
+.matrix-cell{transition:transform .12s ease,opacity .16s ease!important}
+@media (hover:hover) and (pointer:fine){
+ .nav-btn:hover,.v652-view-tabs button:hover,.v652-month-switch button:hover,.filter-btn:hover,.range-btn:hover,.ghost-btn:hover{transform:translateY(-2px);color:#fff!important}
+ .matrix-cell:hover,.heatmap td:hover,.v6515-oncall-row:hover,.v6515-month-days button:hover{transform:translateY(-1px);filter:brightness(1.20)}
+ .hud-panel:hover,.roster-card:hover,.v6515-oncall-month:hover{border-color:rgba(142,221,255,.46)!important}
+}
+/* Year-end bars: rich identities, exact day geometry unchanged. */
+.v6511-board-scroll{overflow:hidden}
+.v6511-board-grid{background:rgba(5,9,17,.84)!important}
+.v6511-day-head,.v6511-corner{background:rgba(19,28,42,.94)!important}
+.v6511-day.today{background:rgba(80,234,255,.22)!important;color:#fff!important}
+.v6511-duty-bar{color:#fff!important;border:1px solid rgba(255,255,255,.30)!important}
+.v6511-duty-bar.v655-live{box-shadow:inset 0 0 0 1px #50eaff,0 0 12px rgba(80,234,255,.23)!important}
+.v6511-duty-bar.v655-next{box-shadow:inset 0 0 0 1px #b59dff,0 0 9px rgba(181,157,255,.20)!important}
+.v6511-today-line{background:#50eaff!important;box-shadow:0 0 9px rgba(80,234,255,.42)!important}
+/* Native month layout: weekday-aligned October 2026 and vivid chips. */
+.v6515-month-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+.v6515-month-days button:first-child{grid-column:5}
+.v6515-month-days button{
+ position:relative;overflow:hidden;
+ border:1px solid rgba(170,215,247,.36)!important;
+ background:rgba(23,32,47,.96)!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.06)!important;
+ color:#e6f3ff!important;
+ transition:transform .13s ease,background-color .15s ease,opacity .15s ease!important;
+}
+.v6515-month-days button b{font-size:16px!important;font-weight:800;color:#f5faff}
+.v6515-month-days button small{color:#b5cadc!important}
+.v6515-month-days button.today{border-color:#50eaff!important;box-shadow:inset 0 0 0 1px #50eaff!important}
+.v6515-month-days button.active{background:#174c68!important;border-color:#50eaff!important;box-shadow:0 0 0 1px rgba(80,234,255,.5),inset 0 1px rgba(255,255,255,.20)!important}
+.v6516-counts{display:flex;gap:3px;align-items:center;justify-content:center;font:700 9px/1.2 system-ui,sans-serif}
+.v6516-counts em{font-style:normal}.v6516-counts .day{color:#ff98a8}.v6516-counts .night{color:#9dbfff}
+.v6515-person,.v6515-oncall-row{background:rgba(28,39,57,.94)!important;color:#f5fbff!important;border:1px solid rgba(175,224,252,.27)!important}
+.v6515-oncall-row.live{background:rgba(22,87,96,.95)!important;border-color:#50eaff!important}
+.v6515-oncall-row.next{background:rgba(58,43,95,.93)!important;border-color:#b59dff!important}
+.v6515-oncall-row em{color:#d1f6ff!important;font-size:13px!important}
+.v6515-oncall-month.current{border-color:#50eaff!important}
+/* Lightweight entrance choreography. No constant blurred background animation. */
+@keyframes v6516FloatIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@keyframes v6516Pulse{0%,100%{opacity:1}50%{opacity:.72}}
+.view.active > :is(.hero-grid,.daily-header,.person-layout,.month-panel,.analytics-grid,.v652-oncall),
+.v652-pane,.v6515-mobile-month,.v6515-oncall-month{
+ animation:v6516FloatIn .24s ease-out both;
+}
+.mobile-nav button.active b,.v6515-month-days button.today b{animation:v6516Pulse 3.8s ease-in-out infinite}
+@media (max-width:900px){
+ .v6511-board-scroll{overflow-x:auto;overflow-y:hidden}
+ .v6515-month-days{grid-template-columns:repeat(7,minmax(0,1fr))}
+}
+@media (max-width:860px){
+ html,body{background:#000!important;min-height:100dvh}
+ .command-bar,.nav-tabs,.hud-panel,.roster-card,.metric-card,.insights-panel,.network-panel,
+ .month-snapshot,.analytics-card,.analytics-panel,.v652-control-deck,.v6515-oncall-month{
+ -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+ background-color:rgba(25,29,40,.93)!important;
+ }
+ .command-bar{background-color:rgba(26,29,41,.98)!important}
+ /* Pixel-perfect footer anchoring: safe inset is INSIDE the bar. */
+ html body #mobileNav{
+ position:fixed!important;left:0!important;right:0!important;top:auto!important;bottom:0!important;
+ transform:none!important;margin:0!important;border-radius:18px 18px 0 0!important;
+ padding-bottom:calc(6px + env(safe-area-inset-bottom,0px))!important;
+ background:rgba(27,30,43,.82)!important;
+ -webkit-backdrop-filter:blur(12px) saturate(140%)!important;
+ backdrop-filter:blur(12px) saturate(140%)!important;
+ border:1px solid rgba(225,242,255,.35)!important;border-bottom:0!important;
+ box-shadow:0 -8px 28px rgba(0,0,0,.58),inset 0 1px rgba(255,255,255,.22)!important;
+ }
+ html body #mobileNav button{border-radius:12px!important;color:#c0d2e5!important}
+ html body #mobileNav button.active{background:linear-gradient(135deg,rgba(75,223,255,.28),rgba(172,150,255,.18))!important;border:1px solid rgba(124,225,255,.51)!important}
+ .view.active > :is(.hero-grid,.daily-header,.person-layout,.month-panel,.analytics-grid,.v652-oncall),
+ .v652-pane,.v6515-mobile-month,.v6515-oncall-month{animation:v6516FloatIn .17s ease-out both}
+ .mobile-nav button.active b,.v6515-month-days button.today b{animation:none!important}
+}
+@media (display-mode:standalone){html body #mobileNav{bottom:0!important}body{background:#000!important}}
+@media (prefers-reduced-transparency:reduce){
+ .command-bar,.hud-panel,.v652-control-deck,.nav-tabs,.mobile-nav,.v6515-oncall-month{background-color:#1a1f2b!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+}
+@media (prefers-reduced-motion:reduce){
+ .view.active > :is(.hero-grid,.daily-header,.person-layout,.month-panel,.analytics-grid,.v652-oncall),
+ .v652-pane,.v6515-mobile-month,.v6515-oncall-month,.mobile-nav button.active b,.v6515-month-days button.today b{
+ animation:none!important;transition:none!important;
+ }
+}
+html[data-v65-mode="ECO"] .view.active > *,html[data-v65-mode="ECO"] .v652-pane{animation:none!important}

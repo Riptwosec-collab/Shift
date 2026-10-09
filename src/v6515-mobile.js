@@ -51,8 +51,8 @@ function v6515MonthDay(day){
   const weekday=(locale==='th'?['อา','จ','อ','พ','พฤ','ศ','ส']:['Su','Mo','Tu','We','Th','Fr','Sa'])[date.getDay()];
   const selected=Number(selectedDay)===day;
   const today=v6515TodayForLegacy()===day;
-  const count=crew(day,'D').length+crew(day,'N').length;
-  return `<button type="button" data-v6515-day="${day}" class="${selected?'active':''} ${today?'today':''}" aria-pressed="${selected?'true':'false'}" aria-label="${day} ${locale==='th'?'ตุลาคม':'October'} ${count} ${locale==='th'?'คนเข้าเวร':'working'}"><small>${weekday}</small><b>${day}</b></button>`;
+  const dayCount=crew(day,'D').length,nightCount=crew(day,'N').length,count=dayCount+nightCount;
+  return `<button type="button" data-v6515-day="${day}" class="${selected?'active':''} ${today?'today':''}" aria-pressed="${selected?'true':'false'}" aria-label="${day} ${locale==='th'?'ตุลาคม':'October'} ${count} ${locale==='th'?'คนเข้าเวร':'working'}"><small>${weekday}</small><b>${day}</b><span class="v6516-counts"><em class="day">D${dayCount}</em><em class="night">N${nightCount}</em></span></button>`;
 }
 function v6515RenderMobileMonth(){
   if(!v6515IsMobile())return;
