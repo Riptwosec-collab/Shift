@@ -2,10 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
-test('production loader animates for three seconds with a 3.6s safety exit',()=>{
+test('production loader exits promptly with a short safety timeout',()=>{
   const html=fs.readFileSync('index.html','utf8');
   assert.ok(html.includes('id="v65-loader-runtime"'));
-  assert.ok(html.includes('TARGET=3000,HARD=3600'));
+  assert.ok(html.includes('TARGET=260,HARD=950'));
   assert.ok(html.includes('elapsed>=TARGET&&domReady'));
   assert.doesNotMatch(html,/MIN=1150,HARD=1850/);
 });
