@@ -7,7 +7,7 @@ test('PWA install button remains visible on mobile even when browser does not em
   const js=read('src/v6513-pwa.js');
   assert.match(js,/button\.hidden\s*=\s*isStandalone\(\)/);
   assert.doesNotMatch(js,/button\.hidden\s*=\s*!isIOS/);
-  assert.match(js,/button\.textContent\s*=\s*['"]\+?ติดตั้ง/);
+  assert.ok(js.includes("button.textContent='＋ ติดตั้ง'"));
   assert.match(js,/pendingInstall/);
   assert.match(js,/beforeinstallprompt/);
   assert.match(js,/appinstalled/);
