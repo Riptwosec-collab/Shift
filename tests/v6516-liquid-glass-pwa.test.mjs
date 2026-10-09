@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 const read=path=>fs.readFileSync(path,'utf8');
 
-test('v6.5.18 uses a genuinely pitch-black, no-image canvas and restrained liquid glass',()=>{
+test('v6.5.19 uses a genuinely pitch-black, no-image canvas and restrained liquid glass',()=>{
   const css=read('src/v6516-liquid-glass.css');
   for(const marker of ['#000000','background:#000','backdrop-filter:blur','--glass','prefers-reduced-motion','prefers-reduced-transparency','color-scheme:dark'])assert.ok(css.includes(marker),`missing ${marker}`);
   assert.match(css,/body::before[\s\S]*?display:none\s*!important/);
@@ -25,7 +25,7 @@ test('desktop matrix stays zero scroll and mobile calendar keeps 7 native column
 });
 test('service worker returns cached navigation immediately and revalidates in background, without caching API responses',()=>{
   const sw=read('sw.js');
-  for(const k of ['shift-shell-v6.5.18','networkFirst','event.waitUntil','caches.open','request.mode','navigate','cache.match','fetch(request)'])assert.ok(sw.includes(k),`missing ${k}`);
+  for(const k of ['shift-shell-v6.5.19','networkFirst','event.waitUntil','caches.open','request.mode','navigate','cache.match','fetch(request)'])assert.ok(sw.includes(k),`missing ${k}`);
   assert.match(sw,/if\(cached\)[\s\S]*return cached/);
   assert.match(sw,/url\.origin!==self\.location\.origin/);
   assert.match(sw,/request\.method!=='GET'/);
@@ -38,10 +38,10 @@ test('language translation avoids traversing detached or hidden views for routin
   assert.match(engine,/classList\.contains\('active'\)/);
   assert.doesNotMatch(engine,/\|\|v64Mounted\?\.has\?\.\(view\)/);
 });
-test('v6.5.18 build CI and shipped artifact are in sync',()=>{
+test('v6.5.19 build CI and shipped artifact are in sync',()=>{
   const build=read('scripts/build.mjs'),html=read('index.html'),workflow=read('.github/workflows/v65-ci.yml');
-  for(const x of ['v6516-liquid-glass.css','v6516-liquid-glass-style','data-app-version="6.5.18"','data-loader-version="6.5.18"','built v6.5.18'])assert.ok(build.includes(x),`missing ${x}`);
-  assert.match(html,/data-app-version="6\.5\.18"/);
+  for(const x of ['v6516-liquid-glass.css','v6516-liquid-glass-style','data-app-version="6.5.19"','data-loader-version="6.5.19"','built v6.5.19'])assert.ok(build.includes(x),`missing ${x}`);
+  assert.match(html,/data-app-version="6\.5\.19"/);
   assert.match(html,/id="v6516-liquid-glass-style"/);
   assert.ok(workflow.includes('work/v6.5.16-trueblack-liquidglass-fast-pwa'));
   assert.ok(workflow.includes('tests/v6516-*.test.mjs'));

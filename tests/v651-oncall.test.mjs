@@ -30,7 +30,7 @@ test('oncall schedule matches the approved Oct-Dec 2026 rotation',async()=>{
   assert.equal(mod.getOncallForDate(new Date(2026,11,31)),null);
 });
 
-test('v6.5.1 foundation suppresses Daily Operations and remains in v6.5.18 build',()=>{
+test('v6.5.1 foundation suppresses Daily Operations and remains in v6.5.19 build',()=>{
   const v651=fs.readFileSync('src/v651-engine.js','utf8');
   const css=fs.readFileSync('src/v651-oncall.css','utf8');
   const i18n=fs.readFileSync('src/i18n-copy.js','utf8');
@@ -45,5 +45,5 @@ test('v6.5.1 foundation suppresses Daily Operations and remains in v6.5.18 build
   assert.match(i18n,/oncall:'Engineer Oncall'/);
   assert.match(build,/v651-engine\.js/);
   assert.match(build,/v651-oncall\.css/);
-  assert.match(build,/data-app-version=\"6\.5\.18\"/);
+  assert.match(build,/data-app-version=\"6\.5\.19\"/);
 });

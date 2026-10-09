@@ -1,0 +1,131 @@
+/* Shift v6.5.19 — legible data views and protected full-name heatmap rows.
+   No roster data mutation. Scope all sizing to information surfaces and tables. */
+:root{--v6519-copy:#e4f4ff;--v6519-sub:#b9d1e4;--v6519-name-width:272px}
+#analyticsView,#personView,#monthView,#overviewView .insights-panel,#overviewView .v6517-insights-panel{
+ color:var(--v6519-copy);font-size:15px;line-height:1.5;
+ text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;
+}
+#analyticsView .section-title,#personView .section-title,#monthView .section-title,
+#overviewView .insights-panel .section-title{font-size:clamp(17px,1.4vw,21px)!important;line-height:1.35!important;font-weight:800!important;color:#fff!important}
+#analyticsView .eyebrow,#personView .eyebrow,#monthView .eyebrow,
+#overviewView .insights-panel .eyebrow{
+ font-size:12px!important;letter-spacing:.055em;line-height:1.4!important;color:var(--v6519-sub)!important;
+}
+#analyticsView .analytics-card{min-height:128px;padding:16px!important}
+#analyticsView .analytics-card .value{font-size:clamp(26px,2.2vw,34px)!important;line-height:1.18!important;font-weight:850}
+#analyticsView .analytics-card .label{font-size:14px!important;font-weight:650!important;color:var(--v6519-copy)!important;line-height:1.45!important;overflow-wrap:anywhere}
+#analyticsView .workload-bars{display:grid;gap:4px;margin-top:14px}
+#analyticsView .workload-row{
+ display:grid;grid-template-columns:minmax(120px,1.45fr) minmax(90px,3fr) minmax(33px,.4fr);
+ gap:11px;align-items:center;min-height:40px;padding:6px 0;
+ font-size:14px!important;line-height:1.45;color:var(--v6519-copy);
+}
+#analyticsView .workload-row>span:first-child{
+ font-size:14px!important;font-weight:650;color:#eff9ff;
+ min-width:0;overflow-wrap:anywhere;white-space:normal;
+}
+#analyticsView .workload-row>b{font-size:15px!important;color:#f9fdff;text-align:right;font-variant-numeric:tabular-nums}
+#analyticsView .workload-row .track{height:9px!important;min-width:0;border-radius:99px}
+#analyticsView .analytics-panel{min-width:0;padding:clamp(13px,1.5vw,20px)!important}
+#personView .people-list .person-pick{min-height:60px!important;padding:9px!important;gap:9px!important;min-width:0}
+#personView .person-pick .row-name{
+ display:block;font-size:15px!important;font-weight:700;line-height:1.45!important;
+ overflow-wrap:anywhere;white-space:normal!important;color:#f7fcff!important;
+}
+#personView .person-pick .row-meta{display:block;font-size:13px!important;line-height:1.45!important;color:var(--v6519-sub)!important;white-space:normal!important}
+#personView .profile-copy h2{font-size:clamp(19px,2vw,27px)!important;line-height:1.4!important;overflow-wrap:anywhere}
+#personView .profile-copy p,#personView .sub,#personView .calendar-card .calendar-head,
+#personView .person-stats span,#personView .pstat span,
+#personView .streak-pill span{font-size:13px!important;line-height:1.45!important;color:var(--v6519-sub)!important}
+#personView .streak-pill b,#personView .pstat b,#personView .next-shift-card .big{font-size:clamp(19px,1.65vw,26px)!important;line-height:1.25}
+#overviewView .insights-panel .insight-tabs button{font-size:13px!important;line-height:1.4;padding:9px 6px!important;min-height:38px}
+#overviewView .insights-panel .insight-item{
+ grid-template-columns:35px minmax(0,1fr) auto!important;
+ gap:10px!important;min-height:57px;padding:10px 0!important;
+}
+#overviewView .insights-panel .insight-item b{font-size:14px!important;line-height:1.45!important;color:#f8fcff!important}
+#overviewView .insights-panel .insight-item span{font-size:13px!important;line-height:1.45!important;color:var(--v6519-sub)!important}
+#overviewView .insights-panel .insight-value{font-size:clamp(15px,1.2vw,18px)!important;line-height:1.25;color:#76eaff!important}
+#overviewView .v6517-note{gap:12px;min-height:46px;padding:10px 12px;font-size:14px!important;line-height:1.45}
+#overviewView .v6517-note span{font-size:13px!important;line-height:1.45;color:#d1e9fa}
+#overviewView .v6517-note b{font-size:16px!important;line-height:1.25}
+#overviewView .v6517-kpi-label{font-size:13px!important;line-height:1.4}
+#overviewView .v6517-kpi-note,#overviewView .v6517-caption{font-size:12px!important;line-height:1.4;color:#b9d1e4}
+#overviewView .v6517-oncall-item b{font-size:14px!important;line-height:1.4}
+#overviewView .v6517-oncall-item small{font-size:12px!important;line-height:1.45}
+#monthView .month-head .section-title{font-size:clamp(19px,1.6vw,25px)!important}
+#monthView .table-wrap{
+ overflow-x:auto!important;overflow-y:auto;
+ max-width:100%;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;
+}
+#monthView .heatmap{
+ width:100%;min-width:1500px!important;table-layout:fixed;
+ border-collapse:separate;border-spacing:3px;font-size:13px!important;
+}
+#monthView .heatmap thead th.name-col,
+#monthView .heatmap tbody th.name-col,
+#monthView .heatmap tfoot td.name-col{
+ position:sticky;left:0;z-index:8;
+ box-sizing:border-box;min-width:250px!important;width:var(--v6519-name-width)!important;max-width:var(--v6519-name-width);
+ padding:8px 12px!important;text-align:left!important;
+ white-space:normal!important;overflow-wrap:break-word;word-break:normal;
+ font-size:14px!important;line-height:1.45!important;font-weight:700;
+ color:#f0faff!important;background:#061a31!important;
+ border-right:1px solid rgba(76,193,255,.6)!important;
+}
+#monthView .heatmap thead th.name-col{z-index:12;font-size:14px!important}
+#monthView .heatmap tfoot td.name-col{font-size:13px!important}
+#monthView .heatmap tbody th.name-col{min-height:51px;vertical-align:middle}
+#monthView .heatmap .v6519-full-name{
+ display:block;max-width:100%;white-space:normal!important;
+ overflow-wrap:break-word;word-break:normal;line-height:1.45;
+ font-size:14px;font-weight:750;color:#f6fcff;
+}
+#monthView .heatmap tbody tr{height:auto}
+#monthView .heatmap tbody td.shift{
+ box-sizing:border-box;height:44px!important;min-width:32px;
+ font-size:12px!important;line-height:1.2!important;
+}
+#monthView .heatmap thead th:not(.name-col){font-size:12px!important;line-height:1.4!important}
+#monthView .heatmap tfoot td:not(.name-col){font-size:12px!important;color:#e0efff}
+#monthView .filter-btn{font-size:13px!important;min-height:42px;padding:9px 12px!important}
+#monthView .v6515-shift-group .v6515-person{
+ font-size:14px!important;line-height:1.5!important;
+ padding:11px!important;white-space:normal;overflow-wrap:anywhere;
+}
+#monthView .v6515-shift-head b{font-size:15px!important}
+#monthView .v6515-month-title strong{font-size:20px!important}
+#monthView .v6515-month-title small{font-size:13px!important;line-height:1.5}
+#monthView .v6515-month-days button small{font-size:11px!important}
+#monthView .v6515-month-days button b{font-size:16px!important}
+#monthView .v6515-people{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:1100px){
+ #analyticsView .workload-row{grid-template-columns:minmax(105px,1.5fr) minmax(70px,2fr) 34px}
+ #personView .people-panel{position:relative;top:auto}
+}
+@media (max-width:860px){
+ :root{--v6519-name-width:252px}
+ #analyticsView .analytics-card .label{font-size:14px!important}
+ #analyticsView .analytics-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ #analyticsView .workload-row{font-size:14px!important;grid-template-columns:minmax(110px,1.35fr) minmax(75px,2fr) 33px}
+ #personView .people-list .person-pick{min-height:58px!important}
+ #overviewView .insights-panel{max-height:none!important}
+ #monthView .heatmap{min-width:1440px!important}
+ #monthView .v6515-shift-group .v6515-person{font-size:14px!important}
+}
+@media (max-width:600px){
+ #analyticsView .analytics-grid{grid-template-columns:minmax(0,1fr)!important}
+ #analyticsView .workload-row{grid-template-columns:minmax(110px,1.4fr) minmax(70px,2fr) 30px;gap:7px}
+ #overviewView .insights-panel .insight-item{grid-template-columns:32px minmax(0,1fr) auto!important}
+ #overviewView .v6517-kpi-label{font-size:12px!important}
+ #monthView .v6515-people{grid-template-columns:minmax(0,1fr)}
+ #monthView .v6515-shift-group .v6515-person{font-size:15px!important}
+ #monthView .v6515-month-days button{min-height:51px}
+ #monthView .heatmap{min-width:1380px!important}
+}
+@media (prefers-reduced-motion:reduce){
+ #monthView .heatmap *,#analyticsView .analytics-panel *,#personView .person-detail *{
+  animation:none!important;transition:none!important;
+ }
+}
+/* scoped readability rules protect roster geometry and existing source schedule values. */
