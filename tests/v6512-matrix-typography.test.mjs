@@ -35,7 +35,7 @@ test('v6.5.12 mobile keeps readable sizing and horizontal fallback',()=>{
 test('v6.5.12 build and CI ship the typography clarity layer',()=>{
   const build=fs.readFileSync('scripts/build.mjs','utf8');
   const workflow=fs.readFileSync('.github/workflows/v65-ci.yml','utf8');
-  for(const marker of ['v6512-ui.css','v6512-overrides.js','v6512-ui-style','data-app-version="6.5.16"','data-loader-version="6.5.16"','built v6.5.16']) assert.ok(build.includes(marker),`build missing ${marker}`);
+  for(const marker of ['v6512-ui.css','v6512-overrides.js','v6512-ui-style','data-app-version="6.5.17"','data-loader-version="6.5.17"','built v6.5.17']) assert.ok(build.includes(marker),`build missing ${marker}`);
   assert.ok(workflow.includes(branch),'missing v6.5.12 branch trigger');
   assert.ok(workflow.includes('tests/v6512-*.test.mjs'),'missing v6.5.12 release gate');
 });

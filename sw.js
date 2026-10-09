@@ -1,5 +1,5 @@
-/* Shift v6.5.16 — fast installable shell, same-origin only, background refresh. */
-const CACHE_NAME='shift-shell-v6.5.16';
+/* Shift v6.5.17 — fast installable shell, same-origin only, background refresh. */
+const CACHE_NAME='shift-shell-v6.5.17';
 const SHELL_ASSETS=['./index.html','./manifest.webmanifest','./icons/shift-192.png','./icons/shift-512.png','./icons/shift-maskable-512.png'];
 const APP_PATHS=new Set(SHELL_ASSETS.map(path=>new URL(path,self.registration.scope).pathname));
 self.addEventListener('install',event=>{

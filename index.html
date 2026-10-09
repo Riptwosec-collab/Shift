@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="th" data-app-version="6.5.16" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">
+<html lang="th" data-app-version="6.5.17" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -2980,11 +2980,314 @@ html[data-v65-mode="HIGH"] .ambient,html[data-v65-mode="BALANCED"] .ambient{disp
 html[data-v65-mode="ECO"] .view.active > *,html[data-v65-mode="ECO"] .v652-pane{animation:none!important}
 
 </style>
+<style id="v6517-neon-dashboard-style">
+/* Shift v6.5.17 | Reference Neon Command UI — grounded in actual Shift roster.
+   No external images, fonts or continuous full-screen animations. */
+:root{
+  --shift-neon-green:#00ed91; --shift-neon-blue:#1689ff; --shift-neon-red:#ff315e;
+  --shift-neon-cyan:#19cfff; --shift-neon-purple:#a45cff;
+  --shift-neon-bg:#010714; --shift-neon-ink:#f3faff; --shift-neon-muted:#a5c6df;
+  --shift-neon-glass:rgba(3,20,38,.86);
+  --shift-neon-stroke:rgba(52,174,255,.60);
+  --shift-neon-rim:inset 0 1px 0 rgba(178,231,255,.32),0 0 0 1px rgba(15,114,213,.13),0 9px 26px rgba(0,4,14,.65),0 0 15px rgba(10,128,238,.18);
+}
+html{background:#010714!important;color-scheme:dark}
+html::before{
+  content:"";display:block;position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:repeating-linear-gradient(0deg,transparent 0 41px,rgba(7,100,172,.22) 42px,transparent 43px),
+             repeating-linear-gradient(90deg,transparent 0 41px,rgba(7,100,172,.22) 42px,transparent 43px),
+             linear-gradient(180deg,#00101e 0%,#010713 55%,#000815 100%);
+}
+html::after{
+  content:"";display:block;position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(circle at 16% 14%,rgba(0,117,233,.23),transparent 28%),
+             radial-gradient(circle at 88% 83%,rgba(5,89,185,.24),transparent 34%),
+             radial-gradient(circle at 51% 32%,rgba(1,89,196,.12),transparent 28%);
+}
+body,body:where(:not(.whatever)),.app{background:transparent!important;background-image:none!important;color:var(--shift-neon-ink)!important}
+.app{position:relative;z-index:1;isolation:isolate;max-width:1800px;margin:0 auto}
+.app main,.view{min-width:0}
+.v6517-glass{
+ position:relative;min-width:0;border:1px solid rgba(42,188,255,.77);
+ border-radius:16px;color:#f6fcff;
+ background:linear-gradient(145deg,rgba(6,31,55,.90),rgba(1,11,26,.91));
+ box-shadow:inset 0 1px rgba(169,234,255,.43),inset 0 0 18px rgba(0,105,226,.08),0 8px 20px rgba(0,0,0,.58),0 0 12px rgba(3,146,255,.31);
+ -webkit-backdrop-filter:blur(7px) saturate(125%);
+ backdrop-filter:blur(7px) saturate(125%);
+}
+.v6517-glass::before{
+ content:"";pointer-events:none;position:absolute;inset:1px;border-radius:inherit;
+ background:linear-gradient(113deg,rgba(173,237,255,.09),transparent 38%,rgba(29,145,255,.06));
+ z-index:0;
+}
+.v6517-glass>*{position:relative;z-index:1}
+.command-bar{
+  border:1px solid rgba(68,193,255,.78)!important;border-radius:18px!important;
+  background:linear-gradient(145deg,rgba(2,27,50,.96),rgba(0,12,29,.94))!important;
+  box-shadow:var(--shift-neon-rim),inset 0 0 20px rgba(0,118,233,.12),0 0 18px rgba(0,175,255,.24)!important;
+}
+.brand-mark{color:#29d8ff!important;filter:drop-shadow(0 0 9px rgba(0,187,255,.7))}
+.brand-copy h1{color:#f0faff!important;font-weight:850!important;letter-spacing:.02em;text-transform:uppercase;font-size:clamp(15px,1.5vw,24px)!important}
+.brand-copy h1 em{font-style:normal;color:#20d7ff;text-shadow:0 0 10px rgba(25,207,255,.52)}
+.brand-copy p{color:#a3d4fb!important;letter-spacing:.13em;font-size:10px!important}
+.nav-tabs,.v652-view-tabs,.v652-month-switch{background:rgba(2,19,39,.75)!important;border:1px solid rgba(52,165,255,.42)!important;border-radius:12px!important}
+.nav-btn,.sys-btn,.ghost-btn,.filter-btn,.range-btn,.v652-view-tabs button,.v652-month-switch button{
+  border:1px solid rgba(68,156,234,.40)!important;background:linear-gradient(155deg,rgba(13,38,66,.85),rgba(1,18,35,.92))!important;
+  color:#e1f4ff!important;box-shadow:inset 0 1px 0 rgba(153,221,255,.12)!important;
+  transition:transform .15s ease,background-color .15s ease,border-color .15s ease,box-shadow .16s ease!important
+}
+.nav-btn.active,.nav-tabs .active,.v652-view-tabs button.active,.v652-month-switch button.active,
+.filter-btn.active,.range-btn.active,.mobile-nav button.active{
+ background:linear-gradient(140deg,#1054c7,#062350 84%)!important;
+ border-color:#29d6ff!important;color:white!important;
+ box-shadow:inset 0 1px 0 rgba(217,249,255,.65),0 0 0 1px rgba(18,164,255,.43),0 0 17px rgba(0,140,255,.55)!important;
+}
+.smart-search,.smart-search input{border-radius:12px!important;background:rgba(0,18,38,.78)!important;color:#edf9ff!important;border-color:rgba(67,175,246,.59)!important}
+.hud-panel,.roster-card,.metric-card,.month-snapshot,.network-panel,.insights-panel,.analytics-panel,
+.analytics-card,.month-panel,.person-detail,.people-panel,.v652-hero,.v652-control-deck,.v652-timeline-panel,
+.v6515-oncall-month,.v6515-shift-group,.v655-selected-day-detail{
+ background:linear-gradient(135deg,rgba(7,32,56,.94),rgba(1,12,27,.95))!important;
+ border:1px solid var(--shift-neon-stroke)!important;border-radius:17px!important;
+ box-shadow:var(--shift-neon-rim)!important;
+ color:#effaff!important;
+}
+.hud-panel::after,.roster-card::after,.metric-card::after,.v6517-glass::after{
+ content:"";pointer-events:none;position:absolute;inset:0;border-radius:inherit;
+ background:linear-gradient(115deg,rgba(175,228,255,.09),transparent 27%,transparent 79%,rgba(33,147,255,.08));
+}
+.section-title,.v6515-oncall-title strong,.v6515-month-title strong,.roster-title b{color:#f8fdff!important;font-weight:780!important;text-shadow:0 1px 1px #000!important}
+.eyebrow,.muted,.row-meta{color:#a6cce6!important}
+.metric-card.day,.roster-card.day,.v6515-shift-group.day{border-color:rgba(0,237,145,.7)!important;border-left:3px solid var(--shift-neon-green)!important}
+.metric-card.night,.roster-card.night,.v6515-shift-group.night{border-color:rgba(22,137,255,.7)!important;border-left:3px solid var(--shift-neon-blue)!important}
+.metric-card.off,.roster-card.off,.v6515-shift-group.off{border-color:rgba(255,49,94,.7)!important;border-left:3px solid var(--shift-neon-red)!important}
+.metric-card.day .metric-orb,.roster-card.day .shift-emblem{color:#00ffaa!important;text-shadow:0 0 14px rgba(0,237,145,.65)!important}
+.metric-card.night .metric-orb,.roster-card.night .shift-emblem{color:#6ec1ff!important;text-shadow:0 0 14px rgba(22,137,255,.65)!important}
+.metric-card.off .metric-orb,.roster-card.off .shift-emblem{color:#ff637e!important;text-shadow:0 0 14px rgba(255,49,94,.65)!important}
+.metric-card.day .metric-num{color:#52ffba!important}
+.metric-card.night .metric-num{color:#99cfff!important}
+.metric-card.off .metric-num{color:#ff99ab!important}
+.metric-card .spark{filter:drop-shadow(0 0 3px currentColor)}
+:where(.analytics-panel,.analytics-card) svg{max-width:100%;overflow:visible}
+:where(.analytics-panel,.analytics-card) polyline{stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 3px currentColor)}
+/* Source roster status, not arbitrary screenshot values: D=day/green, N=night/blue, O=off/red. */
+.matrix-cell.D,.heatmap td.shift.D,.mini-matrix .matrix-cell.D{
+ background:linear-gradient(180deg,#00a46a,#034b38 70%,#02251d)!important;
+ border:1px solid #00ed91!important;color:#d8fff1!important;
+ box-shadow:inset 0 1px rgba(152,255,205,.52),0 0 5px rgba(0,237,145,.66),0 0 1px rgba(0,237,145,.8)!important;
+}
+.matrix-cell.N,.heatmap td.shift.N,.mini-matrix .matrix-cell.N{
+ background:linear-gradient(180deg,#1278ef,#063b9a 70%,#021a4b)!important;
+ border:1px solid #1689ff!important;color:#e6f5ff!important;
+ box-shadow:inset 0 1px rgba(167,221,255,.58),0 0 5px rgba(22,137,255,.77),0 0 1px rgba(22,137,255,.8)!important;
+}
+.matrix-cell.O,.heatmap td.shift.O,.mini-matrix .matrix-cell.O{
+ background:linear-gradient(180deg,#eb2857,#8f0930 68%,#41061c)!important;
+ border:1px solid #ff315e!important;color:#fff1f3!important;
+ box-shadow:inset 0 1px rgba(255,177,197,.6),0 0 5px rgba(255,49,94,.70),0 0 1px rgba(255,49,94,.8)!important;
+}
+.matrix-cell,.heatmap td.shift{border-radius:4px!important}
+.matrix-cell.selected,.matrix-day-head.selected,.heatmap .selected-col,.v6511-day.today{
+ outline:2px solid #49edff!important;outline-offset:0!important;
+ box-shadow:0 0 8px rgba(25,207,255,.9),inset 0 0 6px rgba(25,207,255,.4)!important;z-index:2;position:relative;
+}
+.matrix-day-head,.heatmap th,.matrix-name,.heatmap .name-col{background:#051a2d!important;color:#e1f3ff!important;border-color:rgba(43,123,193,.4)!important}
+.mini-matrix,.table-wrap{background:rgba(0,9,24,.9)!important;border:1px solid rgba(43,178,255,.57)!important;border-radius:9px}
+.matrix-row{gap:2px!important;border:0!important}
+.v6511-duty-bar{border:1px solid rgba(28,197,255,.66)!important;box-shadow:inset 0 1px rgba(191,236,255,.16),0 0 8px rgba(21,132,255,.24)!important}
+.v6511-month-board,.v6511-board-scroll{background:rgba(1,12,28,.88)!important}
+.v6511-day.today,.v655-live{box-shadow:0 0 14px rgba(25,207,255,.59),inset 0 1px rgba(189,244,255,.26)!important}
+.v652-person-chip,.v655-detail-person,.person-pick,.v64-transition,.insight-item,.v6515-person{
+ background:linear-gradient(145deg,rgba(9,42,70,.95),rgba(3,23,42,.93))!important;border-color:rgba(49,174,244,.5)!important;color:#effaff!important;
+}
+#analyticsView .activity-svg path,#analyticsView .activity-svg polyline{filter:drop-shadow(0 0 3px rgba(43,177,255,.6))}
+#monthView .month-panel{padding:clamp(10px,1.5vw,22px)!important}
+/* Reference-informed overview: hero / KPI / matrix / donut / oncall / trend */
+.v6517-dashboard{display:grid;gap:12px;min-width:0;margin:12px 0 16px}
+.v6517-banner{
+ display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+ padding:19px 24px;min-height:95px;position:relative;overflow:hidden;
+}
+.v6517-banner::before{
+ content:"";position:absolute;pointer-events:none;inset:0;
+ background:linear-gradient(113deg,rgba(0,126,225,.15),transparent 49%),
+ linear-gradient(90deg,transparent 0 65%,rgba(18,159,255,.12));
+}
+.v6517-banner h2{font-size:clamp(23px,2.35vw,34px);margin:0;color:#f7fdff;line-height:1.2;font-weight:800}
+.v6517-banner p{margin:5px 0 0;color:#a9cee7;font-size:clamp(11px,1vw,14px)}
+.v6517-banner h2 span{color:#27d6ff;text-shadow:0 0 12px rgba(25,207,255,.45)}
+.v6517-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;z-index:1}
+.v6517-actions button{height:42px;min-width:42px;padding:0 12px;font-size:14px;cursor:pointer;border-radius:11px;color:#fff;border:1px solid rgba(79,180,255,.76);background:linear-gradient(150deg,#082d58,#03142e);box-shadow:inset 0 1px rgba(222,250,255,.28),0 0 10px rgba(0,126,255,.24)}
+.v6517-date{font-weight:700;font-size:14px;color:#edfaff;min-width:132px;text-align:center}
+.v6517-kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;min-width:0}
+.v6517-kpi{
+ position:relative;min-width:0;min-height:95px;padding:13px;
+ display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:center;overflow:hidden;
+}
+.v6517-kpi-icon{
+ width:43px;height:43px;display:grid;place-items:center;border-radius:12px;
+ background:linear-gradient(150deg,rgba(17,120,241,.6),rgba(6,22,52,.98));
+ border:1px solid rgba(34,189,255,.79);color:#b6f2ff;
+ box-shadow:inset 0 1px rgba(255,255,255,.32),0 0 13px rgba(0,152,255,.3);font-size:21px
+}
+.v6517-kpi--green .v6517-kpi-icon{background:linear-gradient(145deg,#005b46,#021d22);color:#68ffd0;border-color:#00ed91;box-shadow:0 0 11px rgba(0,237,145,.39)}
+.v6517-kpi--red .v6517-kpi-icon{background:linear-gradient(145deg,#7b1236,#270821);color:#ffb2c1;border-color:#ff315e;box-shadow:0 0 11px rgba(255,49,94,.37)}
+.v6517-kpi--blue .v6517-kpi-icon{background:linear-gradient(145deg,#064fbc,#031838);color:#c2e9ff}
+.v6517-kpi--violet .v6517-kpi-icon{background:linear-gradient(145deg,#5c198b,#180c37);color:#e8c9ff;border-color:#a45cff}
+.v6517-kpi-copy{min-width:0;display:grid;gap:4px}
+.v6517-kpi-label{font-size:12px;font-weight:700;color:#c2deee;line-height:1.3}
+.v6517-kpi-value{font-size:clamp(23px,2.2vw,32px);font-weight:850;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+.v6517-kpi-value small{font-size:11px;color:#abd2ea;margin-left:4px}
+.v6517-kpi-note{font-size:10px;color:#8fb9d4}
+.v6517-main-grid{display:grid;grid-template-columns:minmax(0,2.35fr) minmax(235px,1fr);gap:12px;align-items:stretch;min-width:0}
+.v6517-matrix{padding:12px 13px;min-width:0;overflow:hidden;min-height:310px}
+.v6517-panel-header{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:9px}
+.v6517-panel-header strong{font-size:clamp(15px,1.35vw,21px);color:#fff;font-weight:800}
+.v6517-panel-header .v6517-accent{color:#26d8ff}
+.v6517-caption{color:#acc9df;font-size:11px}
+.v6517-matrix .month-snapshot{border:0!important;box-shadow:none!important;padding:0!important;background:transparent!important}
+.v6517-matrix .mini-matrix{overflow:hidden;max-width:100%;min-width:0;padding:4px}
+.v6517-matrix .matrix-row{display:grid!important;grid-template-columns:minmax(82px,1.65fr) repeat(31,minmax(0,1fr))!important;gap:2px!important;min-width:0}
+.v6517-matrix .matrix-name{font-size:clamp(9px,.75vw,12px)!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:3px 4px!important}
+.v6517-matrix .matrix-cell{min-width:0!important;width:100%!important;height:clamp(14px,1.33vw,21px)!important}
+.v6517-matrix .matrix-day-head{font-size:clamp(8px,.74vw,11px)!important;min-width:0;display:grid;place-items:center}
+.v6517-matrix .ghost-btn{min-height:31px;padding:6px 10px;color:#bcf4ff!important}
+.v6517-side-grid{display:grid;grid-template-rows:minmax(0,1fr) auto;gap:12px;min-width:0}
+.v6517-ratio-panel,.v6517-shifts-panel,.v6517-oncall-panel,.v6517-trend-panel,.v6517-insights-panel{padding:13px;min-width:0;overflow:hidden}
+.v6517-donut-wrap{display:flex;align-items:center;justify-content:center;gap:12px;min-width:0}
+.v6517-donut{--p1:0%;--p2:0%;--p3:0%;width:clamp(90px,9vw,155px);aspect-ratio:1;flex-shrink:0;border-radius:50%;display:grid;place-items:center;position:relative;
+ background:conic-gradient(#00ed91 0 var(--p1),#1689ff var(--p1) var(--p2),#ff315e var(--p2) 100%);
+ filter:drop-shadow(0 0 8px rgba(0,220,183,.3))}
+.v6517-donut::before{content:"";position:absolute;inset:15%;border-radius:50%;background:#041326;box-shadow:inset 0 0 9px rgba(0,0,0,.8)}
+.v6517-donut-center{z-index:1;text-align:center;font-size:24px;font-weight:850;color:#fff;line-height:1}
+.v6517-donut-center small{display:block;font-size:10px;margin-top:5px;color:#b6d4e8;font-weight:600}
+.v6517-legend{display:grid;gap:7px;min-width:0;flex:1}
+.v6517-legend-row{display:flex;gap:7px;align-items:center;justify-content:space-between;color:#d8ebf8;font-size:11px;border-bottom:1px solid rgba(72,151,213,.22);padding-bottom:5px}
+.v6517-legend-row b{font-variant-numeric:tabular-nums;color:#f9fdff}
+.v6517-dot{width:9px;height:9px;border-radius:50%;display:inline-block;box-shadow:0 0 8px currentColor;flex-shrink:0;margin-right:5px}
+.v6517-dot.green{background:#00ed91;color:#00ed91}.v6517-dot.blue{background:#1689ff;color:#1689ff}.v6517-dot.red{background:#ff315e;color:#ff315e}.v6517-dot.violet{background:#a45cff;color:#a45cff}
+.v6517-shifts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.v6517-shift{padding:9px 5px;border:1px solid rgba(43,148,229,.42);border-radius:10px;text-align:center;background:rgba(3,26,52,.8)}
+.v6517-shift b{display:block;font-size:19px;font-weight:800;color:#f9fdff}
+.v6517-shift span{display:block;font-size:10px;color:#bcdaf0}
+.v6517-shift--day{border-color:#00ed91;box-shadow:inset 0 -3px rgba(0,237,145,.3)}.v6517-shift--night{border-color:#1689ff;box-shadow:inset 0 -3px rgba(22,137,255,.4)}.v6517-shift--off{border-color:#ff315e;box-shadow:inset 0 -3px rgba(255,49,94,.42)}
+.v6517-bottom-grid{display:grid;grid-template-columns:minmax(170px,1fr) minmax(0,1.45fr) minmax(170px,1fr);gap:12px;align-items:stretch;min-width:0}
+.v6517-oncall-list,.v6517-notes{display:grid;gap:7px}
+.v6517-oncall-item,.v6517-note{display:flex;align-items:center;gap:9px;padding:9px 8px;border-radius:9px;border:1px solid rgba(53,138,207,.30);background:rgba(4,23,43,.85);font-size:12px;color:#d9f0ff}
+.v6517-oncall-item b{font-size:12px;color:#fff}
+.v6517-oncall-item small{display:block;color:#a8c9df;margin-top:3px}
+.v6517-oncall-item .v6517-dot{margin:0}
+.v6517-trend svg{display:block;width:100%;height:162px;overflow:visible}
+.v6517-trend .v6517-grid-line{stroke:rgba(43,145,219,.24);stroke-width:1}
+.v6517-trend .v6517-trend-line{fill:none;stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round;filter:drop-shadow(0 0 4px currentColor)}
+.v6517-trend .v6517-trend-line.green{stroke:#00ed91;color:#00ed91}
+.v6517-trend .v6517-trend-line.blue{stroke:#1689ff;color:#1689ff}
+.v6517-trend .v6517-trend-line.red{stroke:#ff315e;color:#ff315e}
+.v6517-trend .v6517-trend-selected{stroke:#23dfff;stroke-dasharray:3 3;stroke-width:1.4}
+.v6517-note{justify-content:space-between;align-items:center}
+.v6517-note span{font-size:11px;color:#cce7fa}
+.v6517-note b{color:#f9fdff;font-size:14px;font-variant-numeric:tabular-nums}
+.v6517-note .v6517-dot{margin-right:3px}
+.v6517-mobile-matrix{display:none}
+#overviewView>.hero-grid{margin-top:12px}
+#overviewView>.hero-grid .metric-stack{display:none!important}
+#overviewView>.hero-grid .hero-stage{min-height:220px!important;max-height:265px}
+#overviewView>.hero-grid .cyber-scene{opacity:.50}
+#overviewView>.lower-grid{display:grid;grid-template-columns:minmax(0,1fr)!important}
+#overviewView>.lower-grid:empty{display:none}
+#overviewView .lower-grid .month-snapshot{display:none}
+/* Color all non-dashboard states and analytics consistently. */
+#personView .person-detail,#dailyView .roster-card,#monthView .month-panel,#analyticsView .analytics-panel,#oncallView .v652-oncall{border-color:rgba(43,178,255,.6)!important}
+#oncallView .v652-control-deck{background:linear-gradient(145deg,rgba(7,36,65,.95),rgba(2,17,37,.97))!important}
+#oncallView .v652-pane{min-width:0}
+.v6515-month-days button{border:1px solid rgba(43,156,245,.58)!important;background:linear-gradient(160deg,#0d3051,#051526)!important}
+.v6515-month-days button.active{border-color:#19cfff!important;box-shadow:0 0 12px rgba(25,207,255,.64)!important}
+.v6515-shift-group.day .v6515-person{border-color:#00ed91!important;background:rgba(0,70,49,.6)!important}
+.v6515-shift-group.night .v6515-person{border-color:#1689ff!important;background:rgba(9,44,103,.7)!important}
+.v6515-shift-group.off .v6515-person{border-color:#ff315e!important;background:rgba(93,8,39,.65)!important}
+/* Glow arrives once: no 31x10 constantly running animations. */
+@keyframes v6517Appear{from{opacity:.30;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes v6517Alive{0%,100%{box-shadow:0 0 8px rgba(25,207,255,.45)}50%{box-shadow:0 0 18px rgba(25,207,255,.83)}}
+.v6517-dashboard{animation:v6517Appear .26s ease-out both}
+#overviewView .v6517-banner{animation:v6517Appear .30s ease-out both}
+.v6517-actions .v6517-date{animation:v6517Alive 4s ease-in-out infinite}
+@media (hover:hover) and (pointer:fine){
+ .v6517-kpi:hover,.v6517-glass:hover{border-color:rgba(98,229,255,.85)!important}
+ .v6517-actions button:hover,.v6517-oncall-item:hover{transform:translateY(-2px);box-shadow:0 0 15px rgba(22,137,255,.39)}
+ .matrix-cell:hover,.heatmap td.shift:hover{filter:brightness(1.25)}
+}
+@media (max-width:1200px){
+ .v6517-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .v6517-main-grid{grid-template-columns:minmax(0,1.8fr) minmax(200px,1fr)}
+ .v6517-bottom-grid{grid-template-columns:1fr 1fr}
+ .v6517-trend-panel{grid-column:1/-1;grid-row:1}
+}
+@media (max-width:860px){
+ html::before{background:repeating-linear-gradient(0deg,transparent 0 40px,rgba(0,89,155,.14) 41px,transparent 42px),repeating-linear-gradient(90deg,transparent 0 40px,rgba(0,89,155,.14) 41px,transparent 42px),#010814}
+ html::after{display:none}
+ .app{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))!important}
+ .v6517-dashboard{gap:9px;margin-top:7px}
+ .v6517-banner{padding:14px;min-height:unset}
+ .v6517-banner h2{font-size:22px}
+ .v6517-kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .v6517-kpi{min-height:81px;padding:9px;gap:8px}
+ .v6517-kpi-icon{width:35px;height:35px;font-size:18px}
+ .v6517-kpi-value{font-size:23px}
+ .v6517-main-grid,.v6517-bottom-grid{grid-template-columns:minmax(0,1fr)}
+ .v6517-bottom-grid .v6517-trend-panel{grid-column:auto;grid-row:auto}
+ .v6517-main-grid .v6517-side-grid{grid-template-rows:auto auto}
+ .v6517-matrix{padding:11px;min-height:0}
+ .v6517-matrix .mini-matrix{display:none!important}
+ .v6517-mobile-matrix{display:block;min-width:0;overflow-x:auto;overscroll-behavior-inline:contain;-webkit-overflow-scrolling:touch}
+ .v6517-mobile-row{display:grid;grid-template-columns:75px repeat(14,minmax(15px,1fr));gap:3px;min-width:330px;margin-bottom:3px;align-items:center}
+ .v6517-mobile-name{font-size:10px;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;color:#cbeaff}
+ .v6517-mobile-row button{min-width:0;height:20px;padding:0;border-radius:4px;font-size:9px;border:1px solid rgba(23,122,193,.4);background:#06203c;color:#e8f9ff}
+ .v6517-mobile-row button.D{background:#005c40;border-color:#00ed91;box-shadow:0 0 4px rgba(0,237,145,.60)}
+ .v6517-mobile-row button.N{background:#073b9b;border-color:#1689ff;box-shadow:0 0 4px rgba(22,137,255,.70)}
+ .v6517-mobile-row button.O{background:#800e33;border-color:#ff315e;box-shadow:0 0 4px rgba(255,49,94,.65)}
+ .v6517-mobile-row button.selected{outline:2px solid #19cfff;box-shadow:0 0 8px #19cfff}
+ .v6517-actions .v6517-date{animation:none}
+ .v6517-donut{width:120px}
+ .v6517-kpi,.v6517-glass,.hud-panel{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+ html body #mobileNav{
+  position:fixed!important;left:0!important;right:0!important;top:auto!important;bottom:0!important;transform:none!important;
+  margin:0!important;border-radius:15px 15px 0 0!important;z-index:2147483000!important;
+  padding-bottom:calc(7px + env(safe-area-inset-bottom,0px))!important;background:rgba(2,23,47,.96)!important;
+  border:1px solid rgba(44,184,255,.78)!important;border-bottom:0!important;
+  box-shadow:0 -7px 20px rgba(0,0,0,.85),inset 0 1px rgba(184,236,255,.36),0 0 14px rgba(0,126,255,.32)!important;
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+ }
+ html body #mobileNav button{min-height:48px!important;font-weight:760!important;min-width:0!important}
+ .v6517-dashboard,.v6517-banner{animation:none}
+}
+@media (max-width:600px){
+ .v6517-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .v6517-kpi-label{font-size:10px}.v6517-kpi-note{font-size:9px}
+ .v6517-actions{width:100%;justify-content:space-between}
+ .v6517-date{min-width:0!important;flex:1}
+ .v6517-donut-wrap{gap:8px}
+ .v6517-ratio-panel,.v6517-shifts-panel,.v6517-oncall-panel,.v6517-trend-panel,.v6517-insights-panel{padding:11px}
+ .v6517-trend svg{height:145px}
+ #overviewView>.hero-grid .hero-stage{max-height:235px}
+}
+@media (display-mode:standalone){
+ html body #mobileNav{bottom:0!important}
+ .app{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))!important}
+}
+@media (prefers-reduced-transparency:reduce){
+ .v6517-glass,.command-bar,.hud-panel,.mobile-nav{background:#061c35!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+}
+@media (prefers-reduced-motion:reduce){
+ .v6517-dashboard,.v6517-banner,.v6517-date{animation:none!important}
+ .v6517-glass,.matrix-cell,.nav-btn{transition:none!important}
+}
+html[data-v65-mode="ECO"] .v6517-dashboard,html[data-v65-mode="ECO"] .v6517-banner,html[data-v65-mode="ECO"] .v6517-date{animation:none!important}
+
+</style>
 </head>
 <!-- REFERENCE LOCK V4 -->
 <body>
 
-<div id="bootOverlay" data-loader-version="6.5.16" aria-label="Loading Shift Command Center"><div class="boot613-shell"><div class="boot613-top"><div class="boot613-logo"></div><div class="boot613-title"><small>Boot Sequence</small><h2>Loading Shift Command Center</h2><p>กำลังเชื่อมต่อ Shift Matrix และ Command UI…</p></div><div class="boot613-live">● LIVE BOOT</div></div><div class="boot613-main"><div class="boot613-radar"><div class="boot613-orbit"><i class="boot613-arc a"></i><i class="boot613-arc b"></i><i class="boot613-arc c"></i><i class="boot613-core"></i></div></div><div class="boot613-info"><div class="boot613-card"><div class="boot613-card-head"><b id="boot613Phase">Initializing Core Systems</b><span id="boot613Status">Starting…</span></div><div class="boot613-progress"><i id="boot613Bar"></i></div><div class="boot613-readout"><div class="boot613-pct" id="boot613Pct">8%</div><div class="boot613-phase" id="boot613Meta">phase 1 / 4<br>Secure startup</div></div></div><div class="boot613-grid"><div class="boot613-mini"><span>Module</span><b>Command UI</b></div><div class="boot613-mini"><span>Matrix</span><b>October 2569</b></div><div class="boot613-mini"><span>Status</span><b id="boot613State">BOOTING</b></div></div><div class="boot613-scan"><i></i></div></div></div></div></div>
+<div id="bootOverlay" data-loader-version="6.5.17" aria-label="Loading Shift Command Center"><div class="boot613-shell"><div class="boot613-top"><div class="boot613-logo"></div><div class="boot613-title"><small>Boot Sequence</small><h2>Loading Shift Command Center</h2><p>กำลังเชื่อมต่อ Shift Matrix และ Command UI…</p></div><div class="boot613-live">● LIVE BOOT</div></div><div class="boot613-main"><div class="boot613-radar"><div class="boot613-orbit"><i class="boot613-arc a"></i><i class="boot613-arc b"></i><i class="boot613-arc c"></i><i class="boot613-core"></i></div></div><div class="boot613-info"><div class="boot613-card"><div class="boot613-card-head"><b id="boot613Phase">Initializing Core Systems</b><span id="boot613Status">Starting…</span></div><div class="boot613-progress"><i id="boot613Bar"></i></div><div class="boot613-readout"><div class="boot613-pct" id="boot613Pct">8%</div><div class="boot613-phase" id="boot613Meta">phase 1 / 4<br>Secure startup</div></div></div><div class="boot613-grid"><div class="boot613-mini"><span>Module</span><b>Command UI</b></div><div class="boot613-mini"><span>Matrix</span><b>October 2569</b></div><div class="boot613-mini"><span>Status</span><b id="boot613State">BOOTING</b></div></div><div class="boot613-scan"><i></i></div></div></div></div></div>
 
 <div class="ambient a"></div><div class="ambient b"></div><div class="ambient c"></div>
 <div class="app">
@@ -4417,6 +4720,198 @@ if(typeof document!=='undefined'){
   };
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',v6515Init,{once:true});
   else v6515Init();
+}
+
+// v6517-neon-dashboard.js
+/* Shift v6.5.17 – reference neon dashboard. All figures are derived from the existing roster. */
+function v6517Esc(value){
+ return String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+}
+function v6517Language(){return document.documentElement.lang==='en'?'en':'th'}
+function v6517Stats(day){
+ const d=crew(day,'D').length,n=crew(day,'N').length,o=crew(day,'O').length;
+ return {total:staff.length,day:d,night:n,off:o,working:d+n,coverage:staff.length?Math.round((d+n)/staff.length*100):0};
+}
+function v6517Chart(selected){
+ const series={D:[],N:[],O:[]},max=staff.length||1;
+ for(let d=1;d<=31;d++){
+   const stat=v6517Stats(d);
+   for(const [code,value] of [['D',stat.day],['N',stat.night],['O',stat.off]]){
+     series[code].push([12+(d-1)*15.6,130-value/max*106]);
+   }
+ }
+ const poly=key=>series[key].map(x=>x.map(v=>v.toFixed(1)).join(',')).join(' ');
+ const x=12+(selected-1)*15.6;
+ return `<svg role="img" aria-label="จำนวนพนักงานเวรกลางวัน กลางคืน และหยุด ตลอดเดือนตุลาคม 2569" viewBox="0 0 500 165" preserveAspectRatio="none">
+ <title>Shift schedule trends based on October 2026 roster</title>
+ <line x1="12" y1="25" x2="486" y2="25" class="v6517-grid-line"/>
+ <line x1="12" y1="78" x2="486" y2="78" class="v6517-grid-line"/>
+ <line x1="12" y1="130" x2="486" y2="130" class="v6517-grid-line"/>
+ <line x1="${x.toFixed(1)}" y1="12" x2="${x.toFixed(1)}" y2="136" class="v6517-trend-selected"/>
+ <polyline class="v6517-trend-line green" points="${poly('D')}"/>
+ <polyline class="v6517-trend-line blue" points="${poly('N')}"/>
+ <polyline class="v6517-trend-line red" points="${poly('O')}"/>
+ <g font-size="11" fill="#a5c6df"><text x="12" y="154">1 ต.ค.</text><text x="220" y="154">15</text><text x="462" y="154">31</text></g>
+ </svg>`;
+}
+function v6517Oncall(){
+ const now=new Date(),english=v6517Language()==='en';
+ const current=typeof getOncallAssignmentsForDate==='function'?getOncallAssignmentsForDate(now):[];
+ const next=typeof getNextOncallAssignments==='function'?getNextOncallAssignments(now):[];
+ const lines=[];
+ for(const row of current.slice(0,3)){
+  lines.push(`<div class="v6517-oncall-item"><i class="v6517-dot green"></i><div><b>${v6517Esc(row.name)}</b><small>${english?'On call now':'กำลังเข้าเวร Oncall'} • ${row.start}–${row.end}</small></div></div>`);
+ }
+ for(const row of next.slice(0,3-lines.length)){
+  lines.push(`<div class="v6517-oncall-item"><i class="v6517-dot violet"></i><div><b>${v6517Esc(row.name)}</b><small>${english?'Next assignment':'เวรถัดไป'} • ${row.start}–${row.end}</small></div></div>`);
+ }
+ return lines.join('')||`<div class="v6517-oncall-item">${english?'No on-call assignment for the current date':'ไม่มีข้อมูลผู้เข้าเวร Oncall สำหรับวันนี้'}</div>`;
+}
+function v6517MobilePreview(selectedDay){
+ const start=Math.floor((selectedDay-1)/14)*14+1,end=Math.min(31,start+13);
+ const days=Array.from({length:end-start+1},(_,i)=>start+i);
+ const header=`<div class="v6517-mobile-row"><span class="v6517-mobile-name">ทีม / วัน</span>${days.map(day=>`<button type="button" data-v6517-day="${day}" class="${selectedDay===day?'selected':''}" aria-label="วันที่ ${day}">${day}</button>`).join('')}</div>`;
+ const rows=staff.map((person,i)=>`<div class="v6517-mobile-row"><span class="v6517-mobile-name" title="${v6517Esc(person.name)}">${v6517Esc(shortName(person.name))}</span>${days.map(day=>{
+   const code=statusAt(i,day);
+   return `<button type="button" class="${code} ${selectedDay===day?'selected':''}" data-v6517-day="${day}" data-v6517-person="${i}" aria-label="${v6517Esc(person.name)} วันที่ ${day} ${v6517Esc(label(code))}"></button>`;
+ }).join('')}</div>`).join('');
+ return header+rows;
+}
+function v6517Render(){
+ const root=document.getElementById('v6517Dashboard');
+ if(!root)return;
+ const lang=v6517Language(),en=lang==='en';
+ const day=Math.max(1,Math.min(31,Number(selectedDay)||1)),stat=v6517Stats(day);
+ const pct=code=>stat.total?Math.round(stat[code]/stat.total*100):0;
+ const current=v6517Stats(day),prev=v6517Stats(Math.max(1,day-1));
+ const date=document.getElementById('v6517Date'),today=new Date(),isOctober=today.getFullYear()===2026&&today.getMonth()===9;
+ if(date)date.textContent=en?`Oct ${day}, 2026`:`${day} ตุลาคม 2569`;
+ const todayButton=root.querySelector('[data-v6517-action="today"]');
+ if(todayButton){todayButton.disabled=!isOctober;todayButton.title=isOctober?(en?'Jump to today':'ไปวันนี้'):(en?'The loaded roster is October 2026':'ข้อมูลตารางนี้เป็นเดือนตุลาคม 2569')}
+ const numbers={total:stat.total,working:stat.working,day:stat.day,night:stat.night,off:stat.off};
+ root.querySelectorAll('[data-v6517-count]').forEach(node=>{
+  const name=node.getAttribute('data-v6517-count');
+  node.textContent=String(numbers[name]??'—');
+ });
+ const ring=root.querySelector('#v6517Donut');
+ if(ring){
+  ring.style.setProperty('--p1',pct('day')+'%');
+  ring.style.setProperty('--p2',(pct('day')+pct('night'))+'%');
+ }
+ const labels={day:en?'Day':'กลางวัน',night:en?'Night':'กลางคืน',off:en?'Off':'หยุด'};
+ const legend=root.querySelector('#v6517Legend');
+ if(legend)legend.innerHTML=[['day','green'],['night','blue'],['off','red']].map(([name,color])=>
+ `<div class="v6517-legend-row"><span><i class="v6517-dot ${color}"></i>${labels[name]}</span><b>${stat[name]} • ${pct(name)}%</b></div>`).join('');
+ const ratio=root.querySelector('#v6517Percent');
+ if(ratio)ratio.textContent=stat.coverage+'%';
+ const trend=root.querySelector('#v6517Trend');
+ if(trend)trend.innerHTML=v6517Chart(day);
+ const oncall=root.querySelector('#v6517Oncall');
+ if(oncall)oncall.innerHTML=v6517Oncall();
+ const cards=root.querySelector('#v6517Notes');
+ if(cards){
+  const change=stat.working-prev.working;
+  const entries=[
+   [en?'Selected roster date':'วันที่เลือก',en?`October ${day}, 2026`:`${day} ต.ค. 2569`,'blue'],
+   [en?'Working vs previous day':'เข้าเวรเทียบวันก่อน',day===1?'—':(change>0?'+':'')+change+' '+(en?'people':'คน'),'green'],
+   [en?'Roster coverage':'สัดส่วนผู้เข้าเวร',stat.coverage+'%','violet']
+  ];
+  cards.innerHTML=entries.map(([title,value,color])=>
+   `<div class="v6517-note"><span><i class="v6517-dot ${color}"></i>${title}</span><b>${v6517Esc(value)}</b></div>`).join('');
+ }
+ const preview=root.querySelector('#v6517MobileMatrix');
+ if(preview)preview.innerHTML=v6517MobilePreview(day);
+}
+function v6517Init(){
+ const view=document.getElementById('overviewView');
+ if(!view||document.getElementById('v6517Dashboard')||typeof crew!=='function'||!Array.isArray(staff))return;
+ document.documentElement.dataset.appVersion='6.5.17';
+ const brand=document.querySelector('.brand-copy h1');
+ if(brand){brand.innerHTML='SHIFT <em>PRO</em>';brand.setAttribute('aria-label','Shift Pro Command Center')}
+ const subtitle=document.querySelector('.brand-copy p');
+ if(subtitle)subtitle.textContent='WORKFORCE SCHEDULING';
+ const deck=document.createElement('div');
+ deck.id='v6517Dashboard';
+ deck.className='v6517-dashboard';
+ deck.innerHTML=`
+  <section class="v6517-banner v6517-glass" aria-label="Dashboard header">
+   <div><h2>SHIFT <span>PRO</span> <small style="font-size:.48em;color:#a8daff">• DASHBOARD</small></h2>
+    <p>ตารางเวรและกำลังคนจากข้อมูลจริง • ตุลาคม 2569</p></div>
+   <div class="v6517-actions">
+    <button type="button" data-v6517-action="previous" aria-label="วันก่อนหน้า">‹</button>
+    <span class="v6517-date" id="v6517Date"></span>
+    <button type="button" data-v6517-action="next" aria-label="วันถัดไป">›</button>
+    <button type="button" data-v6517-action="today" aria-label="ไปวันนี้">วันนี้</button>
+   </div>
+  </section>
+  <div class="v6517-kpis" id="v6517Kpis">
+   <section class="v6517-kpi v6517-glass"><span class="v6517-kpi-icon" aria-hidden="true">♙</span><div class="v6517-kpi-copy"><span class="v6517-kpi-label">พนักงานทั้งหมด</span><b class="v6517-kpi-value" data-v6517-count="total">—</b><small class="v6517-kpi-note">จากข้อมูลตารางจริง</small></div></section>
+   <section class="v6517-kpi v6517-glass v6517-kpi--green"><span class="v6517-kpi-icon" aria-hidden="true">✓</span><div class="v6517-kpi-copy"><span class="v6517-kpi-label">เข้าเวรวันนี้ที่เลือก</span><b class="v6517-kpi-value" data-v6517-count="working">—</b><small class="v6517-kpi-note">กะกลางวัน + กลางคืน</small></div></section>
+   <section class="v6517-kpi v6517-glass v6517-kpi--blue"><span class="v6517-kpi-icon" aria-hidden="true">☀</span><div class="v6517-kpi-copy"><span class="v6517-kpi-label">เวรกลางวัน</span><b class="v6517-kpi-value" data-v6517-count="day">—</b><small class="v6517-kpi-note">DAY • D</small></div></section>
+   <section class="v6517-kpi v6517-glass v6517-kpi--violet"><span class="v6517-kpi-icon" aria-hidden="true">☾</span><div class="v6517-kpi-copy"><span class="v6517-kpi-label">เวรกลางคืน</span><b class="v6517-kpi-value" data-v6517-count="night">—</b><small class="v6517-kpi-note">NIGHT • N</small></div></section>
+   <section class="v6517-kpi v6517-glass v6517-kpi--red"><span class="v6517-kpi-icon" aria-hidden="true">×</span><div class="v6517-kpi-copy"><span class="v6517-kpi-label">วันหยุด</span><b class="v6517-kpi-value" data-v6517-count="off">—</b><small class="v6517-kpi-note">OFF • O</small></div></section>
+  </div>
+  <div class="v6517-main-grid">
+   <section class="v6517-matrix v6517-glass" aria-label="Monthly shift matrix">
+    <div id="v6517MatrixTarget"></div>
+    <div class="v6517-mobile-matrix" id="v6517MobileMatrix" aria-label="ตัวอย่างตารางเวรบนมือถือ"></div>
+   </section>
+   <div class="v6517-side-grid">
+    <section class="v6517-ratio-panel v6517-glass"><header class="v6517-panel-header"><strong>◉ กำลังคนวันที่เลือก</strong></header>
+     <div class="v6517-donut-wrap"><div class="v6517-donut" id="v6517Donut"><span class="v6517-donut-center"><span id="v6517Percent">0%</span><small>เข้าเวร</small></span></div><div class="v6517-legend" id="v6517Legend"></div></div>
+    </section>
+    <section class="v6517-shifts-panel v6517-glass"><header class="v6517-panel-header"><strong>◷ สรุปกะงาน</strong></header>
+     <div class="v6517-shifts">
+      <div class="v6517-shift v6517-shift--day"><span>☀ DAY</span><b data-v6517-count="day">0</b></div>
+      <div class="v6517-shift v6517-shift--night"><span>☾ NIGHT</span><b data-v6517-count="night">0</b></div>
+      <div class="v6517-shift v6517-shift--off"><span>◌ OFF</span><b data-v6517-count="off">0</b></div>
+     </div>
+    </section>
+   </div>
+  </div>
+  <div class="v6517-bottom-grid">
+   <section class="v6517-oncall-panel v6517-glass"><header class="v6517-panel-header"><strong>⌁ Engineer Oncall</strong><span class="v6517-caption">ตามตารางที่มีข้อมูล</span></header><div class="v6517-oncall-list" id="v6517Oncall"></div></section>
+   <section class="v6517-trend-panel v6517-glass"><header class="v6517-panel-header"><strong>≋ แนวโน้มกำลังคน 31 วัน</strong><span class="v6517-caption"><i class="v6517-dot green"></i>Day <i class="v6517-dot blue"></i>Night <i class="v6517-dot red"></i>Off</span></header><div class="v6517-trend" id="v6517Trend"></div></section>
+   <section class="v6517-insights-panel v6517-glass"><header class="v6517-panel-header"><strong>◷ สรุปจากตารางเวร</strong><span class="v6517-caption">ข้อมูลจริง</span></header><div class="v6517-notes" id="v6517Notes"></div></section>
+  </div>`;
+ view.insertBefore(deck,view.firstElementChild);
+ const matrix=document.getElementById('overviewMonthMatrix');
+ if(!matrix)return;
+ const snapshot=view.querySelector('.lower-grid .month-snapshot');
+ if(snapshot)deck.querySelector('#v6517MatrixTarget')?.appendChild(snapshot);
+ let scheduled=false;
+ const render=()=>{if(scheduled)return;scheduled=true;requestAnimationFrame(()=>{scheduled=false;v6517Render()})};
+ if(typeof window.renderOverview==='function'){
+  const old=window.renderOverview;
+  window.renderOverview=function(){const result=old.apply(this,arguments);render();return result};
+ }
+ deck.addEventListener('click',event=>{
+  const button=event.target.closest?.('button');
+  if(!button||!deck.contains(button))return;
+  const action=button.dataset.v6517Action;
+  if(action==='previous'&&selectedDay>1)setSelectedDay(selectedDay-1,false);
+  if(action==='next'&&selectedDay<31)setSelectedDay(selectedDay+1,false);
+  if(action==='today'){
+    const now=new Date();if(now.getFullYear()===2026&&now.getMonth()===9)setSelectedDay(now.getDate(),false);
+  }
+  if(button.hasAttribute('data-v6517-day')){
+   const person=button.hasAttribute('data-v6517-person')?Number(button.dataset.v6517Person):null;
+   const day=Number(button.dataset.v6517Day);
+   if(Number.isInteger(day)&&day>=1&&day<=31){
+    if(person!==null&&typeof openCellModal==='function')openCellModal(person,day);
+    else setSelectedDay(day,false);
+   }
+  }
+ });
+ const localeObserver=new MutationObserver(render);
+ localeObserver.observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+ window.addEventListener('pageshow',render);
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden)render()});
+ render();
+}
+if(typeof document!=='undefined'){
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',v6517Init,{once:true});
+ else v6517Init();
 }
 
 })();</script>
