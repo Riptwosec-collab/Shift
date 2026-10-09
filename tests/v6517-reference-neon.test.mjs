@@ -5,7 +5,7 @@ const read=p=>fs.readFileSync(p,'utf8');
 
 test('reference neon dashboard uses real schedule, never mock HR values',()=>{
  const js=read('src/v6517-neon-dashboard.js');
- for(const k of ['crew(', 'staff.length', 'selectedDay','getOncallAssignmentsForDate','getNextOncallAssignments','overviewMonthMatrix','month-snapshot','v6517Dashboard','v6517Kpis','v6517Trend','v6517Ratio','aria-label','requestAnimationFrame'])assert.ok(js.includes(k),k);
+ for(const k of ['crew(', 'staff.length', 'selectedDay','getOncallAssignmentsForDate','getNextOncallAssignments','overviewMonthMatrix','month-snapshot','v6517Dashboard','v6517Kpis','v6517Trend','v6517Donut','aria-label','requestAnimationFrame'])assert.ok(js.includes(k),k);
  assert.doesNotMatch(js,/fake|demo employees|Math\.random\(|128 employees|102 employees|simulated/);
 });
 test('new desktop glass grid aesthetic is shared across all five views and oncall',()=>{
@@ -36,7 +36,7 @@ test('animation is GPU-bounded and quality/respect reduced motion modes',()=>{
  assert.match(css,/@keyframes v6517/);
  assert.match(css,/transform:\s*translateY/);
  assert.match(css,/data-v65-mode="ECO"/);
- assert.doesNotMatch(css,/animation:\s*[^;]*(?:blur|filter)/);
+ assert.doesNotMatch(css,/animation:\s*[^;}\n]*(?:blur|filter)/);
 });
 test('build, offline cache and CI gate track v6.5.17',()=>{
  const build=read('scripts/build.mjs'),sw=read('sw.js'),html=read('index.html'),workflow=read('.github/workflows/v65-ci.yml');

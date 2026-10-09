@@ -178,8 +178,7 @@ function v6517Init(){
    }
   }
  });
- const localeObserver=new MutationObserver(render);
- localeObserver.observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+ document.addEventListener('click',event=>{if(event.target.closest?.('.v65-language button'))requestAnimationFrame(render)},true);
  window.addEventListener('pageshow',render);
  document.addEventListener('visibilitychange',()=>{if(!document.hidden)render()});
  render();
