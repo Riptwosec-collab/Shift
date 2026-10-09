@@ -1,15 +1,17 @@
 /* Shift v6.5.20 — resilient install + immediate cached PWA launches. */
-const CACHE_NAME='shift-shell-v6.5.20';
+const CACHE_NAME='shift-shell-v6.5.20-r2';
 const SHELL_ASSETS=['./index.html','./manifest.webmanifest','./icons/shift-192.png','./icons/shift-512.png','./icons/shift-maskable-512.png'];
 const APP_PATHS=new Set(SHELL_ASSETS.map(path=>new URL(path,self.registration.scope).pathname));
 self.addEventListener('install',event=>{
   event.waitUntil((async()=>{
     const cache=await caches.open(CACHE_NAME);
     // A transient missing icon must not make the entire service worker fail to install.
-    await Promise.allSettled([
+    const [shellResult]=await Promise.allSettled([
       cache.add('./index.html'),
       ...SHELL_ASSETS.filter(path=>path!=='./index.html').map(path=>cache.add(path))
     ]);
+    // Do not advertise an installed offline app if its primary HTML never cached.
+    if(shellResult.status!=='fulfilled')throw shellResult.reason;
     await self.skipWaiting();
   })());
 });
