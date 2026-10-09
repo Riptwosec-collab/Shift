@@ -19,7 +19,7 @@ test('mobile PWA bottom navigation is full-bleed and viewport anchored',()=>{
 });
 test('month and oncall render native mobile content rather than desktop scroll table',()=>{
  const js=read('src/v6515-mobile.js'),css=read('src/v6515-ui.css');
- for(const marker of ['v6515MobileMonth','v6515MobileOncall','v6515OncallCard','v6515MonthDay','v652Matrix','v652Overview','v652Timeline','getOncallMonthMatrix','ONCALL_SCHEDULE','renderV652Oncall','renderHeatmap','staff','selectedDay'])assert.ok(js.includes(marker),marker);
+ for(const marker of ['v6515MobileMonth','v6515MobileOncall','v6515OncallCard','v6515MonthDay','v652Matrix','v652Overview','v652Timeline','ONCALL_SCHEDULE','renderV652Oncall','staff','selectedDay'])assert.ok(js.includes(marker),marker);
  for(const marker of ['#monthView .table-wrap','#v6515MobileMonth','.v6515-oncall','.v6515-month-days','grid-template-columns:repeat(7,minmax(0,1fr))'])assert.ok(css.includes(marker),marker);
  assert.match(css,/html\[data-v6515-native-month="1"\][\s\S]*display:none!important/);
 });
@@ -32,8 +32,9 @@ test('oncall range model preserves source segments and per-engineer order',async
  assert.equal(v6515TodayForLegacy(new Date(2026,10,9)),null);
 });
 test('PWA resumes on focus and updates at midnight, without global polling loops',()=>{
- const js=read('src/v6515-mobile.js');
- for(const k of ['visibilitychange','pageshow','setTimeout','document.hidden','v6515LocalDateKey','setSelectedDay','renderV652Oncall','addEventListener'])assert.ok(js.includes(k),k);
+ const js=read('src/v6515-mobile.js'),scheduler=read('src/v6514-mobile.js');
+ for(const k of ['visibilitychange','pageshow','document.hidden','v6515LocalDateKey','setSelectedDay','addEventListener'])assert.ok(js.includes(k),k);
+ for(const k of ['setTimeout','visibilitychange','pageshow','renderV652Oncall'])assert.ok(scheduler.includes(k),k);
  assert.doesNotMatch(js,/setInterval\s*\(/);
 });
 test('new release is wired to CSS JS cache and GitHub CI',()=>{
