@@ -1,0 +1,124 @@
+/* Shift matrix layout fix: preserve employee roster data. */
+#overviewView .v6517-main-grid{align-items:start!important}
+#overviewView .v6517-matrix{
+  display:block!important;align-self:start!important;
+  height:auto!important;min-height:0!important;max-height:none!important;
+  overflow:hidden!important;box-sizing:border-box;
+}
+#overviewView .v6517-matrix #v6517MatrixTarget,
+#overviewView .v6517-matrix #v6517MatrixTarget .month-snapshot{
+  height:auto!important;min-height:0!important;max-height:none!important;margin:0!important;
+}
+#overviewView .v6517-matrix .mini-matrix{
+  box-sizing:border-box;width:100%!important;max-width:100%!important;
+  height:auto!important;min-height:0!important;display:block;
+  overflow-x:auto!important;overflow-y:hidden!important;
+  -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;
+  padding:3px!important;margin:3px 0 0!important;
+}
+#overviewView .v6517-matrix .matrix-row{
+  box-sizing:border-box;min-width:1050px!important;width:100%!important;
+  grid-template-columns:190px repeat(31,minmax(25px,1fr))!important;
+  min-height:29px!important;align-items:center!important;gap:2px!important;margin-bottom:2px!important;
+}
+#overviewView .v6517-matrix .matrix-name{
+  display:flex!important;align-items:center!important;
+  min-height:26px!important;min-width:0!important;max-width:none!important;
+  white-space:normal!important;overflow:visible!important;text-overflow:clip!important;
+  overflow-wrap:break-word!important;word-break:normal!important;
+  font-size:11px!important;line-height:1.25!important;font-weight:700!important;
+  position:sticky;left:0;z-index:4;padding:2px 5px!important;
+  color:#effaff!important;background:#061a31!important;
+}
+#overviewView .v6517-matrix .matrix-header .matrix-name{z-index:6}
+#overviewView .v6517-matrix .matrix-cell{height:20px!important;min-height:20px!important}
+/* Work = D or N / red outline. Rest = O / green outline. */
+#overviewView .v6517-matrix .matrix-cell.D,
+#overviewView .v6517-matrix .matrix-cell.N,
+#monthView .heatmap td.shift.D,#monthView .heatmap td.shift.N,
+#overviewView .v6517-mobile-row button.D,#overviewView .v6517-mobile-row button.N{
+  border:1px solid #ff4d68!important;
+  box-shadow:inset 0 1px rgba(255,225,234,.24),0 0 5px rgba(255,74,101,.52)!important;
+}
+#overviewView .v6517-matrix .matrix-cell.O,
+#monthView .heatmap td.shift.O,#overviewView .v6517-mobile-row button.O{
+  border:1px solid #25e3a4!important;
+  background:linear-gradient(180deg,#08845b,#053b2b)!important;
+  box-shadow:inset 0 1px rgba(225,255,246,.22),0 0 5px rgba(35,226,163,.5)!important;
+}
+#overviewView .v6517-matrix .matrix-cell.D,
+#monthView .heatmap td.shift.D,#overviewView .v6517-mobile-row button.D{
+  background:linear-gradient(180deg,#aa2548,#551028)!important;
+}
+#overviewView .v6517-matrix .matrix-cell.N,
+#monthView .heatmap td.shift.N,#overviewView .v6517-mobile-row button.N{
+  background:linear-gradient(180deg,#145bb3,#08275a)!important;
+}
+#overviewView .v6517-matrix .matrix-cell.selected,
+#overviewView .v6517-mobile-row button.selected,
+#monthView .heatmap .selected-col{
+  outline:2px solid #54eaff!important;outline-offset:0!important;
+  box-shadow:0 0 9px rgba(62,215,255,.75)!important;
+}
+#overviewView .roster-card.day,#overviewView .roster-card.night,
+#dailyView .roster-card.day,#dailyView .roster-card.night{border-left:3px solid #ff4d68!important}
+#overviewView .roster-card.off,#dailyView .roster-card.off{border-left:3px solid #25e3a4!important}
+#monthView .heatmap tbody th.name-col,#monthView .heatmap .v6519-full-name{
+  white-space:normal!important;overflow:visible!important;text-overflow:clip!important;
+  overflow-wrap:break-word!important;
+}
+@media(max-width:860px){
+  .sticky-daily,#dailyView .sticky-daily{
+    position:static!important;top:auto!important;bottom:auto!important;
+    z-index:auto!important;transform:none!important;
+  }
+  #overviewView .v6517-main-grid{
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-auto-rows:max-content!important;align-items:start!important;
+  }
+  #overviewView .v6517-matrix{
+    height:fit-content!important;min-height:0!important;max-height:none!important;
+    align-self:start!important;padding:10px!important;
+  }
+  #overviewView .v6517-matrix #v6517MatrixTarget{
+    display:none!important;height:0!important;min-height:0!important;margin:0!important;
+  }
+  #overviewView .v6517-matrix .mini-matrix{display:none!important}
+  #overviewView .v6517-matrix #v6517MobileMatrix{
+    display:block!important;box-sizing:border-box;
+    width:100%!important;max-width:100%!important;min-width:0!important;
+    height:auto!important;min-height:0!important;max-height:none!important;
+    overflow-x:auto!important;overflow-y:hidden!important;
+    overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;
+    padding:3px 0 2px!important;margin:0!important;
+  }
+  #overviewView .v6517-mobile-row{
+    display:grid!important;grid-template-columns:160px repeat(14,23px)!important;
+    width:max-content!important;min-width:max-content!important;
+    min-height:28px!important;align-items:center!important;
+    gap:3px!important;margin-bottom:2px!important;
+  }
+  #overviewView .v6517-mobile-name{
+    display:flex!important;align-items:center!important;
+    width:160px!important;min-width:160px!important;max-width:160px!important;
+    min-height:27px!important;padding:2px 6px!important;
+    white-space:normal!important;overflow:visible!important;text-overflow:clip!important;
+    overflow-wrap:break-word!important;word-break:normal!important;
+    font-size:11px!important;line-height:1.22!important;font-weight:700!important;
+    color:#effaff!important;background:#071d34!important;
+    position:sticky!important;left:0!important;z-index:5!important;
+    border-right:1px solid rgba(71,191,242,.5);
+  }
+  #overviewView .v6517-mobile-row button{
+    min-width:23px!important;height:22px!important;min-height:22px!important;
+    touch-action:manipulation;
+  }
+}
+@media(max-width:390px){
+  #overviewView .v6517-mobile-row{grid-template-columns:148px repeat(14,22px)!important}
+  #overviewView .v6517-mobile-name{width:148px!important;min-width:148px!important;max-width:148px!important;font-size:10.5px!important}
+  #overviewView .v6517-mobile-row button{min-width:22px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #overviewView .v6517-matrix *,#monthView .heatmap *{animation:none!important;transition:none!important}
+}

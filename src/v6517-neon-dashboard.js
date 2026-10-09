@@ -46,7 +46,7 @@ function v6517MobilePreview(selectedDay){
  const start=Math.floor((selectedDay-1)/14)*14+1,end=Math.min(31,start+13);
  const days=Array.from({length:end-start+1},(_,i)=>start+i);
  const header=`<div class="v6517-mobile-row"><span class="v6517-mobile-name">ทีม / วัน</span>${days.map(day=>`<button type="button" data-v6517-day="${day}" class="${selectedDay===day?'selected':''}" aria-label="วันที่ ${day}">${day}</button>`).join('')}</div>`;
- const rows=staff.map((person,i)=>`<div class="v6517-mobile-row"><span class="v6517-mobile-name" title="${v6517Esc(person.name)}">${v6517Esc(shortName(person.name))}</span>${days.map(day=>{
+ const rows=staff.map((person,i)=>`<div class="v6517-mobile-row"><span class="v6517-mobile-name" title="${v6517Esc(person.name)}">${v6517Esc(person.name)}</span>${days.map(day=>{
    const code=statusAt(i,day);
    return `<button type="button" class="${code} ${selectedDay===day?'selected':''}" data-v6517-day="${day}" data-v6517-person="${i}" aria-label="${v6517Esc(person.name)} วันที่ ${day} ${v6517Esc(label(code))}"></button>`;
  }).join('')}</div>`).join('');
