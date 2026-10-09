@@ -36,7 +36,8 @@ body{min-width:0;overflow-x:clip}
     width:100%!important;
     max-width:none!important;
     margin:0!important;
-    padding:6px max(5px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(5px,env(safe-area-inset-left,0px))!important;
+    padding:6px max(5px,env(safe-area-inset-right,0px)) 6px max(5px,env(safe-area-inset-left,0px))!important;
+    padding-bottom:calc(6px + env(safe-area-inset-bottom,0px))!important;
     border-radius:16px 16px 0 0!important;
     border-bottom:0!important;
     transform:none!important;
