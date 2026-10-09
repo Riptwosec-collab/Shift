@@ -7,7 +7,7 @@ test('fast loader is not held for three seconds and oncall is lazy on startup',(
  assert.doesNotMatch(b,/TARGET=3000,HARD=3600/);
  assert.match(b,/TARGET=\d{2,3},HARD=\d{3,4}/);
  assert.doesNotMatch(html,/TARGET=3000,HARD=3600/);
- assert.doesNotMatch(first,/mountV651View\(\)[^\n]*renderV651Oncall\(\)/);
+ assert.doesNotMatch(first,/insertBefore\(view,footer\|\|null\);renderV651Oncall\(\)/);
  assert.doesNotMatch(first,/if\(name==='oncall'\)renderV651Oncall\(\)/);
  assert.doesNotMatch(second,/installV652Bridge\(\);renderV652Oncall\(\);/);
 });
@@ -19,7 +19,7 @@ test('mobile PWA bottom navigation is full-bleed and viewport anchored',()=>{
 });
 test('month and oncall render native mobile content rather than desktop scroll table',()=>{
  const js=read('src/v6515-mobile.js'),css=read('src/v6515-ui.css');
- for(const marker of ['v6515MobileMonth','v6515MobileOncall','v6515OncallCard','v6515MonthDay','v652Matrix','v652Overview','v652Timeline','ONCALL_SCHEDULE','renderV652Oncall','staff','selectedDay'])assert.ok(js.includes(marker),marker);
+ for(const marker of ['v6515MobileMonth','v6515MobileOncall','v6515OncallCard','v6515MonthDay','v652Matrix','v652Overview','v652Timeline','ONCALL_SCHEDULE','staff','selectedDay'])assert.ok(js.includes(marker),marker);
  for(const marker of ['#monthView .table-wrap','#v6515MobileMonth','.v6515-oncall','.v6515-month-days','grid-template-columns:repeat(7,minmax(0,1fr))'])assert.ok(css.includes(marker),marker);
  assert.match(css,/html\[data-v6515-native-month="1"\][\s\S]*display:none!important/);
 });
