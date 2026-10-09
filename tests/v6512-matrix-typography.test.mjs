@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
-const branch='work/v6.5.13-matrix-typography-clarity';
+const branch='work/v6.5.12-matrix-typography-clarity';
 
 test('v6.5.12 Matrix typography is larger, sharper, and higher contrast on desktop',()=>{
   assert.ok(fs.existsSync('src/v6512-ui.css'),'missing src/v6512-ui.css');
@@ -36,6 +36,6 @@ test('v6.5.12 build and CI ship the typography clarity layer',()=>{
   const build=fs.readFileSync('scripts/build.mjs','utf8');
   const workflow=fs.readFileSync('.github/workflows/v65-ci.yml','utf8');
   for(const marker of ['v6512-ui.css','v6512-overrides.js','v6512-ui-style','data-app-version="6.5.13"','data-loader-version="6.5.13"','built v6.5.13']) assert.ok(build.includes(marker),`build missing ${marker}`);
-  assert.ok(workflow.includes(branch),'missing v6.5.13 branch trigger');
-  assert.ok(workflow.includes('tests/v6512-*.test.mjs'),'missing v6.5.13 release gate');
+  assert.ok(workflow.includes(branch),'missing v6.5.12 branch trigger');
+  assert.ok(workflow.includes('tests/v6512-*.test.mjs'),'missing v6.5.12 release gate');
 });
