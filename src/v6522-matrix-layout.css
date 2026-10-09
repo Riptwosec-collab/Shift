@@ -122,3 +122,51 @@
 @media(prefers-reduced-motion:reduce){
   #overviewView .v6517-matrix *,#monthView .heatmap *{animation:none!important;transition:none!important}
 }
+
+/* v6.5.23 — single-line full Thai names, auto-sized sticky name rail. */
+@media(min-width:861px){
+ #overviewView .v6517-matrix .matrix-row{
+  min-width:1150px!important;
+  grid-template-columns:260px repeat(31,minmax(25px,1fr))!important;
+ }
+ #overviewView .v6517-matrix .matrix-name{
+  white-space:nowrap!important;overflow:visible!important;
+  text-overflow:clip!important;max-width:none!important;
+  font-size:11px!important;word-break:normal!important;
+ }
+}
+@media(max-width:860px){
+ #overviewView .v6517-mobile-row{
+  grid-template-columns:var(--shift-matrix-name-width,190px) repeat(14,23px)!important;
+  min-height:25px!important;
+ }
+ #overviewView .v6517-mobile-name{
+  display:flex!important;align-items:center!important;
+  width:max-content!important;
+  min-width:var(--shift-matrix-name-width,190px)!important;
+  max-width:none!important;
+  white-space:nowrap!important;overflow:visible!important;
+  text-overflow:clip!important;overflow-wrap:normal!important;
+  word-break:normal!important;flex-wrap:nowrap!important;
+  font-size:clamp(10px,2.7vw,11px)!important;
+  line-height:1.25!important;
+  min-height:25px!important;padding:2px 6px!important;
+ }
+ #overviewView .v6517-mobile-row button:not(.selected){
+  box-shadow:none!important;
+ }
+ #overviewView .v6517-mobile-row button.selected{
+  box-shadow:0 0 5px rgba(62,215,255,.60)!important;
+ }
+}
+@media(max-width:390px){
+ #overviewView .v6517-mobile-row{
+  grid-template-columns:var(--shift-matrix-name-width,190px) repeat(14,22px)!important;
+ }
+ #overviewView .v6517-mobile-name{
+  min-width:var(--shift-matrix-name-width,190px)!important;
+  width:max-content!important;max-width:none!important;
+  white-space:nowrap!important;font-size:10px!important;
+ }
+}
+/* GPU-friendly boundaries only; avoids triggering 140 glowing cells per interaction. */

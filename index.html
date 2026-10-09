@@ -3969,6 +3969,54 @@ html[data-v65-mode="ECO"] .view.active{animation:none!important}
   #overviewView .v6517-matrix *,#monthView .heatmap *{animation:none!important;transition:none!important}
 }
 
+/* v6.5.23 — single-line full Thai names, auto-sized sticky name rail. */
+@media(min-width:861px){
+ #overviewView .v6517-matrix .matrix-row{
+  min-width:1150px!important;
+  grid-template-columns:260px repeat(31,minmax(25px,1fr))!important;
+ }
+ #overviewView .v6517-matrix .matrix-name{
+  white-space:nowrap!important;overflow:visible!important;
+  text-overflow:clip!important;max-width:none!important;
+  font-size:11px!important;word-break:normal!important;
+ }
+}
+@media(max-width:860px){
+ #overviewView .v6517-mobile-row{
+  grid-template-columns:var(--shift-matrix-name-width,190px) repeat(14,23px)!important;
+  min-height:25px!important;
+ }
+ #overviewView .v6517-mobile-name{
+  display:flex!important;align-items:center!important;
+  width:max-content!important;
+  min-width:var(--shift-matrix-name-width,190px)!important;
+  max-width:none!important;
+  white-space:nowrap!important;overflow:visible!important;
+  text-overflow:clip!important;overflow-wrap:normal!important;
+  word-break:normal!important;flex-wrap:nowrap!important;
+  font-size:clamp(10px,2.7vw,11px)!important;
+  line-height:1.25!important;
+  min-height:25px!important;padding:2px 6px!important;
+ }
+ #overviewView .v6517-mobile-row button:not(.selected){
+  box-shadow:none!important;
+ }
+ #overviewView .v6517-mobile-row button.selected{
+  box-shadow:0 0 5px rgba(62,215,255,.60)!important;
+ }
+}
+@media(max-width:390px){
+ #overviewView .v6517-mobile-row{
+  grid-template-columns:var(--shift-matrix-name-width,190px) repeat(14,22px)!important;
+ }
+ #overviewView .v6517-mobile-name{
+  min-width:var(--shift-matrix-name-width,190px)!important;
+  width:max-content!important;max-width:none!important;
+  white-space:nowrap!important;font-size:10px!important;
+ }
+}
+/* GPU-friendly boundaries only; avoids triggering 140 glowing cells per interaction. */
+
 </style>
 </head>
 <!-- REFERENCE LOCK V4 -->
@@ -4118,7 +4166,7 @@ function renderPeople(target,items,code){renderRosterRows(target,items,code,true
 function updateQuickInsight(){const d=crew(selectedDay,'D'),n=crew(selectedDay,'N'),o=staff.length-d.length-n.length;const e=$('#insightText');if(e)e.textContent=`เข้าเวร ${d.length+n.length}/${staff.length} • Day ${d.length} • Night ${n.length} • Off ${o}`}
 
 function renderOverviewInsights(){const x=computeInsights(),total=x.totals.D+x.totals.N+x.totals.O,items=[['▦','วันที่พนักงานมากที่สุด',`${x.busiest.day} ต.ค.`,`${x.busiest.working} คน`],['⌁','วันที่คนน้อยที่สุด',`${x.least.day} ต.ค.`,`${x.least.working} คน`],['♛','พนักงานทำงานมากที่สุด',shortName(staff[x.mostWorking.i].name),`${x.mostWorking.working} วัน`],['◇','พนักงานที่ได้พักมากที่สุด',shortName(staff[x.mostOff.i].name),`${x.mostOff.O} วัน`]];$('#overviewInsightList').innerHTML=items.map(v=>`<div class="insight-item"><span class="insight-icon">${v[0]}</span><span><b>${v[1]}</b><span>${v[2]}</span></span><span class="insight-value">${v[3]}</span></div>`).join('');const pd=x.totals.D/total*100,pn=x.totals.N/total*100,po=x.totals.O/total*100;$('#overviewRatio').innerHTML=`<i class="d" style="width:${pd}%"></i><i class="n" style="width:${pn}%"></i><i class="o" style="width:${po}%"></i>`;$('#overviewRatioLegend').innerHTML=`<span>D ${pd.toFixed(0)}%</span><span>N ${pn.toFixed(0)}%</span><span>OFF ${po.toFixed(0)}%</span>`;const vals=x.dayStats.map(v=>v.working),pts=linePoints(vals,220,42,2);$('#overviewWave').innerHTML=`<polyline points="${pts}" fill="none" stroke="#38e8ff" stroke-width="1.5"/>`}
-function renderOverviewMatrix(){const host=$('#overviewMonthMatrix');const header=`<div class="matrix-row matrix-header"><div class="matrix-name">ทีม</div>${dates.map((_,i)=>`<span class="matrix-day-head${selectedDay===i+1?' selected':''}">${i+1}</span>`).join('')}</div>`;host.innerHTML=header+staff.map((p,pi)=>`<div class="matrix-row"><div class="matrix-name" title="${p.name}" aria-label="${p.name}">${p.name}</div>${dates.map((_,i)=>{const day=i+1,c=statusAt(pi,day);return `<button class="matrix-cell ${c}${selectedDay===day?' selected':''}" data-i="${pi}" data-day="${day}" aria-label="${p.name} วันที่ ${day} ${label(c)}"></button>`}).join('')}</div>`).join('');host.querySelectorAll('.matrix-cell').forEach(b=>b.onclick=()=>openCellModal(+b.dataset.i,+b.dataset.day))}
+function renderOverviewMatrix(){const host=$('#overviewMonthMatrix');if(!host)return;if(host.dataset.matrixReady!=='1'||!host.querySelector('.matrix-row')){const header=`<div class="matrix-row matrix-header"><div class="matrix-name">ทีม</div>${dates.map((_,i)=>`<span class="matrix-day-head${selectedDay===i+1?' selected':''}" data-day="${i+1}">${i+1}</span>`).join('')}</div>`;host.innerHTML=header+staff.map((p,pi)=>`<div class="matrix-row"><div class="matrix-name" title="${p.name}" aria-label="${p.name}">${p.name}</div>${dates.map((_,i)=>{const day=i+1,c=statusAt(pi,day);return `<button class="matrix-cell ${c}${selectedDay===day?' selected':''}" data-i="${pi}" data-day="${day}" aria-label="${p.name} วันที่ ${day} ${label(c)}"></button>`}).join('')}</div>`).join('');if(host.dataset.matrixHandlerBound!=='1'){host.addEventListener('click',event=>{const cell=event.target.closest?.('.matrix-cell');if(cell&&host.contains(cell))openCellModal(+cell.dataset.i,+cell.dataset.day)});host.dataset.matrixHandlerBound='1'}host.dataset.matrixReady='1';host.dataset.matrixSelected=String(selectedDay);return}if(host.dataset.matrixSelected===String(selectedDay))return;host.querySelectorAll('.matrix-cell.selected,.matrix-day-head.selected').forEach(el=>el.classList.remove('selected'));host.querySelectorAll('[data-day="'+selectedDay+'"]').forEach(el=>el.classList.add('selected'));host.dataset.matrixSelected=String(selectedDay)}
 function shiftDeltaText(code,current){if(selectedDay<=1)return '— 0';const prev=code==='O'?staff.length-crew(selectedDay-1,'D').length-crew(selectedDay-1,'N').length:crew(selectedDay-1,code).length;const diff=current-prev;return diff>0?`▲ +${diff}`:diff<0?`▼ ${diff}`:'— 0'}
 function renderOverview(){renderTimeline();const d=crew(selectedDay,'D'),n=crew(selectedDay,'N'),o=crew(selectedDay,'O');$('#heroDate').textContent=`${selectedDay} ตุลาคม • วัน${dows[dates[selectedDay-1].getDay()]}`;animateNumber($('#dayMetric'),d.length);animateNumber($('#nightMetric'),n.length);animateNumber($('#offMetric'),o.length);$('#dayDelta').textContent=shiftDeltaText('D',d.length);$('#nightDelta').textContent=shiftDeltaText('N',n.length);$('#offDelta').textContent=shiftDeltaText('O',o.length);updateSpark('#daySpark','D');updateSpark('#nightSpark','N');updateSpark('#offSpark','O');$('#ovDayCount').textContent=d.length;$('#ovNightCount').textContent=n.length;$('#ovOffCount').textContent=o.length;renderRosterRows('#ovDayPeople',d,'D');renderRosterRows('#ovNightPeople',n,'N');renderRosterRows('#ovOffPeople',o,'O');updateQuickInsight();renderOverviewInsights();renderOverviewMatrix();renderNetwork(selectedRosterPerson??selectedPerson,'overviewNetwork');applyAmbient(selectedRosterPerson!==null?statusAt(selectedRosterPerson,selectedDay):'')}
 
@@ -5634,9 +5682,20 @@ function v6517Render(){
  const ratio=root.querySelector('#v6517Percent');
  if(ratio)ratio.textContent=stat.coverage+'%';
  const trend=root.querySelector('#v6517Trend');
- if(trend)trend.innerHTML=v6517Chart(day);
+ if(trend){
+  let selectedLine=trend.querySelector('.v6517-trend-selected');
+  if(!selectedLine){
+   trend.innerHTML=v6517Chart(day);
+   selectedLine=trend.querySelector('.v6517-trend-selected');
+  }
+  if(selectedLine){
+   const x=(12+(day-1)*15.6).toFixed(1);
+   selectedLine.setAttribute('x1',x);
+   selectedLine.setAttribute('x2',x);
+  }
+ }
  const oncall=root.querySelector('#v6517Oncall');
- if(oncall)oncall.innerHTML=v6517Oncall();
+ if(oncall){const markup=v6517Oncall();if(oncall.innerHTML!==markup)oncall.innerHTML=markup;}
  const cards=root.querySelector('#v6517Notes');
  if(cards){
   const change=stat.working-prev.working;
@@ -5645,11 +5704,31 @@ function v6517Render(){
    [en?'Working vs previous day':'เข้าเวรเทียบวันก่อน',day===1?'—':(change>0?'+':'')+change+' '+(en?'people':'คน'),'green'],
    [en?'Roster coverage':'สัดส่วนผู้เข้าเวร',stat.coverage+'%','violet']
   ];
-  cards.innerHTML=entries.map(([title,value,color])=>
+  const markup=entries.map(([title,value,color])=>
    `<div class="v6517-note"><span><i class="v6517-dot ${color}"></i>${title}</span><b>${v6517Esc(value)}</b></div>`).join('');
+  if(cards.innerHTML!==markup)cards.innerHTML=markup;
  }
  const preview=root.querySelector('#v6517MobileMatrix');
- if(preview)preview.innerHTML=v6517MobilePreview(day);
+ if(preview){
+  const section=String(Math.floor((day-1)/14));
+  if(preview.dataset.matrixSection!==section||!preview.firstElementChild){
+   preview.innerHTML=v6517MobilePreview(day);
+   preview.dataset.matrixSection=section;
+   preview.dataset.matrixDay=String(day);
+   // Measure the actual roster labels once per 14-day section to prevent wrapping.
+   if(window.matchMedia?.('(max-width:860px)')?.matches){
+    let needed=166;
+    preview.querySelectorAll('.v6517-mobile-name').forEach(name=>{
+     needed=Math.max(needed,name.scrollWidth+4);
+    });
+    preview.style.setProperty('--shift-matrix-name-width',Math.ceil(needed)+'px');
+   }
+  }else if(preview.dataset.matrixDay!==String(day)){
+   preview.querySelectorAll('.selected').forEach(cell=>cell.classList.remove('selected'));
+   preview.querySelectorAll('[data-v6517-day="'+day+'"]').forEach(cell=>cell.classList.add('selected'));
+   preview.dataset.matrixDay=String(day);
+  }
+ }
 }
 function v6517Init(){
  const view=document.getElementById('overviewView');
