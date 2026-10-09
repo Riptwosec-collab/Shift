@@ -2,6 +2,7 @@
 :root{--v6518-gap:12px;--v6518-panel-pad:14px}
 #overviewView,.view{min-width:0;max-width:100%}
 #overviewView .v6517-dashboard{width:100%;max-width:100%;margin:8px 0 18px;gap:var(--v6518-gap);align-items:stretch}
+#overviewView .overview-main{min-width:0;max-width:100%}
 #overviewView .v6517-banner{width:100%;min-width:0;min-height:98px!important;padding:17px clamp(16px,2vw,25px)!important}
 #overviewView .v6517-banner h2{max-width:100%;line-height:1.2}
 html[data-v6518-layout="ready"] #overviewView > .hero-grid{display:none!important}

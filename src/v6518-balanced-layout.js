@@ -4,6 +4,7 @@ function v6518InitBalancedLayout(){
  if(root.dataset.v6518Layout==='ready')return;
  const view=document.getElementById('overviewView');
  if(!view)return;
+ const hero=view.querySelector(':scope > .hero-grid');
  if(!document.getElementById('v6517Dashboard')&&typeof v6517Init==='function')v6517Init();
  const deck=document.getElementById('v6517Dashboard');
  const timeline=view.querySelector(':scope > .timeline-panel');
@@ -14,7 +15,7 @@ function v6518InitBalancedLayout(){
  const matrix=deck?.querySelector('#v6517MatrixTarget');
  // The original hero and metrics retain their IDs in the DOM for the old renderers.
  // Only their duplicate visual block is hidden after the new layout is committed.
- if(!deck||!timeline||!rosters||!network||!kpis||!bottom||!matrix)return;
+ if(!deck||!timeline||!rosters||!network||!kpis||!bottom||!matrix||!hero)return;
  deck.insertBefore(timeline,kpis);
  deck.insertBefore(rosters,bottom);
  deck.appendChild(network);
