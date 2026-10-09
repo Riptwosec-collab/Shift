@@ -80,9 +80,20 @@ function v6517Render(){
  const ratio=root.querySelector('#v6517Percent');
  if(ratio)ratio.textContent=stat.coverage+'%';
  const trend=root.querySelector('#v6517Trend');
- if(trend)trend.innerHTML=v6517Chart(day);
+ if(trend){
+  let selectedLine=trend.querySelector('.v6517-trend-selected');
+  if(!selectedLine){
+   trend.innerHTML=v6517Chart(day);
+   selectedLine=trend.querySelector('.v6517-trend-selected');
+  }
+  if(selectedLine){
+   const x=(12+(day-1)*15.6).toFixed(1);
+   selectedLine.setAttribute('x1',x);
+   selectedLine.setAttribute('x2',x);
+  }
+ }
  const oncall=root.querySelector('#v6517Oncall');
- if(oncall)oncall.innerHTML=v6517Oncall();
+ if(oncall){const markup=v6517Oncall();if(oncall.innerHTML!==markup)oncall.innerHTML=markup;}
  const cards=root.querySelector('#v6517Notes');
  if(cards){
   const change=stat.working-prev.working;
@@ -91,11 +102,31 @@ function v6517Render(){
    [en?'Working vs previous day':'เข้าเวรเทียบวันก่อน',day===1?'—':(change>0?'+':'')+change+' '+(en?'people':'คน'),'green'],
    [en?'Roster coverage':'สัดส่วนผู้เข้าเวร',stat.coverage+'%','violet']
   ];
-  cards.innerHTML=entries.map(([title,value,color])=>
+  const markup=entries.map(([title,value,color])=>
    `<div class="v6517-note"><span><i class="v6517-dot ${color}"></i>${title}</span><b>${v6517Esc(value)}</b></div>`).join('');
+  if(cards.innerHTML!==markup)cards.innerHTML=markup;
  }
  const preview=root.querySelector('#v6517MobileMatrix');
- if(preview)preview.innerHTML=v6517MobilePreview(day);
+ if(preview){
+  const section=String(Math.floor((day-1)/14));
+  if(preview.dataset.matrixSection!==section||!preview.firstElementChild){
+   preview.innerHTML=v6517MobilePreview(day);
+   preview.dataset.matrixSection=section;
+   preview.dataset.matrixDay=String(day);
+   // Measure the actual roster labels once per 14-day section to prevent wrapping.
+   if(window.matchMedia?.('(max-width:860px)')?.matches){
+    let needed=166;
+    preview.querySelectorAll('.v6517-mobile-name').forEach(name=>{
+     needed=Math.max(needed,name.scrollWidth+4);
+    });
+    preview.style.setProperty('--shift-matrix-name-width',Math.ceil(needed)+'px');
+   }
+  }else if(preview.dataset.matrixDay!==String(day)){
+   preview.querySelectorAll('.selected').forEach(cell=>cell.classList.remove('selected'));
+   preview.querySelectorAll('[data-v6517-day="'+day+'"]').forEach(cell=>cell.classList.add('selected'));
+   preview.dataset.matrixDay=String(day);
+  }
+ }
 }
 function v6517Init(){
  const view=document.getElementById('overviewView');

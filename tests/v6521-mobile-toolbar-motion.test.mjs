@@ -45,5 +45,5 @@ test('tracked build carries latest in-flow install UI and navigation enhancement
   const html=read('index.html');
   assert.ok(html.includes(read('src/v6513-pwa.js')));
   assert.ok(html.includes(read('src/v6520-install-ui.css')));
-  assert.match(read('sw.js'),/shift-shell-v6\.5\.20-r4/);
+  assert.match(read('sw.js'),/shift-shell-v6\.5\.20-r5/);
 });
