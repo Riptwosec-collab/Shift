@@ -1,0 +1,106 @@
+/* v6.5.14 — Mobile/PWA edge-to-edge, readable layouts and low-cost navigation. */
+:root{--v6514-bottom-safe:env(safe-area-inset-bottom,0px);--v6514-top-safe:env(safe-area-inset-top,0px)}
+html{min-width:0;min-height:100%;-webkit-text-size-adjust:100%}
+body{min-width:0;overflow-x:clip}
+.view,#overviewView,#dailyView,#personView,#monthView,#analyticsView,#oncallView{min-width:0;max-width:100%}
+@media (max-width:900px){
+  .app{width:100%;min-width:0;max-width:100%;padding-inline:max(10px,env(safe-area-inset-left,0px)) max(10px,env(safe-area-inset-right,0px));}
+  main,.view,.hero-grid,.overview-main,.lower-grid,.insights-panel,.network-panel,.month-snapshot,.hud-panel,.person-layout,.analytics-grid,.analytics-main,
+  #overviewView,#dailyView,#personView,#monthView,#analyticsView,#oncallView{box-sizing:border-box;min-width:0;max-width:100%}
+  #overviewView .hero-grid,#overviewView .overview-main,#overviewView .lower-grid,
+  #personView .person-layout,#analyticsView .analytics-main{grid-template-columns:minmax(0,1fr)!important}
+  #dailyView .daily-header{height:auto!important;min-width:0}
+  #monthView .month-panel{min-width:0;max-width:100%}
+  #monthView .table-wrap,#overviewView .mini-matrix,#dailyView .daily-timeline,#personView .people-list,
+  #analyticsView .analytics-panel,#oncallView .v6511-board-scroll,#oncallView .v652-timeline{
+    max-width:100%;min-width:0;overscroll-behavior-x:contain;
+  }
+  #monthView .table-wrap,#overviewView .mini-matrix,#dailyView .daily-timeline,
+  #oncallView .v6511-board-scroll,#oncallView .v652-timeline{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  #monthView .heatmap{min-width:max-content}
+  #oncallView .v652-oncall,#oncallView .v652-matrix-panel,#oncallView .v652-hero,
+  #oncallView .v652-control-deck,#oncallView .v6511-month-board,#oncallView .v652-timeline-panel{min-width:0;max-width:100%}
+  #oncallView .v652-hero,#oncallView .v652-now-grid,#oncallView .v655-now-columns{grid-template-columns:minmax(0,1fr)!important}
+  #oncallView .v6511-board{height:auto!important;max-height:none!important;overflow:visible!important}
+  #oncallView .v6511-board-scroll{overflow-x:auto!important;overflow-y:hidden!important}
+  #oncallView .v652-view-tabs,#oncallView .v652-month-switch{max-width:100%;min-width:0;overflow-x:auto}
+  #oncallView .v652-view-tabs button,#oncallView .v652-month-switch button{min-height:44px;touch-action:manipulation}
+}
+@media (max-width:860px){
+  .app{padding-bottom:calc(90px + var(--v6514-bottom-safe))!important}
+  .mobile-nav{
+    position:fixed!important;
+    bottom:0!important;
+    left:0!important;
+    right:0!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:6px max(5px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(5px,env(safe-area-inset-left,0px))!important;
+    border-radius:16px 16px 0 0!important;
+    border-bottom:0!important;
+    transform:none!important;
+    box-sizing:border-box!important;
+    align-items:stretch;
+    justify-content:space-around;
+    gap:2px;
+    z-index:999!important;
+    background:#061424!important;
+    box-shadow:0 -8px 28px rgba(0,0,0,.45)!important;
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+  }
+  .mobile-nav button{flex:1 1 0;min-width:0;min-height:44px;padding:7px 2px!important;font-size:clamp(9px,2.7vw,11px)!important;font-weight:650;line-height:1.25;white-space:nowrap}
+  .mobile-nav button b{font-size:17px;line-height:1.05;margin-bottom:4px}
+  .mobile-nav button:focus-visible{outline:2px solid #54eeff;outline-offset:-2px}
+  .command-bar{position:relative!important;top:0!important;min-width:0;max-width:100%;transform:none!important}
+  .command-bar .nav-tabs{display:none!important}
+  .search-row{position:relative;min-width:0;max-width:100%}
+  .search-row .smart-search,.search-row .smart-search input{min-width:0;max-width:100%}
+  #dailyView .hero-quick,#monthView .filter-bar{max-width:100%;flex-wrap:wrap}
+  #personView .people-panel,#personView .person-detail{width:100%;min-width:0}
+  #analyticsView .analytics-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .hud-panel,.roster-card,.insights-panel,.network-panel,.month-snapshot,
+  .v6511-month-board,.v652-control-deck,.v652-hero,.mobile-nav{
+    -webkit-backdrop-filter:none!important;backdrop-filter:none!important
+  }
+  .ambient,.star,.scan-beam{animation:none!important}
+  body::after,.cyber-scene::after{animation:none!important}
+  .network-line,.network-node .core-shell::after,.metric-orb::before{animation:none!important}
+  .view:not(.active){display:none!important}
+}
+@media (max-width:600px){
+  .app{padding-left:10px!important;padding-right:10px!important}
+  .command-bar{grid-template-columns:minmax(0,1fr) auto!important;gap:6px!important}
+  .command-bar .brand{max-width:100%;min-width:0}
+  .command-bar .brand-copy h1{font-size:clamp(15px,4vw,19px)!important;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+  .command-actions{min-width:0;gap:4px;justify-content:flex-end;flex-wrap:nowrap!important}
+  .command-actions .live-pill{display:none}
+  #overviewView .hero-grid,#overviewView .overview-main,#overviewView .lower-grid,
+  #personView .person-layout,#analyticsView .analytics-grid,#analyticsView .analytics-main{grid-template-columns:minmax(0,1fr)!important}
+  #overviewView .hero-title{font-size:clamp(34px,10vw,48px)!important;line-height:1.05!important}
+  #overviewView .metric-stack{grid-template-columns:minmax(0,1fr)!important;min-width:0;min-height:0}
+  #overviewView .metric-card{width:100%;min-width:0;min-height:128px}
+  #overviewView .network-panel{height:auto!important;min-height:300px!important}
+  #dailyView .daily-header,#monthView .month-head{display:flex;flex-wrap:wrap;gap:9px}
+  #dailyView .daily-timeline{max-width:100%}
+  #personView .profile-head,#personView .person-top,#personView .person-lower{grid-template-columns:minmax(0,1fr)!important}
+  #analyticsView .analytics-panel{width:100%;min-width:0}
+  #oncallView .v652-control-deck{display:flex!important;flex-direction:column!important;position:relative!important;top:auto!important}
+  #oncallView .v652-view-tabs{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;overflow:visible}
+  #oncallView .v652-view-tabs button{min-width:0!important;font-size:clamp(11px,3vw,13px);padding-inline:3px!important}
+  #oncallView .v652-month-switch{display:flex;width:100%}
+  #oncallView .v652-month-switch button{min-width:0!important;flex:1 1 0}
+  #oncallView .v652-now-grid,#oncallView .v652-stat-grid,#oncallView .v655-detail-grid{grid-template-columns:minmax(0,1fr)!important}
+  #oncallView .v6511-month-head{gap:4px}
+  #oncallView .v6511-month-head b{font-size:15px}
+  #oncallView .v6511-engineer-name b{font-size:10px}
+}
+@media (display-mode:standalone){
+  html{min-height:100dvh}
+  .app{min-height:100dvh}
+  .mobile-nav{bottom:0!important}
+}
+@media (prefers-reduced-motion:reduce){
+  .mobile-nav,.mobile-nav button,.nav-btn,.view{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}

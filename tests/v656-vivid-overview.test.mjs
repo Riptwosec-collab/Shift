@@ -21,11 +21,11 @@ test('v6.5.6 vivid layer raises global contrast and preserves performance modes'
   assert.match(css,/radial-gradient/);
 });
 
-test('v6.5.6 vivid layer remains shipped in v6.5.13',()=>{
+test('v6.5.6 vivid layer remains shipped in v6.5.14',()=>{
   const build=fs.readFileSync('scripts/build.mjs','utf8');
   assert.match(build,/v656-ui\.css/);
   assert.match(build,/v656-overrides\.js/);
   assert.match(build,/v656-ui-style/);
-  assert.match(build,/data-app-version=\"6\.5\.13\"/);
-  assert.match(build,/data-loader-version=\"6\.5\.13\"/);
+  assert.match(build,/data-app-version=\"6\.5\.14\"/);
+  assert.match(build,/data-loader-version=\"6\.5\.14\"/);
 });

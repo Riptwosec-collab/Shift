@@ -29,10 +29,10 @@ test('v6.5.9 year-end matrix styling preserves command-center and mobile behavio
   assert.match(css,/radial-gradient/);
 });
 
-test('v6.5.9 layer remains shipped in v6.5.13',()=>{
+test('v6.5.9 layer remains shipped in v6.5.14',()=>{
   const build=fs.readFileSync('scripts/build.mjs','utf8');
   const workflow=fs.readFileSync('.github/workflows/v65-ci.yml','utf8');
-  for(const marker of ['v659-ui.css','v659-overrides.js','v659-ui-style','data-app-version="6.5.13"','data-loader-version="6.5.13"','built v6.5.13']) assert.ok(build.includes(marker),`build missing ${marker}`);
+  for(const marker of ['v659-ui.css','v659-overrides.js','v659-ui-style','data-app-version="6.5.14"','data-loader-version="6.5.14"','built v6.5.14']) assert.ok(build.includes(marker),`build missing ${marker}`);
   assert.ok(workflow.includes(branch),'missing v6.5.9 branch trigger');
   assert.ok(workflow.includes('tests/v659-*.test.mjs'),'missing v6.5.9 release gate');
 });
