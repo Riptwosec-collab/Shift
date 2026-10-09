@@ -34,10 +34,10 @@ test('v6.5.8 command-center layer upgrades Oncall Timeline and performance fallb
   assert.match(css,/radial-gradient/);
 });
 
-test('v6.5.8 layer remains shipped in v6.5.14',()=>{
+test('v6.5.8 layer remains shipped in v6.5.15',()=>{
   const build=fs.readFileSync('scripts/build.mjs','utf8');
   const workflow=fs.readFileSync('.github/workflows/v65-ci.yml','utf8');
-  for(const marker of ['v658-ui.css','v658-overrides.js','v658-ui-style','data-app-version="6.5.14"','data-loader-version="6.5.14"','built v6.5.14']) assert.ok(build.includes(marker),`build missing ${marker}`);
+  for(const marker of ['v658-ui.css','v658-overrides.js','v658-ui-style','data-app-version="6.5.15"','data-loader-version="6.5.15"','built v6.5.15']) assert.ok(build.includes(marker),`build missing ${marker}`);
   assert.ok(workflow.includes(branch),'missing v6.5.8 branch trigger');
   assert.ok(workflow.includes('tests/v658-*.test.mjs'),'missing v6.5.8 release gate');
 });

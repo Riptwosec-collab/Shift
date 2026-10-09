@@ -95,6 +95,6 @@ function renderV652Oncall(){
 }
 
 function installV652Bridge(){const prior=window.showView;if(typeof prior!=='function'||prior.__v652)return;const wrapped=function(name){const out=prior.apply(this,arguments);if(name==='oncall')queueMicrotask(renderV652Oncall);return out};wrapped.__v652=true;window.showView=wrapped}
-function initV652(){if(typeof mountV651Navigation==='function')mountV651Navigation();if(typeof mountV651View==='function')mountV651View();installV652Bridge();renderV652Oncall();document.addEventListener('v65:localechange',renderV652Oncall);document.documentElement.dataset.appVersion='6.5.5'}
+function initV652(){if(typeof mountV651Navigation==='function')mountV651Navigation();if(typeof mountV651View==='function')mountV651View();installV652Bridge();document.addEventListener('v65:localechange',renderV652Oncall);document.documentElement.dataset.appVersion='6.5.5'}
 if(typeof document!=='undefined'){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initV652,{once:true});else initV652()}
 export {renderV652Oncall,setV652Mode,setV652Month,initV652};

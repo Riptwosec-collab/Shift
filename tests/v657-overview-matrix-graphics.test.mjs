@@ -35,10 +35,10 @@ test('v6.5.7 visual layer reduces palette and adds command-center graphics',()=>
   assert.doesNotMatch(css,/--v657-(pink|green|amber|red)/);
 });
 
-test('v6.5.7 layer remains shipped in v6.5.14',()=>{
+test('v6.5.7 layer remains shipped in v6.5.15',()=>{
   const build=fs.readFileSync('scripts/build.mjs','utf8');
   const workflow=fs.readFileSync('.github/workflows/v65-ci.yml','utf8');
-  for(const marker of ['v657-ui.css','v657-ui-style','v657-overrides.js','data-app-version="6.5.14"','data-loader-version="6.5.14"','built v6.5.14']) assert.ok(build.includes(marker),`build missing ${marker}`);
+  for(const marker of ['v657-ui.css','v657-ui-style','v657-overrides.js','data-app-version="6.5.15"','data-loader-version="6.5.15"','built v6.5.15']) assert.ok(build.includes(marker),`build missing ${marker}`);
   assert.ok(workflow.includes(branch));
   assert.ok(workflow.includes('tests/v657-*.test.mjs'));
 });

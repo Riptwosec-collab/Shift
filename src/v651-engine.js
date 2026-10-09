@@ -57,11 +57,11 @@ function mountV651Navigation(){
 function mountV651View(){
   if(document.getElementById('oncallView'))return;
   const view=document.createElement('section');view.className='view';view.id='oncallView';view.setAttribute('aria-label','Engineer Oncall');
-  const footer=document.querySelector('.footer');(footer?.parentElement||document.querySelector('.app')||document.body).insertBefore(view,footer||null);renderV651Oncall();
+  const footer=document.querySelector('.footer');(footer?.parentElement||document.querySelector('.app')||document.body).insertBefore(view,footer||null);
 }
 function installV651ViewBridge(){
   const prior=window.showView;if(typeof prior!=='function'||prior.__v651)return;
-  const wrapped=function(name){const result=prior.apply(this,arguments);if(name==='daily')queueMicrotask(suppressV64DailyOps);if(name==='oncall')renderV651Oncall();return result};wrapped.__v651=true;window.showView=wrapped;
+  const wrapped=function(name){const result=prior.apply(this,arguments);if(name==='daily')queueMicrotask(suppressV64DailyOps);return result};wrapped.__v651=true;window.showView=wrapped;
 }
 function initV651(){mountV651Navigation();mountV651View();installV651ViewBridge();suppressV64DailyOps();document.addEventListener('v65:localechange',()=>{mountV651Navigation();renderV651Oncall();suppressV64DailyOps()});document.documentElement.dataset.appVersion='6.5.1'}
 if(typeof document!=='undefined'){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initV651,{once:true});else initV651()}
