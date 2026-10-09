@@ -7,7 +7,10 @@ test('install UI is available independently of command-actions layout',()=>{
   const script=read('src/v6513-pwa.js');
   const css=read('src/v6520-install-ui.css');
   assert.match(script,/querySelector\('\.command-bar'\)\|\|document\.body/);
-  assert.match(css,/position:fixed!important/);
+  assert.match(script,/shift-install-dock/);
+  assert.match(script,/insertAdjacentElement\('afterend',dock\)/);
+  assert.match(css,/\.shift-install-dock\s*\{/);
+  assert.match(css,/position:relative!important/);
   assert.match(css,/\.shift-pwa-install\[hidden\]\{display:none!important\}/);
   assert.match(css,/display-mode:standalone/);
 });
@@ -30,7 +33,7 @@ test('worker never claims offline install unless its HTML shell was cached',()=>
   assert.match(sw,/Promise\.allSettled/);
   assert.match(sw,/shellResult\.status!=='fulfilled'/);
   assert.match(sw,/throw shellResult\.reason/);
-  assert.match(sw,/shift-shell-v6\.5\.20-r2/);
+  assert.match(sw,/shift-shell-v6\.5\.20-r3/);
 });
 test('built artifact includes exact latest PWA JavaScript and CSS',()=>{
   const html=read('index.html');

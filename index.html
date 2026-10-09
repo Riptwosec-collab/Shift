@@ -3680,19 +3680,167 @@ html[data-v6518-layout="ready"] #overviewView > .lower-grid{display:none!importa
   background:#07395b;color:#f0faff;font-weight:800;font-size:13px;
 }
 .shift-pwa-retry:focus-visible{outline:2px solid #8ef4ff;outline-offset:2px}
-@media (max-width:860px){
-  .command-actions .shift-pwa-install,.command-bar .shift-pwa-install,.shift-pwa-install{
-    display:inline-flex!important;position:fixed!important;
-    z-index:2147483001!important;right:12px!important;left:auto!important;
-    top:auto!important;bottom:calc(82px + env(safe-area-inset-bottom,0px))!important;
-    width:auto!important;min-width:100px!important;
-    box-shadow:0 8px 24px rgba(0,0,0,.7),0 0 18px rgba(29,204,255,.35)!important;
-  }
-  .shift-pwa-install[hidden]{display:none!important}
-  .shift-pwa-help{bottom:calc(138px + env(safe-area-inset-bottom,0px))!important;
-    max-height:calc(100dvh - 155px - env(safe-area-inset-bottom,0px))!important}
-}
+/* Floating CTA removed: installation now occupies an accessible document-flow dock. */
 @media (display-mode:standalone){.shift-pwa-install{display:none!important}}
+
+
+/* v6.5.20-r3 Mobile command bar / PWA install dock / lightweight neon motion.
+   No canvas, external animation libraries, videos, or animation loops on cards. */
+.shift-install-dock{
+  position:relative;isolation:isolate;box-sizing:border-box;
+  display:flex;align-items:center;justify-content:flex-end;
+  min-height:50px;gap:10px;margin:6px 0 10px;padding:5px 8px;
+  width:100%;max-width:100%;overflow:hidden;
+  border-radius:13px;border:1px solid rgba(57,164,226,.24);
+  background:linear-gradient(112deg,rgba(4,23,43,.89),rgba(2,10,24,.96));
+}
+.shift-install-dock[hidden],.shift-install-dock:has(.shift-pwa-install[hidden]){display:none!important}
+.shift-install-dock::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 92% 50%,rgba(0,173,244,.15),transparent 55%);
+}
+.shift-install-dock .shift-pwa-install{
+  position:relative!important;left:auto!important;right:auto!important;
+  top:auto!important;bottom:auto!important;margin:0!important;
+  display:inline-flex!important;width:auto!important;max-width:none!important;
+  min-height:44px!important;min-width:116px!important;
+  font-size:13px!important;padding:8px 14px!important;
+  border-radius:10px!important;
+  box-shadow:inset 0 1px 0 rgba(236,251,255,.26),0 0 15px rgba(15,171,245,.23)!important;
+}
+.shift-install-dock .shift-pwa-install[hidden]{display:none!important}
+.shift-install-dock .shift-pwa-install:focus-visible{outline:2px solid #86edff;outline-offset:2px}
+@media (min-width:861px) and (max-width:1200px){
+  html body .command-bar .nav-tabs{
+    display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr));
+    overflow:visible!important;gap:4px!important;width:100%;box-sizing:border-box;
+  }
+  html body .command-bar .nav-tabs button{
+    min-width:0!important;max-width:100%;padding-inline:4px!important;
+    white-space:normal!important;overflow-wrap:normal;text-align:center;
+  }
+  html body .command-bar .command-actions{
+    display:flex!important;flex-wrap:wrap!important;
+    justify-content:flex-end!important;min-width:0;max-width:100%;
+  }
+}
+@media (max-width:860px){
+  html body .command-bar{
+    display:grid!important;grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:auto auto!important;align-items:stretch!important;
+    column-gap:0!important;row-gap:9px!important;
+    min-width:0!important;overflow:visible!important;
+    padding:12px!important;
+    background:linear-gradient(145deg,rgba(2,27,50,.97),rgba(0,9,23,.98))!important;
+  }
+  html body .command-bar .brand{
+    grid-row:1!important;grid-column:1!important;
+    width:100%;max-width:100%;min-width:0!important;
+  }
+  html body .command-bar .command-actions{
+    grid-row:2!important;grid-column:1!important;
+    display:flex!important;flex-wrap:wrap!important;
+    align-items:center!important;justify-content:flex-start!important;
+    justify-self:stretch!important;
+    width:100%!important;min-width:0!important;max-width:100%!important;
+    gap:6px!important;margin:0!important;padding:0!important;
+    overflow:visible!important;
+  }
+  html body .command-bar .command-actions .v64-quality{order:1;flex:0 0 auto;min-width:0}
+  html body .command-bar .command-actions .v65-language{order:2;flex:0 0 auto;min-width:0}
+  html body .command-bar .command-actions .live-pill{order:3;flex:0 0 auto}
+  html body .command-bar .command-actions > .sys-btn{order:4;flex:0 0 auto}
+  html body .command-bar .command-actions .v64-quality button,
+  html body .command-bar .command-actions .v65-language button{
+    box-sizing:border-box;min-height:36px!important;touch-action:manipulation;
+  }
+  .shift-install-dock{
+    min-height:53px;margin:8px 0 12px;padding:6px 8px 6px 13px;
+    border-color:rgba(44,158,240,.38);
+    box-shadow:inset 0 1px 0 rgba(128,227,255,.08),0 6px 18px rgba(0,0,0,.19);
+  }
+  .shift-install-dock::after{
+    content:"PWA  /  MOBILE";position:relative;z-index:1;
+    margin-right:auto;font-size:10px;font-weight:800;letter-spacing:.15em;
+    color:#94c8e5;white-space:nowrap;
+    order:-1;pointer-events:none;
+  }
+  .shift-install-dock .shift-pwa-install{
+    z-index:1!important;min-width:106px!important;max-width:160px!important;
+  }
+  .shift-pwa-help{
+    left:10px!important;right:10px!important;
+    bottom:calc(82px + env(safe-area-inset-bottom,0px))!important;
+    width:auto!important;max-width:none!important;
+    max-height:calc(100dvh - 100px - env(safe-area-inset-bottom,0px))!important;
+  }
+  html body #mobileNav{
+    border-top:1px solid rgba(71,187,248,.55)!important;
+    box-shadow:0 -7px 26px rgba(0,0,0,.6),0 -1px 14px rgba(11,130,220,.14)!important;
+  }
+  html body #mobileNav button{position:relative;isolation:isolate;overflow:hidden}
+  html body #mobileNav button.active::after{
+    content:"";position:absolute;bottom:3px;left:20%;right:20%;height:2px;
+    border-radius:8px;background:#63dcff;
+    box-shadow:0 0 9px rgba(42,208,255,.9);pointer-events:none;
+  }
+  #overviewView .v6517-kpi,#overviewView .v6517-glass,
+  #dailyView .roster-card,#personView .person-detail,
+  #analyticsView .analytics-panel,#oncallView .v652-control-deck{
+    border-color:rgba(56,158,232,.48)!important;
+    box-shadow:inset 0 1px 0 rgba(171,234,255,.09),0 5px 20px rgba(0,0,0,.22)!important;
+  }
+  #overviewView .v6517-banner{
+    background:linear-gradient(125deg,rgba(7,44,77,.96),rgba(0,12,31,.97))!important;
+    box-shadow:inset 0 1px 0 rgba(142,229,255,.13),0 0 24px rgba(11,104,202,.18)!important;
+  }
+  #overviewView .v6517-kpi:active,
+  .v6515-month-days button:active,
+  .v652-view-tabs button:active{
+    border-color:#82edff!important;
+    box-shadow:inset 0 0 0 1px rgba(98,222,255,.4)!important;
+  }
+}
+@media (max-width:380px){
+  html body .command-bar .command-actions{gap:4px!important}
+  .shift-install-dock::after{font-size:9px;letter-spacing:.08em}
+  .shift-install-dock .shift-pwa-install{min-width:99px!important;padding-inline:9px!important}
+}
+@keyframes shiftMobilePageIn{
+  from{opacity:.6;transform:translate3d(0,9px,0)}
+  to{opacity:1;transform:translate3d(0,0,0)}
+}
+@keyframes shiftMobileCardIn{
+  from{opacity:.5;transform:translate3d(0,6px,0)}
+  to{opacity:1;transform:translate3d(0,0,0)}
+}
+@keyframes shiftMobileCTAIn{
+  from{opacity:.5;transform:translate3d(6px,0,0)}
+  to{opacity:1;transform:translate3d(0,0,0)}
+}
+@media (max-width:860px) and (prefers-reduced-motion:no-preference){
+  html:not([data-v65-mode="ECO"]) .view.active{
+    animation:shiftMobilePageIn .28s cubic-bezier(.2,.7,.25,1) both!important;
+  }
+  html:not([data-v65-mode="ECO"]) .shift-install-dock .shift-pwa-install{
+    animation:shiftMobileCTAIn .34s ease-out both;
+  }
+  html:not([data-v65-mode="ECO"]) #overviewView.active .v6517-kpi{
+    animation:shiftMobileCardIn .32s ease-out both!important;
+  }
+  html:not([data-v65-mode="ECO"]) #overviewView.active .v6517-kpi:nth-child(2){animation-delay:55ms!important}
+  html:not([data-v65-mode="ECO"]) #overviewView.active .v6517-kpi:nth-child(3){animation-delay:100ms!important}
+  html:not([data-v65-mode="ECO"]) #overviewView.active .v6517-kpi:nth-child(4){animation-delay:145ms!important}
+}
+@media (prefers-reduced-motion:reduce){
+  .shift-install-dock,.shift-install-dock *,#mobileNav button,
+  .view.active,#overviewView .v6517-kpi{animation:none!important;transition:none!important}
+}
+html[data-v65-mode="ECO"] .shift-install-dock *,
+html[data-v65-mode="ECO"] .view.active{animation:none!important}
+@media (prefers-reduced-transparency:reduce){
+  .shift-install-dock{background:#071b2e!important}
+}
 
 </style>
 </head>
@@ -4872,7 +5020,16 @@ function initV6513PWA(){
   button.setAttribute('aria-label','ติดตั้ง Shift เป็นแอป / Install Shift');
   button.setAttribute('title','ติดตั้ง Shift ลงหน้าจอโฮม');
   button.hidden=isStandalone();
-  host.appendChild(button);
+  // Reserve a real layout row for installation rather than a floating button
+  // overlapping Oncall/TH/EN/performance switches or the mobile bottom nav.
+  const dock=document.createElement('div');
+  dock.className='shift-install-dock';
+  dock.setAttribute('aria-label','PWA installation');
+  const header=document.querySelector('.command-bar');
+  if(header)header.insertAdjacentElement('afterend',dock);
+  else host.appendChild(dock);
+  dock.appendChild(button);
+  dock.hidden=isStandalone();
 
   const closeHelp=()=>{
     if(!helpBox)return;
@@ -4982,14 +5139,15 @@ function initV6513PWA(){
     event.preventDefault();
     pendingInstall=event;
     button.hidden=isStandalone();
+    dock.hidden=isStandalone();
   });
   window.addEventListener('appinstalled',()=>{
-    pendingInstall=null;button.hidden=true;
+    pendingInstall=null;button.hidden=true;dock.hidden=true;
     if(helpBox){helpBox.remove();helpBox=null}
   });
-  window.addEventListener('pageshow',()=>{button.hidden=isStandalone()});
+  window.addEventListener('pageshow',()=>{button.hidden=isStandalone();dock.hidden=isStandalone()});
   button.addEventListener('click',async()=>{
-    if(isStandalone()){button.hidden=true;return}
+    if(isStandalone()){button.hidden=true;dock.hidden=true;return}
     if(pendingInstall){
       const prompt=pendingInstall;
       pendingInstall=null;
@@ -5002,6 +5160,24 @@ function initV6513PWA(){
     }
     showHelp();
   });
+  // A single delegated, GPU-friendly tap response. No permanent timers,
+  // canvas, scroll handlers, or excessive reflows on mobile.
+  if(root.dataset.shiftMobileMotionReady!=='1'){
+    root.dataset.shiftMobileMotionReady='1';
+    document.addEventListener('pointerdown',event=>{
+      if(!window.matchMedia?.('(max-width:860px)')?.matches)return;
+      if(window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches)return;
+      if(root.dataset.v65Mode==='ECO'||event.pointerType==='mouse'||event.button!==0)return;
+      const target=event.target?.closest?.('button');
+      if(!target||target.disabled||!target.isConnected||!target.animate)return;
+      if(target.closest('.shift-pwa-help'))return;
+      target.animate([
+        {transform:'scale(1)'},
+        {transform:'scale(.965)',offset:.45},
+        {transform:'scale(1)'}
+      ],{duration:190,easing:'ease-out'});
+    },{passive:true});
+  }
   const canRegister=('serviceWorker' in navigator)&&secure();
   if(canRegister){
     const register=()=>{
