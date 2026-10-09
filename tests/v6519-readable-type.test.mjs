@@ -40,7 +40,7 @@ test('v6.5.20 build and PWA cache are aligned with read-only release CI',()=>{
   assert.match(html,/data-app-version="6\.5\.20"/);
   assert.ok(html.includes('v6519-readable-type-style'));
   assert.ok(sw.includes('shift-shell-v6.5.20'));
-  assert.ok(wf.includes('work/v6.5.20-readable-data-month-names'));
+  assert.ok(wf.includes('work/v6.5.19-readable-data-month-names'));
   assert.ok(wf.includes('tests/v6519-*.test.mjs'));
   assert.doesNotMatch(wf,/permissions:\s*contents:\s*write/);
 });
