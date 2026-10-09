@@ -34,10 +34,10 @@ test('v6.5.10 runtime layer stamps the current app version without changing sche
   assert.doesNotMatch(js,/function\s+v652Matrix/);
 });
 
-test('v6.5.10 layer remains shipped in v6.5.17',()=>{
+test('v6.5.10 layer remains shipped in v6.5.18',()=>{
   const build=fs.readFileSync('scripts/build.mjs','utf8');
   const workflow=fs.readFileSync('.github/workflows/v65-ci.yml','utf8');
-  for(const marker of ['v6510-ui.css','v6510-overrides.js','v6510-ui-style','data-app-version="6.5.17"','data-loader-version="6.5.17"','built v6.5.17']) assert.ok(build.includes(marker),`build missing ${marker}`);
+  for(const marker of ['v6510-ui.css','v6510-overrides.js','v6510-ui-style','data-app-version="6.5.18"','data-loader-version="6.5.18"','built v6.5.18']) assert.ok(build.includes(marker),`build missing ${marker}`);
   assert.ok(workflow.includes(branch),'missing v6.5.10 branch trigger');
   assert.ok(workflow.includes('tests/v6510-*.test.mjs'),'missing v6.5.10 release gate');
 });

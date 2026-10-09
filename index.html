@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="th" data-app-version="6.5.17" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">
+<html lang="th" data-app-version="6.5.18" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -3283,11 +3283,193 @@ body,body:where(:not(.whatever)),.app{background:transparent!important;backgroun
 html[data-v65-mode="ECO"] .v6517-dashboard,html[data-v65-mode="ECO"] .v6517-banner,html[data-v65-mode="ECO"] .v6517-date{animation:none!important}
 
 </style>
+<style id="v6518-balanced-layout-style">
+/* Shift v6.5.18 — Balanced command layout. Keeps live roster data and neon theme. */
+:root{--v6518-gap:12px;--v6518-panel-pad:14px}
+#overviewView,.view{min-width:0;max-width:100%}
+#overviewView .v6517-dashboard{width:100%;max-width:100%;margin:8px 0 18px;gap:var(--v6518-gap);align-items:stretch}
+#overviewView .v6517-banner{width:100%;min-width:0;min-height:98px!important;padding:17px clamp(16px,2vw,25px)!important}
+#overviewView .v6517-banner h2{max-width:100%;line-height:1.2}
+html[data-v6518-layout="ready"] #overviewView > .hero-grid{display:none!important}
+html[data-v6518-layout="ready"] #overviewView > .timeline-panel,
+html[data-v6518-layout="ready"] #overviewView > .overview-main,
+html[data-v6518-layout="ready"] #overviewView > .lower-grid{display:none!important}
+#overviewView .v6517-dashboard > .timeline-panel{
+ display:grid!important;grid-template-columns:minmax(155px,auto) minmax(0,1fr);
+ align-items:center;gap:12px;margin:0!important;padding:11px 14px!important;
+ min-width:0;min-height:78px!important;height:auto!important
+}
+#overviewView .v6517-dashboard > .timeline-panel .timeline-head{min-width:0}
+#overviewView .v6517-dashboard > .timeline-panel .timeline-shell{min-width:0;max-width:100%;overflow:hidden}
+#overviewView .v6517-dashboard > .timeline-panel .timeline{max-width:100%;overflow-x:auto;scrollbar-width:thin}
+#overviewView .v6517-dashboard > .timeline-panel #rangeTitle{position:absolute}
+#overviewView .v6517-kpis{grid-template-columns:repeat(5,minmax(0,1fr));align-items:stretch}
+#overviewView .v6517-kpi{min-width:0;min-height:88px;padding:12px}
+#overviewView .v6517-main-grid{grid-template-columns:minmax(0,2.1fr) minmax(265px,.95fr);gap:var(--v6518-gap);align-items:stretch}
+#overviewView .v6517-matrix{min-height:0!important;padding:clamp(10px,1.2vw,16px)!important}
+#overviewView .v6517-matrix .mini-matrix{width:100%;max-width:100%}
+#overviewView .v6517-side-grid{min-height:0;grid-template-rows:auto auto;align-content:start}
+#overviewView .v6517-ratio-panel,#overviewView .v6517-shifts-panel{min-height:0}
+#overviewView .v6517-dashboard > .overview-main{
+ display:grid!important;grid-template-columns:minmax(0,2.9fr) minmax(240px,1fr)!important;
+ align-items:stretch;gap:var(--v6518-gap);margin:0!important;width:100%;min-width:0
+}
+#overviewView .shift-columns{
+ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ gap:var(--v6518-gap)!important;min-width:0;align-items:stretch
+}
+#overviewView .roster-card{
+ display:flex!important;flex-direction:column!important;min-width:0;
+ height:auto!important;min-height:0!important;max-height:360px!important;
+ border-radius:15px!important
+}
+#overviewView .roster-head{min-height:56px!important;padding:10px 11px!important;flex:0 0 auto}
+#overviewView .roster-title{min-width:0;gap:6px}
+#overviewView .roster-title b{font-size:clamp(12px,1vw,16px)!important;line-height:1.2}
+#overviewView .roster-title small{font-size:10px!important}
+#overviewView .roster-count{font-size:clamp(19px,1.5vw,25px)!important;flex-shrink:0}
+#overviewView .roster-card .people{
+ height:auto!important;min-height:0!important;max-height:274px!important;
+ flex:1 1 auto!important;overflow-y:auto!important;overflow-x:hidden!important;
+ overscroll-behavior:contain;scrollbar-width:thin;padding:4px 7px 8px!important
+}
+#overviewView .person-row{min-height:44px!important;padding:5px 4px!important;gap:5px!important}
+#overviewView .row-name{font-size:clamp(10px,.85vw,13px)!important;line-height:1.25!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#overviewView .row-meta{font-size:10px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#overviewView .id-glyph{flex-shrink:0}
+#overviewView .roster-foo{min-height:23px;padding:5px!important}
+#overviewView .insights-panel{
+ height:auto!important;min-height:0!important;max-height:360px!important;
+ padding:12px!important;overflow-y:auto;scrollbar-width:thin
+}
+#overviewView .insights-panel .insight-item{gap:6px}
+#overviewView .insights-panel .insight-value{font-size:clamp(13px,1.2vw,17px)!important}
+#overviewView .v6517-bottom-grid{grid-template-columns:minmax(200px,1fr) minmax(0,1.5fr) minmax(200px,1fr);gap:var(--v6518-gap)}
+#overviewView .v6517-oncall-panel,#overviewView .v6517-trend-panel,#overviewView .v6517-insights-panel{
+ min-width:0;min-height:0;align-self:stretch
+}
+#overviewView .v6517-trend svg{height:clamp(140px,12vw,182px)}
+#overviewView .v6517-dashboard > .lower-grid{
+ display:grid!important;grid-template-columns:minmax(0,1fr)!important;
+ margin:0!important;min-width:0;gap:0
+}
+#overviewView .lower-grid .network-panel{
+ min-width:0;max-width:100%;height:auto!important;min-height:0!important;
+ padding:12px 15px!important;overflow:hidden!important
+}
+#overviewView .network-host{
+ width:100%;max-width:100%;height:clamp(205px,22vw,265px)!important;
+ min-height:0!important;margin-top:7px!important
+}
+#overviewView .network-summary{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+#overviewView .network-stat{min-width:0}
+/* Stable, clean layouts across secondary navigation. */
+#dailyView .daily-header,#dailyView .timeline-panel{width:100%;min-width:0}
+#dailyView .shift-columns{grid-template-columns:repeat(3,minmax(0,1fr));min-width:0;gap:12px}
+#dailyView .roster-card{min-width:0;min-height:0;height:auto;max-height:490px}
+#dailyView .roster-card .people{overflow-y:auto;scrollbar-width:thin;min-height:0}
+#personView .person-layout{grid-template-columns:minmax(235px,.85fr) minmax(0,2fr);gap:12px;min-width:0}
+#personView .people-panel,#personView .person-detail{min-width:0}
+#monthView .month-panel{width:100%;min-width:0;max-width:100%}
+#monthView .month-head{flex-wrap:wrap;align-items:center}
+#monthView .table-wrap{width:100%;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+#monthView .heatmap{table-layout:fixed}
+#analyticsView .analytics-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;min-width:0}
+#analyticsView .analytics-main{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;min-width:0}
+#analyticsView .analytics-panel{min-width:0;overflow:hidden}
+#oncallView .v652-oncall,#oncallView .v652-pane,#oncallView .v652-control-deck{min-width:0;max-width:100%}
+#oncallView .v652-view-tabs{flex-wrap:wrap}
+#oncallView .v6511-board-scroll{max-width:100%}
+@media (max-width:1440px){
+ #overviewView .v6517-main-grid{grid-template-columns:minmax(0,1.85fr) minmax(240px,1fr)}
+ #overviewView .v6517-dashboard > .overview-main{grid-template-columns:minmax(0,2.7fr) minmax(210px,1fr)!important}
+ #overviewView .roster-card{max-height:330px!important}
+ #overviewView .roster-card .people{max-height:250px!important}
+ #overviewView .v6517-kpi{padding:10px!important}
+}
+@media (max-width:1100px){
+ #overviewView .v6517-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
+ #overviewView .v6517-main-grid{grid-template-columns:minmax(0,1fr)!important}
+ #overviewView .v6517-side-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto;align-items:stretch}
+ #overviewView .v6517-dashboard > .overview-main{grid-template-columns:minmax(0,1fr)!important}
+ #overviewView .shift-columns{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ #overviewView .insights-panel{max-height:none!important}
+ #overviewView .v6517-bottom-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #overviewView .v6517-trend-panel{grid-column:1/-1;grid-row:1}
+ #dailyView .shift-columns{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #analyticsView .analytics-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:860px){
+ :root{--v6518-gap:9px}
+ #overviewView .v6517-dashboard{gap:9px!important;margin:6px 0 12px!important}
+ #overviewView .v6517-banner{padding:13px!important;min-height:0!important}
+ #overviewView .v6517-dashboard > .timeline-panel{
+  display:flex!important;flex-direction:column!important;align-items:stretch!important;
+  padding:9px!important;gap:7px!important;min-height:0!important
+ }
+ #overviewView .v6517-dashboard > .timeline-panel .timeline-head{width:100%;display:flex;justify-content:space-between;gap:8px}
+ #overviewView .v6517-dashboard > .timeline-panel .timeline-shell{width:100%;min-width:0}
+ #overviewView .v6517-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ #overviewView .v6517-side-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #overviewView .v6517-dashboard > .overview-main{grid-template-columns:minmax(0,1fr)!important}
+ #overviewView .shift-columns{grid-template-columns:minmax(0,1fr)!important;gap:9px!important}
+ #overviewView .roster-card{max-height:none!important;min-height:0!important;height:auto!important}
+ #overviewView .roster-card .people{max-height:none!important;overflow:visible!important;height:auto!important}
+ #overviewView .person-row{min-height:48px!important}
+ #overviewView .row-name{font-size:13px!important}
+ #overviewView .roster-title b{font-size:15px!important}
+ #overviewView .insights-panel{max-height:none!important;overflow:visible}
+ #overviewView .v6517-bottom-grid{grid-template-columns:minmax(0,1fr)}
+ #overviewView .v6517-trend-panel{grid-column:auto;grid-row:auto}
+ #overviewView .network-host{height:225px!important}
+ #overviewView .network-summary{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #dailyView .shift-columns{grid-template-columns:minmax(0,1fr)}
+ #dailyView .roster-card{max-height:none}
+ #dailyView .roster-card .people{overflow:visible}
+ #personView .person-layout{grid-template-columns:minmax(0,1fr)}
+ #monthView .heatmap{table-layout:auto}
+ #analyticsView .analytics-main{grid-template-columns:minmax(0,1fr)}
+ #oncallView .v652-view-tabs{min-width:0;max-width:100%}
+ #oncallView .v6511-board-scroll{overflow-x:auto!important;overflow-y:hidden!important}
+ html body #mobileNav{
+  position:fixed!important;left:0!important;right:0!important;bottom:0!important;top:auto!important;
+  width:100%!important;margin:0!important;transform:none!important;
+  padding-bottom:calc(8px + env(safe-area-inset-bottom,0px))!important;
+  z-index:2147483000!important
+ }
+ html body #mobileNav button{min-height:48px!important;flex:1 1 0;min-width:0}
+ .app{padding-bottom:calc(98px + env(safe-area-inset-bottom,0px))!important}
+}
+@media (max-width:600px){
+ #overviewView .v6517-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ #overviewView .v6517-side-grid{grid-template-columns:minmax(0,1fr)!important}
+ #overviewView .v6517-banner{gap:8px}
+ #overviewView .v6517-banner h2{font-size:20px}
+ #overviewView .v6517-donut-wrap{justify-content:space-evenly;flex-wrap:wrap}
+ #overviewView .v6517-shifts{grid-template-columns:repeat(3,minmax(0,1fr))}
+ #overviewView .v6517-dashboard > .timeline-panel .timeline-head{flex-wrap:wrap}
+ #overviewView .network-summary{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #dailyView .daily-header{display:flex;flex-wrap:wrap;gap:9px}
+ #analyticsView .analytics-grid{grid-template-columns:minmax(0,1fr)}
+ #analyticsView .analytics-main{grid-template-columns:minmax(0,1fr)}
+ #monthView .month-head{display:flex;flex-wrap:wrap}
+ #personView .person-layout{grid-template-columns:minmax(0,1fr)}
+}
+@media (display-mode:standalone){
+ html body #mobileNav{bottom:0!important}
+}
+@media (prefers-reduced-motion:reduce){
+ #overviewView .v6517-dashboard *,#overviewView .roster-card,.mobile-nav button{
+  scroll-behavior:auto!important;animation:none!important;transition:none!important
+ }
+}
+
+</style>
 </head>
 <!-- REFERENCE LOCK V4 -->
 <body>
 
-<div id="bootOverlay" data-loader-version="6.5.17" aria-label="Loading Shift Command Center"><div class="boot613-shell"><div class="boot613-top"><div class="boot613-logo"></div><div class="boot613-title"><small>Boot Sequence</small><h2>Loading Shift Command Center</h2><p>กำลังเชื่อมต่อ Shift Matrix และ Command UI…</p></div><div class="boot613-live">● LIVE BOOT</div></div><div class="boot613-main"><div class="boot613-radar"><div class="boot613-orbit"><i class="boot613-arc a"></i><i class="boot613-arc b"></i><i class="boot613-arc c"></i><i class="boot613-core"></i></div></div><div class="boot613-info"><div class="boot613-card"><div class="boot613-card-head"><b id="boot613Phase">Initializing Core Systems</b><span id="boot613Status">Starting…</span></div><div class="boot613-progress"><i id="boot613Bar"></i></div><div class="boot613-readout"><div class="boot613-pct" id="boot613Pct">8%</div><div class="boot613-phase" id="boot613Meta">phase 1 / 4<br>Secure startup</div></div></div><div class="boot613-grid"><div class="boot613-mini"><span>Module</span><b>Command UI</b></div><div class="boot613-mini"><span>Matrix</span><b>October 2569</b></div><div class="boot613-mini"><span>Status</span><b id="boot613State">BOOTING</b></div></div><div class="boot613-scan"><i></i></div></div></div></div></div>
+<div id="bootOverlay" data-loader-version="6.5.18" aria-label="Loading Shift Command Center"><div class="boot613-shell"><div class="boot613-top"><div class="boot613-logo"></div><div class="boot613-title"><small>Boot Sequence</small><h2>Loading Shift Command Center</h2><p>กำลังเชื่อมต่อ Shift Matrix และ Command UI…</p></div><div class="boot613-live">● LIVE BOOT</div></div><div class="boot613-main"><div class="boot613-radar"><div class="boot613-orbit"><i class="boot613-arc a"></i><i class="boot613-arc b"></i><i class="boot613-arc c"></i><i class="boot613-core"></i></div></div><div class="boot613-info"><div class="boot613-card"><div class="boot613-card-head"><b id="boot613Phase">Initializing Core Systems</b><span id="boot613Status">Starting…</span></div><div class="boot613-progress"><i id="boot613Bar"></i></div><div class="boot613-readout"><div class="boot613-pct" id="boot613Pct">8%</div><div class="boot613-phase" id="boot613Meta">phase 1 / 4<br>Secure startup</div></div></div><div class="boot613-grid"><div class="boot613-mini"><span>Module</span><b>Command UI</b></div><div class="boot613-mini"><span>Matrix</span><b>October 2569</b></div><div class="boot613-mini"><span>Status</span><b id="boot613State">BOOTING</b></div></div><div class="boot613-scan"><i></i></div></div></div></div></div>
 
 <div class="ambient a"></div><div class="ambient b"></div><div class="ambient c"></div>
 <div class="app">
@@ -4911,6 +5093,35 @@ function v6517Init(){
 if(typeof document!=='undefined'){
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',v6517Init,{once:true});
  else v6517Init();
+}
+
+// v6518-balanced-layout.js
+/* Shift v6.5.18 — Rebalance the existing live views; no duplicated schedule data. */
+function v6518InitBalancedLayout(){
+ const root=document.documentElement;
+ if(root.dataset.v6518Layout==='ready')return;
+ const view=document.getElementById('overviewView');
+ if(!view)return;
+ if(!document.getElementById('v6517Dashboard')&&typeof v6517Init==='function')v6517Init();
+ const deck=document.getElementById('v6517Dashboard');
+ const timeline=view.querySelector(':scope > .timeline-panel');
+ const rosters=view.querySelector(':scope > .overview-main');
+ const network=view.querySelector(':scope > .lower-grid');
+ const kpis=deck?.querySelector(':scope > .v6517-kpis');
+ const bottom=deck?.querySelector(':scope > .v6517-bottom-grid');
+ const matrix=deck?.querySelector('#v6517MatrixTarget');
+ // The original hero and metrics retain their IDs in the DOM for the old renderers.
+ // Only their duplicate visual block is hidden after the new layout is committed.
+ if(!deck||!timeline||!rosters||!network||!kpis||!bottom||!matrix)return;
+ deck.insertBefore(timeline,kpis);
+ deck.insertBefore(rosters,bottom);
+ deck.appendChild(network);
+ root.dataset.v6518Layout='ready';
+ root.dataset.appVersion='6.5.18';
+}
+if(typeof document!=='undefined'){
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',v6518InitBalancedLayout,{once:true});
+ else v6518InitBalancedLayout();
 }
 
 })();</script>

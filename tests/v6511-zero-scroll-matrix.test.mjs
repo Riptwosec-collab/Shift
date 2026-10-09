@@ -42,10 +42,10 @@ test('v6.5.11 Matrix Board v2 keeps month/day and engineer interactions through 
   for(const marker of ['data-v659-month','data-v659-day','data-v659-engineer','v655-focused-row','v655-live','v655-next','v655-selected-day']) assert.ok(js.includes(marker),`missing ${marker}`);
 });
 
-test('v6.5.11 Matrix Board layer remains shipped in v6.5.17',()=>{
+test('v6.5.11 Matrix Board layer remains shipped in v6.5.18',()=>{
   const build=fs.readFileSync('scripts/build.mjs','utf8');
   const workflow=fs.readFileSync('.github/workflows/v65-ci.yml','utf8');
-  for(const marker of ['v6511-ui.css','v6511-overrides.js','v6511-ui-style','data-app-version="6.5.17"','data-loader-version="6.5.17"','built v6.5.17']) assert.ok(build.includes(marker),`build missing ${marker}`);
+  for(const marker of ['v6511-ui.css','v6511-overrides.js','v6511-ui-style','data-app-version="6.5.18"','data-loader-version="6.5.18"','built v6.5.18']) assert.ok(build.includes(marker),`build missing ${marker}`);
   assert.ok(workflow.includes(branch),'missing v6.5.11 branch trigger');
   assert.ok(workflow.includes('tests/v6511-*.test.mjs'),'missing v6.5.11 release gate');
 });
