@@ -24,6 +24,7 @@ on:
       - 'work/v6.5.18-balanced-responsive-layout'
       - 'work/v6.5.19-readable-data-month-names'
       - 'work/v6.5.20-mobile-pwa-install-repair'
+      - 'work/v6.5.20-pwa-install-production-hotfix'
   workflow_dispatch:
 
 jobs:

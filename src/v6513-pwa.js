@@ -1,9 +1,8 @@
-/* Shift v6.5.20 — accessible install flow for iOS Safari, Android and in-app browsers.
-   Manual install help is available regardless of beforeinstallprompt support. */
+/* Shift v6.5.20 PWA install hotfix — inspect actual production resources, not just file names. */
 function initV6513PWA(){
-  const host=document.querySelector('.command-actions');
   const root=document.documentElement;
-  if(!host||root.dataset.v6513PwaReady==='1')return;
+  if(root.dataset.v6513PwaReady==='1')return;
+  const host=document.querySelector('.command-actions')||document.querySelector('.command-bar')||document.body;
   root.dataset.v6513PwaReady='1';
   root.dataset.appVersion='6.5.20';
   const isStandalone=()=>window.matchMedia?.('(display-mode: standalone)')?.matches||window.navigator.standalone===true;
@@ -29,22 +28,50 @@ function initV6513PWA(){
     helpBox.remove();helpBox=null;
     button.focus({preventScroll:true});
   };
-  const diagnosis=async(node)=>{
+  const diagnosticLines=async()=>{
     const states=[];
-    states.push(secure()?'HTTPS: พร้อมใช้งาน':'HTTPS: ต้องเปิดผ่านลิงก์ https://');
+    states.push(secure()?'HTTPS: ผ่าน':'HTTPS: ไม่ผ่าน — ต้องใช้ HTTPS');
     try{
       const response=await fetch('./manifest.webmanifest',{cache:'no-store'});
-      if(!response.ok)throw new Error(String(response.status));
+      if(!response.ok)throw new Error('HTTP '+response.status);
       const manifest=await response.json();
-      states.push(manifest?.name&&manifest?.icons?.length?'Manifest: พร้อมใช้งาน':'Manifest: ข้อมูลไม่ครบ');
-    }catch{states.push('Manifest: เปิดไม่ได้ — ตรวจสอบการ Deploy')}
+      if(!manifest?.name||!manifest?.start_url||!manifest?.icons?.length)throw new Error('Manifest ไม่มีข้อมูลสำคัญ');
+      states.push('Manifest: ผ่าน');
+      const primary=manifest.icons.find(icon=>icon.sizes?.includes('192x192'))||manifest.icons[0];
+      const iconURL=new URL(primary.src,new URL('./manifest.webmanifest',location.href));
+      const image=await fetch(iconURL,{cache:'no-store'});
+      if(!image.ok||!image.headers.get('content-type')?.toLowerCase().startsWith('image/')){
+        throw new Error('Icon '+image.status+' / '+(image.headers.get('content-type')||'ไม่มี MIME type'));
+      }
+      states.push('Icon: ผ่าน');
+    }catch(error){
+      states.push('Manifest/Icon: ไม่ผ่าน — '+(error?.message||'ตรวจสอบการ Deploy'));
+    }
+    try{
+      const response=await fetch('./sw.js',{cache:'no-store'});
+      if(!response.ok)throw new Error('HTTP '+response.status);
+      const worker=await response.text();
+      if(!worker.includes('shift-shell-v6.5.20'))throw new Error('ไฟล์ sw.js ยังไม่ใช่ v6.5.20');
+      if(/^\s*<!doctype html|^\s*<html/i.test(worker))throw new Error('เซิร์ฟเวอร์ส่ง HTML แทน sw.js');
+      states.push('ไฟล์ sw.js: ผ่าน (v6.5.20)');
+    }catch(error){
+      states.push('ไฟล์ sw.js: ไม่ผ่าน — '+(error?.message||'ตรวจสอบการ Deploy'));
+    }
     if('serviceWorker' in navigator){
       try{
         const registration=await navigator.serviceWorker.getRegistration('./');
-        states.push(registration?.active?'Service Worker: พร้อมใช้งาน':'Service Worker: กำลังติดตั้ง หรือยังไม่ได้ Deploy');
+        states.push(registration?.active?'Service Worker: พร้อมใช้งาน':'Service Worker: ยังไม่ Active — ลองโหลดหน้านี้อีกครั้ง');
       }catch{states.push('Service Worker: ตรวจสอบไม่สำเร็จ')}
     }else states.push('Service Worker: เบราว์เซอร์นี้ไม่รองรับ');
-    if(node?.isConnected)node.textContent=states.join(' • ');
+    if(inApp)states.push('เบราว์เซอร์ในแอป: กรุณาเปิดลิงก์ใน Safari หรือ Chrome');
+    if(isIOS)states.push('iPhone: ต้องกด Share → Add to Home Screen เอง (ไม่มี native install prompt)');
+    return states;
+  };
+  const diagnosis=async(node)=>{
+    if(!node?.isConnected)return;
+    node.textContent='กำลังตรวจสอบไฟล์จริงบนเว็บไซต์…';
+    const states=await diagnosticLines();
+    if(node.isConnected)node.textContent=states.join('\n');
   };
   const showHelp=()=>{
     if(isStandalone())return;
@@ -66,7 +93,7 @@ function initV6513PWA(){
       description.textContent=iosSafari?'สำหรับ iPhone/iPad ผ่าน Safari':'สำหรับ iPhone/iPad ให้เปิดเว็บไซต์ใน Safari ก่อน';
       if(!iosSafari)steps.push('เปิดในเบราว์เซอร์ Safari (ไม่ใช่เบราว์เซอร์ใน LINE, Facebook หรือ Instagram)');
       steps.push('แตะปุ่มแชร์ Share (สี่เหลี่ยมมีลูกศรขึ้น) ใน Safari');
-      steps.push('เลือก เพิ่มไปยังหน้าจอโฮม (Add to Home Screen)');
+      steps.push('เลื่อนเมนูและเลือก เพิ่มไปยังหน้าจอโฮม (Add to Home Screen)');
       steps.push('ถ้ามีตัวเลือก เปิดเป็นเว็บแอป ให้เปิดไว้ แล้วแตะ เพิ่ม (Add)');
     }else if(isAndroid){
       description.textContent='สำหรับ Android ผ่าน Chrome หรือเบราว์เซอร์ที่รองรับ';
@@ -84,10 +111,15 @@ function initV6513PWA(){
     }
     const status=document.createElement('p');
     status.className='shift-pwa-diagnostics';
+    status.setAttribute('aria-live','polite');
     status.textContent='กำลังตรวจสอบ HTTPS, Manifest และ Service Worker…';
+    const retry=document.createElement('button');
+    retry.type='button';retry.className='shift-pwa-retry';
+    retry.textContent='ตรวจสอบอีกครั้ง';
+    retry.addEventListener('click',()=>{void diagnosis(status)});
     const heading=document.createElement('div');
     heading.className='shift-pwa-help-heading';heading.append(title,close);
-    tip.append(heading,description,instructions,status);
+    tip.append(heading,description,instructions,status,retry);
     document.body.appendChild(tip);
     helpBox=tip;
     close.addEventListener('click',closeHelp);
@@ -104,6 +136,7 @@ function initV6513PWA(){
     pendingInstall=null;button.hidden=true;
     if(helpBox){helpBox.remove();helpBox=null}
   });
+  window.addEventListener('pageshow',()=>{button.hidden=isStandalone()});
   button.addEventListener('click',async()=>{
     if(isStandalone()){button.hidden=true;return}
     if(pendingInstall){
@@ -121,12 +154,16 @@ function initV6513PWA(){
   const canRegister=('serviceWorker' in navigator)&&secure();
   if(canRegister){
     const register=()=>{
-      navigator.serviceWorker.register('./sw.js',{scope:'./'})
-        .then(()=>{void navigator.serviceWorker.ready.catch(()=>{})})
+      navigator.serviceWorker.register('./sw.js',{scope:'./',updateViaCache:'none'})
+        .then(registration=>{
+          void registration.update().catch(()=>{});
+          void navigator.serviceWorker.ready.catch(()=>{});
+        })
         .catch(()=>{ /* install help reports registration failures */ });
     };
-    if(document.readyState==='complete')register();
-    else window.addEventListener('load',register,{once:true});
+    // Register without waiting for all photos, fonts and other network requests to finish.
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',register,{once:true});
+    else register();
   }
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initV6513PWA,{once:true});

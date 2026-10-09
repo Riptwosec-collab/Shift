@@ -67,3 +67,25 @@
 @media (prefers-reduced-motion:reduce){
   .shift-pwa-install,.shift-pwa-help,.shift-pwa-help *{animation:none!important;transition:none!important}
 }
+
+/* Install access must not depend on a horizontally crowded mobile command bar. */
+.shift-pwa-diagnostics{white-space:pre-line}
+.shift-pwa-retry{
+  width:100%;min-height:44px;padding:9px 12px;cursor:pointer;
+  border-radius:11px;border:1px solid rgba(79,217,253,.7);
+  background:#07395b;color:#f0faff;font-weight:800;font-size:13px;
+}
+.shift-pwa-retry:focus-visible{outline:2px solid #8ef4ff;outline-offset:2px}
+@media (max-width:860px){
+  .command-actions .shift-pwa-install,.command-bar .shift-pwa-install,.shift-pwa-install{
+    display:inline-flex!important;position:fixed!important;
+    z-index:2147483001!important;right:12px!important;left:auto!important;
+    top:auto!important;bottom:calc(82px + env(safe-area-inset-bottom,0px))!important;
+    width:auto!important;min-width:100px!important;
+    box-shadow:0 8px 24px rgba(0,0,0,.7),0 0 18px rgba(29,204,255,.35)!important;
+  }
+  .shift-pwa-install[hidden]{display:none!important}
+  .shift-pwa-help{bottom:calc(138px + env(safe-area-inset-bottom,0px))!important;
+    max-height:calc(100dvh - 155px - env(safe-area-inset-bottom,0px))!important}
+}
+@media (display-mode:standalone){.shift-pwa-install{display:none!important}}
