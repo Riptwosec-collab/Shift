@@ -35,12 +35,12 @@ test('PWA bottom bar reaches viewport bottom with Safe Area inside, reduced-moti
  assert.match(css,/display-mode:standalone/);
  assert.match(css,/prefers-reduced-motion/);
 });
-test('v6.5.19 has a single built output and CI regression checks',()=>{
+test('v6.5.20 has a single built output and CI regression checks',()=>{
  const build=read('scripts/build.mjs'),html=read('index.html'),sw=read('sw.js'),workflow=read('.github/workflows/v65-ci.yml');
- for(const k of ['v6518-balanced-layout.css','v6518-balanced-layout.js','v6518-balanced-layout-style','data-app-version="6.5.19"','data-loader-version="6.5.19"','built v6.5.19'])assert.ok(build.includes(k),k);
- assert.match(html,/data-app-version="6\.5\.19"/);
+ for(const k of ['v6518-balanced-layout.css','v6518-balanced-layout.js','v6518-balanced-layout-style','data-app-version="6.5.20"','data-loader-version="6.5.20"','built v6.5.20'])assert.ok(build.includes(k),k);
+ assert.match(html,/data-app-version="6\.5\.20"/);
  assert.match(html,/id="v6518-balanced-layout-style"/);
- assert.match(sw,/shift-shell-v6\.5\.19/);
+ assert.match(sw,/shift-shell-v6\.5\.20/);
  assert.ok(workflow.includes('work/v6.5.18-balanced-responsive-layout'));
  assert.ok(workflow.includes('tests/v6518-*.test.mjs'));
 });

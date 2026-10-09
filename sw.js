@@ -1,11 +1,15 @@
-/* Shift v6.5.19 — fast installable shell, same-origin only, background refresh. */
-const CACHE_NAME='shift-shell-v6.5.19';
+/* Shift v6.5.20 — resilient install + immediate cached PWA launches. */
+const CACHE_NAME='shift-shell-v6.5.20';
 const SHELL_ASSETS=['./index.html','./manifest.webmanifest','./icons/shift-192.png','./icons/shift-512.png','./icons/shift-maskable-512.png'];
 const APP_PATHS=new Set(SHELL_ASSETS.map(path=>new URL(path,self.registration.scope).pathname));
 self.addEventListener('install',event=>{
   event.waitUntil((async()=>{
     const cache=await caches.open(CACHE_NAME);
-    await cache.addAll(SHELL_ASSETS);
+    // A transient missing icon must not make the entire service worker fail to install.
+    await Promise.allSettled([
+      cache.add('./index.html'),
+      ...SHELL_ASSETS.filter(path=>path!=='./index.html').map(path=>cache.add(path))
+    ]);
     await self.skipWaiting();
   })());
 });
@@ -17,16 +21,14 @@ self.addEventListener('activate',event=>{
     await self.clients.claim();
   })());
 });
-/* networkFirst is deliberately stale-while-revalidate for the static HTML shell:
-   returning the cached page immediately prevents a repeat PWA launch from waiting on cellular RTT. */
+/* networkFirst: stale-while-revalidate for the static HTML shell only.
+   API calls and cross-origin requests are never intercepted or cached. */
 async function networkFirst(request,event){
   const cache=await caches.open(CACHE_NAME);
   const shellURL=new URL('./index.html',self.registration.scope);
   const cached=await cache.match(shellURL)||await cache.match('./');
   const refresh=fetch(request,{cache:'no-cache'}).then(async response=>{
-    if(response.ok&&response.type==='basic'){
-      await cache.put(shellURL,response.clone());
-    }
+    if(response.ok&&response.type==='basic')await cache.put(shellURL,response.clone());
     return response;
   });
   if(cached){

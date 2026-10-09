@@ -17,7 +17,7 @@ test('PWA has a scoped installable manifest and usable icons',()=>{
 
 test('service worker uses versioned same-origin caches with safe navigation offline fallback',()=>{
   const sw=read('sw.js');
-  for(const marker of ['shift-shell-v6.5.19','install','activate','fetch','skipWaiting','clients.claim','request.mode','navigate','caches.open','index.html','manifest.webmanifest']) assert.ok(sw.includes(marker),`missing ${marker}`);
+  for(const marker of ['shift-shell-v6.5.20','install','activate','fetch','skipWaiting','clients.claim','request.mode','navigate','caches.open','index.html','manifest.webmanifest']) assert.ok(sw.includes(marker),`missing ${marker}`);
   assert.match(sw,/request\.method\s*!==\s*['"]GET['"]/);
   assert.match(sw,/url\.origin\s*!==\s*self\.location\.origin/);
   assert.match(sw,/networkFirst|network-first/i);
@@ -28,9 +28,9 @@ test('PWA entry is connected in standalone build and installation has an accessi
   const build=read('scripts/build.mjs');
   const shell=read('index.html');
   const js=read('src/v6513-pwa.js');
-  for(const marker of ['manifest.webmanifest','apple-mobile-web-app-capable','apple-touch-icon','theme-color','v6513-ui-style','v6513-pwa.js','6.5.19']) assert.ok(build.includes(marker)||shell.includes(marker),`missing ${marker}`);
+  for(const marker of ['manifest.webmanifest','apple-mobile-web-app-capable','apple-touch-icon','theme-color','v6513-ui-style','v6513-pwa.js','6.5.20']) assert.ok(build.includes(marker)||shell.includes(marker),`missing ${marker}`);
   for(const marker of ['serviceWorker','beforeinstallprompt','appinstalled','aria-label','shift-pwa-install']) assert.ok(js.includes(marker),`missing ${marker}`);
-  assert.match(shell,/data-app-version="6\.5\.19"/);
+  assert.match(shell,/data-app-version="6\.5\.20"/);
   assert.match(shell,/rel="manifest" href="\.\/manifest\.webmanifest"/);
   assert.match(shell,/id="v6513-ui-style"/);
 });
@@ -59,6 +59,6 @@ test('v6.5.13 PWA release gates and build track current version',()=>{
   const build=read('scripts/build.mjs');
   assert.ok(workflow.includes('work/v6.5.13-pwa-responsive-all-views'));
   assert.ok(workflow.includes('tests/v6513-*.test.mjs'));
-  assert.ok(build.includes('built v6.5.19'));
-  assert.ok(build.includes('data-loader-version="6.5.19"'));
+  assert.ok(build.includes('built v6.5.20'));
+  assert.ok(build.includes('data-loader-version="6.5.20"'));
 });

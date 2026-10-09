@@ -20,7 +20,7 @@ function v6518InitBalancedLayout(){
  deck.insertBefore(rosters,bottom);
  deck.appendChild(network);
  root.dataset.v6518Layout='ready';
- root.dataset.appVersion='6.5.18';
+ root.dataset.appVersion='6.5.20';
 }
 if(typeof document!=='undefined'){
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',v6518InitBalancedLayout,{once:true});

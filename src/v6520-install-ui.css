@@ -1,0 +1,69 @@
+/* Shift v6.5.20 — visible, practical install CTA and accessible platform-specific guide. */
+.shift-pwa-install{
+  display:inline-flex;align-items:center;justify-content:center;gap:5px;flex:0 0 auto;
+  width:auto!important;max-width:128px;min-width:86px!important;min-height:44px!important;
+  padding:7px 10px!important;
+  font-size:13px!important;font-weight:800!important;line-height:1.2!important;
+  white-space:nowrap;color:#f3fbff!important;
+  background:linear-gradient(145deg,rgba(4,98,150,.93),rgba(3,29,61,.95))!important;
+  border:1px solid rgba(71,227,255,.8)!important;border-radius:11px!important;
+  box-shadow:inset 0 1px 0 rgba(223,250,255,.31),0 0 10px rgba(0,164,233,.3)!important;
+  touch-action:manipulation;
+}
+.shift-pwa-install[hidden]{display:none!important}
+.shift-pwa-install:focus-visible{outline:2px solid #70f4ff;outline-offset:3px}
+.shift-pwa-help{
+  position:fixed!important;z-index:2147483002!important;
+  left:auto!important;right:12px!important;
+  top:auto!important;bottom:calc(20px + env(safe-area-inset-bottom,0px))!important;
+  display:block!important;box-sizing:border-box;
+  width:min(410px,calc(100vw - 24px))!important;max-width:calc(100vw - 24px)!important;
+  max-height:calc(100dvh - 75px);overflow:auto;overscroll-behavior:contain;
+  padding:18px!important;
+  border:1px solid rgba(74,207,254,.8)!important;border-radius:18px!important;
+  background:linear-gradient(145deg,rgba(10,39,69,.98),rgba(3,15,32,.99))!important;
+  color:#eefaff!important;box-shadow:0 20px 50px rgba(0,0,0,.75),0 0 20px rgba(0,137,233,.25)!important;
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+}
+.shift-pwa-help-heading{display:flex;align-items:start;justify-content:space-between;gap:12px}
+.shift-pwa-help-heading strong{font-size:18px!important;line-height:1.35!important;color:#fff!important;font-weight:800}
+.shift-pwa-help p,.shift-pwa-help li{font-size:14px!important;line-height:1.6!important;color:#dcefff!important}
+.shift-pwa-help p{margin:9px 0!important}
+.shift-pwa-help ol{padding-left:23px!important;margin:8px 0!important;display:grid;gap:8px}
+.shift-pwa-help li::marker{color:#6eeaff;font-weight:800}
+.shift-pwa-help .shift-pwa-diagnostics{
+  margin:15px 0 0!important;padding:10px!important;
+  font-size:12px!important;line-height:1.55!important;
+  border:1px solid rgba(71,186,239,.45)!important;border-radius:10px!important;
+  color:#cbeeff!important;background:rgba(3,21,39,.85)!important;
+}
+.shift-pwa-help-close{
+  display:grid;place-items:center;flex:0 0 auto;
+  width:40px!important;min-width:40px!important;height:40px!important;
+  border:1px solid rgba(96,214,255,.5)!important;border-radius:9px!important;
+  background:rgba(14,59,91,.85)!important;color:#fff!important;
+  font-size:25px!important;cursor:pointer;
+}
+@media (max-width:860px){
+  .shift-pwa-help{
+    bottom:calc(90px + env(safe-area-inset-bottom,0px))!important;
+    max-height:calc(100dvh - 118px - env(safe-area-inset-bottom,0px))!important;
+  }
+  .command-actions .shift-pwa-install{
+    display:inline-flex!important;min-width:76px!important;min-height:44px!important;
+    max-width:100px!important;padding:7px 8px!important;font-size:12px!important;
+  }
+  .command-actions .shift-pwa-install[hidden]{display:none!important}
+  #mobileNav{position:fixed!important;bottom:0!important}
+}
+@media (max-width:600px){
+  .command-actions{gap:5px!important}
+  .command-actions .shift-pwa-install{font-size:11px!important;min-width:72px!important;padding:6px!important}
+  .shift-pwa-help{left:10px!important;right:10px!important;width:auto!important;max-width:none!important;padding:14px!important}
+}
+@media (display-mode:standalone){
+  .shift-pwa-install{display:none!important}
+}
+@media (prefers-reduced-motion:reduce){
+  .shift-pwa-install,.shift-pwa-help,.shift-pwa-help *{animation:none!important;transition:none!important}
+}

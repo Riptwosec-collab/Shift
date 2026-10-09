@@ -38,12 +38,12 @@ test('animation is GPU-bounded and quality/respect reduced motion modes',()=>{
  assert.match(css,/data-v65-mode="ECO"/);
  assert.doesNotMatch(css,/animation:\s*[^;}\n]*(?:blur|filter)/);
 });
-test('build, offline cache and CI gate track v6.5.19',()=>{
+test('build, offline cache and CI gate track v6.5.20',()=>{
  const build=read('scripts/build.mjs'),sw=read('sw.js'),html=read('index.html'),workflow=read('.github/workflows/v65-ci.yml');
- for(const k of ['v6517-neon-dashboard.css','v6517-neon-dashboard.js','v6517-neon-dashboard-style','built v6.5.19','data-app-version="6.5.19"','data-loader-version="6.5.19"'])assert.ok(build.includes(k),k);
- assert.match(html,/data-app-version="6\.5\.19"/);
+ for(const k of ['v6517-neon-dashboard.css','v6517-neon-dashboard.js','v6517-neon-dashboard-style','built v6.5.20','data-app-version="6.5.20"','data-loader-version="6.5.20"'])assert.ok(build.includes(k),k);
+ assert.match(html,/data-app-version="6\.5\.20"/);
  assert.match(html,/id="v6517-neon-dashboard-style"/);
- assert.match(sw,/shift-shell-v6\.5\.19/);
+ assert.match(sw,/shift-shell-v6\.5\.20/);
  assert.ok(workflow.includes('work/v6.5.17-reference-neon-dashboard'));
  assert.ok(workflow.includes('tests/v6517-*.test.mjs'));
 });

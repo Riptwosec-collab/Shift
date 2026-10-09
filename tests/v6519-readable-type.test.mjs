@@ -34,13 +34,13 @@ test('original 31-day heatmap cells and D N O values are untouched',()=>{
   const built=read('index.html');
   for(const snippet of ['dates.map((_,i)=>','statusAt(pi,i+1)','openCellModal(${pi},${i+1})']) assert.ok(original.includes(snippet)&&built.includes(snippet),snippet);
 });
-test('v6.5.19 build and PWA cache are aligned with read-only release CI',()=>{
+test('v6.5.20 build and PWA cache are aligned with read-only release CI',()=>{
   const build=read('scripts/build.mjs'),html=read('index.html'),sw=read('sw.js'),wf=read('.github/workflows/v65-ci.yml');
-  for(const marker of ['v6519-readable-type.css','v6519-readable-type-style','built v6.5.19','data-app-version="6.5.19"','data-loader-version="6.5.19"']) assert.ok(build.includes(marker),marker);
-  assert.match(html,/data-app-version="6\.5\.19"/);
+  for(const marker of ['v6519-readable-type.css','v6519-readable-type-style','built v6.5.20','data-app-version="6.5.20"','data-loader-version="6.5.20"']) assert.ok(build.includes(marker),marker);
+  assert.match(html,/data-app-version="6\.5\.20"/);
   assert.ok(html.includes('v6519-readable-type-style'));
-  assert.ok(sw.includes('shift-shell-v6.5.19'));
-  assert.ok(wf.includes('work/v6.5.19-readable-data-month-names'));
+  assert.ok(sw.includes('shift-shell-v6.5.20'));
+  assert.ok(wf.includes('work/v6.5.20-readable-data-month-names'));
   assert.ok(wf.includes('tests/v6519-*.test.mjs'));
   assert.doesNotMatch(wf,/permissions:\s*contents:\s*write/);
 });

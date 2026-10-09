@@ -57,13 +57,13 @@ test('v6.5.14 build uses day-aware default and ships refreshed PWA cache version
   assert.ok(build.includes('v6514-ui.css'));
   assert.ok(build.includes('v6514-mobile.js'));
   assert.ok(build.includes('v6514-ui-style'));
-  assert.ok(build.includes('built v6.5.19'));
-  assert.ok(build.includes('data-app-version="6.5.19"'));
-  assert.ok(build.includes('data-loader-version="6.5.19"'));
+  assert.ok(build.includes('built v6.5.20'));
+  assert.ok(build.includes('data-app-version="6.5.20"'));
+  assert.ok(build.includes('data-loader-version="6.5.20"'));
   assert.ok(build.includes('let selectedDay=1,selectedPerson=0'));
-  assert.match(html,/data-app-version="6\.5\.19"/);
+  assert.match(html,/data-app-version="6\.5\.20"/);
   assert.match(html,/id="v6514-ui-style"/);
-  assert.ok(sw.includes('shift-shell-v6.5.19'));
+  assert.ok(sw.includes('shift-shell-v6.5.20'));
 });
 
 test('v6.5.14 CI runs targeted mobile and date checks with read-only permissions',()=>{

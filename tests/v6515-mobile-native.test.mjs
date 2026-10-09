@@ -39,9 +39,9 @@ test('PWA resumes on focus and updates at midnight, without global polling loops
 });
 test('new release is wired to CSS JS cache and GitHub CI',()=>{
  const b=read('scripts/build.mjs'),h=read('index.html'),sw=read('sw.js'),wf=read('.github/workflows/v65-ci.yml');
- for(const k of ['v6515-ui.css','v6515-mobile.js','v6515-ui-style','data-app-version="6.5.19"','data-loader-version="6.5.19"','built v6.5.19'])assert.ok(b.includes(k),k);
- assert.match(h,/data-app-version="6\.5\.19"/);
- assert.ok(sw.includes('shift-shell-v6.5.19'));
+ for(const k of ['v6515-ui.css','v6515-mobile.js','v6515-ui-style','data-app-version="6.5.20"','data-loader-version="6.5.20"','built v6.5.20'])assert.ok(b.includes(k),k);
+ assert.match(h,/data-app-version="6\.5\.20"/);
+ assert.ok(sw.includes('shift-shell-v6.5.20'));
  assert.ok(wf.includes('work/v6.5.15-pwa-mobile-native-performance'));
  assert.ok(wf.includes('tests/v6515-*.test.mjs'));
 });
