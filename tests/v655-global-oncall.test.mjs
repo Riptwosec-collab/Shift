@@ -72,11 +72,11 @@ test('v6.5.5 global neon effects preserve HIGH BALANCED ECO and reduced motion f
   assert.match(css,/@keyframes v655/);
 });
 
-test('v6.5.5 neon layer remains shipped in v6.5.12',()=>{
+test('v6.5.5 neon layer remains shipped in v6.5.13',()=>{
   const build=fs.readFileSync('scripts/build.mjs','utf8');
   const html=fs.readFileSync('index.html','utf8');
-  for(const marker of ['v655-ui.css','v655-ui-style','data-app-version="6.5.12"','data-loader-version="6.5.12"','built v6.5.12']) assert.ok(build.includes(marker),`build missing ${marker}`);
-  for(const marker of ['data-app-version="6.5.12"','id="v655-ui-style"','v655-oncall-hero','v655-selected-day-detail','OOOOODDDDOODDDDOOOODDOOOONNNNNN','นาย นลิทัศน์ นากรณ์']) assert.ok(html.includes(marker),`index missing ${marker}`);
+  for(const marker of ['v655-ui.css','v655-ui-style','data-app-version="6.5.13"','data-loader-version="6.5.13"','built v6.5.13']) assert.ok(build.includes(marker),`build missing ${marker}`);
+  for(const marker of ['data-app-version="6.5.13"','id="v655-ui-style"','v655-oncall-hero','v655-selected-day-detail','OOOOODDDDOODDDDOOOODDOOOONNNNNN','นาย นลิทัศน์ นากรณ์']) assert.ok(html.includes(marker),`index missing ${marker}`);
 });
 
 test('v6.5.5 release gate includes the feature branch and dedicated regression suite',()=>{

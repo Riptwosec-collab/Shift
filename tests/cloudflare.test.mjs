@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
-test('Cloudflare direct deploy publishes only the tracked production index',()=>{
+test('Cloudflare direct deploy uses a strict allowlist for the PWA shell',()=>{
   const pkg=JSON.parse(fs.readFileSync('package.json','utf8'));
   const wrangler=fs.readFileSync('wrangler.jsonc','utf8');
   const build=fs.readFileSync('scripts/build.mjs','utf8');
