@@ -33,7 +33,7 @@ test('worker never claims offline install unless its HTML shell was cached',()=>
   assert.match(sw,/Promise\.allSettled/);
   assert.match(sw,/shellResult\.status!=='fulfilled'/);
   assert.match(sw,/throw shellResult\.reason/);
-  assert.match(sw,/shift-shell-v6\.5\.20-r5/);
+  assert.match(sw,/shift-shell-v6\.5\.20-r6/);
 });
 test('built artifact includes exact latest PWA JavaScript and CSS',()=>{
   const html=read('index.html');

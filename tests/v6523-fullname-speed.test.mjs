@@ -42,5 +42,5 @@ test('tracked bundle and offline cache contain updated optimization',()=>{
  assert.ok(html.includes(css));
  assert.ok(html.includes("name.scrollWidth+4"));
  assert.ok(html.includes("host.dataset.matrixReady!=='1'"));
- assert.ok(read('sw.js').includes('shift-shell-v6.5.20-r5'));
+ assert.ok(read('sw.js').includes('shift-shell-v6.5.20-r6'));
 });
