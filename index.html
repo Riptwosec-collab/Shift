@@ -4272,6 +4272,103 @@ html[data-v65-mode="ECO"] .view.active{animation:none!important}
 @media(max-width:390px){#monthView .shift-week-grid{--name-rail:165px}}
 @media(prefers-reduced-motion:reduce){#monthView .shift-week-cell,#overviewView .shift-preview-full{transition:none!important}}
 </style>
+<style id="v6526-overview-eight-style">
+/* v6.5.26 — Overview-only eight-day desktop matrix. Monthly roster retains 31 dates. */
+@media(min-width:861px){
+ #overviewView .v6517-matrix #v6517MatrixTarget,
+ #overviewView .v6517-matrix #v6517MatrixTarget .month-snapshot{width:100%!important;max-width:100%!important}
+ #overviewView .v6517-matrix .month-snapshot{padding:5px 5px 9px!important}
+ #overviewView .v6517-matrix .month-snapshot>.timeline-head{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;padding:0 3px 11px!important}
+ #overviewView .v6517-matrix .month-snapshot>.timeline-head .ghost-btn{display:none!important}
+ #overviewView .v6517-matrix .month-snapshot .section-title{font-size:clamp(16px,1.35vw,22px)!important;line-height:1.3!important}
+ #overviewView .v6517-matrix .shift-eight-period{font-size:12px!important;margin-top:5px;color:#a6c8e2;line-height:1.45}
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix{
+  display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;
+  padding:5px!important;margin:4px 0 0!important;overflow:hidden!important;
+  border:1px solid rgba(74,170,227,.28)!important;border-radius:13px!important;
+  background:linear-gradient(150deg,rgba(6,30,55,.86),rgba(2,13,28,.98))!important;
+  scrollbar-width:none
+ }
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-row{
+  display:grid!important;box-sizing:border-box!important;
+  grid-template-columns:minmax(190px,24%) repeat(8,minmax(0,1fr))!important;
+  min-width:0!important;max-width:100%!important;width:100%!important;
+  gap:4px!important;margin:0!important;min-height:39px!important;padding:3px 2px!important;
+  border-bottom:1px solid rgba(81,156,214,.10)
+ }
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-row:nth-child(even){background:rgba(65,137,198,.045)}
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-row:last-child{border:0}
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-name{
+  position:static!important;display:flex!important;align-items:center!important;
+  width:auto!important;min-width:0!important;max-width:none!important;
+  padding:5px 8px!important;min-height:31px!important;
+  color:#eff9ff!important;white-space:nowrap!important;overflow:hidden!important;
+  text-overflow:ellipsis!important;word-break:keep-all!important;
+  font-size:clamp(10px,.86vw,13px)!important;background:rgba(9,37,64,.98)!important;
+  border-radius:6px!important;border:1px solid rgba(71,143,197,.14)
+ }
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .shift-eight-header{background:rgba(12,47,80,.46)!important}
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .shift-eight-header .matrix-name{color:#b8dff9!important;font-size:11px!important}
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-day-head{
+  display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  min-width:0!important;width:100%!important;height:40px!important;cursor:pointer;
+  border:1px solid rgba(77,165,230,.14);border-radius:7px;
+  color:#d3efff;background:linear-gradient(180deg,#0d3053,#061c32)
+ }
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-day-head small{font-size:9px;color:#88b3d3}
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-day-head b{font-size:14px;line-height:1.2}
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-day-head.today{
+  border-color:#70e6fa!important;background:linear-gradient(180deg,#175271,#0b304b)!important;
+  box-shadow:inset 0 0 0 1px rgba(70,235,255,.17),0 0 12px rgba(50,196,242,.15)
+ }
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-day-head.selected{
+  outline:1px solid #77e8ff!important;outline-offset:0!important
+ }
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-cell{
+  display:grid!important;place-items:center!important;
+  box-sizing:border-box!important;height:32px!important;min-height:32px!important;
+  min-width:0!important;width:100%!important;transform:none!important;
+  border-radius:7px!important;padding:1px!important;color:#f9fdff!important;
+  font-size:11px!important;font-weight:850!important;cursor:pointer;
+  transition:filter .14s ease!important
+ }
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-cell:hover{filter:brightness(1.2)!important}
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-cell.O{font-size:9px!important}
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .shift-eight-empty{
+  display:grid;place-items:center;width:100%;min-width:0;height:32px;
+  border-radius:7px;border:1px dashed rgba(98,154,188,.22);
+  background:rgba(37,70,92,.12);color:#63829e
+ }
+ #overviewView .v6517-matrix .shift-eight-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:13px 4px 0;flex-wrap:wrap}
+ #overviewView .v6517-matrix .shift-eight-legend{display:flex;align-items:center;gap:13px;flex-wrap:wrap;color:#b3cee1;font-size:11px}
+ #overviewView .v6517-matrix .shift-eight-legend span{display:inline-flex;align-items:center;gap:5px}
+ #overviewView .v6517-matrix .shift-eight-legend i{width:9px;height:9px;border-radius:3px;display:inline-block}
+ #overviewView .v6517-matrix .shift-eight-legend .D i{background:var(--shift-day-solid,#ff426a)}
+ #overviewView .v6517-matrix .shift-eight-legend .N i{background:var(--shift-night-solid,#258dff)}
+ #overviewView .v6517-matrix .shift-eight-legend .O i{background:var(--shift-off-solid,#08dfa4)}
+ #overviewView .v6517-matrix .shift-eight-full{
+  display:inline-flex;align-items:center;justify-content:center;gap:14px;
+  box-sizing:border-box;min-height:41px;min-width:185px;
+  padding:9px 14px;border:1px solid rgba(74,185,255,.66);
+  border-radius:11px;background:linear-gradient(105deg,rgba(17,78,125,.65),rgba(6,35,67,.95));
+  color:#e9f8ff;font-size:12px;font-weight:850;cursor:pointer;
+  box-shadow:0 0 16px rgba(27,142,240,.11)
+ }
+ #overviewView .v6517-matrix .shift-eight-full:hover{border-color:#75dbff;background:rgba(32,105,163,.4)}
+ #overviewView .v6517-matrix .shift-eight-outside{margin:7px 4px 0;color:#9db9cd;font-size:10px}
+}
+@media (min-width:861px) and (max-width:1050px){
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-row{
+  grid-template-columns:minmax(160px,27%) repeat(8,minmax(0,1fr))!important;gap:2px!important
+ }
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-name{padding:5px!important;font-size:10px!important}
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-cell{font-size:9px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-cell{transition:none!important}
+}
+
+</style>
 </head>
 <!-- REFERENCE LOCK V4 -->
 <body>
@@ -6159,6 +6256,101 @@ const person=Number(b.dataset.shiftWeekPerson),day=Number(b.dataset.shiftWeekDat
 });const oldShow=window.showView;if(typeof oldShow==='function')window.showView=function(view){if(view==='month')shiftWeekStart=weekAnchor(selectedDay);return oldShow.apply(this,arguments)};
 const oldSet=window.setSelectedDay;if(typeof oldSet==='function')window.setSelectedDay=function(day){if(document.getElementById('monthView')?.classList.contains('active'))shiftWeekStart=weekAnchor(day);return oldSet.apply(this,arguments)};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{if(document.getElementById('monthView')?.classList.contains('active'))v6515RenderMobileMonth()},{once:true});else if(document.getElementById('monthView')?.classList.contains('active'))v6515RenderMobileMonth()}
+// v6526-overview-eight.js
+/* v6.5.26 — replaces ONLY the Overview's legacy 31-day matrix with today + 7 days.
+   Full Month screen remains backed by the unchanged 31-day heatmap. */
+function shiftOverview8Window(now=new Date()){
+ const actual=now.getFullYear()===2026&&now.getMonth()===9;
+ const first=actual?now.getDate():Math.max(1,Math.min(31,Number(selectedDay)||1));
+ const slots=Array.from({length:8},(_,index)=>{
+  const date=new Date(2026,9,first+index);
+  return {date,day:date.getDate(),available:date.getFullYear()===2026&&date.getMonth()===9};
+ });
+ return {first,slots,actual};
+}
+const shiftLegacyOverviewMatrix=renderOverviewMatrix;
+renderOverviewMatrix=function shiftRenderEightDayMatrix(){
+ const host=document.getElementById('overviewMonthMatrix');
+ if(!host||!Array.isArray(staff))return;
+ const {first,slots,actual}=shiftOverview8Window();
+ const english=typeof v6517Language==='function'&&v6517Language()==='en',locale=english?'en-US':'th-TH';
+ const rangeEnd=slots[7].date,fullYear=english?'2026':'2569';
+ const endMonth=rangeEnd.getMonth()===9?(english?'Oct':'ต.ค.'):(english?'Nov':'พ.ย.');
+ const textRange=english?`Oct ${first} – ${rangeEnd.getDate()} ${endMonth} ${fullYear}`:`${first} ต.ค. – ${rangeEnd.getDate()} ${endMonth} ${fullYear}`;
+ const context=host.closest('.month-snapshot');
+ if(context){
+  const heading=context.querySelector('.timeline-head');
+  if(heading){
+   const eyebrow=heading.querySelector('.eyebrow'),title=heading.querySelector('.section-title');
+   if(eyebrow)eyebrow.textContent='8-DAY MATRIX / OVERVIEW';
+   if(title)title.textContent=english?'Today + next 7 days':'วันนี้และ 7 วันถัดไป';
+   let period=heading.querySelector('.shift-eight-period');
+   if(!period){period=document.createElement('div');period.className='shift-eight-period';title?.parentElement?.appendChild(period);}
+   if(period)period.textContent=textRange;
+  }
+ }
+ const key=`${first}/${english?'en':'th'}`;
+ if(host.dataset.shiftEightKey!==key||host.dataset.shiftEightReady!=='1'){
+  const daysHeader=slots.map((slot,index)=>{
+   const wd=slot.date.toLocaleDateString(locale,{weekday:'short'}).replace('.','');
+   return slot.available?
+    `<button type="button" class="matrix-day-head${index===0&&actual?' today':''}${selectedDay===slot.day?' selected':''}" data-shift-eight-day="${slot.day}" data-day="${slot.day}" aria-label="${slot.day} ${english?'October':'ตุลาคม'}"><small>${wd}</small><b>${slot.day}</b></button>`:
+    `<span class="matrix-day-head shift-eight-unavailable" aria-label="${english?'No roster available':'ยังไม่มีข้อมูลเวร'}"><small>${wd}</small><b>${slot.day}</b></span>`;
+  }).join('');
+  const rows=staff.map((p,pi)=>`<div class="matrix-row"><div class="matrix-name" title="${v6517Esc(p.name)}">${v6517Esc(p.name)}</div>${slots.map(slot=>{
+   if(!slot.available)return `<span class="shift-eight-empty" aria-label="${english?'Future month roster unavailable':'ยังไม่มีตารางเวรเดือนถัดไป'}">–</span>`;
+   const code=statusAt(pi,slot.day);
+   return `<button type="button" class="matrix-cell ${code}${selectedDay===slot.day?' selected':''}" data-i="${pi}" data-day="${slot.day}" aria-label="${v6517Esc(p.name)} ${slot.day} ${v6517Esc(label(code))}" title="${v6517Esc(p.name)} • ${slot.day} • ${code==='O'?'OFF':code}">${code==='O'?'OFF':code}</button>`;
+  }).join('')}</div>`).join('');
+  host.innerHTML=`<div class="matrix-row matrix-header shift-eight-header"><div class="matrix-name">${english?'Employee':'ชื่อพนักงาน'}</div>${daysHeader}</div>${rows}`;
+  host.classList.add('shift-eight-matrix');
+  host.dataset.shiftEightKey=key;
+  host.dataset.shiftEightReady='1';
+  if(host.dataset.shiftEightBound!=='1'){
+   host.addEventListener('click',e=>{
+    const control=e.target.closest?.('[data-shift-eight-day]');
+    if(control&&host.contains(control)){setSelectedDay(Number(control.dataset.shiftEightDay),false);return;}
+    const cell=e.target.closest?.('.matrix-cell[data-i][data-day]');
+    if(cell&&host.contains(cell)&&host.dataset.matrixHandlerBound!=='1')
+     openCellModal(Number(cell.dataset.i),Number(cell.dataset.day));
+   });
+   host.dataset.shiftEightBound='1';
+  }
+  host.dataset.shiftEightSelected=String(selectedDay);
+ }else if(host.dataset.shiftEightSelected!==String(selectedDay)){
+  host.querySelectorAll('.selected').forEach(el=>el.classList.remove('selected'));
+  host.querySelectorAll('[data-day="'+selectedDay+'"]').forEach(el=>el.classList.add('selected'));
+  host.dataset.shiftEightSelected=String(selectedDay);
+ }
+ if(context){
+  let footer=context.querySelector('.shift-eight-footer');
+  if(!footer){
+   footer=document.createElement('div');
+   footer.className='shift-eight-footer';
+   footer.innerHTML='<div class="shift-eight-legend"><span class="D"><i></i>DAY • D</span><span class="N"><i></i>NIGHT • N</span><span class="O"><i></i>OFF • พัก</span></div><button type="button" class="shift-eight-full">ดูเต็ม • ตารางรายเดือน <b aria-hidden="true">→</b></button>';
+   footer.querySelector('button').addEventListener('click',()=>showView('month'));
+   context.appendChild(footer);
+  }
+  const open=footer.querySelector('button');
+  if(open){
+   open.firstChild.textContent=english?'View full month ':'ดูเต็ม • ตารางรายเดือน ';
+  }
+  let note=context.querySelector('.shift-eight-outside');
+  const missing=slots.some(s=>!s.available);
+  if(missing){
+   if(!note){note=document.createElement('p');note.className='shift-eight-outside';context.appendChild(note);}
+   note.textContent=english?'November roster has not been loaded.':'วันที่เดือน พ.ย. ยังไม่มีข้อมูลตารางเวร';
+  }else if(note)note.remove();
+ }
+};
+if(typeof document!=='undefined'){
+ if(document.getElementById('overviewMonthMatrix'))renderOverviewMatrix();
+ document.addEventListener('visibilitychange',()=>{
+  if(!document.hidden&&document.getElementById('overviewView')?.classList.contains('active'))
+   renderOverviewMatrix();
+ });
+}
+
 })();</script>
 </body>
 </html>

@@ -1,0 +1,94 @@
+/* v6.5.26 — Overview-only eight-day desktop matrix. Monthly roster retains 31 dates. */
+@media(min-width:861px){
+ #overviewView .v6517-matrix #v6517MatrixTarget,
+ #overviewView .v6517-matrix #v6517MatrixTarget .month-snapshot{width:100%!important;max-width:100%!important}
+ #overviewView .v6517-matrix .month-snapshot{padding:5px 5px 9px!important}
+ #overviewView .v6517-matrix .month-snapshot>.timeline-head{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;padding:0 3px 11px!important}
+ #overviewView .v6517-matrix .month-snapshot>.timeline-head .ghost-btn{display:none!important}
+ #overviewView .v6517-matrix .month-snapshot .section-title{font-size:clamp(16px,1.35vw,22px)!important;line-height:1.3!important}
+ #overviewView .v6517-matrix .shift-eight-period{font-size:12px!important;margin-top:5px;color:#a6c8e2;line-height:1.45}
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix{
+  display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;
+  padding:5px!important;margin:4px 0 0!important;overflow:hidden!important;
+  border:1px solid rgba(74,170,227,.28)!important;border-radius:13px!important;
+  background:linear-gradient(150deg,rgba(6,30,55,.86),rgba(2,13,28,.98))!important;
+  scrollbar-width:none
+ }
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-row{
+  display:grid!important;box-sizing:border-box!important;
+  grid-template-columns:minmax(190px,24%) repeat(8,minmax(0,1fr))!important;
+  min-width:0!important;max-width:100%!important;width:100%!important;
+  gap:4px!important;margin:0!important;min-height:39px!important;padding:3px 2px!important;
+  border-bottom:1px solid rgba(81,156,214,.10)
+ }
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-row:nth-child(even){background:rgba(65,137,198,.045)}
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-row:last-child{border:0}
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-name{
+  position:static!important;display:flex!important;align-items:center!important;
+  width:auto!important;min-width:0!important;max-width:none!important;
+  padding:5px 8px!important;min-height:31px!important;
+  color:#eff9ff!important;white-space:nowrap!important;overflow:hidden!important;
+  text-overflow:ellipsis!important;word-break:keep-all!important;
+  font-size:clamp(10px,.86vw,13px)!important;background:rgba(9,37,64,.98)!important;
+  border-radius:6px!important;border:1px solid rgba(71,143,197,.14)
+ }
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .shift-eight-header{background:rgba(12,47,80,.46)!important}
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .shift-eight-header .matrix-name{color:#b8dff9!important;font-size:11px!important}
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-day-head{
+  display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  min-width:0!important;width:100%!important;height:40px!important;cursor:pointer;
+  border:1px solid rgba(77,165,230,.14);border-radius:7px;
+  color:#d3efff;background:linear-gradient(180deg,#0d3053,#061c32)
+ }
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-day-head small{font-size:9px;color:#88b3d3}
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-day-head b{font-size:14px;line-height:1.2}
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-day-head.today{
+  border-color:#70e6fa!important;background:linear-gradient(180deg,#175271,#0b304b)!important;
+  box-shadow:inset 0 0 0 1px rgba(70,235,255,.17),0 0 12px rgba(50,196,242,.15)
+ }
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-day-head.selected{
+  outline:1px solid #77e8ff!important;outline-offset:0!important
+ }
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-cell{
+  display:grid!important;place-items:center!important;
+  box-sizing:border-box!important;height:32px!important;min-height:32px!important;
+  min-width:0!important;width:100%!important;transform:none!important;
+  border-radius:7px!important;padding:1px!important;color:#f9fdff!important;
+  font-size:11px!important;font-weight:850!important;cursor:pointer;
+  transition:filter .14s ease!important
+ }
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-cell:hover{filter:brightness(1.2)!important}
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-cell.O{font-size:9px!important}
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .shift-eight-empty{
+  display:grid;place-items:center;width:100%;min-width:0;height:32px;
+  border-radius:7px;border:1px dashed rgba(98,154,188,.22);
+  background:rgba(37,70,92,.12);color:#63829e
+ }
+ #overviewView .v6517-matrix .shift-eight-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:13px 4px 0;flex-wrap:wrap}
+ #overviewView .v6517-matrix .shift-eight-legend{display:flex;align-items:center;gap:13px;flex-wrap:wrap;color:#b3cee1;font-size:11px}
+ #overviewView .v6517-matrix .shift-eight-legend span{display:inline-flex;align-items:center;gap:5px}
+ #overviewView .v6517-matrix .shift-eight-legend i{width:9px;height:9px;border-radius:3px;display:inline-block}
+ #overviewView .v6517-matrix .shift-eight-legend .D i{background:var(--shift-day-solid,#ff426a)}
+ #overviewView .v6517-matrix .shift-eight-legend .N i{background:var(--shift-night-solid,#258dff)}
+ #overviewView .v6517-matrix .shift-eight-legend .O i{background:var(--shift-off-solid,#08dfa4)}
+ #overviewView .v6517-matrix .shift-eight-full{
+  display:inline-flex;align-items:center;justify-content:center;gap:14px;
+  box-sizing:border-box;min-height:41px;min-width:185px;
+  padding:9px 14px;border:1px solid rgba(74,185,255,.66);
+  border-radius:11px;background:linear-gradient(105deg,rgba(17,78,125,.65),rgba(6,35,67,.95));
+  color:#e9f8ff;font-size:12px;font-weight:850;cursor:pointer;
+  box-shadow:0 0 16px rgba(27,142,240,.11)
+ }
+ #overviewView .v6517-matrix .shift-eight-full:hover{border-color:#75dbff;background:rgba(32,105,163,.4)}
+ #overviewView .v6517-matrix .shift-eight-outside{margin:7px 4px 0;color:#9db9cd;font-size:10px}
+}
+@media (min-width:861px) and (max-width:1050px){
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-row{
+  grid-template-columns:minmax(160px,27%) repeat(8,minmax(0,1fr))!important;gap:2px!important
+ }
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-name{padding:5px!important;font-size:10px!important}
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-cell{font-size:9px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ #overviewView .v6517-matrix .mini-matrix.shift-eight-matrix .matrix-cell{transition:none!important}
+}
