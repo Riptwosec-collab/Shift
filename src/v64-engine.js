@@ -45,12 +45,8 @@ function ensureV64DailyOps(){
     block.innerHTML='<div class="timeline-head"><div><div class="eyebrow">DAILY INTELLIGENCE • v6.4</div><div class="section-title">ภาพรวมปฏิบัติการรายวัน</div></div><span class="v64-risk-badge" id="v64DailyRiskBadge">STABLE</span></div><div class="v64-op-grid"><section><div class="eyebrow">ADJACENT DAYS</div><div id="v64DayCompare" class="v64-compare"></div></section><section><div class="eyebrow">SHIFT TRANSITIONS</div><div id="v64Transitions" class="v64-transition-list"></div></section><section><div class="eyebrow">STAFFING RISK</div><div id="v64RiskList" class="v64-risk-list"></div></section><section><div class="eyebrow">CURRENT STREAKS</div><div id="v64StreakList" class="v64-streak-list"></div></section></div>';
     view.appendChild(block);
   }
-  if(!v64El('v64StickyDaily')){
-    const sticky=document.createElement('div');
-    sticky.id='v64StickyDaily';
-    sticky.className='v64-sticky-daily';
-    view.insertBefore(sticky,view.firstChild);
-  }
+  /* The redundant floating D/N/OFF/COVER quick bar was removed (v6.5.29). */
+  document.getElementById('v64StickyDaily')?.remove();
   return block;
 }
 
@@ -77,8 +73,6 @@ function renderV64Daily(){
   if(badge){const critical=risks.some(x=>x.level==='critical'),warning=risks.some(x=>x.level==='warning');badge.className=`v64-risk-badge ${critical?'critical':warning?'warning':'ok'}`;badge.textContent=critical?'CRITICAL':warning?'WATCH':'STABLE'}
   const streaks=v64El('v64StreakList');
   if(streaks)streaks.innerHTML=model.working.map(row=>`<button type="button" class="v64-streak" data-person="${row.i}"><b>${v64Esc(row.name)}</b><span>WORK ${row.workStreak} วัน${row.nightStreak?` • NIGHT ${row.nightStreak} คืน`:''}</span></button>`).join('');
-  const sticky=v64El('v64StickyDaily');
-  if(sticky)sticky.innerHTML=`<span class="d">D <b>${model.counts.D}</b></span><span class="n">N <b>${model.counts.N}</b></span><span class="o">OFF <b>${model.counts.OFF}</b></span><span>COVER <b>${model.coverage}%</b></span>`;
 }
 
 function ensureV64NetworkDetails(){

@@ -64,3 +64,6 @@ html[data-v64-mode="ECO"] *{transition-duration:.1s}
 
 /* v6.5.28 — mobile day counts must scroll normally, never stick. */
 @media(max-width:860px){#dailyView #v64StickyDaily.v64-sticky-daily{position:static!important;top:auto!important;bottom:auto!important;left:auto!important;right:auto!important;z-index:auto!important;transform:none!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important;margin:7px 0!important}}
+
+/* v6.5.29 — permanently remove the duplicate D/N/OFF/COVER strip. */
+#v64StickyDaily,.v64-sticky-daily{display:none!important;visibility:hidden!important;pointer-events:none!important}

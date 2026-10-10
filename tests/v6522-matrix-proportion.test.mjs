@@ -25,5 +25,5 @@ test('release embeds source patch and rotates PWA cache',()=>{
  assert.ok(html.includes('v6522-matrix-layout-style'));
  assert.ok(html.includes('v6517Esc(person.name)'));
  assert.ok(read('scripts/build.mjs').includes('v6522Css'));
- assert.ok(read('sw.js').includes('shift-shell-v6.5.20-r10'));
+ assert.ok(read('sw.js').includes('shift-shell-v6.5.20-r11'));
 });

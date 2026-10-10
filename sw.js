@@ -1,6 +1,6 @@
 /* Shift PWA — Safari-safe offline shell (v6.5.20-r9).
    Never deliver a redirected Response from a service worker. */
-const CACHE_NAME='shift-shell-v6.5.20-r10';
+const CACHE_NAME='shift-shell-v6.5.20-r11';
 const APP_ROOT=new URL('./',self.registration.scope).href;
 const SHELL_ASSETS=['./manifest.webmanifest','./icons/shift-192.png','./icons/shift-512.png','./icons/shift-maskable-512.png'];
 const APP_PATHS=new Set(SHELL_ASSETS.map(path=>new URL(path,self.registration.scope).pathname));
