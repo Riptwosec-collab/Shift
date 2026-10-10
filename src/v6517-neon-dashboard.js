@@ -23,9 +23,9 @@ function v6517Chart(selected){
  <line x1="12" y1="78" x2="486" y2="78" class="v6517-grid-line"/>
  <line x1="12" y1="130" x2="486" y2="130" class="v6517-grid-line"/>
  <line x1="${x.toFixed(1)}" y1="12" x2="${x.toFixed(1)}" y2="136" class="v6517-trend-selected"/>
- <polyline class="v6517-trend-line green" points="${poly('D')}"/>
+ <polyline class="v6517-trend-line red" points="${poly('D')}"/>
  <polyline class="v6517-trend-line blue" points="${poly('N')}"/>
- <polyline class="v6517-trend-line red" points="${poly('O')}"/>
+ <polyline class="v6517-trend-line green" points="${poly('O')}"/>
  <g font-size="11" fill="#a5c6df"><text x="12" y="154">1 ต.ค.</text><text x="220" y="154">15</text><text x="462" y="154">31</text></g>
  </svg>`;
 }
@@ -43,14 +43,22 @@ function v6517Oncall(){
  return lines.join('')||`<div class="v6517-oncall-item">${english?'No on-call assignment for the current date':'ไม่มีข้อมูลผู้เข้าเวร Oncall สำหรับวันนี้'}</div>`;
 }
 function v6517MobilePreview(selectedDay){
- const start=Math.floor((selectedDay-1)/14)*14+1,end=Math.min(31,start+13);
- const days=Array.from({length:end-start+1},(_,i)=>start+i);
- const header=`<div class="v6517-mobile-row"><span class="v6517-mobile-name">ทีม / วัน</span>${days.map(day=>`<button type="button" data-v6517-day="${day}" class="${selectedDay===day?'selected':''}" aria-label="วันที่ ${day}">${day}</button>`).join('')}</div>`;
- const rows=staff.map((person,i)=>`<div class="v6517-mobile-row"><span class="v6517-mobile-name" title="${v6517Esc(person.name)}">${v6517Esc(person.name)}</span>${days.map(day=>{
+ const now=new Date(),isOctober=now.getFullYear()===2026&&now.getMonth()===9;
+ const anchor=isOctober?now.getDate():selectedDay;
+ const end=Math.min(31,anchor+7),days=Array.from({length:end-anchor+1},(_,i)=>anchor+i);
+ const en=v6517Language()==='en',lang=en?'en-US':'th-TH';
+ const dow=day=>dates[day-1].toLocaleDateString(lang,{weekday:'short'}).replace('.','');
+ const heading=en?'Today + next 7 days':'วันนี้และ 7 วันถัดไป';
+ const range=en?`Oct ${anchor}–${end}, 2026`:`${anchor}–${end} ต.ค. 2569`;
+ const top=`<div class="v660-matrix-toolbar"><div><span class="v660-matrix-kicker">8-DAY SHIFT PREVIEW</span><strong>${heading}</strong><small>${range}</small></div><button type="button" class="v660-month-link" data-v660-full-month aria-label="${en?'Open full monthly roster':'ดูตารางเวรรายเดือนเต็ม'}">${en?'Full month →':'ดูเต็ม • รายเดือน →'}</button></div>`;
+ const header=`<div class="v6517-mobile-row v660-preview-head"><span class="v6517-mobile-name">${en?'Employee':'ชื่อพนักงาน'}</span>${days.map(day=>`<button type="button" data-v6517-day="${day}" class="${day===anchor?'today':''}" aria-label="${en?'October':'ตุลาคม'} ${day}"><small>${dow(day)}</small><b>${day}</b></button>`).join('')}</div>`;
+ const rows=staff.map((person,i)=>`<div class="v6517-mobile-row"><span class="v6517-mobile-name" title="${v6517Esc(person.name)}" aria-label="${v6517Esc(person.name)}">${v6517Esc(person.name)}</span>${days.map(day=>{
    const code=statusAt(i,day);
-   return `<button type="button" class="${code} ${selectedDay===day?'selected':''}" data-v6517-day="${day}" data-v6517-person="${i}" aria-label="${v6517Esc(person.name)} วันที่ ${day} ${v6517Esc(label(code))}"></button>`;
+   return `<button type="button" class="${code} ${selectedDay===day?'selected':''}" data-v6517-day="${day}" data-v6517-person="${i}" aria-label="${v6517Esc(person.name)} ${en?'October':'ตุลาคม'} ${day} ${v6517Esc(label(code))}"></button>`;
  }).join('')}</div>`).join('');
- return header+rows;
+ const legend=`<div class="v660-matrix-legend"><span class="d"><i></i>D • ${en?'Day':'กลางวัน'}</span><span class="n"><i></i>N • ${en?'Night':'กลางคืน'}</span><span class="o"><i></i>OFF • ${en?'Off':'พัก'}</span></div>`;
+ const note=end<anchor+7?`<p class="v660-out-of-range">${en?'The current roster only covers October 2026.':'ตารางเวรชุดนี้มีข้อมูลถึง 31 ต.ค. 2569 เท่านั้น'}</p>`:'';
+ return top+`<div class="v660-matrix-grid" style="--v660-preview-days:${days.length}">${header}${rows}</div>`+legend+note;
 }
 function v6517Render(){
  const root=document.getElementById('v6517Dashboard');
@@ -75,7 +83,7 @@ function v6517Render(){
  }
  const labels={day:en?'Day':'กลางวัน',night:en?'Night':'กลางคืน',off:en?'Off':'หยุด'};
  const legend=root.querySelector('#v6517Legend');
- if(legend)legend.innerHTML=[['day','green'],['night','blue'],['off','red']].map(([name,color])=>
+ if(legend)legend.innerHTML=[['day','red'],['night','blue'],['off','green']].map(([name,color])=>
  `<div class="v6517-legend-row"><span><i class="v6517-dot ${color}"></i>${labels[name]}</span><b>${stat[name]} • ${pct(name)}%</b></div>`).join('');
  const ratio=root.querySelector('#v6517Percent');
  if(ratio)ratio.textContent=stat.coverage+'%';
@@ -108,7 +116,7 @@ function v6517Render(){
  }
  const preview=root.querySelector('#v6517MobileMatrix');
  if(preview){
-  const section=String(Math.floor((day-1)/14));
+  const section=String((()=>{const t=new Date();return t.getFullYear()===2026&&t.getMonth()===9?t.getDate():day})());
   if(preview.dataset.matrixSection!==section||!preview.firstElementChild){
    preview.innerHTML=v6517MobilePreview(day);
    preview.dataset.matrixSection=section;
@@ -177,7 +185,7 @@ function v6517Init(){
   </div>
   <div class="v6517-bottom-grid">
    <section class="v6517-oncall-panel v6517-glass"><header class="v6517-panel-header"><strong>⌁ Engineer Oncall</strong><span class="v6517-caption">ตามตารางที่มีข้อมูล</span></header><div class="v6517-oncall-list" id="v6517Oncall"></div></section>
-   <section class="v6517-trend-panel v6517-glass"><header class="v6517-panel-header"><strong>≋ แนวโน้มกำลังคน 31 วัน</strong><span class="v6517-caption"><i class="v6517-dot green"></i>Day <i class="v6517-dot blue"></i>Night <i class="v6517-dot red"></i>Off</span></header><div class="v6517-trend" id="v6517Trend"></div></section>
+   <section class="v6517-trend-panel v6517-glass"><header class="v6517-panel-header"><strong>≋ แนวโน้มกำลังคน 31 วัน</strong><span class="v6517-caption"><i class="v6517-dot red"></i>Day <i class="v6517-dot blue"></i>Night <i class="v6517-dot green"></i>Off</span></header><div class="v6517-trend" id="v6517Trend"></div></section>
    <section class="v6517-insights-panel v6517-glass"><header class="v6517-panel-header"><strong>◷ สรุปจากตารางเวร</strong><span class="v6517-caption">ข้อมูลจริง</span></header><div class="v6517-notes" id="v6517Notes"></div></section>
   </div>`;
  view.insertBefore(deck,view.firstElementChild);
@@ -194,6 +202,7 @@ function v6517Init(){
  deck.addEventListener('click',event=>{
   const button=event.target.closest?.('button');
   if(!button||!deck.contains(button))return;
+  if(button.hasAttribute('data-v660-full-month')){showView('month');return;}
   const action=button.dataset.v6517Action;
   if(action==='previous'&&selectedDay>1)setSelectedDay(selectedDay-1,false);
   if(action==='next'&&selectedDay<31)setSelectedDay(selectedDay+1,false);

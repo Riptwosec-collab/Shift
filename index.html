@@ -4018,6 +4018,177 @@ html[data-v65-mode="ECO"] .view.active{animation:none!important}
 /* GPU-friendly boundaries only; avoids triggering 140 glowing cells per interaction. */
 
 </style>
+<style id="v6524-mobile-matrix-style">
+/* Shift v6.5.24: one-to-one status palette, 8-day mobile preview and tight full-name rail. */
+:root{--shift-day-solid:#ff426a;--shift-night-solid:#258dff;--shift-off-solid:#08dfa4}
+:is(#overviewView,#dailyView) .roster-card.day{
+  color:var(--shift-day-solid)!important;border:1px solid rgba(255,66,106,.88)!important;
+  background:linear-gradient(180deg,rgba(23,8,22,.48),rgba(3,14,29,.97) 32%)!important;
+  box-shadow:inset 0 1px rgba(255,135,160,.10),0 0 15px rgba(255,66,106,.11)!important
+}
+:is(#overviewView,#dailyView) .roster-card.night{
+  color:var(--shift-night-solid)!important;border:1px solid rgba(37,141,255,.88)!important;
+  background:linear-gradient(180deg,rgba(6,19,42,.9),rgba(3,14,29,.97) 32%)!important;
+  box-shadow:inset 0 1px rgba(135,197,255,.10),0 0 15px rgba(37,141,255,.12)!important
+}
+:is(#overviewView,#dailyView) .roster-card.off{
+  color:var(--shift-off-solid)!important;border:1px solid rgba(8,223,164,.88)!important;
+  background:linear-gradient(180deg,rgba(5,34,33,.70),rgba(3,14,29,.97) 32%)!important;
+  box-shadow:inset 0 1px rgba(155,255,218,.09),0 0 15px rgba(8,223,164,.11)!important
+}
+:is(#overviewView,#dailyView) .roster-card.day :is(.shift-emblem,.roster-count,.status-badge){color:var(--shift-day-solid)!important}
+:is(#overviewView,#dailyView) .roster-card.night :is(.shift-emblem,.roster-count,.status-badge){color:var(--shift-night-solid)!important}
+:is(#overviewView,#dailyView) .roster-card.off :is(.shift-emblem,.roster-count,.status-badge){color:var(--shift-off-solid)!important}
+:is(#overviewView,#dailyView) .shift-D .id-glyph{--g:var(--shift-day-solid)!important}
+:is(#overviewView,#dailyView) .shift-N .id-glyph{--g:var(--shift-night-solid)!important}
+:is(#overviewView,#dailyView) .shift-O .id-glyph{--g:var(--shift-off-solid)!important}
+:is(#overviewView,#dailyView) .shift-D .status-badge{background:rgba(255,66,106,.08)!important;border-color:var(--shift-day-solid)!important;box-shadow:0 0 11px rgba(255,66,106,.38)!important}
+:is(#overviewView,#dailyView) .shift-N .status-badge{background:rgba(37,141,255,.08)!important;border-color:var(--shift-night-solid)!important;box-shadow:0 0 11px rgba(37,141,255,.38)!important}
+:is(#overviewView,#dailyView) .shift-O .status-badge{background:rgba(8,223,164,.08)!important;border-color:var(--shift-off-solid)!important;box-shadow:0 0 11px rgba(8,223,164,.34)!important}
+:is(#overviewView,#dailyView) .roster-card.day .shift-emblem{border-color:var(--shift-day-solid)!important;box-shadow:0 0 14px rgba(255,66,106,.36)!important}
+:is(#overviewView,#dailyView) .roster-card.night .shift-emblem{border-color:var(--shift-night-solid)!important;box-shadow:0 0 14px rgba(37,141,255,.36)!important}
+:is(#overviewView,#dailyView) .roster-card.off .shift-emblem{border-color:var(--shift-off-solid)!important;box-shadow:0 0 14px rgba(8,223,164,.32)!important}
+
+/* Keep borders, fills and selection of each state in the same hue throughout the matrices. */
+:is(#overviewView,#monthView) :is(.matrix-cell.D,.heatmap td.shift.D,.v6517-mobile-row button.D){
+ border:1px solid var(--shift-day-solid)!important;
+ background:linear-gradient(180deg,#a42344,#591229)!important;
+ box-shadow:inset 0 1px rgba(255,209,220,.16),0 0 5px rgba(255,66,106,.32)!important
+}
+:is(#overviewView,#monthView) :is(.matrix-cell.N,.heatmap td.shift.N,.v6517-mobile-row button.N){
+ border:1px solid var(--shift-night-solid)!important;
+ background:linear-gradient(180deg,#175eaf,#0a295c)!important;
+ box-shadow:inset 0 1px rgba(197,229,255,.16),0 0 5px rgba(37,141,255,.33)!important
+}
+:is(#overviewView,#monthView) :is(.matrix-cell.O,.heatmap td.shift.O,.v6517-mobile-row button.O){
+ border:1px solid var(--shift-off-solid)!important;
+ background:linear-gradient(180deg,#087d5d,#054436)!important;
+ box-shadow:inset 0 1px rgba(206,255,235,.16),0 0 5px rgba(8,223,164,.30)!important
+}
+:is(#overviewView,#monthView) :is(.matrix-cell.D.selected,.heatmap td.shift.D.selected-col,.v6517-mobile-row button.D.selected){
+ outline:1px solid var(--shift-day-solid)!important;outline-offset:0!important;
+ box-shadow:0 0 10px rgba(255,66,106,.62),inset 0 0 0 1px rgba(255,170,187,.45)!important
+}
+:is(#overviewView,#monthView) :is(.matrix-cell.N.selected,.heatmap td.shift.N.selected-col,.v6517-mobile-row button.N.selected){
+ outline:1px solid var(--shift-night-solid)!important;outline-offset:0!important;
+ box-shadow:0 0 10px rgba(37,141,255,.64),inset 0 0 0 1px rgba(166,219,255,.45)!important
+}
+:is(#overviewView,#monthView) :is(.matrix-cell.O.selected,.heatmap td.shift.O.selected-col,.v6517-mobile-row button.O.selected){
+ outline:1px solid var(--shift-off-solid)!important;outline-offset:0!important;
+ box-shadow:0 0 10px rgba(8,223,164,.60),inset 0 0 0 1px rgba(170,255,217,.40)!important
+}
+/* Side-panels in the overview should match their D / N / OFF definitions. */
+#overviewView .v6517-shift--day{border-color:rgba(255,66,106,.52)!important}
+#overviewView .v6517-shift--night{border-color:rgba(37,141,255,.52)!important}
+#overviewView .v6517-shift--off{border-color:rgba(8,223,164,.52)!important}
+#overviewView .v6517-shift--day b,#overviewView .v6517-shift--day span{color:var(--shift-day-solid)!important}
+#overviewView .v6517-shift--night b,#overviewView .v6517-shift--night span{color:var(--shift-night-solid)!important}
+#overviewView .v6517-shift--off b,#overviewView .v6517-shift--off span{color:var(--shift-off-solid)!important}
+#overviewView .v6517-kpi:nth-child(3){border-color:rgba(255,66,106,.40)!important}
+#overviewView .v6517-kpi:nth-child(4){border-color:rgba(37,141,255,.40)!important}
+#overviewView .v6517-kpi:nth-child(5){border-color:rgba(8,223,164,.40)!important}
+
+/* The full month table sizes its first column to the uninterrupted surname and starts dates immediately after. */
+#monthView .table-wrap{overflow-x:auto!important;-webkit-overflow-scrolling:touch}
+#monthView .heatmap{
+ width:max-content!important;min-width:max-content!important;table-layout:auto!important;
+ border-collapse:separate!important;border-spacing:2px!important
+}
+#monthView .heatmap :is(thead th.name-col,tbody th.name-col,tfoot td.name-col){
+ width:1%!important;min-width:max-content!important;max-width:none!important;
+ white-space:nowrap!important;word-break:keep-all!important;overflow-wrap:normal!important;
+ text-overflow:clip!important;padding:7px 8px!important;
+ line-height:1.35!important;font-size:12px!important
+}
+#monthView .heatmap .v6519-full-name{
+ display:inline!important;max-width:none!important;white-space:nowrap!important;
+ word-break:keep-all!important;overflow-wrap:normal!important;line-height:1.35!important;
+ font-size:12px!important
+}
+#monthView .heatmap td.shift{width:31px!important;min-width:31px!important;height:33px!important}
+#monthView .heatmap thead th:not(.name-col){min-width:31px!important;width:31px!important}
+
+/* Overview: a complete, readable eight-day mobile preview, without 14-day horizontal paging. */
+@media(max-width:860px){
+ #overviewView .v6517-matrix{padding:12px!important;border-radius:16px!important}
+ #overviewView .v6517-matrix #v6517MobileMatrix{
+   padding:0!important;margin:0!important;overflow:visible!important;
+   background:transparent!important;border:0!important
+ }
+ #overviewView .v660-matrix-toolbar{
+   display:flex;justify-content:space-between;align-items:center;gap:10px;
+   padding:2px 2px 12px;margin-bottom:9px;border-bottom:1px solid rgba(97,184,232,.19)
+ }
+ #overviewView .v660-matrix-kicker{display:block;color:#61caff;font-size:9px;letter-spacing:.13em;font-weight:850}
+ #overviewView .v660-matrix-toolbar strong{display:block;margin-top:3px;font-size:15px;color:#f0faff;line-height:1.3}
+ #overviewView .v660-matrix-toolbar small{display:block;margin-top:3px;font-size:10px;color:#a2bfd2}
+ #overviewView .v660-month-link{
+   flex:none;min-height:36px;padding:7px 10px;border-radius:10px;cursor:pointer;
+   border:1px solid rgba(50,171,255,.65);color:#e7f7ff;
+   background:linear-gradient(135deg,rgba(15,82,147,.34),rgba(7,28,58,.8));
+   font-size:11px;font-weight:800;box-shadow:0 0 13px rgba(37,141,255,.10);
+   transition:background .2s ease,box-shadow .2s ease
+ }
+ #overviewView .v660-month-link:active{background:rgba(37,141,255,.25)}
+ #overviewView .v660-matrix-grid{
+   --v660-preview-days:8;overflow:hidden;width:100%;border-radius:11px;
+   border:1px solid rgba(70,176,228,.25);background:rgba(2,12,27,.52)
+ }
+ #overviewView .v6517-mobile-row{
+   box-sizing:border-box!important;grid-template-columns:minmax(0,37%) repeat(var(--v660-preview-days),minmax(0,1fr))!important;
+   min-width:0!important;width:100%!important;gap:2px!important;
+   min-height:33px!important;margin:0!important;padding:2px!important;
+   border-bottom:1px solid rgba(71,136,182,.12)
+ }
+ #overviewView .v6517-mobile-row:last-child{border-bottom:0}
+ #overviewView .v6517-mobile-name{
+   box-sizing:border-box!important;min-width:0!important;max-width:none!important;
+   width:100%!important;padding:4px 5px!important;min-height:28px!important;
+   color:#e3f4ff!important;font-size:clamp(9px,2.55vw,11px)!important;
+   line-height:1.3!important;white-space:nowrap!important;overflow:hidden!important;
+   text-overflow:ellipsis!important;position:static!important;border:0!important;
+   background:#0a2139!important
+ }
+ #overviewView .v6517-mobile-row button{
+   box-sizing:border-box!important;width:100%!important;min-width:0!important;
+   height:25px!important;min-height:25px!important;padding:0!important;
+   font-size:10px!important;border-radius:5px!important;touch-action:manipulation
+ }
+ #overviewView .v660-preview-head{
+   border-bottom:1px solid rgba(86,185,244,.34);
+   background:rgba(13,42,72,.65)
+ }
+ #overviewView .v660-preview-head .v6517-mobile-name{background:#0b2945!important;color:#b8d8ee!important;font-weight:850}
+ #overviewView .v660-preview-head button{
+   display:flex!important;flex-direction:column;align-items:center;justify-content:center;
+   color:#a9d4ed!important;border:1px solid transparent!important;
+   background:transparent!important;box-shadow:none!important;height:32px!important
+ }
+ #overviewView .v660-preview-head button small{font-size:7px;line-height:1;color:#76a6c5}
+ #overviewView .v660-preview-head button b{font-size:12px;line-height:1.2;color:#d5efff}
+ #overviewView .v660-preview-head button.today{
+   border-color:rgba(88,230,255,.66)!important;
+   background:rgba(48,174,222,.18)!important;box-shadow:inset 0 0 8px rgba(50,218,255,.12)!important
+ }
+ #overviewView .v660-matrix-legend{
+   display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:10px 3px 2px;
+   font-size:10px;color:#b2cce0
+ }
+ #overviewView .v660-matrix-legend i{display:inline-block;width:7px;height:7px;margin-right:4px;border-radius:2px}
+ #overviewView .v660-matrix-legend .d i{background:var(--shift-day-solid)}
+ #overviewView .v660-matrix-legend .n i{background:var(--shift-night-solid)}
+ #overviewView .v660-matrix-legend .o i{background:var(--shift-off-solid)}
+ #overviewView .v660-out-of-range{margin:8px 3px 0;font-size:10px;color:#b4cce1}
+}
+@media(max-width:390px){
+ #overviewView .v6517-mobile-row{grid-template-columns:minmax(0,38%) repeat(var(--v660-preview-days),minmax(0,1fr))!important}
+ #overviewView .v6517-mobile-name{font-size:9px!important;padding:4px 3px!important}
+ #overviewView .v660-month-link{padding:7px;font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+ #overviewView .v660-month-link{transition:none!important}
+}
+</style>
 </head>
 <!-- REFERENCE LOCK V4 -->
 <body>
@@ -4187,7 +4358,7 @@ function renderNetwork(idx,hostId='networkViz'){const host=$('#'+hostId);if(!hos
 function renderPerson(){renderPeopleList();const p=staff[selectedPerson],counts=countPerson(selectedPerson),overlaps=overlapFor(selectedPerson),max=Math.max(1,...overlaps.map(x=>x.count)),startBlank=dates[0].getDay(),next=nextWorkingShift(selectedPerson,selectedDay),streak=streakSummary(selectedPerson,selectedDay),pattern=shiftPattern(selectedPerson,selectedDay,14);let cells=Array.from({length:startBlank},()=>`<div class="month-cell blank"></div>`).join('');dates.forEach((date,i)=>{const day=i+1,c=statusAt(selectedPerson,day),cl=c==='D'?'day':c==='N'?'night':'off';cells+=`<button class="month-cell ${cl} ${weekend(day)?'weekend':''}" onclick="openCellModal(${selectedPerson},${day})" aria-label="วันที่ ${day} ${label(c)}"><span class="dnum">${day}</span><span class="code">${c==='O'?'—':c}</span></button>`});$('#personDetail').innerHTML=`<div class="profile-head">${identityCore(selectedPerson)}<div class="profile-copy"><div class="eyebrow">TACTICAL PERSONNEL PROFILE</div><h2>${p.name}</h2><p>Personal Shift Calendar • วันที่อ้างอิง ${selectedDay} ต.ค. 2569</p></div><div class="profile-actions"><button class="ghost-btn" onclick="showView('daily');selectRosterPerson(${selectedPerson},${selectedDay})">ดูในรายวัน</button></div></div><div class="person-top"><div class="ring-card"><div class="eyebrow">WORKLOAD RING</div>${ringSvg(counts)}</div><div class="person-stats"><div class="pstat"><b style="color:var(--day)">${counts.D}</b><span>DAY SHIFT</span></div><div class="pstat"><b style="color:#8476ff">${counts.N}</b><span>NIGHT SHIFT</span></div><div class="pstat"><b style="color:#94a4b2">${counts.O}</b><span>OFF</span></div></div></div><div class="smart-row"><div class="next-shift-card"><div class="eyebrow">NEXT SHIFT</div><div class="big">${next?`${next.day} ต.ค. • ${next.code==='D'?'DAY':'NIGHT'}`:'ไม่มีเวรถัดไปในเดือน'}</div><div class="sub">แสดงจากตารางเดิมเท่านั้น ไม่สมมติเวลาเริ่มกะ</div></div><div class="streak-card"><div class="eyebrow">SHIFT STREAK</div><div class="streak-grid"><div class="streak-pill"><b>${streak.work}</b><span>ทำงานต่อเนื่อง</span></div><div class="streak-pill"><b>${streak.night}</b><span>Night ต่อเนื่อง</span></div><div class="streak-pill"><b>${streak.off}</b><span>หยุดต่อเนื่อง</span></div></div></div></div><div class="pattern-card" style="margin-top:9px"><div class="eyebrow">14-DAY SHIFT PATTERN</div><div class="sub">รูปแบบจากวันที่ ${selectedDay}</div><div class="pattern-strip" id="patternStrip">${pattern.map(x=>`<div class="pattern-day ${x.code}"><small>${x.day}</small><b>${x.code==='O'?'—':x.code}</b></div>`).join('')}</div></div><div class="calendar-card"><div class="calendar-head">${['อา','จ','อ','พ','พฤ','ศ','ส'].map(x=>`<span>${x}</span>`).join('')}</div><div class="mini-month">${cells}</div></div><div class="person-lower"><div class="subcard"><h3>COWORKER NETWORK</h3><div class="network-host" id="networkViz"></div></div><div class="subcard"><h3>ทำงานร่วมกันบ่อยที่สุด</h3><div class="rank-list">${overlaps.slice(0,7).map(x=>`<div class="rank-row"><span>${staff[x.j].name}</span><span>${x.count} วัน</span><div class="bar"><i style="width:${x.count/max*100}%"></i></div></div>`).join('')}</div></div></div>`;requestAnimationFrame(()=>renderNetwork(selectedPerson));applyAmbient(statusAt(selectedPerson,selectedDay))}
 
 function setHeatmapFilter(code){heatmapFilter=code;$$('#heatmapFilters .filter-btn').forEach(b=>b.classList.toggle('active',b.dataset.filter===code));renderHeatmap()}
-function renderHeatmap(){const head=dates.map((d,i)=>`<th class="${weekend(i+1)?'weekend-h ':''}${selectedDay===i+1?'selected-col':''}">${shortDows[d.getDay()]}<br><b>${i+1}</b></th>`).join(''),rows=staff.map((p,pi)=>`<tr><th class="name-col" scope="row" aria-label="${p.name}"><span class="v6519-full-name">${String(p.name).trim().replace(/\s+(\S+)$/, "<br>$1")}</span></th>${dates.map((_,i)=>{const c=statusAt(pi,i+1),dim=heatmapFilter!=='ALL'&&heatmapFilter!==c?' dimmed':'';return `<td class="shift ${c}${selectedDay===i+1?' selected-col':''}${dim}" onclick="openCellModal(${pi},${i+1})" title="${label(c)}">${c==='O'?'—':c}</td>`}).join('')}</tr>`).join(''),daily=dates.map((_,i)=>`<td>${crew(i+1,'D').length}/${crew(i+1,'N').length}</td>`).join('');$('#heatmapTable').innerHTML=`<thead><tr><th class="name-col">ชื่อพนักงาน</th>${head}</tr></thead><tbody>${rows}</tbody><tfoot><tr><td class="name-col">D / N ต่อวัน</td>${daily}</tr></tfoot>`}
+function renderHeatmap(){const head=dates.map((d,i)=>`<th class="${weekend(i+1)?'weekend-h ':''}${selectedDay===i+1?'selected-col':''}">${shortDows[d.getDay()]}<br><b>${i+1}</b></th>`).join(''),rows=staff.map((p,pi)=>`<tr><th class="name-col" scope="row" aria-label="${p.name}"><span class="v6519-full-name">${String(p.name).trim().replace(/\s+(\S+)$/, " $1")}</span></th>${dates.map((_,i)=>{const c=statusAt(pi,i+1),dim=heatmapFilter!=='ALL'&&heatmapFilter!==c?' dimmed':'';return `<td class="shift ${c}${selectedDay===i+1?' selected-col':''}${dim}" onclick="openCellModal(${pi},${i+1})" title="${label(c)}">${c==='O'?'—':c}</td>`}).join('')}</tr>`).join(''),daily=dates.map((_,i)=>`<td>${crew(i+1,'D').length}/${crew(i+1,'N').length}</td>`).join('');$('#heatmapTable').innerHTML=`<thead><tr><th class="name-col">ชื่อพนักงาน</th>${head}</tr></thead><tbody>${rows}</tbody><tfoot><tr><td class="name-col">D / N ต่อวัน</td>${daily}</tr></tfoot>`}
 function openCellModal(idx,day){const c=statusAt(idx,day),same=workingCrew(day,c).filter(x=>x.i!==idx),next=nextWorkingShift(idx,day);$('#modalContent').innerHTML=`<div class="eyebrow">SHIFT DETAIL</div><div style="display:flex;align-items:center;gap:10px;margin-top:8px">${identityGlyph(idx,c)}<div><h2 style="margin:0">${staff[idx].name}</h2><p>${day} ตุลาคม 2569 • วัน${dows[dates[day-1].getDay()]}</p></div></div><div class="modal-meta"><strong>${c==='D'?'D • DAY SHIFT':c==='N'?'N • NIGHT SHIFT':'OFF • วันหยุด'}</strong><br><span style="color:#7590a6;font-size:9px">${c==='O'?'ไม่มีผู้ร่วมกะ':`ทำงานร่วมกับ ${same.length} คน`} • Next: ${next?`${next.day} ต.ค. ${next.code}`:'—'}</span></div><div class="modal-team">${same.map(x=>`<span class="coworker">◇ ${x.p.name}</span>`).join('')}</div>`;const dlg=$('#cellModal');if(typeof dlg.showModal==='function')dlg.showModal();else dlg.setAttribute('open','')}
 
 function renderAnalytics(){const x=computeInsights(),total=x.totals.D+x.totals.N+x.totals.O,cards=[['วันที่คนทำงานมากที่สุด',`${x.busiest.day} ต.ค.`,`${x.busiest.working} คน`],['วันที่คนน้อยที่สุด',`${x.least.day} ต.ค.`,`${x.least.working} คน`],['ทำงานมากที่สุด',shortName(staff[x.mostWorking.i].name),`${x.mostWorking.working} วัน`],['OFF มากที่สุด',shortName(staff[x.mostOff.i].name),`${x.mostOff.O} วัน`]];$('#analyticsCards').innerHTML=cards.map(c=>`<section class="hud-panel trace analytics-card"><div class="eyebrow">${c[0]}</div><div class="value">${c[2]}</div><div class="label">${c[1]}</div></section>`).join('');const max=Math.max(...x.persons.map(p=>p.working));$('#workloadBars').innerHTML=x.persons.map(p=>`<div class="workload-row"><span>${shortName(staff[p.i].name)}</span><span class="track"><i style="width:${p.working/max*100}%"></i></span><b>${p.working}</b></div>`).join('');const W=600,H=190,pad=12,dayVals=x.dayStats.map(v=>v.D),nightVals=x.dayStats.map(v=>v.N),grid=[.25,.5,.75].map(f=>`<line x1="0" y1="${H*f}" x2="${W}" y2="${H*f}"/>`).join('');$('#activityChart').innerHTML=`${grid}<polyline points="${linePoints(dayVals,W,H,pad)}"/><polyline class="nightline" points="${linePoints(nightVals,W,H,pad)}"/><text x="16" y="20" fill="#ffb43a" font-size="9">DAY</text><text x="55" y="20" fill="#8476ff" font-size="9">NIGHT</text>`}
@@ -5625,9 +5796,9 @@ function v6517Chart(selected){
  <line x1="12" y1="78" x2="486" y2="78" class="v6517-grid-line"/>
  <line x1="12" y1="130" x2="486" y2="130" class="v6517-grid-line"/>
  <line x1="${x.toFixed(1)}" y1="12" x2="${x.toFixed(1)}" y2="136" class="v6517-trend-selected"/>
- <polyline class="v6517-trend-line green" points="${poly('D')}"/>
+ <polyline class="v6517-trend-line red" points="${poly('D')}"/>
  <polyline class="v6517-trend-line blue" points="${poly('N')}"/>
- <polyline class="v6517-trend-line red" points="${poly('O')}"/>
+ <polyline class="v6517-trend-line green" points="${poly('O')}"/>
  <g font-size="11" fill="#a5c6df"><text x="12" y="154">1 ต.ค.</text><text x="220" y="154">15</text><text x="462" y="154">31</text></g>
  </svg>`;
 }
@@ -5645,14 +5816,22 @@ function v6517Oncall(){
  return lines.join('')||`<div class="v6517-oncall-item">${english?'No on-call assignment for the current date':'ไม่มีข้อมูลผู้เข้าเวร Oncall สำหรับวันนี้'}</div>`;
 }
 function v6517MobilePreview(selectedDay){
- const start=Math.floor((selectedDay-1)/14)*14+1,end=Math.min(31,start+13);
- const days=Array.from({length:end-start+1},(_,i)=>start+i);
- const header=`<div class="v6517-mobile-row"><span class="v6517-mobile-name">ทีม / วัน</span>${days.map(day=>`<button type="button" data-v6517-day="${day}" class="${selectedDay===day?'selected':''}" aria-label="วันที่ ${day}">${day}</button>`).join('')}</div>`;
- const rows=staff.map((person,i)=>`<div class="v6517-mobile-row"><span class="v6517-mobile-name" title="${v6517Esc(person.name)}">${v6517Esc(person.name)}</span>${days.map(day=>{
+ const now=new Date(),isOctober=now.getFullYear()===2026&&now.getMonth()===9;
+ const anchor=isOctober?now.getDate():selectedDay;
+ const end=Math.min(31,anchor+7),days=Array.from({length:end-anchor+1},(_,i)=>anchor+i);
+ const en=v6517Language()==='en',lang=en?'en-US':'th-TH';
+ const dow=day=>dates[day-1].toLocaleDateString(lang,{weekday:'short'}).replace('.','');
+ const heading=en?'Today + next 7 days':'วันนี้และ 7 วันถัดไป';
+ const range=en?`Oct ${anchor}–${end}, 2026`:`${anchor}–${end} ต.ค. 2569`;
+ const top=`<div class="v660-matrix-toolbar"><div><span class="v660-matrix-kicker">8-DAY SHIFT PREVIEW</span><strong>${heading}</strong><small>${range}</small></div><button type="button" class="v660-month-link" data-v660-full-month aria-label="${en?'Open full monthly roster':'ดูตารางเวรรายเดือนเต็ม'}">${en?'Full month →':'ดูเต็ม • รายเดือน →'}</button></div>`;
+ const header=`<div class="v6517-mobile-row v660-preview-head"><span class="v6517-mobile-name">${en?'Employee':'ชื่อพนักงาน'}</span>${days.map(day=>`<button type="button" data-v6517-day="${day}" class="${day===anchor?'today':''}" aria-label="${en?'October':'ตุลาคม'} ${day}"><small>${dow(day)}</small><b>${day}</b></button>`).join('')}</div>`;
+ const rows=staff.map((person,i)=>`<div class="v6517-mobile-row"><span class="v6517-mobile-name" title="${v6517Esc(person.name)}" aria-label="${v6517Esc(person.name)}">${v6517Esc(person.name)}</span>${days.map(day=>{
    const code=statusAt(i,day);
-   return `<button type="button" class="${code} ${selectedDay===day?'selected':''}" data-v6517-day="${day}" data-v6517-person="${i}" aria-label="${v6517Esc(person.name)} วันที่ ${day} ${v6517Esc(label(code))}"></button>`;
+   return `<button type="button" class="${code} ${selectedDay===day?'selected':''}" data-v6517-day="${day}" data-v6517-person="${i}" aria-label="${v6517Esc(person.name)} ${en?'October':'ตุลาคม'} ${day} ${v6517Esc(label(code))}"></button>`;
  }).join('')}</div>`).join('');
- return header+rows;
+ const legend=`<div class="v660-matrix-legend"><span class="d"><i></i>D • ${en?'Day':'กลางวัน'}</span><span class="n"><i></i>N • ${en?'Night':'กลางคืน'}</span><span class="o"><i></i>OFF • ${en?'Off':'พัก'}</span></div>`;
+ const note=end<anchor+7?`<p class="v660-out-of-range">${en?'The current roster only covers October 2026.':'ตารางเวรชุดนี้มีข้อมูลถึง 31 ต.ค. 2569 เท่านั้น'}</p>`:'';
+ return top+`<div class="v660-matrix-grid" style="--v660-preview-days:${days.length}">${header}${rows}</div>`+legend+note;
 }
 function v6517Render(){
  const root=document.getElementById('v6517Dashboard');
@@ -5677,7 +5856,7 @@ function v6517Render(){
  }
  const labels={day:en?'Day':'กลางวัน',night:en?'Night':'กลางคืน',off:en?'Off':'หยุด'};
  const legend=root.querySelector('#v6517Legend');
- if(legend)legend.innerHTML=[['day','green'],['night','blue'],['off','red']].map(([name,color])=>
+ if(legend)legend.innerHTML=[['day','red'],['night','blue'],['off','green']].map(([name,color])=>
  `<div class="v6517-legend-row"><span><i class="v6517-dot ${color}"></i>${labels[name]}</span><b>${stat[name]} • ${pct(name)}%</b></div>`).join('');
  const ratio=root.querySelector('#v6517Percent');
  if(ratio)ratio.textContent=stat.coverage+'%';
@@ -5710,7 +5889,7 @@ function v6517Render(){
  }
  const preview=root.querySelector('#v6517MobileMatrix');
  if(preview){
-  const section=String(Math.floor((day-1)/14));
+  const section=String((()=>{const t=new Date();return t.getFullYear()===2026&&t.getMonth()===9?t.getDate():day})());
   if(preview.dataset.matrixSection!==section||!preview.firstElementChild){
    preview.innerHTML=v6517MobilePreview(day);
    preview.dataset.matrixSection=section;
@@ -5779,7 +5958,7 @@ function v6517Init(){
   </div>
   <div class="v6517-bottom-grid">
    <section class="v6517-oncall-panel v6517-glass"><header class="v6517-panel-header"><strong>⌁ Engineer Oncall</strong><span class="v6517-caption">ตามตารางที่มีข้อมูล</span></header><div class="v6517-oncall-list" id="v6517Oncall"></div></section>
-   <section class="v6517-trend-panel v6517-glass"><header class="v6517-panel-header"><strong>≋ แนวโน้มกำลังคน 31 วัน</strong><span class="v6517-caption"><i class="v6517-dot green"></i>Day <i class="v6517-dot blue"></i>Night <i class="v6517-dot red"></i>Off</span></header><div class="v6517-trend" id="v6517Trend"></div></section>
+   <section class="v6517-trend-panel v6517-glass"><header class="v6517-panel-header"><strong>≋ แนวโน้มกำลังคน 31 วัน</strong><span class="v6517-caption"><i class="v6517-dot red"></i>Day <i class="v6517-dot blue"></i>Night <i class="v6517-dot green"></i>Off</span></header><div class="v6517-trend" id="v6517Trend"></div></section>
    <section class="v6517-insights-panel v6517-glass"><header class="v6517-panel-header"><strong>◷ สรุปจากตารางเวร</strong><span class="v6517-caption">ข้อมูลจริง</span></header><div class="v6517-notes" id="v6517Notes"></div></section>
   </div>`;
  view.insertBefore(deck,view.firstElementChild);
@@ -5796,6 +5975,7 @@ function v6517Init(){
  deck.addEventListener('click',event=>{
   const button=event.target.closest?.('button');
   if(!button||!deck.contains(button))return;
+  if(button.hasAttribute('data-v660-full-month')){showView('month');return;}
   const action=button.dataset.v6517Action;
   if(action==='previous'&&selectedDay>1)setSelectedDay(selectedDay-1,false);
   if(action==='next'&&selectedDay<31)setSelectedDay(selectedDay+1,false);

@@ -1,0 +1,169 @@
+/* Shift v6.5.24: one-to-one status palette, 8-day mobile preview and tight full-name rail. */
+:root{--shift-day-solid:#ff426a;--shift-night-solid:#258dff;--shift-off-solid:#08dfa4}
+:is(#overviewView,#dailyView) .roster-card.day{
+  color:var(--shift-day-solid)!important;border:1px solid rgba(255,66,106,.88)!important;
+  background:linear-gradient(180deg,rgba(23,8,22,.48),rgba(3,14,29,.97) 32%)!important;
+  box-shadow:inset 0 1px rgba(255,135,160,.10),0 0 15px rgba(255,66,106,.11)!important
+}
+:is(#overviewView,#dailyView) .roster-card.night{
+  color:var(--shift-night-solid)!important;border:1px solid rgba(37,141,255,.88)!important;
+  background:linear-gradient(180deg,rgba(6,19,42,.9),rgba(3,14,29,.97) 32%)!important;
+  box-shadow:inset 0 1px rgba(135,197,255,.10),0 0 15px rgba(37,141,255,.12)!important
+}
+:is(#overviewView,#dailyView) .roster-card.off{
+  color:var(--shift-off-solid)!important;border:1px solid rgba(8,223,164,.88)!important;
+  background:linear-gradient(180deg,rgba(5,34,33,.70),rgba(3,14,29,.97) 32%)!important;
+  box-shadow:inset 0 1px rgba(155,255,218,.09),0 0 15px rgba(8,223,164,.11)!important
+}
+:is(#overviewView,#dailyView) .roster-card.day :is(.shift-emblem,.roster-count,.status-badge){color:var(--shift-day-solid)!important}
+:is(#overviewView,#dailyView) .roster-card.night :is(.shift-emblem,.roster-count,.status-badge){color:var(--shift-night-solid)!important}
+:is(#overviewView,#dailyView) .roster-card.off :is(.shift-emblem,.roster-count,.status-badge){color:var(--shift-off-solid)!important}
+:is(#overviewView,#dailyView) .shift-D .id-glyph{--g:var(--shift-day-solid)!important}
+:is(#overviewView,#dailyView) .shift-N .id-glyph{--g:var(--shift-night-solid)!important}
+:is(#overviewView,#dailyView) .shift-O .id-glyph{--g:var(--shift-off-solid)!important}
+:is(#overviewView,#dailyView) .shift-D .status-badge{background:rgba(255,66,106,.08)!important;border-color:var(--shift-day-solid)!important;box-shadow:0 0 11px rgba(255,66,106,.38)!important}
+:is(#overviewView,#dailyView) .shift-N .status-badge{background:rgba(37,141,255,.08)!important;border-color:var(--shift-night-solid)!important;box-shadow:0 0 11px rgba(37,141,255,.38)!important}
+:is(#overviewView,#dailyView) .shift-O .status-badge{background:rgba(8,223,164,.08)!important;border-color:var(--shift-off-solid)!important;box-shadow:0 0 11px rgba(8,223,164,.34)!important}
+:is(#overviewView,#dailyView) .roster-card.day .shift-emblem{border-color:var(--shift-day-solid)!important;box-shadow:0 0 14px rgba(255,66,106,.36)!important}
+:is(#overviewView,#dailyView) .roster-card.night .shift-emblem{border-color:var(--shift-night-solid)!important;box-shadow:0 0 14px rgba(37,141,255,.36)!important}
+:is(#overviewView,#dailyView) .roster-card.off .shift-emblem{border-color:var(--shift-off-solid)!important;box-shadow:0 0 14px rgba(8,223,164,.32)!important}
+
+/* Keep borders, fills and selection of each state in the same hue throughout the matrices. */
+:is(#overviewView,#monthView) :is(.matrix-cell.D,.heatmap td.shift.D,.v6517-mobile-row button.D){
+ border:1px solid var(--shift-day-solid)!important;
+ background:linear-gradient(180deg,#a42344,#591229)!important;
+ box-shadow:inset 0 1px rgba(255,209,220,.16),0 0 5px rgba(255,66,106,.32)!important
+}
+:is(#overviewView,#monthView) :is(.matrix-cell.N,.heatmap td.shift.N,.v6517-mobile-row button.N){
+ border:1px solid var(--shift-night-solid)!important;
+ background:linear-gradient(180deg,#175eaf,#0a295c)!important;
+ box-shadow:inset 0 1px rgba(197,229,255,.16),0 0 5px rgba(37,141,255,.33)!important
+}
+:is(#overviewView,#monthView) :is(.matrix-cell.O,.heatmap td.shift.O,.v6517-mobile-row button.O){
+ border:1px solid var(--shift-off-solid)!important;
+ background:linear-gradient(180deg,#087d5d,#054436)!important;
+ box-shadow:inset 0 1px rgba(206,255,235,.16),0 0 5px rgba(8,223,164,.30)!important
+}
+:is(#overviewView,#monthView) :is(.matrix-cell.D.selected,.heatmap td.shift.D.selected-col,.v6517-mobile-row button.D.selected){
+ outline:1px solid var(--shift-day-solid)!important;outline-offset:0!important;
+ box-shadow:0 0 10px rgba(255,66,106,.62),inset 0 0 0 1px rgba(255,170,187,.45)!important
+}
+:is(#overviewView,#monthView) :is(.matrix-cell.N.selected,.heatmap td.shift.N.selected-col,.v6517-mobile-row button.N.selected){
+ outline:1px solid var(--shift-night-solid)!important;outline-offset:0!important;
+ box-shadow:0 0 10px rgba(37,141,255,.64),inset 0 0 0 1px rgba(166,219,255,.45)!important
+}
+:is(#overviewView,#monthView) :is(.matrix-cell.O.selected,.heatmap td.shift.O.selected-col,.v6517-mobile-row button.O.selected){
+ outline:1px solid var(--shift-off-solid)!important;outline-offset:0!important;
+ box-shadow:0 0 10px rgba(8,223,164,.60),inset 0 0 0 1px rgba(170,255,217,.40)!important
+}
+/* Side-panels in the overview should match their D / N / OFF definitions. */
+#overviewView .v6517-shift--day{border-color:rgba(255,66,106,.52)!important}
+#overviewView .v6517-shift--night{border-color:rgba(37,141,255,.52)!important}
+#overviewView .v6517-shift--off{border-color:rgba(8,223,164,.52)!important}
+#overviewView .v6517-shift--day b,#overviewView .v6517-shift--day span{color:var(--shift-day-solid)!important}
+#overviewView .v6517-shift--night b,#overviewView .v6517-shift--night span{color:var(--shift-night-solid)!important}
+#overviewView .v6517-shift--off b,#overviewView .v6517-shift--off span{color:var(--shift-off-solid)!important}
+#overviewView .v6517-kpi:nth-child(3){border-color:rgba(255,66,106,.40)!important}
+#overviewView .v6517-kpi:nth-child(4){border-color:rgba(37,141,255,.40)!important}
+#overviewView .v6517-kpi:nth-child(5){border-color:rgba(8,223,164,.40)!important}
+
+/* The full month table sizes its first column to the uninterrupted surname and starts dates immediately after. */
+#monthView .table-wrap{overflow-x:auto!important;-webkit-overflow-scrolling:touch}
+#monthView .heatmap{
+ width:max-content!important;min-width:max-content!important;table-layout:auto!important;
+ border-collapse:separate!important;border-spacing:2px!important
+}
+#monthView .heatmap :is(thead th.name-col,tbody th.name-col,tfoot td.name-col){
+ width:1%!important;min-width:max-content!important;max-width:none!important;
+ white-space:nowrap!important;word-break:keep-all!important;overflow-wrap:normal!important;
+ text-overflow:clip!important;padding:7px 8px!important;
+ line-height:1.35!important;font-size:12px!important
+}
+#monthView .heatmap .v6519-full-name{
+ display:inline!important;max-width:none!important;white-space:nowrap!important;
+ word-break:keep-all!important;overflow-wrap:normal!important;line-height:1.35!important;
+ font-size:12px!important
+}
+#monthView .heatmap td.shift{width:31px!important;min-width:31px!important;height:33px!important}
+#monthView .heatmap thead th:not(.name-col){min-width:31px!important;width:31px!important}
+
+/* Overview: a complete, readable eight-day mobile preview, without 14-day horizontal paging. */
+@media(max-width:860px){
+ #overviewView .v6517-matrix{padding:12px!important;border-radius:16px!important}
+ #overviewView .v6517-matrix #v6517MobileMatrix{
+   padding:0!important;margin:0!important;overflow:visible!important;
+   background:transparent!important;border:0!important
+ }
+ #overviewView .v660-matrix-toolbar{
+   display:flex;justify-content:space-between;align-items:center;gap:10px;
+   padding:2px 2px 12px;margin-bottom:9px;border-bottom:1px solid rgba(97,184,232,.19)
+ }
+ #overviewView .v660-matrix-kicker{display:block;color:#61caff;font-size:9px;letter-spacing:.13em;font-weight:850}
+ #overviewView .v660-matrix-toolbar strong{display:block;margin-top:3px;font-size:15px;color:#f0faff;line-height:1.3}
+ #overviewView .v660-matrix-toolbar small{display:block;margin-top:3px;font-size:10px;color:#a2bfd2}
+ #overviewView .v660-month-link{
+   flex:none;min-height:36px;padding:7px 10px;border-radius:10px;cursor:pointer;
+   border:1px solid rgba(50,171,255,.65);color:#e7f7ff;
+   background:linear-gradient(135deg,rgba(15,82,147,.34),rgba(7,28,58,.8));
+   font-size:11px;font-weight:800;box-shadow:0 0 13px rgba(37,141,255,.10);
+   transition:background .2s ease,box-shadow .2s ease
+ }
+ #overviewView .v660-month-link:active{background:rgba(37,141,255,.25)}
+ #overviewView .v660-matrix-grid{
+   --v660-preview-days:8;overflow:hidden;width:100%;border-radius:11px;
+   border:1px solid rgba(70,176,228,.25);background:rgba(2,12,27,.52)
+ }
+ #overviewView .v6517-mobile-row{
+   box-sizing:border-box!important;grid-template-columns:minmax(0,37%) repeat(var(--v660-preview-days),minmax(0,1fr))!important;
+   min-width:0!important;width:100%!important;gap:2px!important;
+   min-height:33px!important;margin:0!important;padding:2px!important;
+   border-bottom:1px solid rgba(71,136,182,.12)
+ }
+ #overviewView .v6517-mobile-row:last-child{border-bottom:0}
+ #overviewView .v6517-mobile-name{
+   box-sizing:border-box!important;min-width:0!important;max-width:none!important;
+   width:100%!important;padding:4px 5px!important;min-height:28px!important;
+   color:#e3f4ff!important;font-size:clamp(9px,2.55vw,11px)!important;
+   line-height:1.3!important;white-space:nowrap!important;overflow:hidden!important;
+   text-overflow:ellipsis!important;position:static!important;border:0!important;
+   background:#0a2139!important
+ }
+ #overviewView .v6517-mobile-row button{
+   box-sizing:border-box!important;width:100%!important;min-width:0!important;
+   height:25px!important;min-height:25px!important;padding:0!important;
+   font-size:10px!important;border-radius:5px!important;touch-action:manipulation
+ }
+ #overviewView .v660-preview-head{
+   border-bottom:1px solid rgba(86,185,244,.34);
+   background:rgba(13,42,72,.65)
+ }
+ #overviewView .v660-preview-head .v6517-mobile-name{background:#0b2945!important;color:#b8d8ee!important;font-weight:850}
+ #overviewView .v660-preview-head button{
+   display:flex!important;flex-direction:column;align-items:center;justify-content:center;
+   color:#a9d4ed!important;border:1px solid transparent!important;
+   background:transparent!important;box-shadow:none!important;height:32px!important
+ }
+ #overviewView .v660-preview-head button small{font-size:7px;line-height:1;color:#76a6c5}
+ #overviewView .v660-preview-head button b{font-size:12px;line-height:1.2;color:#d5efff}
+ #overviewView .v660-preview-head button.today{
+   border-color:rgba(88,230,255,.66)!important;
+   background:rgba(48,174,222,.18)!important;box-shadow:inset 0 0 8px rgba(50,218,255,.12)!important
+ }
+ #overviewView .v660-matrix-legend{
+   display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:10px 3px 2px;
+   font-size:10px;color:#b2cce0
+ }
+ #overviewView .v660-matrix-legend i{display:inline-block;width:7px;height:7px;margin-right:4px;border-radius:2px}
+ #overviewView .v660-matrix-legend .d i{background:var(--shift-day-solid)}
+ #overviewView .v660-matrix-legend .n i{background:var(--shift-night-solid)}
+ #overviewView .v660-matrix-legend .o i{background:var(--shift-off-solid)}
+ #overviewView .v660-out-of-range{margin:8px 3px 0;font-size:10px;color:#b4cce1}
+}
+@media(max-width:390px){
+ #overviewView .v6517-mobile-row{grid-template-columns:minmax(0,38%) repeat(var(--v660-preview-days),minmax(0,1fr))!important}
+ #overviewView .v6517-mobile-name{font-size:9px!important;padding:4px 3px!important}
+ #overviewView .v660-month-link{padding:7px;font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+ #overviewView .v660-month-link{transition:none!important}
+}
