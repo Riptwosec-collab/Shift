@@ -42,7 +42,8 @@ test('failed ancillary assets cannot prevent worker install and cache version in
   const sw=read('sw.js');
   assert.ok(sw.includes('shift-shell-v6.5.20'));
   assert.ok(sw.includes('Promise.allSettled'));
-  assert.match(sw,/cache\.add\(['"]\.\/index\.html['"]\)/);
+  assert.ok(sw.includes("fetchShell(cache)"));
+  assert.ok(sw.includes("APP_ROOT"));
   assert.doesNotMatch(sw,/await cache\.addAll\(SHELL_ASSETS\)/);
   for(const resource of ['manifest.webmanifest','shift-192.png','shift-512.png'])assert.ok(sw.includes(resource));
   assert.ok(sw.includes('networkFirst'));

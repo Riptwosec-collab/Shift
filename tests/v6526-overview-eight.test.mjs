@@ -29,5 +29,5 @@ test('build and PWA cache carry the new override',()=>{
  const css=read('src/v6526-overview-eight.css'),js=read('src/v6526-overview-eight.js');
  for(const x of ['v6526-overview-eight.css','v6526-overview-eight.js','v6526-overview-eight-style'])assert.ok(build.includes(x),x);
  assert.ok(html.includes(css)&&html.includes(js));
- assert.ok(read('sw.js').includes('shift-shell-v6.5.20-r8'));
+ assert.ok(read('sw.js').includes('shift-shell-v6.5.20-r9'));
 });

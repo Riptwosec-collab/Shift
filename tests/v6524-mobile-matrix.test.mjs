@@ -40,5 +40,5 @@ test('built HTML ships final responsive override; PWA cache revision forces fres
  assert.ok(html.includes(css));
  assert.ok(html.includes('v6524-mobile-matrix-style'));
  assert.ok(html.includes('8-DAY SHIFT PREVIEW'));
- assert.ok(read('sw.js').includes("CACHE_NAME='shift-shell-v6.5.20-r8'"));
+ assert.ok(read('sw.js').includes("CACHE_NAME='shift-shell-v6.5.20-r9'"));
 });

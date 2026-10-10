@@ -20,5 +20,5 @@ test('tracked index and PWA match source build',()=>{
  const b=read('scripts/build.mjs'),h=read('index.html'),c=read('src/v6525-polish.css'),j=read('src/v6525-polish.js');
  assert.ok(b.includes('v6525-polish.css')&&b.includes('v6525-polish.js'));
  assert.ok(h.includes(c)&&h.includes(j));
- assert.ok(read('sw.js').includes('shift-shell-v6.5.20-r8'));
+ assert.ok(read('sw.js').includes('shift-shell-v6.5.20-r9'));
 });
