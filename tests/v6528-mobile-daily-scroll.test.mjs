@@ -3,7 +3,10 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 const read=p=>fs.readFileSync(p,'utf8');
 test('D / N / OFF / COVER floating bar is no longer created or rendered',()=>{
- const js=read('src/v64-engine.js'),html=read('index.html');
+ const js=read('src/v64-engine.js'),bridge=read('src/v651-engine.js'),html=read('index.html');
+ assert.ok(!bridge.includes("sticky.className='v64-sticky-daily'"));
+ assert.ok(bridge.includes("document.getElementById('v64StickyDaily')?.remove()"));
+ assert.ok(!html.includes("sticky.className='v64-sticky-daily'"));
  assert.ok(!js.includes("sticky.className='v64-sticky-daily'"));
  assert.ok(!js.includes("sticky.innerHTML="));
  assert.ok(js.includes("document.getElementById('v64StickyDaily')?.remove()"));

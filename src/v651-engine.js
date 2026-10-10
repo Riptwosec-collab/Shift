@@ -23,12 +23,8 @@ function suppressV64DailyOps(){
   const view=document.getElementById('dailyView');
   if(!view)return null;
   document.getElementById('v64DailyOps')?.remove();
-  if(!document.getElementById('v64StickyDaily')){
-    const sticky=document.createElement('div');
-    sticky.id='v64StickyDaily';
-    sticky.className='v64-sticky-daily';
-    view.insertBefore(sticky,view.firstChild);
-  }
+  // Keep legacy floating summary absent on every render and navigation.
+  document.getElementById('v64StickyDaily')?.remove();
   return null;
 }
 if(typeof ensureV64DailyOps==='function')ensureV64DailyOps=suppressV64DailyOps;
