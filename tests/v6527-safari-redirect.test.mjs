@@ -19,7 +19,7 @@ function worker({online=true,badCrossOrigin=false}={}){
    match:async key=>store.get(new URL(typeof key==='string'?key:key.url,ROOT).href)?.clone(),
    put:async(key,value)=>store.set(new URL(typeof key==='string'?key:key.url,ROOT).href,value.clone()),
    delete:async key=>store.delete(new URL(typeof key==='string'?key:key.url,ROOT).href)
- }),keys:async()=>['shift-shell-v6.5.20-r8','shift-shell-v6.5.20-r9'],delete:async()=>true};
+ }),keys:async()=>['shift-shell-v6.5.20-r9','shift-shell-v6.5.20-r10'],delete:async()=>true};
  const fetch=async (input,options)=>{
    const url=new URL(typeof input==='string'?input:input.url,ROOT);
    requests.push({url:url.href,options});
