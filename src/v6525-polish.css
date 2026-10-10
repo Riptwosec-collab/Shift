@@ -1,0 +1,81 @@
+/* Shift v6.5.25 — stretch desktop table and responsive native month presentation */
+#monthView .table-wrap{width:100%!important;max-width:100%!important;overflow-x:auto!important;scrollbar-width:thin}
+#monthView .heatmap{width:100%!important;min-width:1180px!important;max-width:none!important;table-layout:fixed!important;border-spacing:2px!important}
+#monthView .heatmap :is(thead th.name-col,tbody th.name-col,tfoot td.name-col){width:198px!important;min-width:198px!important;max-width:198px!important;white-space:nowrap!important;padding:6px 8px!important;overflow:visible!important;word-break:keep-all!important;overflow-wrap:normal!important;font-size:12px!important}
+#monthView .heatmap thead th:not(.name-col){width:auto!important;min-width:0!important;padding:6px 0!important}
+#monthView .heatmap td.shift{width:auto!important;min-width:0!important;height:37px!important}
+#monthView .heatmap tfoot td:not(.name-col){width:auto!important;min-width:0!important}
+@media(max-width:860px){
+#overviewView .v6517-matrix{border:1px solid rgba(70,174,232,.48)!important;background:linear-gradient(145deg,#071c32,#030e1e)!important;border-radius:17px!important}
+#overviewView .shift-preview-header{display:block!important;padding:3px 1px 12px!important;border:0!important;margin:0!important}
+#overviewView .shift-preview-label{color:#79bce8;font-size:9px;letter-spacing:.11em;font-weight:850}
+#overviewView .shift-preview-label em{font-style:normal;font-size:8px;color:#58e9b7;padding:2px 5px;border:1px solid rgba(28,218,160,.3);border-radius:5px}
+#overviewView .shift-preview-header strong{display:block;font-size:18px!important;margin:5px 0 4px!important}
+#overviewView .shift-preview-header small{font-size:11px!important;color:#a6c8e4!important}
+#overviewView .shift-preview-grid{overflow:hidden;border:1px solid rgba(66,167,232,.26);border-radius:12px}
+#overviewView .shift-preview-grid .v660-matrix-grid{border:0!important;border-radius:0!important}
+#overviewView .v6517-mobile-row{min-height:36px!important;padding:2px!important}
+#overviewView .v6517-mobile-row:nth-child(even){background:rgba(26,88,145,.07)}
+#overviewView .v6517-mobile-name{min-height:29px!important;background:#0b2742!important;border-radius:4px!important}
+#overviewView .v6517-mobile-row button{height:26px!important;min-height:26px!important;font-size:9px!important;font-weight:850}
+#overviewView .v6517-mobile-row button.shift-first-day{border-width:2px!important;filter:brightness(1.12)}
+#overviewView .shift-nextmonth-date{display:grid;place-items:center;min-width:0;color:#7e9fb7;font-size:10px}
+#overviewView .shift-nextmonth-date small{font-size:7px}
+#overviewView .shift-no-data{display:grid;place-items:center;min-height:26px;color:#5c7992;border:1px dashed rgba(106,153,178,.2);border-radius:5px;background:rgba(39,71,95,.1)}
+#overviewView .shift-preview-fade{height:9px;background:linear-gradient(180deg,transparent,rgba(26,100,148,.22))}
+#overviewView .shift-preview-footer{padding:12px 2px 2px}
+#overviewView .shift-preview-footer .v660-matrix-legend{margin:0!important}
+#overviewView .shift-preview-footer p{color:#a5c8de;font-size:10px;margin:9px 0 13px}
+#overviewView .shift-preview-full{display:flex!important;align-items:center;justify-content:space-between;width:100%;min-height:46px!important;padding:10px 14px!important;margin:0!important;border-radius:12px!important;border:1px solid rgba(73,189,252,.65)!important;background:linear-gradient(110deg,rgba(12,80,136,.76),rgba(10,38,71,.93))!important;color:#f0faff!important;font-size:13px!important;font-weight:850!important;box-shadow:0 0 16px rgba(47,153,233,.14)!important}
+#overviewView .shift-preview-full span:last-child{font-size:20px;color:#85eaff}
+#monthView .table-wrap{display:none!important}
+#monthView .month-panel{padding:13px!important;border-radius:17px!important;border:1px solid rgba(73,165,229,.41)!important}
+#monthView .month-head{padding-bottom:12px;border-bottom:1px solid rgba(88,159,220,.17)}
+#monthView .month-head .section-title{font-size:19px!important}
+#v6515MobileMonth{margin-top:12px!important}
+#monthView .shift-week-panel{padding:12px 10px;margin:0 0 14px;background:linear-gradient(145deg,rgba(11,41,71,.94),rgba(4,16,32,.97));border:1px solid rgba(69,172,237,.31);border-radius:14px;box-shadow:inset 0 1px rgba(255,255,255,.05),0 9px 24px rgba(0,0,0,.21)}
+#monthView .shift-week-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+#monthView .shift-week-heading>div:first-child{display:grid;gap:3px;min-width:0}
+#monthView .shift-week-heading small{font-size:9px;font-weight:850;color:#64c1f2;letter-spacing:.11em}
+#monthView .shift-week-heading strong{font-size:16px;color:#f3fcff}
+#monthView .shift-week-heading span{font-size:11px;color:#a8c8e0}
+#monthView .shift-week-nav{display:flex;gap:6px;flex:none}
+#monthView .shift-week-nav button{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;border:1px solid rgba(72,175,237,.49);background:rgba(15,58,94,.75);font-size:25px;color:#e3f6ff;cursor:pointer}
+#monthView .shift-week-nav button:disabled{opacity:.25;cursor:default}
+#monthView .shift-week-scroll{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:thin;border:1px solid rgba(67,158,220,.25);border-radius:11px;background:#04192c}
+#monthView .shift-week-grid{--name-rail:175px;width:100%;min-width:calc(var(--name-rail) + 7 * 32px + 16px);padding:3px;box-sizing:border-box}
+#monthView .shift-week-row{display:grid;grid-template-columns:var(--name-rail) repeat(7,minmax(30px,1fr));gap:2px;align-items:center;min-height:34px;padding:2px 0;border-bottom:1px solid rgba(75,158,204,.08)}
+#monthView .shift-week-row:nth-child(2n){background:rgba(45,99,154,.05)}
+#monthView .shift-week-name{position:sticky;left:0;z-index:3;min-width:0;display:flex;align-items:center;white-space:nowrap!important;overflow:visible!important;word-break:keep-all;min-height:30px;padding:3px 5px;background:#092840;border-right:1px solid rgba(80,180,239,.3);color:#eaf7ff;font-size:10px;font-weight:760}
+#monthView .shift-week-head{background:#0a273e}
+#monthView .shift-week-head .shift-week-name{z-index:5;color:#adddff}
+#monthView .shift-week-date{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;height:39px;min-width:0;padding:1px;border-radius:5px;border:1px solid transparent;background:#11324b;color:#dff3ff}
+#monthView .shift-week-date small{font-size:8px;color:#95c5e5}
+#monthView .shift-week-date b{font-size:12px}
+#monthView .shift-week-date.today{border-color:#7ceaff}
+#monthView .shift-week-date.selected{box-shadow:inset 0 -2px #91eaff}
+#monthView .shift-week-cell{min-width:0;display:grid;place-items:center;height:30px;padding:0 1px;border:1px solid currentColor;border-radius:5px;font-size:10px;font-weight:850;color:#fff;cursor:pointer}
+#monthView .shift-week-cell.D{border-color:#ff426a!important;background:linear-gradient(150deg,#b22949,#57132a)!important}
+#monthView .shift-week-cell.N{border-color:#258dff!important;background:linear-gradient(150deg,#175db6,#092b5a)!important}
+#monthView .shift-week-cell.O{border-color:#08dfa4!important;background:linear-gradient(150deg,#087d5d,#054436)!important;font-size:8px}
+#monthView .shift-week-cell.selected{outline:2px solid #c8faff;outline-offset:-2px}
+#monthView .shift-week-empty{display:grid;place-items:center;min-height:29px;color:#64809b;border:1px dashed rgba(98,150,184,.19);border-radius:5px;background:rgba(39,72,96,.12)}
+#monthView .shift-week-footer{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:10px 0 0}
+#monthView .shift-week-footer>span{font-size:10px;font-weight:850;padding:3px 7px;border-radius:6px;border:1px solid currentColor}
+#monthView .shift-week-footer .D{color:#ff7793}
+#monthView .shift-week-footer .N{color:#79baff}
+#monthView .shift-week-footer .O{color:#4be6b3}
+#monthView .shift-week-footer small{font-size:10px;color:#a0bed5}
+#monthView .shift-calendar-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px}
+#monthView .shift-calendar-heading b{font-size:15px;color:#f0faff}
+#monthView .shift-calendar-heading small{font-size:10px;color:#a3c5d9}
+#monthView .v6515-month-days{padding:10px 6px!important;margin:10px 0 16px!important;border:1px solid rgba(81,175,233,.21);border-radius:12px;background:rgba(4,21,39,.68);gap:4px!important}
+#monthView .v6515-month-days button{min-height:55px!important;border-radius:9px!important;background:linear-gradient(165deg,#123450,#0a223b)!important}
+#monthView .v6515-month-days button.active{border-color:#7defff!important;background:#19536a!important;box-shadow:0 0 12px rgba(65,203,249,.17)!important}
+#monthView .v6515-month-detail{padding-top:10px;border-top:1px solid rgba(76,159,219,.2)}
+#monthView .v6515-shift-group.day{border-left:3px solid #ff426a!important}
+#monthView .v6515-shift-group.night{border-left:3px solid #258dff!important}
+#monthView .v6515-shift-group.off{border-left:3px solid #08dfa4!important}
+}
+@media(max-width:390px){#monthView .shift-week-grid{--name-rail:165px}}
+@media(prefers-reduced-motion:reduce){#monthView .shift-week-cell,#overviewView .shift-preview-full{transition:none!important}}
