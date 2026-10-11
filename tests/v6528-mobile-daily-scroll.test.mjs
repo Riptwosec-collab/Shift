@@ -19,8 +19,12 @@ test('all legacy bar elements are hidden as defensive fallback on cached phones'
  assert.ok(html.includes(css));
 });
 test('other daily metrics and fixed bottom navigation are unchanged',()=>{
- const js=read('src/v64-engine.js'),mobile=read('src/v6515-ui.css');
- for(const text of ['renderV64Daily','model.counts.D','model.counts.N','model.counts.OFF','model.coverage'])assert.ok(js.includes(text),text);
+ const js=read('src/v64-engine.js'),baseline=read('src/legacy-baseline.html'),model=read('src/daily-model.js'),mobile=read('src/v6515-ui.css');
+ assert.ok(js.includes('renderV64Daily'));
+ assert.ok(js.includes('dailyModel(selectedDay'));
+ assert.ok(model.includes('const counts=cache.dayStats[day]'));
+ assert.ok(model.includes('coverage:counts.coverage'));
+ for(const text of ["crew(selectedDay,'D')","crew(selectedDay,'N')","crew(selectedDay,'O')","renderPeople('#dayPeople'","renderPeople('#nightPeople'","renderPeople('#offPeople'"])assert.ok(baseline.includes(text),text);
  assert.ok(mobile.includes('#mobileNav')&&mobile.includes('position:fixed!important'));
 });
 test('PWA cache revision updates old installed shell',()=>{
