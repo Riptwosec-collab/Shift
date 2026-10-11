@@ -1,8 +1,8 @@
 name: Deploy Shift to Cloudflare
 
+# Cloudflare Builds is the authoritative auto-deployer for main.
+# Manual fallback only; do not duplicate Cloudflare Git deploys on every push.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 concurrency:
