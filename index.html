@@ -164,7 +164,7 @@ body::after{content:""!important;position:fixed!important;inset:-22%!important;z
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Shift">
-<link rel="apple-touch-icon" href="./icons/shift-192.png">
+<link rel="icon" type="image/png" href="./icons/shift-tt-source.png">\n<link rel="apple-touch-icon" sizes="180x180" href="./icons/shift-180.png">
 <style id="v64-additive-style">
 /* v6.4 additive-only layer.
    The approved legacy appearance remains embedded in src/legacy-baseline.html.
@@ -4375,6 +4375,16 @@ html[data-v65-mode="ECO"] .view.active{animation:none!important}
 }
 
 </style>
+<style id="shift-brand-icon-style">
+/* Shift PRO custom T icon based on the uploaded artwork */
+.brand-mark{width:52px!important;height:52px!important;flex:none!important;filter:none!important;display:grid!important;place-items:center!important;overflow:visible!important}
+.brand-mark::before,.brand-mark::after{content:none!important;display:none!important;animation:none!important}
+.brand-mark svg{display:none!important}
+.brand-mark .shift-brand-icon{display:block!important;width:100%!important;height:100%!important;object-fit:cover;border-radius:13px;border:1px solid rgba(145,182,244,.38);box-shadow:0 0 16px rgba(103,79,228,.27),0 0 10px rgba(28,178,247,.22)}
+@media(max-width:860px){.brand-mark{width:44px!important;height:44px!important}.brand-mark .shift-brand-icon{border-radius:11px}}
+@media(prefers-reduced-motion:reduce){.brand-mark,.brand-mark *{animation:none!important;transition:none!important}}
+
+</style>
 </head>
 <!-- REFERENCE LOCK V4 -->
 <body>
@@ -4384,7 +4394,7 @@ html[data-v65-mode="ECO"] .view.active{animation:none!important}
 <div class="ambient a"></div><div class="ambient b"></div><div class="ambient c"></div>
 <div class="app">
 <header class="command-bar">
- <div class="brand"><div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none"><path d="M15 3 26 24h-5.7L15 13.5 9.7 24H4L15 3Z" fill="currentColor"/><path d="m15 17 4.3 7h-8.6L15 17Z" fill="#38e8ff"/></svg></div><div class="brand-copy"><h1>Shift Command Center</h1><p>October 2569 • Shift Viewer</p><small>ระบบดูตารางเวร • จัดการทีม • เพื่อทุกวันที่ทำงานที่ดีขึ้น</small></div></div>
+ <div class="brand"><div class="brand-mark" aria-hidden="true"><img class="shift-brand-icon" src="./icons/shift-tt-source.png" width="52" height="52" alt="" decoding="async"></div><div class="brand-copy"><h1>Shift Command Center</h1><p>October 2569 • Shift Viewer</p><small>ระบบดูตารางเวร • จัดการทีม • เพื่อทุกวันที่ทำงานที่ดีขึ้น</small></div></div>
  <nav class="nav-tabs" aria-label="Main navigation">
   <button class="nav-btn active" data-view="overview" aria-label="ภาพรวม Overview"><b>⌂ ภาพรวม</b><span>Overview</span></button>
   <button class="nav-btn" data-view="daily" aria-label="รายวัน Daily"><b>▣ รายวัน</b><span>Daily</span></button>

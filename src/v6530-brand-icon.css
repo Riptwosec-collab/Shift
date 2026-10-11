@@ -1,0 +1,7 @@
+/* Shift PRO custom T icon based on the uploaded artwork */
+.brand-mark{width:52px!important;height:52px!important;flex:none!important;filter:none!important;display:grid!important;place-items:center!important;overflow:visible!important}
+.brand-mark::before,.brand-mark::after{content:none!important;display:none!important;animation:none!important}
+.brand-mark svg{display:none!important}
+.brand-mark .shift-brand-icon{display:block!important;width:100%!important;height:100%!important;object-fit:cover;border-radius:13px;border:1px solid rgba(145,182,244,.38);box-shadow:0 0 16px rgba(103,79,228,.27),0 0 10px rgba(28,178,247,.22)}
+@media(max-width:860px){.brand-mark{width:44px!important;height:44px!important}.brand-mark .shift-brand-icon{border-radius:11px}}
+@media(prefers-reduced-motion:reduce){.brand-mark,.brand-mark *{animation:none!important;transition:none!important}}
