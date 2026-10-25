@@ -46,5 +46,5 @@ test('all schedule views use explicit roles from a single shared lookup',()=>{
  assert.ok(html.includes(js)&&html.includes(css));
  assert.ok(build.includes("'v6532-duty-posts.js'"));
  assert.ok(build.includes('v6532-duty-posts.css'));
- assert.ok(read('sw.js').includes("CACHE_NAME='shift-shell-v6.5.20-r14'"));
+ assert.ok(read('sw.js').includes("CACHE_NAME='shift-shell-v6.5.20-r15'"));
 });

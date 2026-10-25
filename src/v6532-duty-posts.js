@@ -81,6 +81,14 @@ function shiftRoleRenderAll(){
  });
  const legend=document.querySelector('#v6515MobileMonth .shift-week-footer small');
  if(legend)legend.textContent='D1–D4 / N1–N2 • ? = ยังไม่ระบุ';
+ const note=document.getElementById('shiftRoleStatus');
+ if(note){
+  const working=staff.filter((p,i)=>statusAt(i,selectedDay)!=='O');
+  const current=shiftAssignments[selectedDay]||{};
+  const assigned=working.filter(p=>shiftPositions.some(r=>current[r]===p.name)).length;
+  note.textContent='ตำแหน่งเวร '+selectedDay+' ต.ค. • กำหนดแล้ว '+assigned+'/'+working.length+
+   ' คน • D? / N? = ยังไม่กำหนดตำแหน่งจริง • Duty UI v6.5.33';
+ }
 }
 function shiftRoleMount(){
  const panel=document.querySelector('#monthView .month-panel');
@@ -90,6 +98,13 @@ function shiftRoleMount(){
   section.id='shiftRoleEditor';section.hidden=true;section.className='shift-post-editor';
   const header=panel.querySelector('.month-head');
   if(header)header.after(section);else panel.prepend(section);
+ }
+ if(!document.getElementById('shiftRoleStatus')){
+  const note=document.createElement('div');
+  note.id='shiftRoleStatus';note.className='shift-post-status';note.setAttribute('role','status');
+  note.textContent='D? / N? = ยังไม่ได้ระบุตำแหน่งจริง';
+  const head=panel.querySelector('.month-head');
+  if(head)head.after(note);else panel.prepend(note);
  }
  [[panel.querySelector('.month-head'),'กำหนด D1–D4 / N1–N2'],
   [document.querySelector('#v6517Dashboard .v6517-actions'),'ตำแหน่ง D1–N2'],
@@ -126,6 +141,7 @@ function shiftRoleOpenEditor(){
  if(editor){editor.hidden=false;editor.scrollIntoView?.({behavior:'smooth',block:'start'})}
 }
 function shiftRoleInit(){
+ document.documentElement.dataset.shiftPositionsUi='v6.5.33';
  shiftLoadRoles();
  const hook=(fn,decorator)=>{
   const previous=window[fn];
@@ -180,6 +196,8 @@ function shiftRoleInit(){
   if(day){shiftEditDay=Number(day.value);shiftRoleDrawEditor()}
  });
  shiftRoleMount();shiftRoleRenderAll();
+ window.addEventListener('pageshow',()=>{shiftRoleMount();shiftRoleRenderAll()});
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden){shiftRoleMount();shiftRoleRenderAll()}});
 }
 if(typeof document!=='undefined'){
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',shiftRoleInit,{once:true});

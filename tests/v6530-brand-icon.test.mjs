@@ -27,5 +27,5 @@ test('dependency-free generator runs before building index and produces images f
  assert.ok(generator.includes('zlib.deflateSync'));
  assert.ok(generator.includes('maskable?0.79:1'));
  assert.ok(ignore.includes('!icons/shift-tt-source.png'));
- assert.ok(read('sw.js').includes("CACHE_NAME='shift-shell-v6.5.20-r14'"));
+ assert.ok(read('sw.js').includes("CACHE_NAME='shift-shell-v6.5.20-r15'"));
 });

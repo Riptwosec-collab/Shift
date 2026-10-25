@@ -1,6 +1,6 @@
 /* Shift PWA — Safari-safe offline shell (v6.5.20-r9).
    Never deliver a redirected Response from a service worker. */
-const CACHE_NAME='shift-shell-v6.5.20-r14';
+const CACHE_NAME='shift-shell-v6.5.20-r15';
 const APP_ROOT=new URL('./',self.registration.scope).href;
 const SHELL_ASSETS=['./manifest.webmanifest','./icons/shift-192.png','./icons/shift-512.png','./icons/shift-maskable-512.png','./icons/shift-tt-source.png','./icons/shift-180.png','./icons/shift-32.png'];
 const APP_PATHS=new Set(SHELL_ASSETS.map(path=>new URL(path,self.registration.scope).pathname));
@@ -73,20 +73,15 @@ self.addEventListener('activate',event=>{
     await self.clients.claim();
   })());
 });
-/* Cached-first navigation, background revalidation. Always strip redirect metadata. */
+/* Network-first navigation: load fresh deployed HTML before relying on a cached shell.
+   Always return a normalized Safari-safe response and preserve offline fallback. */
 async function networkFirst(request,event){
   const cache=await caches.open(CACHE_NAME);
-  const cached=await cachedShell(cache);
-  const refresh=safeFetch(request,'html').then(async response=>{
-    await cache.put(APP_ROOT,response.clone());
-    return response;
-  });
-  if(cached){
-    event.waitUntil(refresh.catch(()=>null));
-    return cached;
-  }
-  try{return await refresh}
-  catch{
+  try{
+    const fresh=await safeFetch(request,'html');
+    await cache.put(APP_ROOT,fresh.clone());
+    return fresh;
+  }catch{
     const fallback=await cachedShell(cache);
     if(fallback)return fallback;
     return new Response('<!doctype html><html lang="th"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Shift is offline</title><body style="background:#030913;color:#e6f4ff;font:16px system-ui;padding:32px"><h1>ยังเปิด Shift ไม่ได้</h1><p>กรุณาตรวจสอบอินเทอร์เน็ตแล้วลองใหม่</p><a href="./" style="color:#65d9ff">ลองอีกครั้ง</a></body></html>',{

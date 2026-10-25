@@ -14,12 +14,13 @@ function response(body,contentType='text/html; charset=utf-8',opts={}){
 }
 function worker({online=true,badCrossOrigin=false}={}){
  const listeners={},store=new Map(),requests=[];
+ let shellContent='<html><h1>Shift</h1></html>';
  const self={registration:{scope:ROOT},location:{origin:ORIGIN},clients:{claim:async()=>{}},skipWaiting:async()=>{},addEventListener:(type,cb)=>{listeners[type]=cb}};
  const caches={open:async()=>({
    match:async key=>store.get(new URL(typeof key==='string'?key:key.url,ROOT).href)?.clone(),
    put:async(key,value)=>store.set(new URL(typeof key==='string'?key:key.url,ROOT).href,value.clone()),
    delete:async key=>store.delete(new URL(typeof key==='string'?key:key.url,ROOT).href)
- }),keys:async()=>['shift-shell-v6.5.20-r13','shift-shell-v6.5.20-r14'],delete:async()=>true};
+ }),keys:async()=>['shift-shell-v6.5.20-r14','shift-shell-v6.5.20-r15'],delete:async()=>true};
  const fetch=async (input,options)=>{
    const url=new URL(typeof input==='string'?input:input.url,ROOT);
    requests.push({url:url.href,options});
@@ -27,7 +28,7 @@ function worker({online=true,badCrossOrigin=false}={}){
    if(url.pathname.endsWith('.webmanifest'))return response('{"name":"Shift"}','application/manifest+json',{url:url.href});
    if(url.pathname.includes('/icons/'))return response('PNG','image/png',{url:url.href});
    if(badCrossOrigin)return response('login','text/html',{redirected:true,url:'https://evil.test/login'});
-   return response('<html><h1>Shift</h1></html>','text/html',{redirected:true,url:ROOT+'index.html',headers:{location:'/index.html','content-length':'99'}});
+   return response(shellContent,'text/html',{redirected:true,url:ROOT+'index.html',headers:{location:'/index.html','content-length':'99'}});
  };
  const context={self,caches,fetch,Response,Headers,URL,Promise,Set,Error};
  vm.runInNewContext(script,context,{filename:'sw.js'});
@@ -39,7 +40,7 @@ function worker({online=true,badCrossOrigin=false}={}){
    await Promise.allSettled(pending);
    return result;
  };
- return {run,store,requests,setOnline:v=>online=v};
+ return {run,store,requests,setOnline:v=>online=v,setShell:v=>shellContent=v};
 }
 test('precaches canonical / and removes redirect metadata',async()=>{
  const w=worker();await w.run('install');
@@ -80,4 +81,13 @@ test('API calls never intercepted',async()=>{
  const w=worker();
  const result=await w.run('fetch',{url:ROOT+'api/private',method:'GET',mode:'navigate'});
  assert.equal(result,undefined);
+});
+
+test('fresh deployed HTML takes precedence over cached PWA HTML when online',async()=>{
+ const w=worker();await w.run('install');
+ w.setShell('<html><h1>New Shift Role UI v6.5.33</h1></html>');
+ const out=await w.run('fetch',{url:ROOT,method:'GET',mode:'navigate'});
+ assert.match(await out.text(),/New Shift Role UI v6.5.33/);
+ assert.match(await w.store.get(ROOT).text(),/New Shift Role UI v6.5.33/);
+ assert.equal(out.redirected,false);
 });
