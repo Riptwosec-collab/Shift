@@ -28,5 +28,5 @@ test('other daily metrics and fixed bottom navigation are unchanged',()=>{
  assert.ok(mobile.includes('#mobileNav')&&mobile.includes('position:fixed!important'));
 });
 test('PWA cache revision updates old installed shell',()=>{
- assert.ok(read('sw.js').includes("CACHE_NAME='shift-shell-v6.5.20-r13'"));
+ assert.ok(read('sw.js').includes("CACHE_NAME='shift-shell-v6.5.20-r14'"));
 });
