@@ -1,0 +1,18 @@
+/* v6.5.31 • Explicit status and calendar date in every roster surface. */
+#monthView .heatmap td.shift.O{font-size:9px!important;letter-spacing:-.055em!important;white-space:nowrap}
+#overviewView .v6517-mobile-row button.O{font-size:8px!important;font-weight:850!important;letter-spacing:-.06em!important}
+#monthView .v6515-person .shift-roster-date{display:inline-flex;align-items:center;margin-inline-start:6px;padding:3px 6px;border-radius:7px;border:1px solid currentColor;font-size:10px;font-weight:850;white-space:nowrap;vertical-align:middle}
+#monthView .shift-roster-date.D{color:#ff698b;background:#40152a}
+#monthView .shift-roster-date.N{color:#80c4ff;background:#102e53}
+#monthView .shift-roster-date.O{color:#35f4bd;background:#07382e}
+#overviewView .roster-card .status-badge,#dailyView .roster-card .status-badge{white-space:nowrap;font-size:10px!important;min-width:53px}
+.shift-team-days{margin:15px 0 0;padding:13px;border:1px solid rgba(64,164,234,.45);background:linear-gradient(150deg,#051e37,#020f21);border-radius:14px;min-width:0}
+.shift-team-days h3{margin:0;color:#ecf9ff;font-size:16px;line-height:1.4}
+.shift-team-days>p{margin:5px 0 13px;color:#a3c4dc;font-size:12px}
+.shift-team-days-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,350px),1fr));gap:9px}
+.shift-team-person{padding:11px;background:#06172c;border-radius:10px;border:1px solid rgba(45,128,195,.35);min-width:0}
+.shift-team-person>strong{display:block;color:#eaf8ff;margin-bottom:7px;font-size:12px;white-space:normal;overflow-wrap:anywhere}
+.shift-team-line{display:grid;grid-template-columns:82px minmax(0,1fr);gap:7px;align-items:baseline;font-size:11px;line-height:1.55;padding:3px 0}
+.shift-team-line b{white-space:nowrap}.shift-team-line span{color:#d2e9fc;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.shift-team-line.D b{color:#ff6587}.shift-team-line.N b{color:#79bfff}.shift-team-line.O b{color:#34e9b6}
+@media(max-width:860px){#monthView .shift-team-days{margin-top:14px;padding:11px}#monthView .shift-team-person{padding:10px}#monthView .v6515-person{line-height:1.6}}
