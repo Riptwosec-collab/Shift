@@ -1,5 +1,5 @@
 /* v6.5.32: Explicit duty positions, never inferred from coarse D/N/O data. */
-const shiftPositions=['D1','D2','D3','D4','N1','N2'],shiftPositionKey='shift-positions-oct-2026-v1';
+const shiftPositions=['D1','D2','D3','D4','N1','N2'],shiftPositionKey='shift-positions-oct-2026-image-verified-v2';
 let shiftAssignments={},shiftEditDay=1;
 function shiftSanitizeRoles(obj){
  const result={};
@@ -32,11 +32,30 @@ function shiftAssignRole(day,role,name){
  if(Object.keys(row).length)shiftAssignments[day]=row;else delete shiftAssignments[day];
  shiftSaveRoles();return true;
 }
+/* Build the globally verified October slots first. Local changes are optional overrides,
+   never guessed positions. A changed slot releases the former occupant without duplicates. */
+function shiftRolesForDay(day){
+ const roles={};
+ if(!Number.isInteger(Number(day))||Number(day)<1||Number(day)>31)return roles;
+ const base=typeof OCTOBER_2026_DUTY_POSITIONS!=='undefined'?OCTOBER_2026_DUTY_POSITIONS:[];
+ if(base.length===staff.length)for(let i=0;i<staff.length;i++){
+  const role=base[i]?.[day-1];
+  if(shiftPositions.includes(role)&&statusAt(i,day)===role[0]&&!roles[role])roles[role]=staff[i].name;
+ }
+ const overrides=shiftAssignments[day]||{};
+ for(const role of shiftPositions){
+  const name=overrides[role],i=staff.findIndex(p=>p.name===name);
+  if(typeof name!=='string'||i<0||statusAt(i,day)!==role[0])continue;
+  for(const key of Object.keys(roles))if(key===role||roles[key]===name)delete roles[key];
+  roles[role]=name;
+ }
+ return roles;
+}
 function shiftRoleOf(i,day){
  const c=statusAt(i,day);
  if(c==='O')return 'OFF';
- const row=shiftAssignments[day]||{},name=staff[i]?.name;
- return shiftPositions.find(r=>r[0]===c&&row[r]===name)||c+'?';
+ const roles=shiftRolesForDay(day),name=staff[i]?.name;
+ return shiftPositions.find(r=>r[0]===c&&roles[r]===name)||c+'?';
 }
 function shiftRoleExplain(i,day){
  const role=shiftRoleOf(i,day);
@@ -84,10 +103,10 @@ function shiftRoleRenderAll(){
  const note=document.getElementById('shiftRoleStatus');
  if(note){
   const working=staff.filter((p,i)=>statusAt(i,selectedDay)!=='O');
-  const current=shiftAssignments[selectedDay]||{};
+  const current=shiftRolesForDay(selectedDay);
   const assigned=working.filter(p=>shiftPositions.some(r=>current[r]===p.name)).length;
   note.textContent='ตำแหน่งเวร '+selectedDay+' ต.ค. • กำหนดแล้ว '+assigned+'/'+working.length+
-   ' คน • D? / N? = ยังไม่กำหนดตำแหน่งจริง • Duty UI v6.5.33';
+   ' คน • ตำแหน่งจากตารางจริง ต.ค. 2569 • Duty UI v6.5.34';
  }
 }
 function shiftRoleMount(){
@@ -102,7 +121,7 @@ function shiftRoleMount(){
  if(!document.getElementById('shiftRoleStatus')){
   const note=document.createElement('div');
   note.id='shiftRoleStatus';note.className='shift-post-status';note.setAttribute('role','status');
-  note.textContent='D? / N? = ยังไม่ได้ระบุตำแหน่งจริง';
+  note.textContent='ตำแหน่ง D1–D4 / N1–N2 จากภาพตาราง ต.ค. 2569';
   const head=panel.querySelector('.month-head');
   if(head)head.after(note);else panel.prepend(note);
  }
@@ -116,7 +135,7 @@ function shiftRoleMount(){
 }
 function shiftRoleDrawEditor(){
  const host=document.getElementById('shiftRoleEditor');if(!host)return;
- const day=shiftEditDay,current=shiftAssignments[day]||{};
+ const day=shiftEditDay,current=shiftRolesForDay(day);
  const opts=Array.from({length:31},(_,i)=>'<option value="'+(i+1)+'"'+(i+1===day?' selected':'')+'>'+(i+1)+' ต.ค. 2569</option>').join('');
  const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const slots=shiftPositions.map(role=>{
@@ -124,13 +143,13 @@ function shiftRoleDrawEditor(){
   const choices='<option value="">— ยังไม่ระบุ —</option>'+names.map(p=>'<option value="'+esc(p.name)+'"'+(current[role]===p.name?' selected':'')+'>'+esc(p.name)+'</option>').join('');
   return '<label class="shift-post-slot '+role[0]+'"><b>'+role+'</b><select data-role-slot="'+role+'">'+choices+'</select></label>';
  }).join('');
- host.innerHTML='<div class="shift-post-head"><div><h3>ใครทำ D1–D4 / N1–N2 วันไหน</h3><p>ตารางต้นฉบับระบุแค่ D/N/OFF • โปรดเลือกตำแหน่งจริง ไม่ใช้การเดาสุ่ม</p></div><button type="button" data-role-close aria-label="ปิด">×</button></div>'+
+ host.innerHTML='<div class="shift-post-head"><div><h3>ใครทำ D1–D4 / N1–N2 วันไหน</h3><p>ลงตำแหน่งจากตารางจริงเดือนตุลาคมแล้ว • แก้เฉพาะกรณีมีใบงานยืนยันการเปลี่ยนเวร</p></div><button type="button" data-role-close aria-label="ปิด">×</button></div>'+
  '<div class="shift-post-date"><button type="button" data-role-step="-1"'+(day===1?' disabled':'')+'>‹</button><label>วันที่ <select data-role-day>'+opts+'</select></label><button type="button" data-role-step="1"'+(day===31?' disabled':'')+'>›</button></div>'+
  '<div class="shift-post-slots">'+slots+'</div>'+
- '<p class="shift-post-result" role="status">กำหนดแล้ว '+Object.keys(current).length+' / 6 ตำแหน่ง • ไม่อนุญาตให้หนึ่งคนรับสองตำแหน่งในวันเดียวกัน</p>'+
+ '<p class="shift-post-result" role="status">กำหนดแล้ว '+Object.keys(current).length+' / '+staff.filter((p,i)=>statusAt(i,day)!=='O').length+' ตำแหน่ง • ไม่อนุญาตให้หนึ่งคนรับสองตำแหน่งในวันเดียวกัน</p>'+
  '<div class="shift-post-actions"><button type="button" data-role-copy>คัดลอก JSON</button><button type="button" data-role-import-toggle>นำเข้า JSON</button></div>'+
  '<div class="shift-post-import" hidden><textarea data-role-json rows="4" placeholder="วาง JSON ของตำแหน่ง D1–N2"></textarea><button type="button" data-role-import>ตรวจสอบและนำเข้า</button></div>'+
- '<p class="shift-post-local">บันทึกตำแหน่งในเบราว์เซอร์เครื่องนี้เท่านั้น • คัดลอก/นำเข้า JSON เพื่อย้ายข้อมูลระหว่างเครื่อง</p>';
+ '<p class="shift-post-local">ข้อมูลต้นฉบับ ต.ค. 2569 ใช้ร่วมกันทุกเครื่อง • การแก้ไขเฉพาะเครื่องนี้ใช้ JSON สำรอง/นำเข้า</p>';
 }
 function shiftRoleOpenEditor(){
  if(!document.getElementById('monthView')?.classList.contains('active'))window.showView?.('month');
@@ -141,7 +160,7 @@ function shiftRoleOpenEditor(){
  if(editor){editor.hidden=false;editor.scrollIntoView?.({behavior:'smooth',block:'start'})}
 }
 function shiftRoleInit(){
- document.documentElement.dataset.shiftPositionsUi='v6.5.33';
+ document.documentElement.dataset.shiftPositionsUi='v6.5.34';
  shiftLoadRoles();
  const hook=(fn,decorator)=>{
   const previous=window[fn];
@@ -170,7 +189,8 @@ function shiftRoleInit(){
   if(b.hasAttribute('data-role-close')){host.hidden=true;return}
   if(b.hasAttribute('data-role-step')){shiftEditDay=Math.max(1,Math.min(31,shiftEditDay+Number(b.dataset.roleStep)));shiftRoleDrawEditor();return}
   if(b.hasAttribute('data-role-copy')){
-   const json=JSON.stringify(shiftAssignments,null,2);
+   const verifiedAll=Object.fromEntries(Array.from({length:31},(_,i)=>[i+1,shiftRolesForDay(i+1)]));
+   const json=JSON.stringify(verifiedAll,null,2);
    try{await navigator.clipboard.writeText(json);host.querySelector('.shift-post-result').textContent='คัดลอก JSON แล้ว'}
    catch{host.querySelector('.shift-post-import').hidden=false;host.querySelector('[data-role-json]').value=json;host.querySelector('.shift-post-result').textContent='คัดลอกอัตโนมัติไม่ได้ • คัดลอกข้อความจากช่อง JSON'}
    return;
