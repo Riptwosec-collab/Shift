@@ -24,5 +24,5 @@ test('person-by-person D/N/OFF calendar dates are computed from existing source 
  assert.ok(build.includes('v6531-roster-dates.css'));
  assert.ok(html.includes(js));
  assert.ok(html.includes(read('src/v6531-roster-dates.css')));
- assert.ok(read('sw.js').includes("CACHE_NAME='shift-shell-v6.5.20-r16'"));
+ assert.ok(read('sw.js').includes("CACHE_NAME='shift-shell-v6.5.20-r17'"));
 });

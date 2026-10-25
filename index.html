@@ -4447,6 +4447,82 @@ html[data-v65-mode="ECO"] .view.active{animation:none!important}
 @media(max-width:860px){#monthView .shift-post-status{margin:8px 0;padding:10px;font-size:10px}}
 
 </style>
+<style id="v6535-november-view-style">
+/* v6.5.35 — independent November roster, preserving the existing October app. */
+#shiftMonthTabs.shift-month-tabs{display:flex;align-items:center;gap:9px;flex-wrap:wrap;width:100%;padding:0 0 14px}
+#shiftMonthTabs button{border:1px solid #255d86;color:#bcd8f0;background:#061b30;border-radius:10px;padding:11px 18px;font-size:12px;font-weight:800;cursor:pointer;min-height:43px}
+#shiftMonthTabs button.active{border-color:#26c6ff;color:#fff;background:linear-gradient(130deg,#075c91,#08223d);box-shadow:0 0 0 1px rgba(50,173,246,.2),0 0 18px rgba(26,153,237,.15)}
+#monthView .month-panel[data-shift-month="11"]>:not(.shift-month-tabs):not(.shift-november-panel){display:none!important}
+#monthView .month-panel[data-shift-month="10"]>.shift-november-panel{display:none!important}
+#monthView .shift-november-panel[hidden]{display:none!important}
+.shift-november-panel{display:block;width:100%;min-width:0}
+.shift-nov-title{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin:1px 0 12px}
+.shift-nov-title h2{font-size:clamp(19px,2vw,27px);margin:4px 0;color:#edfbff}
+.shift-nov-title p{font-size:12px;color:#a4c6e3;margin:2px 0}
+.shift-nov-tag{border:1px solid #3286b7;border-radius:999px;background:#073554;color:#a9e5ff;padding:7px 12px;font-size:10px;font-weight:800}
+.shift-nov-source-warning,.shift-nov-alert{font-size:11px;line-height:1.6;border:1px solid rgba(255,195,79,.57);color:#ffde9e;background:rgba(70,46,13,.32);border-radius:9px;padding:10px 12px;margin:8px 0 12px}
+.shift-nov-scroll-help{font-size:11px;color:#a9cadf;margin:8px 0}
+.shift-nov-scroll{overflow:auto;width:100%;max-width:100%;border:1px solid #245e8a;border-radius:12px;background:#03172c;scrollbar-color:#28668b #061a30;overscroll-behavior-x:contain}
+.shift-nov-table{border-collapse:separate;border-spacing:2px;table-layout:fixed;width:100%;min-width:1150px;font-variant-numeric:tabular-nums}
+.shift-nov-table th,.shift-nov-table td{height:32px;min-width:0;text-align:center;padding:0;white-space:nowrap}
+.shift-nov-table .shift-nov-name{box-sizing:border-box;position:sticky;left:0;z-index:3;width:208px;min-width:208px;max-width:208px;text-align:left;padding:4px 9px;background:#082742;color:#f0fbff;font-size:11px;overflow:hidden;text-overflow:ellipsis;box-shadow:3px 0 8px rgba(0,0,0,.35)}
+.shift-nov-table thead .shift-nov-name{z-index:4;background:#0d3659}
+.shift-nov-table thead th{position:sticky;top:0;z-index:2;background:#0b2e4d;color:#a7d7f6}
+.shift-nov-table thead th.weekend{background:#423047;color:#ffc8bf}
+.shift-nov-day-head button{border:0;width:100%;height:41px;cursor:pointer;background:transparent;color:inherit;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px}
+.shift-nov-day-head small{font-size:9px;color:inherit;font-weight:600}
+.shift-nov-day-head b{font-size:11px}
+.shift-nov-slot{border-radius:5px;border:1px solid transparent;overflow:hidden}
+.shift-nov-slot button{display:block;width:100%;height:33px;min-height:33px;font-size:10px;font-weight:850;border:0;background:none;cursor:pointer;color:#fff}
+.shift-nov-slot.D{background:linear-gradient(180deg,#a92652,#6a1232);border-color:#e13e71}
+.shift-nov-slot.N{background:linear-gradient(180deg,#135baa,#093b80);border-color:#2f90ef}
+.shift-nov-slot.O{background:linear-gradient(180deg,#007c64,#004a42);border-color:#00c89d}
+.shift-nov-slot.O button{font-size:9px}
+.shift-nov-slot.discrepancy{outline:2px dashed #ffd25f;outline-offset:-2px}
+.shift-nov-table .shift-nov-selected{box-shadow:inset 0 0 0 2px #77eeff!important}
+.shift-nov-table tfoot td{font-size:9px;color:#bbd9ed;background:#092944}
+.shift-nov-summary{margin:16px 0 4px}
+.shift-nov-selected-date{display:flex;justify-content:center;align-items:center;gap:14px;margin-bottom:14px}
+.shift-nov-selected-date>div{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.shift-nov-selected-date b{font-size:18px;color:#fff}
+.shift-nov-selected-date small{font-size:11px;color:#abc8dc}
+.shift-nov-selected-date button{border:1px solid #2d85c0;background:#082b4d;color:#eafaff;border-radius:8px;font-size:19px;width:36px;height:36px;cursor:pointer}
+.shift-nov-selected-date button:disabled{opacity:.35}
+.shift-nov-crews{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.shift-nov-crew{background:#05182e;border:1px solid rgba(45,139,204,.4);border-radius:12px;padding:10px;min-width:0}
+.shift-nov-crew.D{border-color:#c72d61}.shift-nov-crew.N{border-color:#2a80de}.shift-nov-crew.O{border-color:#009d85}
+.shift-nov-crew h4{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:12px;margin:0 0 9px}
+.shift-nov-crew h4 small{color:#a4bfd4;font-weight:600}
+.shift-nov-crew-person{display:flex;align-items:center;gap:8px;width:100%;text-align:left;background:#061e35;color:#eefaff;border:1px solid rgba(83,160,205,.16);border-radius:7px;padding:7px 8px;margin:4px 0;font-size:11px;cursor:pointer}
+.shift-nov-crew-person b{color:#61dfff;min-width:29px}.shift-nov-crew.O b{color:#16d9a5}
+.shift-nov-crew-person.highlighted{box-shadow:0 0 0 1px #86ecff;background:#123b58}
+.shift-nov-week{display:none}
+@media(max-width:860px){
+ #shiftMonthTabs{gap:6px!important;flex-wrap:nowrap!important}
+ #shiftMonthTabs button{flex:1;min-width:0;padding:10px 8px;font-size:11px}
+ .shift-nov-title h2{font-size:19px}.shift-nov-tag{font-size:9px}
+ .shift-nov-scroll{max-height:410px}
+ .shift-nov-table{width:max-content;min-width:1230px}
+ .shift-nov-table .shift-nov-name{width:145px;min-width:145px;max-width:145px;font-size:10px}
+ .shift-nov-crews{grid-template-columns:1fr;gap:8px}
+ .shift-nov-week{display:block;padding:9px;background:linear-gradient(135deg,#071f3b,#06142a);border:1px solid #29608a;border-radius:11px;margin:12px 0}
+ .shift-nov-week-title{display:flex;justify-content:space-between;align-items:center;gap:7px;margin:2px 0 10px}
+ .shift-nov-week-title>b{font-size:11px;color:#e8fbff}
+ .shift-nov-week-title>span{display:flex;gap:5px;align-items:center}
+ .shift-nov-week-title button{font-size:9px;border:1px solid #2776a7;color:#d4efff;background:#092c49;border-radius:6px;padding:6px}
+ .shift-nov-week-title button:disabled{opacity:.3}
+ .shift-nov-week-title small{color:#a9cadc;font-size:9px}
+ .shift-nov-week-row{display:grid;grid-template-columns:minmax(95px,32%) repeat(7,minmax(0,1fr));gap:3px;padding:2px 0}
+ .shift-nov-week-row>span:first-child{font-size:9px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;align-self:center;color:#d7ecfb}
+ .shift-nov-week-head{margin-bottom:2px;color:#b2dffb}
+ .shift-nov-week-date{text-align:center;font-size:10px!important;color:#b9d7ef}
+ .shift-nov-week-date.active{color:#57eaff;font-weight:900}
+ .shift-nov-mini{font-size:9px!important;font-weight:850!important;min-width:0;height:29px;padding:2px 0;border-radius:5px;cursor:pointer;color:#fff;border:1px solid rgba(255,255,255,.12)}
+ .shift-nov-mini.D{background:#992747}.shift-nov-mini.N{background:#11559a}.shift-nov-mini.O{background:#006f56}
+}
+@media(prefers-reduced-motion:reduce){.shift-november-panel *{scroll-behavior:auto!important;transition:none!important}}
+
+</style>
 </head>
 <!-- REFERENCE LOCK V4 -->
 <body>
@@ -6756,6 +6832,145 @@ function shiftRoleInit(){
 if(typeof document!=='undefined'){
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',shiftRoleInit,{once:true});
  else shiftRoleInit();
+}
+
+// november-2026-duty-roster.js
+/* November 2026 duty roster transcribed from the user-supplied image.
+   Staff index matches src/data.js. H = OFF, D1–D4 and N1–N2 are numbered duties.
+   Screenshot has an apparent source conflict on Nov 30: two N1 and no N2.
+   Preserve the visible source cells; flag the discrepancy instead of fabricating a correction. */
+const NOVEMBER_2026_DUTY_POSITIONS=Object.freeze([
+  Object.freeze("H H H H N1 N2 N1 N2 H H H D4 D1 H H D1 D2 D3 D4 D3 H H D4 D1 H H H N1 N2 N1".split(' ')),
+  Object.freeze("H H H D1 D3 D4 H H H H N2 N1 N2 H H D2 D3 D4 H H N1 N2 N1 N2 N1 H H H N1 N1".split(' ')),
+  Object.freeze("H D1 D2 D3 H H H D2 D1 D4 H H D3 D2 D1 D3 H H D1 D2 H H D2 D3 D4 D2 H H H H".split(' ')),
+  Object.freeze("H H N2 N1 N2 N1 H H N1 N2 N1 N2 H H H D4 D1 D2 D3 H H H H N1 N2 N1 N2 H H H".split(' ')),
+  Object.freeze("D2 D3 D4 H H D1 D2 D1 H H H D1 D2 H H H H N1 N2 N1 H H H D2 D1 D3 D4 H H D2".split(' ')),
+  Object.freeze("D1 H H H D2 D2 D1 H H H D2 D3 D4 H H H N1 N2 N1 N2 H H H D4 D3 D1 D1 H H D3".split(' ')),
+  Object.freeze("N1 N2 N1 N2 H H H H D3 D2 D1 D2 H H H H D4 D1 H H D2 D1 D1 H H N2 N1 N2 H H".split(' ')),
+  Object.freeze("N2 N1 H H H H N2 N1 N2 N1 H H N1 N2 N1 N2 H H D2 D1 H H H H D2 D4 D2 D1 H H".split(' ')),
+  Object.freeze("H D4 D1 D2 D4 D3 H H D4 D1 D3 H H D1 D2 H H H H H N2 N1 N2 H H H D3 D2 D1 D1".split(' ')),
+  Object.freeze("H D2 D3 D4 D1 H H H D2 D3 D4 H H N1 N2 N1 N2 H H D4 D1 D2 D3 H H H H H D2 D4".split(' ')),
+]);
+const NOVEMBER_2026_DUTY_META=Object.freeze({year:2026,month:11,days:30,staffCount:10,source:'user-provided November 2569 roster image',hasUnverifiedNov30NightPosition:true});
+
+// v6535-november-view.js
+/* v6.5.35 — November 2569: independent read-only monthly view.
+   October's existing 31-day panels remain untouched. */
+const SHIFT_NOV_DAYS=30;
+let shiftNovSelectedDay=1,shiftNovWeekStart=1,shiftMonthDisplay='10';
+function shiftNovEscape(value){return String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+function shiftNovRole(person,day){return NOVEMBER_2026_DUTY_POSITIONS[person]?.[day-1]||'H';}
+function shiftNovType(role){return role==='H'?'O':role[0];}
+function shiftNovIssues(day){
+ const found=NOVEMBER_2026_DUTY_POSITIONS.map(row=>row[day-1]).filter(x=>x!=='H');
+ const repeated=[...new Set(found.filter((role,i)=>found.indexOf(role)!==i))];
+ const missing=['D1','D2','N1','N2'].filter(role=>!found.includes(role));
+ return {repeated,missing};
+}
+function shiftNovDateTitle(day){return day+' พฤศจิกายน 2569';}
+function shiftNovRenderGrid(){
+ const host=document.querySelector('#shiftNovemberView .shift-nov-scroll');
+ if(!host||!Array.isArray(staff)||staff.length!==10)return;
+ const days=Array.from({length:SHIFT_NOV_DAYS},(_,i)=>i+1);
+ const heads=days.map(day=>{
+  const date=new Date(2026,10,day),isWeekend=[0,6].includes(date.getDay());
+  const weekday=date.toLocaleDateString('th-TH',{weekday:'short'}).replace('.','');
+  return '<th scope="col" class="shift-nov-day-head'+(isWeekend?' weekend':'')+'" data-shift-nov-date="'+day+'"><button type="button" data-shift-nov-date="'+day+'" title="'+shiftNovDateTitle(day)+'"><small>'+weekday+'</small><b>'+day+'</b></button></th>';
+ }).join('');
+ const rows=staff.map((person,i)=>'<tr><th class="shift-nov-name" scope="row" title="'+shiftNovEscape(person.name)+'">'+shiftNovEscape(person.name)+'</th>'+
+  days.map(day=>{
+   const role=shiftNovRole(i,day),flag=day===30&&role==='N1';
+   const name=shiftNovEscape(person.name),desc=role==='H'?'หยุด':role+' ตำแหน่งเวร';
+   return '<td class="shift-nov-slot '+shiftNovType(role)+(flag?' discrepancy':'')+'" data-shift-nov-date="'+day+'"><button type="button" data-shift-nov-person="'+i+'" data-shift-nov-date="'+day+'" title="'+name+' • '+day+' พ.ย. • '+desc+'" aria-label="'+name+' วันที่ '+day+' พฤศจิกายน 2569 '+desc+'">'+role+'</button></td>';
+  }).join('')+'</tr>').join('');
+ const tally=days.map(day=>{const roles=NOVEMBER_2026_DUTY_POSITIONS.map(row=>row[day-1]);return '<td>' +roles.filter(x=>x[0]==='D').length+'/'+roles.filter(x=>x[0]==='N').length+'</td>'}).join('');
+ host.innerHTML='<table class="shift-nov-table" aria-label="ตารางเวรพฤศจิกายน 2569 ทุกคน 30 วัน"><thead><tr><th class="shift-nov-name" scope="col">ชื่อพนักงาน</th>'+heads+'</tr></thead><tbody>'+rows+'</tbody><tfoot><tr><th class="shift-nov-name" scope="row">D/N ต่อวัน</th>'+tally+'</tr></tfoot></table>';
+ shiftNovMarkDay();
+}
+function shiftNovMarkDay(){
+ const host=document.getElementById('shiftNovemberView');
+ if(!host)return;
+ host.querySelectorAll('.shift-nov-selected').forEach(el=>el.classList.remove('shift-nov-selected'));
+ host.querySelectorAll('[data-shift-nov-date="'+shiftNovSelectedDay+'"]').forEach(el=>el.classList.add('shift-nov-selected'));
+}
+function shiftNovWeekMarkup(){
+ const dates=Array.from({length:7},(_,i)=>shiftNovWeekStart+i).filter(day=>day<=SHIFT_NOV_DAYS);
+ const header=dates.map(day=>'<span class="shift-nov-week-date'+(day===shiftNovSelectedDay?' active':'')+'">'+day+'</span>').join('');
+ const rows=staff.map((person,i)=>'<div class="shift-nov-week-row"><span title="'+shiftNovEscape(person.name)+'">'+shiftNovEscape(person.name)+'</span>'+
+ dates.map(day=>{const role=shiftNovRole(i,day);return '<button type="button" data-shift-nov-person="'+i+'" data-shift-nov-date="'+day+'" class="shift-nov-mini '+shiftNovType(role)+'" aria-label="'+shiftNovEscape(person.name)+' '+day+' พฤศจิกายน '+role+'">'+role+'</button>';}).join('')+'</div>').join('');
+ return '<div class="shift-nov-week-title"><b>ตารางเวร 7 วัน</b><span><button type="button" data-shift-nov-step="-7"'+(shiftNovWeekStart===1?' disabled':'')+'>‹ ก่อนหน้า</button><small>'+shiftNovWeekStart+'–'+dates[dates.length-1]+' พ.ย.</small><button type="button" data-shift-nov-step="7"'+(shiftNovWeekStart>=24?' disabled':'')+'>ถัดไป ›</button></span></div>'+
+ '<div class="shift-nov-week-row shift-nov-week-head"><span>พนักงาน</span>'+header+'</div>'+rows;
+}
+function shiftNovRenderDetails(personIndex=null){
+ const panel=document.getElementById('shiftNovemberView');
+ if(!panel)return;
+ const d=shiftNovSelectedDay;
+ const roles=NOVEMBER_2026_DUTY_POSITIONS.map((r,i)=>({i,role:r[d-1],name:staff[i].name}));
+ const dayWorkers=roles.filter(x=>x.role.startsWith('D')),nightWorkers=roles.filter(x=>x.role.startsWith('N')),off=roles.filter(x=>x.role==='H');
+ const issue=shiftNovIssues(d);
+ const alert=issue.repeated.length||issue.missing.length;
+ const warning=alert?'<p class="shift-nov-alert" role="alert">ภาพต้นฉบับวันที่ '+d+' พ.ย. มี '+(issue.repeated.length?'ตำแหน่ง '+issue.repeated.join(', ')+' ซ้ำ':'')+(issue.repeated.length&&issue.missing.length?' และ ':'')+(issue.missing.length?'ไม่พบ '+issue.missing.join(', '):'')+' • แสดงตามภาพโดยไม่แก้ไขอัตโนมัติ</p>':'';
+ const renderList=(entries,title,kind)=>'<section class="shift-nov-crew '+kind+'"><h4>'+title+' <small>'+entries.length+' คน</small></h4><div>'+entries.map(x=>'<button type="button" class="shift-nov-crew-person'+(x.i===personIndex?' highlighted':'')+'" data-shift-nov-person="'+x.i+'" data-shift-nov-date="'+d+'"><b>'+x.role+'</b><span>'+shiftNovEscape(x.name)+'</span></button>').join('')+'</div></section>';
+ panel.querySelector('.shift-nov-summary').innerHTML='<div class="shift-nov-selected-date"><button data-shift-nov-adjacent="-1"'+(d===1?' disabled':'')+'>‹</button><div><b>'+d+' พฤศจิกายน 2569</b><small>รายชื่อพนักงานและตำแหน่งเวรจริงในวันนี้</small></div><button data-shift-nov-adjacent="1"'+(d===30?' disabled':'')+'>›</button></div>'+
+ warning+'<div class="shift-nov-crews">'+renderList(dayWorkers,'DAY • D1–D4','D')+renderList(nightWorkers,'NIGHT • N1–N2','N')+renderList(off,'H • วันหยุด','O')+'</div>';
+ panel.querySelector('.shift-nov-week').innerHTML=shiftNovWeekMarkup();
+ shiftNovMarkDay();
+}
+function shiftNovSetDay(day,personIndex=null){
+ if(!Number.isInteger(day)||day<1||day>SHIFT_NOV_DAYS)return;
+ shiftNovSelectedDay=day;
+ if(day<shiftNovWeekStart||day>=shiftNovWeekStart+7)shiftNovWeekStart=Math.floor((day-1)/7)*7+1;
+ shiftNovRenderDetails(personIndex);
+}
+function shiftNovChangeMonth(month){
+ if(month!=='10'&&month!=='11')return;
+ shiftMonthDisplay=month;
+ const panel=document.querySelector('#monthView .month-panel');
+ if(panel)panel.dataset.shiftMonth=month;
+ document.querySelectorAll('#shiftMonthTabs [data-shift-month]').forEach(button=>{
+  const active=button.dataset.shiftMonth===month;
+  button.setAttribute('aria-selected',String(active));
+  button.classList.toggle('active',active);
+ });
+ const nov=document.getElementById('shiftNovemberView');
+ if(nov)nov.hidden=month!=='11';
+ try{localStorage.setItem('shift-month-view-2026',month)}catch{}
+ if(month==='11'){shiftNovMarkDay();shiftNovRenderDetails();}
+}
+function shiftNovInit(){
+ const panel=document.querySelector('#monthView .month-panel');
+ if(!panel||typeof NOVEMBER_2026_DUTY_POSITIONS==='undefined'||!Array.isArray(staff))return;
+ if(staff.length!==NOVEMBER_2026_DUTY_POSITIONS.length)return;
+ if(document.getElementById('shiftMonthTabs'))return;
+ const tabs=document.createElement('div');tabs.id='shiftMonthTabs';tabs.className='shift-month-tabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','เลือกเดือนของตารางเวร');
+ tabs.innerHTML='<button type="button" role="tab" data-shift-month="10" aria-controls="heatmapTable">ตุลาคม 2569</button><button type="button" role="tab" data-shift-month="11" aria-controls="shiftNovemberView">พฤศจิกายน 2569</button>';
+ panel.prepend(tabs);
+ const view=document.createElement('section');view.id='shiftNovemberView';view.className='shift-november-panel';view.hidden=true;
+ view.innerHTML='<div class="shift-nov-title"><div><div class="eyebrow">MONTHLY HEATMAP • NOVEMBER 2026</div><h2>ตารางเวรทั้งทีม • พฤศจิกายน 2569</h2><p>10 พนักงาน • 30 วัน • D1–D4 / N1–N2 / H (หยุด)</p></div><span class="shift-nov-tag">ข้อมูลจากภาพตารางเวร</span></div>'+
+ '<p class="shift-nov-source-warning">หมายเหตุข้อมูลต้นฉบับ: วันที่ 30 พ.ย. ระบุ N1 ซ้ำสองคนและไม่พบ N2 — แสดงตามภาพ โปรดยืนยันก่อนใช้จัดงานจริง</p>'+
+ '<div class="shift-nov-week" aria-label="ตัวอย่างตารางเวร 7 วันบนมือถือ"></div>'+
+ '<p class="shift-nov-scroll-help">เลื่อนตารางในแนวนอนเพื่อดูวันที่ 1–30 ทั้งเดือน • แตะช่องเพื่อดูว่าใครรับตำแหน่งใด</p>'+
+ '<div class="shift-nov-scroll" role="region" tabindex="0" aria-label="ตารางเวรพฤศจิกายน เลื่อนแนวนอนได้"></div>'+
+ '<div class="shift-nov-summary" aria-live="polite"></div>';
+ panel.appendChild(view);
+ shiftNovRenderGrid();
+ let preferred='10';try{preferred=localStorage.getItem('shift-month-view-2026')||((new Date().getFullYear()===2026&&new Date().getMonth()===10)?'11':'10')}catch{}
+ shiftNovChangeMonth(preferred==='11'?'11':'10');
+ panel.addEventListener('click',event=>{
+  const button=event.target.closest('button');if(!button||!panel.contains(button))return;
+  if(button.hasAttribute('data-shift-month')){shiftNovChangeMonth(button.dataset.shiftMonth);return;}
+  if(shiftMonthDisplay!=='11')return;
+  if(button.hasAttribute('data-shift-nov-step')){shiftNovWeekStart=Math.min(24,Math.max(1,shiftNovWeekStart+Number(button.dataset.shiftNovStep)));shiftNovRenderDetails();return;}
+  if(button.hasAttribute('data-shift-nov-adjacent')){shiftNovSetDay(shiftNovSelectedDay+Number(button.dataset.shiftNovAdjacent));return;}
+  if(button.hasAttribute('data-shift-nov-date')){
+   const person=button.hasAttribute('data-shift-nov-person')?Number(button.dataset.shiftNovPerson):null;
+   shiftNovSetDay(Number(button.dataset.shiftNovDate),person);
+  }
+ });
+}
+if(typeof document!=='undefined'){
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',shiftNovInit,{once:true});
+ else shiftNovInit();
 }
 
 })();</script>

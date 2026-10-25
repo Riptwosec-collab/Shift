@@ -16,5 +16,5 @@ test('PWA uses network-first HTML navigation with safe offline fallback',()=>{
  assert.ok(sw.includes("const fresh=await safeFetch(request,'html')"));
  assert.ok(sw.includes("const fallback=await cachedShell(cache)"));
  assert.ok(!sw.includes("const cached=await cachedShell(cache);\n  const refresh="));
- assert.ok(sw.includes("CACHE_NAME='shift-shell-v6.5.20-r16'"));
+ assert.ok(sw.includes("CACHE_NAME='shift-shell-v6.5.20-r17'"));
 });

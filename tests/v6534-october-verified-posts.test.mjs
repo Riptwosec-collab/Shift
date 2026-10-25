@@ -57,5 +57,5 @@ test('verified October positions are compiled into page and shared across screen
  assert.ok(html.includes(role));
  assert.ok(role.includes('shiftRolesForDay(day)'));
  assert.ok(role.includes("dataset.shiftPositionsUi='v6.5.34'"));
- assert.ok(fs.readFileSync('sw.js','utf8').includes("CACHE_NAME='shift-shell-v6.5.20-r16'"));
+ assert.ok(fs.readFileSync('sw.js','utf8').includes("CACHE_NAME='shift-shell-v6.5.20-r17'"));
 });

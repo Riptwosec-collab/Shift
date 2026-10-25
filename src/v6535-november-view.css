@@ -1,0 +1,73 @@
+/* v6.5.35 — independent November roster, preserving the existing October app. */
+#shiftMonthTabs.shift-month-tabs{display:flex;align-items:center;gap:9px;flex-wrap:wrap;width:100%;padding:0 0 14px}
+#shiftMonthTabs button{border:1px solid #255d86;color:#bcd8f0;background:#061b30;border-radius:10px;padding:11px 18px;font-size:12px;font-weight:800;cursor:pointer;min-height:43px}
+#shiftMonthTabs button.active{border-color:#26c6ff;color:#fff;background:linear-gradient(130deg,#075c91,#08223d);box-shadow:0 0 0 1px rgba(50,173,246,.2),0 0 18px rgba(26,153,237,.15)}
+#monthView .month-panel[data-shift-month="11"]>:not(.shift-month-tabs):not(.shift-november-panel){display:none!important}
+#monthView .month-panel[data-shift-month="10"]>.shift-november-panel{display:none!important}
+#monthView .shift-november-panel[hidden]{display:none!important}
+.shift-november-panel{display:block;width:100%;min-width:0}
+.shift-nov-title{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin:1px 0 12px}
+.shift-nov-title h2{font-size:clamp(19px,2vw,27px);margin:4px 0;color:#edfbff}
+.shift-nov-title p{font-size:12px;color:#a4c6e3;margin:2px 0}
+.shift-nov-tag{border:1px solid #3286b7;border-radius:999px;background:#073554;color:#a9e5ff;padding:7px 12px;font-size:10px;font-weight:800}
+.shift-nov-source-warning,.shift-nov-alert{font-size:11px;line-height:1.6;border:1px solid rgba(255,195,79,.57);color:#ffde9e;background:rgba(70,46,13,.32);border-radius:9px;padding:10px 12px;margin:8px 0 12px}
+.shift-nov-scroll-help{font-size:11px;color:#a9cadf;margin:8px 0}
+.shift-nov-scroll{overflow:auto;width:100%;max-width:100%;border:1px solid #245e8a;border-radius:12px;background:#03172c;scrollbar-color:#28668b #061a30;overscroll-behavior-x:contain}
+.shift-nov-table{border-collapse:separate;border-spacing:2px;table-layout:fixed;width:100%;min-width:1150px;font-variant-numeric:tabular-nums}
+.shift-nov-table th,.shift-nov-table td{height:32px;min-width:0;text-align:center;padding:0;white-space:nowrap}
+.shift-nov-table .shift-nov-name{box-sizing:border-box;position:sticky;left:0;z-index:3;width:208px;min-width:208px;max-width:208px;text-align:left;padding:4px 9px;background:#082742;color:#f0fbff;font-size:11px;overflow:hidden;text-overflow:ellipsis;box-shadow:3px 0 8px rgba(0,0,0,.35)}
+.shift-nov-table thead .shift-nov-name{z-index:4;background:#0d3659}
+.shift-nov-table thead th{position:sticky;top:0;z-index:2;background:#0b2e4d;color:#a7d7f6}
+.shift-nov-table thead th.weekend{background:#423047;color:#ffc8bf}
+.shift-nov-day-head button{border:0;width:100%;height:41px;cursor:pointer;background:transparent;color:inherit;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px}
+.shift-nov-day-head small{font-size:9px;color:inherit;font-weight:600}
+.shift-nov-day-head b{font-size:11px}
+.shift-nov-slot{border-radius:5px;border:1px solid transparent;overflow:hidden}
+.shift-nov-slot button{display:block;width:100%;height:33px;min-height:33px;font-size:10px;font-weight:850;border:0;background:none;cursor:pointer;color:#fff}
+.shift-nov-slot.D{background:linear-gradient(180deg,#a92652,#6a1232);border-color:#e13e71}
+.shift-nov-slot.N{background:linear-gradient(180deg,#135baa,#093b80);border-color:#2f90ef}
+.shift-nov-slot.O{background:linear-gradient(180deg,#007c64,#004a42);border-color:#00c89d}
+.shift-nov-slot.O button{font-size:9px}
+.shift-nov-slot.discrepancy{outline:2px dashed #ffd25f;outline-offset:-2px}
+.shift-nov-table .shift-nov-selected{box-shadow:inset 0 0 0 2px #77eeff!important}
+.shift-nov-table tfoot td{font-size:9px;color:#bbd9ed;background:#092944}
+.shift-nov-summary{margin:16px 0 4px}
+.shift-nov-selected-date{display:flex;justify-content:center;align-items:center;gap:14px;margin-bottom:14px}
+.shift-nov-selected-date>div{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.shift-nov-selected-date b{font-size:18px;color:#fff}
+.shift-nov-selected-date small{font-size:11px;color:#abc8dc}
+.shift-nov-selected-date button{border:1px solid #2d85c0;background:#082b4d;color:#eafaff;border-radius:8px;font-size:19px;width:36px;height:36px;cursor:pointer}
+.shift-nov-selected-date button:disabled{opacity:.35}
+.shift-nov-crews{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.shift-nov-crew{background:#05182e;border:1px solid rgba(45,139,204,.4);border-radius:12px;padding:10px;min-width:0}
+.shift-nov-crew.D{border-color:#c72d61}.shift-nov-crew.N{border-color:#2a80de}.shift-nov-crew.O{border-color:#009d85}
+.shift-nov-crew h4{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:12px;margin:0 0 9px}
+.shift-nov-crew h4 small{color:#a4bfd4;font-weight:600}
+.shift-nov-crew-person{display:flex;align-items:center;gap:8px;width:100%;text-align:left;background:#061e35;color:#eefaff;border:1px solid rgba(83,160,205,.16);border-radius:7px;padding:7px 8px;margin:4px 0;font-size:11px;cursor:pointer}
+.shift-nov-crew-person b{color:#61dfff;min-width:29px}.shift-nov-crew.O b{color:#16d9a5}
+.shift-nov-crew-person.highlighted{box-shadow:0 0 0 1px #86ecff;background:#123b58}
+.shift-nov-week{display:none}
+@media(max-width:860px){
+ #shiftMonthTabs{gap:6px!important;flex-wrap:nowrap!important}
+ #shiftMonthTabs button{flex:1;min-width:0;padding:10px 8px;font-size:11px}
+ .shift-nov-title h2{font-size:19px}.shift-nov-tag{font-size:9px}
+ .shift-nov-scroll{max-height:410px}
+ .shift-nov-table{width:max-content;min-width:1230px}
+ .shift-nov-table .shift-nov-name{width:145px;min-width:145px;max-width:145px;font-size:10px}
+ .shift-nov-crews{grid-template-columns:1fr;gap:8px}
+ .shift-nov-week{display:block;padding:9px;background:linear-gradient(135deg,#071f3b,#06142a);border:1px solid #29608a;border-radius:11px;margin:12px 0}
+ .shift-nov-week-title{display:flex;justify-content:space-between;align-items:center;gap:7px;margin:2px 0 10px}
+ .shift-nov-week-title>b{font-size:11px;color:#e8fbff}
+ .shift-nov-week-title>span{display:flex;gap:5px;align-items:center}
+ .shift-nov-week-title button{font-size:9px;border:1px solid #2776a7;color:#d4efff;background:#092c49;border-radius:6px;padding:6px}
+ .shift-nov-week-title button:disabled{opacity:.3}
+ .shift-nov-week-title small{color:#a9cadc;font-size:9px}
+ .shift-nov-week-row{display:grid;grid-template-columns:minmax(95px,32%) repeat(7,minmax(0,1fr));gap:3px;padding:2px 0}
+ .shift-nov-week-row>span:first-child{font-size:9px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;align-self:center;color:#d7ecfb}
+ .shift-nov-week-head{margin-bottom:2px;color:#b2dffb}
+ .shift-nov-week-date{text-align:center;font-size:10px!important;color:#b9d7ef}
+ .shift-nov-week-date.active{color:#57eaff;font-weight:900}
+ .shift-nov-mini{font-size:9px!important;font-weight:850!important;min-width:0;height:29px;padding:2px 0;border-radius:5px;cursor:pointer;color:#fff;border:1px solid rgba(255,255,255,.12)}
+ .shift-nov-mini.D{background:#992747}.shift-nov-mini.N{background:#11559a}.shift-nov-mini.O{background:#006f56}
+}
+@media(prefers-reduced-motion:reduce){.shift-november-panel *{scroll-behavior:auto!important;transition:none!important}}
