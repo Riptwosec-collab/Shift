@@ -6953,6 +6953,7 @@ const NOVEMBER_2026_DUTY_META=Object.freeze({year:2026,month:11,days:30,staffCou
 /* v6.5.35 — November 2569: independent read-only monthly view.
    October's existing 31-day panels remain untouched. */
 const SHIFT_NOV_DAYS=30;
+const SHIFT_NOV_WEEK_STARTS=Object.freeze([1,8,15,22,24]);
 function shiftNovToday(){
  const now=new Date();
  return now.getFullYear()===2026&&now.getMonth()===10?now.getDate():null;
@@ -7034,10 +7035,15 @@ function shiftNovRenderDetails(personIndex=null){
  panel.querySelector('.shift-nov-week').innerHTML=shiftNovWeekMarkup();
  shiftNovMarkDay();
 }
+function shiftNovStepWeek(step){
+ const index=SHIFT_NOV_WEEK_STARTS.indexOf(shiftNovWeekStart);
+ const current=index>=0?index:0;
+ shiftNovWeekStart=SHIFT_NOV_WEEK_STARTS[Math.max(0,Math.min(SHIFT_NOV_WEEK_STARTS.length-1,current+(step>0?1:-1)))];
+}
 function shiftNovSetDay(day,personIndex=null){
  if(!Number.isInteger(day)||day<1||day>SHIFT_NOV_DAYS)return;
  shiftNovSelectedDay=day;
- if(day<shiftNovWeekStart||day>=shiftNovWeekStart+7)shiftNovWeekStart=Math.floor((day-1)/7)*7+1;
+ if(day<shiftNovWeekStart||day>=shiftNovWeekStart+7)shiftNovWeekStart=day>=24?24:Math.floor((day-1)/7)*7+1;
  shiftNovRenderDetails(personIndex);
  shiftNovRevealSelectedDay();
 }
@@ -7083,7 +7089,7 @@ function shiftNovInit(){
   const button=event.target.closest('button');if(!button||!panel.contains(button))return;
   if(button.hasAttribute('data-shift-month')){shiftNovChangeMonth(button.dataset.shiftMonth);return;}
   if(shiftMonthDisplay!=='11')return;
-  if(button.hasAttribute('data-shift-nov-step')){shiftNovWeekStart=Math.min(24,Math.max(1,shiftNovWeekStart+Number(button.dataset.shiftNovStep)));shiftNovRenderDetails();return;}
+  if(button.hasAttribute('data-shift-nov-step')){shiftNovStepWeek(Number(button.dataset.shiftNovStep));shiftNovRenderDetails();return;}
   if(button.hasAttribute('data-shift-nov-today')){const today=shiftNovToday();if(today)shiftNovSetDay(today);return;}
   if(button.hasAttribute('data-shift-nov-adjacent')){shiftNovSetDay(shiftNovSelectedDay+Number(button.dataset.shiftNovAdjacent));return;}
   if(button.hasAttribute('data-shift-nov-date')){
