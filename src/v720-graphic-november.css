@@ -1,0 +1,335 @@
+/* Shift V7.2 — CSS/SVG-first graphical duty board, no image overlays.
+   The original November worksheet is preserved as an explicit alternate view. */
+html[data-shift72="ready"]{
+ --s72-bg:#050d18;--s72-panel:#081b2b;--s72-panel2:#0d283d;--s72-text:#edfaff;
+ --s72-muted:#9ab8c9;--s72-line:rgba(109,191,232,.22);--s72-day:#34dfaf;
+ --s72-night:#7aa9ff;--s72-off:#e3a782;--s72-cyan:#43d8ff;--s72-purple:#9d8cff;
+ --s72-ease:cubic-bezier(.18,.78,.22,1);
+}
+html[data-shift72="ready"] .app{background:transparent!important}
+html[data-shift72="ready"] .command-bar{
+ border:1px solid rgba(92,194,242,.3)!important;
+ background:linear-gradient(115deg,rgba(8,26,43,.97),rgba(5,14,28,.98))!important;
+ border-radius:18px!important;
+ box-shadow:0 28px 65px rgba(0,2,14,.35),inset 0 1px 0 rgba(255,255,255,.075)!important;
+}
+html[data-shift72="ready"] .command-bar .brand-copy h1{font-weight:850!important;letter-spacing:-.045em!important}
+html[data-shift72="ready"] #overviewView .hero-stage{
+ border:1px solid rgba(72,211,243,.39)!important;
+ background:
+  radial-gradient(circle at 79% 22%,rgba(19,141,221,.23),transparent 45%),
+  linear-gradient(117deg,#0b2a43,#071425 63%,#101731)!important;
+ box-shadow:0 28px 64px rgba(0,7,25,.4),inset 0 1px 0 rgba(186,249,255,.095)!important
+}
+html[data-shift72="ready"] #overviewView .hero-stage .hero-title{
+ background:linear-gradient(104deg,#f5fcff 8%,#85e6ff 62%,#aea7ff);
+ -webkit-background-clip:text;background-clip:text;color:transparent!important;
+ text-shadow:none!important
+}
+html[data-shift72="ready"] #overviewView .metric-card{
+ border-radius:16px!important;background:
+ linear-gradient(145deg,rgba(17,51,74,.97),rgba(5,22,39,.96))!important;
+}
+html[data-shift72="ready"] #overviewView .metric-card.day{border-left:3px solid #31d9ab!important}
+html[data-shift72="ready"] #overviewView .metric-card.night{border-left:3px solid #78a9ff!important}
+html[data-shift72="ready"] #overviewView .metric-card.off{border-left:3px solid #ecae89!important}
+html[data-shift72="ready"] .nav-tabs .nav-btn.active{
+ background:linear-gradient(135deg,rgba(46,158,219,.31),rgba(55,68,137,.23))!important;
+ box-shadow:0 0 0 1px rgba(80,213,254,.36),0 9px 24px rgba(22,121,192,.18)!important
+}
+/* New prominent Overview entry: do not present October's legacy hero as a November roster. */
+.shift72-feature-entry{
+ position:relative;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+ min-height:104px;isolation:isolate;overflow:hidden;
+ border:1px solid rgba(80,215,245,.35);border-radius:19px;
+ margin:0 0 18px;padding:18px 24px;color:#eafcff;
+ background:radial-gradient(ellipse at 90% 50%,rgba(71,75,201,.30),transparent 52%),
+ linear-gradient(105deg,#0c3851,#0a233d 53%,#07172d);
+ box-shadow:0 21px 49px rgba(0,5,18,.28),inset 0 1px rgba(192,245,255,.095)
+}
+.shift72-feature-entry::before{
+ content:"";position:absolute;inset:0;pointer-events:none;opacity:.52;z-index:-1;
+ background-image:linear-gradient(90deg,rgba(110,210,255,.08) 1px,transparent 1px),
+ linear-gradient(rgba(110,210,255,.07) 1px,transparent 1px);background-size:32px 32px;
+ mask-image:linear-gradient(90deg,transparent 15%,#000 96%)
+}
+.shift72-feature-entry .shift72-feature-name{display:block;font-size:10px;font-weight:850;letter-spacing:.17em;color:#70e5f6}
+.shift72-feature-entry h2{margin:7px 0 5px!important;color:#effcff;font-size:clamp(19px,2.3vw,27px)!important;letter-spacing:-.03em;line-height:1.2}
+.shift72-feature-entry p{color:#a5d1e4;font-size:12px;margin:0;line-height:1.5}
+.shift72-feature-cta{
+ border:1px solid rgba(136,239,255,.6);border-radius:12px;background:#cff6ff;
+ color:#09253c!important;padding:12px 18px;font-size:12px!important;font-weight:900!important;min-height:44px;
+ cursor:pointer;box-shadow:0 10px 24px rgba(36,192,245,.14);
+ transition:transform .23s ease,box-shadow .23s ease;
+}
+.shift72-feature-cta:hover{transform:translateY(-2px);box-shadow:0 13px 26px rgba(36,192,245,.29)}
+/* View mode control always visible, including when the old worksheet is enabled. */
+#shiftNovemberView .shift72-view-switch{
+ display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+ margin:8px 0 15px;padding:12px 14px;border-radius:15px;
+ border:1px solid rgba(90,193,230,.27);
+ background:linear-gradient(110deg,rgba(13,41,60,.94),rgba(6,24,44,.95));
+}
+#shiftNovemberView .shift72-switch-label{display:block;color:#81d8f3;font-size:9px;letter-spacing:.18em;font-weight:850}
+#shiftNovemberView .shift72-view-switch strong{display:block;font-size:13px;color:#f0fbff;margin-top:3px;font-weight:800}
+#shiftNovemberView .shift72-switch-buttons{display:flex;gap:5px;flex-wrap:wrap}
+#shiftNovemberView .shift72-switch-buttons button{
+ display:inline-flex;align-items:center;gap:7px;min-height:38px;
+ padding:8px 13px;border:1px solid rgba(81,165,204,.37);border-radius:10px;
+ background:rgba(4,24,43,.8);color:#a8cadd;font-size:12px;font-weight:800;cursor:pointer;
+ transition:background .2s,border .2s,color .2s
+}
+#shiftNovemberView .shift72-switch-buttons button[aria-pressed="true"]{
+ border-color:#71e5ff;background:linear-gradient(145deg,#16678d,#10405f);
+ color:#fff;box-shadow:inset 0 1px rgba(255,255,255,.09),0 5px 18px rgba(20,148,201,.21)
+}
+#shiftNovemberView .shift72-switch-buttons button span{font-size:17px}
+#shiftNovemberView[data-shift72-mode="graphic"] :is(.shift-nov-title,.shift-nov-source-warning,.shift-nov-scroll-help,
+ .shift-nov-week,.shift-nov-scroll,.shift-nov-summary,.shift-nov-sheet-legend,.shift-v7-matrix-toolbar){display:none!important}
+#shiftNovemberView[data-shift72-mode="sheet"] #shift72Graphic{display:none!important}
+#shiftNovemberView[data-shift72-mode="graphic"] #shift72Graphic{display:block!important}
+#shiftNovemberView .shift72-graphic-host{
+ margin:0 0 18px;min-width:0;color:var(--s72-text);
+ font-family:inherit;line-height:1.45
+}
+#shiftNovemberView .shift72-graphic{
+ position:relative;isolation:isolate;min-width:0;overflow:hidden;
+ border:1px solid rgba(75,183,225,.25);border-radius:22px;
+ background:linear-gradient(137deg,#081b2d,#071728 54%,#070f21);
+ box-shadow:0 22px 54px rgba(0,4,17,.34),inset 0 1px rgba(208,247,255,.035)
+}
+#shiftNovemberView .shift72-graphic .shift72-ambient{position:absolute;inset:0 0 auto;height:510px;pointer-events:none;z-index:-1;
+ background:radial-gradient(ellipse at 79% 4%,rgba(43,136,211,.22),transparent 58%),
+ radial-gradient(ellipse at 8% 26%,rgba(121,72,211,.15),transparent 54%),
+ repeating-linear-gradient(90deg,transparent 0 49px,rgba(82,178,229,.025) 50px);
+ mask-image:linear-gradient(#000,transparent 96%);animation:shift72-ambient 22s ease-in-out infinite alternate
+}
+#shiftNovemberView .shift72-command{padding:27px clamp(17px,3vw,32px) 15px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+#shiftNovemberView .shift72-eyebrow{font-size:10px;font-weight:900;letter-spacing:.13em;color:#70d5f5}
+#shiftNovemberView .shift72-eyebrow span{color:#8593d2}
+#shiftNovemberView .shift72-command h3{
+ margin:7px 0 8px!important;color:#f4fbff!important;font-weight:900;line-height:1.18;
+ letter-spacing:-.035em;font-size:clamp(22px,3vw,37px)!important
+}
+#shiftNovemberView .shift72-command h3 em{font-style:normal;color:#8ce1f6}
+#shiftNovemberView .shift72-command p{margin:0;color:#b2cddf;font-size:12px;line-height:1.5}
+#shiftNovemberView .shift72-control-group{display:flex;gap:6px;align-items:center;padding:6px;background:rgba(9,35,55,.78);
+ border:1px solid rgba(98,184,229,.25);border-radius:13px}
+#shiftNovemberView .shift72-control-group button{
+ min-width:39px;min-height:37px;border:1px solid rgba(117,209,242,.21);
+ background:rgba(18,57,82,.75);color:#e7f9ff;border-radius:8px;cursor:pointer;font-size:17px;
+ transition:background .2s,transform .2s;font-weight:850}
+#shiftNovemberView .shift72-control-group button:hover:not(:disabled){background:#1a6489;transform:translateY(-1px)}
+#shiftNovemberView .shift72-control-group button:disabled{opacity:.4;cursor:default}
+#shiftNovemberView .shift72-control-group .shift72-today{padding:0 10px;font-size:11px}
+#shiftNovemberView .shift72-current-day{min-width:65px;text-align:center;font-size:22px;letter-spacing:-.04em;color:#effdff;white-space:nowrap}
+#shiftNovemberView .shift72-current-day span{font-size:9px;color:#8edbf7;letter-spacing:.1em}
+#shiftNovemberView .shift72-overview-cards{
+ display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:11px clamp(17px,3vw,32px) 6px}
+#shiftNovemberView .shift72-overview-card{position:relative;overflow:hidden;padding:18px 17px 16px;border-radius:15px;
+ border:1px solid rgba(112,181,220,.24);background:linear-gradient(140deg,rgba(14,42,64,.93),rgba(7,26,47,.91));
+ box-shadow:inset 0 1px rgba(231,251,255,.045),0 13px 25px rgba(0,5,15,.12);
+ transition:transform .28s cubic-bezier(.19,.85,.3,1),border-color .22s}
+#shiftNovemberView .shift72-overview-card:hover{transform:translateY(-3px);border-color:rgba(113,220,252,.53)}
+#shiftNovemberView .shift72-overview-card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--s72-accent)}
+#shiftNovemberView .shift72-overview-card.shift72-d{--s72-accent:#32dcae}
+#shiftNovemberView .shift72-overview-card.shift72-n{--s72-accent:#74a6ff}
+#shiftNovemberView .shift72-overview-card.shift72-h{--s72-accent:#e4ac8d}
+#shiftNovemberView .shift72-overview-card.shift72-coverage{--s72-accent:#c19aff}
+#shiftNovemberView .shift72-overview-card>div:first-child{display:flex;flex-direction:column;gap:3px}
+#shiftNovemberView .shift72-overview-card>div:first-child span{font-size:10px;letter-spacing:.11em;color:#8dbbd4;font-weight:800}
+#shiftNovemberView .shift72-overview-card>div:first-child b{font-size:12px;color:#eaf7ff;font-weight:750}
+#shiftNovemberView .shift72-overview-card>strong{display:block;font-size:clamp(27px,3vw,39px);line-height:1.2;margin:9px 0 13px;font-variant-numeric:tabular-nums;color:#fff}
+#shiftNovemberView .shift72-overview-card strong small{font-size:12px;color:#9ebbd1;margin-left:6px}
+#shiftNovemberView .shift72-mini-bar{width:100%;height:5px;border-radius:12px;background:#1b344b;overflow:hidden}
+#shiftNovemberView .shift72-mini-bar i{display:block;height:100%;border-radius:inherit;background:var(--s72-accent);box-shadow:0 0 12px var(--s72-accent);
+ transition:width .42s cubic-bezier(.2,.8,.2,1)}
+#shiftNovemberView .shift72-status-line{display:flex;gap:8px;align-items:center;
+ margin:12px clamp(17px,3vw,32px) 8px;color:#a5cedf;font-size:11px;font-weight:700}
+#shiftNovemberView .shift72-status-led{width:7px;height:7px;border-radius:50%;background:#3cddb2;box-shadow:0 0 9px rgba(54,225,177,.5)}
+#shiftNovemberView .shift72-status-line[data-warning="true"]{color:#ffdc9c}
+#shiftNovemberView .shift72-status-line[data-warning="true"] .shift72-status-led{background:#ffcb74;box-shadow:0 0 10px rgba(255,203,116,.4)}
+#shiftNovemberView .shift72-graphic-main{padding:6px clamp(17px,3vw,32px) 20px;display:grid;gap:24px}
+#shiftNovemberView .shift72-section-heading{display:flex;justify-content:space-between;align-items:end;gap:10px;margin:0 0 13px;flex-wrap:wrap}
+#shiftNovemberView .shift72-section-heading h4{font-size:clamp(16px,1.9vw,20px)!important;font-weight:880!important;line-height:1.25;
+ letter-spacing:-.022em;margin:4px 0 0!important;color:#f0faff!important}
+#shiftNovemberView .shift72-section-heading h4 span{font-size:11px;letter-spacing:0;font-weight:600;color:#96b5ca}
+#shiftNovemberView .shift72-section-heading>span,
+#shiftNovemberView .shift72-section-heading>small{font-size:10px;color:#97bbd3;letter-spacing:.025em}
+#shiftNovemberView .shift72-section-heading i{font-style:normal;color:#64c7e9}
+#shiftNovemberView .shift72-position-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+#shiftNovemberView .shift72-position-card{position:relative;overflow:hidden;display:flex;flex-direction:column;gap:16px;
+ border:1px solid rgba(92,163,209,.27);border-radius:15px;min-width:0;min-height:150px;padding:16px;
+ background:linear-gradient(130deg,rgba(19,49,71,.94),rgba(8,31,51,.9));
+ box-shadow:0 13px 27px rgba(0,6,24,.11),inset 0 1px rgba(255,255,255,.05);
+ animation:shift72-card-in .38s var(--s72-ease) both;animation-delay:calc(var(--shift72-index)*40ms);
+ transition:transform .24s var(--s72-ease),border-color .2s}
+#shiftNovemberView .shift72-position-card:hover{transform:translateY(-3px);border-color:#6ad2fa}
+#shiftNovemberView .shift72-position-card.shift72-n{background:linear-gradient(133deg,rgba(14,35,72,.96),rgba(7,24,52,.96))}
+#shiftNovemberView .shift72-position-card::before{content:"";position:absolute;width:112px;height:112px;right:-34px;top:-45px;
+ border:1px solid rgba(120,211,242,.13);border-radius:50%;box-shadow:0 0 0 18px rgba(124,202,249,.025)}
+#shiftNovemberView .shift72-position-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+#shiftNovemberView .shift72-position-code{
+ display:inline-flex;min-width:42px;min-height:36px;align-items:center;justify-content:center;
+ border:1px solid rgba(76,232,185,.36);border-radius:9px;background:rgba(24,136,111,.19);
+ color:#6ff1c5;font-size:18px;font-weight:900;letter-spacing:.02em}
+#shiftNovemberView .shift72-n .shift72-position-code{border-color:rgba(115,170,255,.46);background:rgba(42,95,204,.20);color:#a5c4ff}
+#shiftNovemberView .shift72-position-indicator{font-size:10px;font-weight:850;letter-spacing:.10em;color:#8cbdd4}
+#shiftNovemberView .shift72-position-card.has-warning{border-color:#f3ba76;box-shadow:inset 0 0 0 1px rgba(244,189,106,.16)}
+#shiftNovemberView .shift72-position-card.has-warning .shift72-position-indicator{color:#ffd89c}
+#shiftNovemberView .shift72-position-names{display:flex;flex-direction:column;gap:5px;min-height:40px;
+ color:#f4fbff;font-size:clamp(12px,1.2vw,15px);font-weight:830;line-height:1.3;overflow-wrap:anywhere}
+#shiftNovemberView .shift72-position-footer{display:flex;justify-content:space-between;gap:7px;flex-wrap:wrap;
+ margin-top:auto;font-size:10px;color:#8fbbd4}
+#shiftNovemberView .shift72-board-section{
+ padding:15px;border:1px solid rgba(109,187,231,.27);border-radius:17px;
+ background:linear-gradient(140deg,rgba(6,24,42,.97),rgba(8,24,42,.97));
+ min-width:0}
+#shiftNovemberView .shift72-board-legend{display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+#shiftNovemberView .shift72-board-legend span{display:inline-flex;align-items:center;gap:4px;font-size:10px;color:#bad1dc}
+#shiftNovemberView .shift72-board-legend i{display:inline-block;width:8px;height:8px;border-radius:2px;background:#3fdeb2}
+#shiftNovemberView .shift72-legend-night i{background:#75a5fc}
+#shiftNovemberView .shift72-legend-off i{background:#d69f7d}
+#shiftNovemberView .shift72-board-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:9px;
+ padding:8px 0 13px;border-top:1px solid rgba(115,201,244,.12)}
+#shiftNovemberView .shift72-board-actions{display:flex;gap:5px}
+#shiftNovemberView .shift72-board-toolbar button{
+ min-height:35px;border:1px solid rgba(95,183,227,.33);border-radius:8px;background:#0a2c45;
+ color:#c0e0f0;padding:8px 11px;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap}
+#shiftNovemberView .shift72-board-toolbar button[aria-pressed="true"]{
+ border-color:#77dff4;background:#16597a;color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+#shiftNovemberView .shift72-board-toolbar button:disabled{opacity:.4;cursor:default}
+#shiftNovemberView .shift72-week-actions{display:flex;gap:7px;align-items:center;font-size:10px;color:#b5d8ed}
+#shiftNovemberView .shift72-week-actions[hidden]{display:none!important}
+#shiftNovemberView .shift72-scroll-hint{font-size:10px;color:#a0c5db;white-space:nowrap}
+#shiftNovemberView .shift72-board-viewport{position:relative;max-width:100%;width:100%;overflow:auto;
+ border:1px solid rgba(109,190,229,.22);border-radius:11px;
+ background:rgba(3,15,28,.72);scrollbar-color:#307198 #0b2438;overscroll-behavior-x:contain;
+ scrollbar-width:thin}
+#shiftNovemberView .shift72-board-table{border-collapse:separate!important;border-spacing:3px!important;
+ width:max-content!important;min-width:100%!important;table-layout:fixed!important;padding:5px!important;
+ color:#ebfaff!important;font-size:11px!important;font-variant-numeric:tabular-nums}
+#shiftNovemberView .shift72-board-table :is(td,th){height:auto!important;white-space:nowrap!important;border:0!important;
+ background:transparent;color:#e7f6ff!important;text-align:center!important}
+#shiftNovemberView .shift72-board-table thead th{position:sticky;top:0;z-index:2;background:#092638!important}
+#shiftNovemberView .shift72-board-table .shift72-person-heading{
+ position:sticky!important;left:0!important;z-index:3!important;width:180px!important;min-width:180px!important;max-width:180px!important;
+ background:#0c2a41!important;box-shadow:8px 0 16px rgba(3,10,22,.21);text-align:left!important;
+ border-radius:7px!important;padding:4px 9px!important}
+#shiftNovemberView .shift72-board-table thead .shift72-person-heading{z-index:5!important;
+ color:#92d6f2!important;font-size:10px!important;letter-spacing:.07em;vertical-align:middle}
+#shiftNovemberView .shift72-board-table .shift72-date-heading{min-width:47px!important;width:47px!important;max-width:47px!important;
+ padding:0 0 5px!important;background:#092638!important}
+#shiftNovemberView .shift72-date-chip{
+ width:100%;height:46px;min-width:0;border-radius:7px;border:1px solid transparent;
+ display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;
+ background:rgba(16,50,74,.84);color:#bddcf2;cursor:pointer;font-family:inherit}
+#shiftNovemberView .shift72-date-chip span{font-size:10px;color:#9fbdd2}
+#shiftNovemberView .shift72-date-chip b{font-size:13px;font-weight:850;color:#e9f8ff}
+#shiftNovemberView .shift72-date-heading.is-weekend .shift72-date-chip{background:rgba(93,62,73,.51)}
+#shiftNovemberView .shift72-date-heading.is-selected .shift72-date-chip{
+ background:#14557b;border-color:#65d6f9;box-shadow:inset 0 0 0 1px rgba(139,226,255,.25)}
+#shiftNovemberView .shift72-board-table tbody .shift72-person-heading{height:49px!important}
+#shiftNovemberView .shift72-board-table .shift72-person-heading>.shift72-avatar{
+ display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;vertical-align:middle;
+ border-radius:7px;background:linear-gradient(145deg,#184e70,#0f354f);border:1px solid rgba(123,217,253,.22);
+ color:#a3e9fa;font-size:10px;font-weight:850;margin-right:7px}
+#shiftNovemberView .shift72-person-copy{display:inline-flex;flex-direction:column;vertical-align:middle;max-width:130px;min-width:0}
+#shiftNovemberView .shift72-person-copy b{color:#eafaff!important;font-size:11px;overflow:hidden;text-overflow:ellipsis}
+#shiftNovemberView .shift72-person-copy small{font-size:9px;color:#8eb5ce;overflow:hidden;text-overflow:ellipsis}
+#shiftNovemberView .shift72-duty-cell{min-width:47px!important;width:47px!important;height:49px!important;padding:0!important}
+#shiftNovemberView .shift72-duty-pill{
+ display:block;width:100%;height:43px;min-width:0;min-height:43px;cursor:pointer;
+ border:1px solid rgba(102,205,239,.14);border-radius:7px;font-size:11px;font-weight:850;
+ font-family:inherit;color:#d9f6ff;background:#103148;
+ transition:transform .16s ease,border-color .18s,background .18s;letter-spacing:-.02em}
+#shiftNovemberView .shift72-duty-pill.tone-D{color:#6df0bf;background:rgba(24,115,91,.48);border-color:rgba(60,220,166,.22)}
+#shiftNovemberView .shift72-duty-pill.tone-N{color:#a8c7ff;background:rgba(30,77,151,.58);border-color:rgba(102,158,254,.3)}
+#shiftNovemberView .shift72-duty-pill.tone-H{color:#dfb49e;background:rgba(106,60,51,.29);border-color:rgba(173,115,84,.13)}
+#shiftNovemberView .shift72-duty-pill.is-warning{border:1px dashed #f8ce8e!important;color:#ffe0a9}
+#shiftNovemberView .shift72-duty-cell.is-today .shift72-duty-pill{outline:1px solid rgba(113,222,247,.75);outline-offset:1px}
+#shiftNovemberView .shift72-board-table tr.is-person-selected>.shift72-person-heading{box-shadow:inset 3px 0 #5ed6fc,8px 0 16px rgba(3,10,22,.2)}
+#shiftNovemberView .shift72-board-table tr:hover>.shift72-person-heading{background:#144360!important}
+#shiftNovemberView .shift72-duty-pill:hover,#shiftNovemberView .shift72-duty-pill:focus-visible{
+ border-color:#a8f3ff!important;transform:scale(1.045);outline:2px solid #72eaff;outline-offset:1px;z-index:1;position:relative}
+#shiftNovemberView .shift72-analytics-section{display:grid;grid-template-columns:1.05fr .95fr;gap:12px;min-width:0}
+#shiftNovemberView .shift72-analytics-chart,#shiftNovemberView .shift72-analytics-workload{
+ min-width:0;padding:16px;border:1px solid rgba(90,173,215,.23);border-radius:15px;
+ background:linear-gradient(130deg,rgba(11,37,60,.78),rgba(6,24,42,.85))}
+#shiftNovemberView .shift72-graph-legend{display:flex;gap:12px;flex-wrap:wrap;color:#a9d1e4;font-size:10px;font-weight:800}
+#shiftNovemberView .shift72-graph-legend span:first-child{color:#4cddba}
+#shiftNovemberView .shift72-graph-legend span:last-child{color:#8cafff}
+#shiftNovemberView .shift72-trend-svg{display:block;height:160px;width:100%;margin-top:7px}
+#shiftNovemberView .shift72-chart-axis{display:flex;justify-content:space-between;color:#7498b3;font-size:10px}
+#shiftNovemberView .shift72-workload-list{display:grid;gap:8px;margin-top:12px}
+#shiftNovemberView .shift72-workload-row{display:grid;grid-template-columns:70px minmax(0,1fr) 52px;align-items:center;gap:9px;min-width:0}
+#shiftNovemberView .shift72-workload-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px;color:#c9e5f4;font-weight:750}
+#shiftNovemberView .shift72-workload-bar{height:9px;min-width:0;display:flex;overflow:hidden;border-radius:10px;background:#1e3649}
+#shiftNovemberView .shift72-workload-bar i{display:block;height:100%;flex-shrink:0}
+#shiftNovemberView .shift72-bar-day{background:#45d9af}
+#shiftNovemberView .shift72-bar-night{background:#729ff4}
+#shiftNovemberView .shift72-bar-off{background:#815d5a}
+#shiftNovemberView .shift72-workload-total{text-align:right;font-size:11px;font-weight:850;color:#dceffe}
+#shiftNovemberView .shift72-workload-total small{font-size:9px;font-weight:600;color:#8faac1;margin-left:3px}
+#shiftNovemberView .shift72-graphic-footer{padding:15px clamp(17px,3vw,32px) 19px;
+ color:#86aabd;border-top:1px solid rgba(96,175,216,.14);font-size:10px;line-height:1.6}
+#shiftNovemberView :is(.shift72-graphic button,.shift72-switch-buttons button):focus-visible,
+.shift72-feature-cta:focus-visible{outline:2px solid #95eaff!important;outline-offset:2px!important}
+@keyframes shift72-ambient{0%{transform:translate3d(-1%,0,0)}100%{transform:translate3d(2%,0,0)}}
+@keyframes shift72-card-in{0%{opacity:.5;transform:translateY(9px)}100%{opacity:1;transform:translateY(0)}}
+@media(max-width:1050px){
+ #shiftNovemberView .shift72-overview-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #shiftNovemberView .shift72-position-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #shiftNovemberView .shift72-analytics-section{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:760px){
+ .shift72-feature-entry{padding:17px 16px;gap:12px;margin-bottom:12px}
+ .shift72-feature-entry h2{font-size:20px!important}
+ .shift72-feature-cta{width:100%;text-align:center}
+ #shiftNovemberView .shift72-view-switch{align-items:stretch;gap:9px}
+ #shiftNovemberView .shift72-switch-buttons{display:grid;width:100%;grid-template-columns:1fr 1fr;gap:5px}
+ #shiftNovemberView .shift72-switch-buttons button{justify-content:center;padding:8px 5px;font-size:11px}
+ #shiftNovemberView .shift72-graphic{border-radius:15px}
+ #shiftNovemberView .shift72-command{padding:19px 14px 9px}
+ #shiftNovemberView .shift72-command h3{font-size:24px!important}
+ #shiftNovemberView .shift72-control-group{width:100%;justify-content:space-between}
+ #shiftNovemberView .shift72-overview-cards{gap:8px;padding:10px 12px 4px}
+ #shiftNovemberView .shift72-overview-card{padding:12px}
+ #shiftNovemberView .shift72-overview-card>strong{font-size:29px;margin:6px 0 10px}
+ #shiftNovemberView .shift72-overview-card>div:first-child b{font-size:11px}
+ #shiftNovemberView .shift72-status-line{margin:9px 12px;font-size:10px}
+ #shiftNovemberView .shift72-graphic-main{padding:8px 12px 15px;gap:18px}
+ #shiftNovemberView .shift72-position-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ #shiftNovemberView .shift72-position-card{min-height:133px;padding:11px;gap:12px}
+ #shiftNovemberView .shift72-position-code{font-size:15px;min-width:39px;min-height:34px}
+ #shiftNovemberView .shift72-position-names{font-size:12px;line-height:1.4;min-height:46px}
+ #shiftNovemberView .shift72-position-footer{font-size:9px}
+ #shiftNovemberView .shift72-position-footer span:last-child{display:none}
+ #shiftNovemberView .shift72-board-section{padding:10px;border-radius:12px}
+ #shiftNovemberView .shift72-board-toolbar{align-items:flex-start}
+ #shiftNovemberView .shift72-scroll-hint{width:100%}
+ #shiftNovemberView .shift72-board-table .shift72-person-heading{width:111px!important;min-width:111px!important;max-width:111px!important;padding:4px!important}
+ #shiftNovemberView .shift72-person-copy{max-width:76px}
+ #shiftNovemberView .shift72-person-copy small{display:none}
+ #shiftNovemberView .shift72-person-heading>.shift72-avatar{width:23px;height:23px;margin-right:4px}
+ #shiftNovemberView .shift72-board-table .shift72-date-heading{width:44px!important;min-width:44px!important;max-width:44px!important}
+ #shiftNovemberView .shift72-duty-cell{width:44px!important;min-width:44px!important}
+ #shiftNovemberView .shift72-duty-pill{height:45px;min-height:45px;font-size:10px}
+ #shiftNovemberView .shift72-date-chip{height:47px}
+ #shiftNovemberView .shift72-analytics-chart,#shiftNovemberView .shift72-analytics-workload{padding:12px}
+ #shiftNovemberView .shift72-trend-svg{height:115px}
+ #shiftNovemberView .shift72-graphic-footer{padding:11px 12px 15px}
+}
+@media(max-width:360px){
+ #shiftNovemberView .shift72-position-grid{grid-template-columns:minmax(0,1fr)}
+ #shiftNovemberView .shift72-workload-row{grid-template-columns:54px minmax(0,1fr) 45px}
+ #shiftNovemberView .shift72-command h3{font-size:21px!important}
+ #shiftNovemberView .shift72-board-toolbar button{padding:7px 8px}
+ #shiftNovemberView .shift72-week-actions{flex-wrap:wrap}
+}
+@media(prefers-reduced-motion:reduce){
+ #shiftNovemberView .shift72-graphic *,
+ .shift72-feature-entry *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+html[data-shift-effects="lite"] #shiftNovemberView .shift72-ambient,
+html[data-shift-effects="lite"] #shiftNovemberView .shift72-position-card{animation:none!important}
