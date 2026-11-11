@@ -12,8 +12,8 @@ const monthJs=read('src/v740-full-month-overview.js');
 const novemberJs=read('src/v720-graphic-november.js');
 
 test('V7.5 changes the actual built UI colors rather than adding images',()=>{
- for(const marker of ['--bg:#06111f','--panel:#0c2339','--text:#f3fbff',
-  '--day:#3ce9ae','--night:#899eff','--off:#ffc17d','color:#fff!important',
+ for(const marker of ['--bg:#050a12','--panel:#101c2f','--text:#f9fcff',
+  '--day:#b7ff43','--night:#b27aff','--off:#ff7394','color:#fff!important',
   '.command-bar','.nav-tabs','#overviewView','.roster-card.day','.roster-card.night',
   '#shiftNovemberView .shift72-duty-pill.tone-D']){
   assert.ok(globalCss.includes(marker),marker);
@@ -66,7 +66,8 @@ test('Standalone build includes V7.5, UI CSS and faster in-place view code',()=>
  const build=read('scripts/build.mjs'),html=read('index.html');
  assert.match(build,/v750-vivid-motion\.css/);
  assert.match(html,/id="v750-vivid-motion-style"/);
- assert.match(html,/data-shift-release="7\.5"/);
+ const release=html.match(/data-shift-release="(\d+\.\d+)"/);
+ assert.ok(release&&Number(release[1])>=7.5,'v7.5 performance contract must remain present');
  for(const source of [globalCss,monthCss,monthJs,novemberJs])assert.ok(html.includes(source));
  assert.ok(read('src/v6536-november-sheet.js').includes('shiftNovRenderGrid=shiftNovRenderReferenceSheet'));
 });

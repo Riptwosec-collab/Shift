@@ -49,15 +49,15 @@ function shift72TrendMarkup(){
  const path=kind=>points.map((p,i)=>(i?'L':'M')+scale(p.day).toFixed(1)+','+y(p.counts[kind],kind==='D'?0:1).toFixed(1)).join(' ');
  const area=kind=>path(kind)+' L700,155 L20,155 Z';
  return '<svg class="shift72-trend-svg" viewBox="0 0 720 165" preserveAspectRatio="none" role="img" aria-label="กราฟจำนวนคนเข้าเวรกลางวันและกลางคืนทุกวันในพฤศจิกายน">'+
- '<defs><linearGradient id="shift72TrendDayFill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#36e2b5" stop-opacity=".22"/><stop offset="1" stop-color="#36e2b5" stop-opacity="0"/></linearGradient>'+
- '<linearGradient id="shift72TrendNightFill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#6a9fff" stop-opacity=".19"/><stop offset="1" stop-color="#6a9fff" stop-opacity="0"/></linearGradient></defs>'+
+ '<defs><linearGradient id="shift72TrendDayFill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#B7FF43" stop-opacity=".22"/><stop offset="1" stop-color="#B7FF43" stop-opacity="0"/></linearGradient>'+
+ '<linearGradient id="shift72TrendNightFill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#B27AFF" stop-opacity=".19"/><stop offset="1" stop-color="#B27AFF" stop-opacity="0"/></linearGradient></defs>'+
  '<path d="M20 40 H700 M20 78 H700 M20 116 H700 M20 154 H700" stroke="#5caad3" stroke-opacity=".13" fill="none"/>'+
  '<path d="'+area('D')+'" fill="url(#shift72TrendDayFill)"/><path d="'+area('N')+'" fill="url(#shift72TrendNightFill)"/>'+
- '<path d="'+path('D')+'" fill="none" stroke="#42e2b8" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>'+
- '<path d="'+path('N')+'" fill="none" stroke="#7aaaff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>'+
+ '<path d="'+path('D')+'" fill="none" stroke="#B7FF43" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>'+
+ '<path d="'+path('N')+'" fill="none" stroke="#B27AFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>'+
  points.filter(p=>p.day===shiftNovSelectedDay).map(p=>
- '<circle cx="'+scale(p.day)+'" cy="'+y(p.counts.D,0)+'" r="5" fill="#3fe5ba" stroke="#091c2b" stroke-width="3"/>'+
- '<circle cx="'+scale(p.day)+'" cy="'+y(p.counts.N,1)+'" r="5" fill="#7baaff" stroke="#091c2b" stroke-width="3"/>').join('')+
+ '<circle cx="'+scale(p.day)+'" cy="'+y(p.counts.D,0)+'" r="5" fill="#C9FF7D" stroke="#091c2b" stroke-width="3"/>'+
+ '<circle cx="'+scale(p.day)+'" cy="'+y(p.counts.N,1)+'" r="5" fill="#CEA9FF" stroke="#091c2b" stroke-width="3"/>').join('')+
  '</svg>';
 }
 function shift72SummaryMarkup(){
