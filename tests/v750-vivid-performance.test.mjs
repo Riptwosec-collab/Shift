@@ -11,16 +11,15 @@ const monthCss=read('src/v740-full-month-overview.css');
 const monthJs=read('src/v740-full-month-overview.js');
 const novemberJs=read('src/v720-graphic-november.js');
 
-test('V7.5 changes the actual built UI colors rather than adding images',()=>{
- for(const marker of ['--bg:#050a12','--panel:#101c2f','--text:#f9fcff',
-  '--day:#b7ff43','--night:#b27aff','--off:#ff7394','color:#fff!important',
-  '.command-bar','.nav-tabs','#overviewView','.roster-card.day','.roster-card.night',
+test('V7.5 visual stylesheet remains cohesive without external imagery',()=>{
+ for(const marker of ['--end-ink:#1B1A20','--end-paper:#F7F2E8','--end-orange:#FF6946',
+  '--end-lime:#D6F36A','--end-cobalt:#5264E8','--end-pink:#FFC4D4',
+  '.command-bar','.nav-tabs','#overviewView','.roster-card).day',
   '#shiftNovemberView .shift72-duty-pill.tone-D']){
   assert.ok(globalCss.includes(marker),marker);
  }
- assert.match(monthCss,/--s740-day:#36e7ae/);
- assert.match(monthCss,/--s740-night:#91a4ff/);
- assert.match(monthCss,/--s740-off:#ffc483/);
+ assert.match(monthCss,/--s740-day:#36e7ae/); // historical fallback, overridden by the final theme
+ assert.ok(globalCss.includes('html[data-shift750="ready"] #shift740FullMonth'));
  assert.doesNotMatch(globalCss,/<img|url\(https?:/i);
 });
 test('V7.5 safely removes always-running effects and avoids expensive panel blur',()=>{
@@ -28,7 +27,7 @@ test('V7.5 safely removes always-running effects and avoids expensive panel blur
  assert.ok(globalCss.includes('.view.active'));
  assert.ok(globalCss.includes('animation:none!important'));
  assert.ok(globalCss.includes('prefers-reduced-motion:reduce'));
- assert.ok(globalCss.includes('@media(max-width:860px)'));
+ assert.ok(globalCss.includes('@media(max-width:760px)'));
  assert.ok(monthJs.includes("document.documentElement.dataset.shift750='ready'"));
 });
 test('Full-month Overview selection only updates previous/current columns, not 610 cells',()=>{

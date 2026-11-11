@@ -140,9 +140,9 @@ function shift740Matrix(month,day){
 function shift740Markup(month,day){
  const total=shift740Days(month),en=typeof document!=='undefined'&&document.documentElement.lang==='en',stats=shift740MonthStats(month);
  return '<div class="s740-top"><div class="s740-topcopy"><span class="s740-kicker">SHIFT / WORKFORCE PLANNING</span>'+
- '<h2>Full Month <em>Schedule</em></h2>'+
- '<p>ตารางเวรทีมเต็มเดือน '+total+' วัน • รหัสตำแหน่งจริง D1–D4 / N1–N2 / H • เลือกวันที่เพื่อดูรายละเอียด</p></div>'+
- '<div class="s740-control"><div class="s740-months" role="group" aria-label="เลือกเดือนของภาพรวม">'+
+ '<h2 class="end770-title"><span>เวรทั้งทีม.</span><em>ทั้งเดือน.</em></h2>'+
+ '<p>ดูทุกวันของทั้งทีมได้ในที่เดียว · D1–D4 / N1–N2 / H · กดวันที่เพื่อดูผู้รับผิดชอบ</p></div>'+
+ '<span class="end770-hero-mark" aria-hidden="true"><b>'+total+'</b><small>DAYS<br>2026</small></span>'+ '<div class="s740-control"><div class="s740-months" role="group" aria-label="เลือกเดือนของภาพรวม">'+
  [[10,'ตุลาคม'],[11,'พฤศจิกายน']].map(([value,title])=>
  '<button type="button" data-s740-month="'+value+'" aria-pressed="'+(value===month)+'">'+title+'</button>').join('')+
  '</div><div class="s740-actions"><button type="button" data-s740-action="today">วันนี้</button>'+

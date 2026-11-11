@@ -49,15 +49,15 @@ function shift72TrendMarkup(){
  const path=kind=>points.map((p,i)=>(i?'L':'M')+scale(p.day).toFixed(1)+','+y(p.counts[kind],kind==='D'?0:1).toFixed(1)).join(' ');
  const area=kind=>path(kind)+' L700,155 L20,155 Z';
  return '<svg class="shift72-trend-svg" viewBox="0 0 720 165" preserveAspectRatio="none" role="img" aria-label="กราฟจำนวนคนเข้าเวรกลางวันและกลางคืนทุกวันในพฤศจิกายน">'+
- '<defs><linearGradient id="shift72TrendDayFill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#B7FF43" stop-opacity=".22"/><stop offset="1" stop-color="#B7FF43" stop-opacity="0"/></linearGradient>'+
- '<linearGradient id="shift72TrendNightFill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#B27AFF" stop-opacity=".19"/><stop offset="1" stop-color="#B27AFF" stop-opacity="0"/></linearGradient></defs>'+
+ '<defs><linearGradient id="shift72TrendDayFill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#D6F36A" stop-opacity=".22"/><stop offset="1" stop-color="#D6F36A" stop-opacity="0"/></linearGradient>'+
+ '<linearGradient id="shift72TrendNightFill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#5264E8" stop-opacity=".19"/><stop offset="1" stop-color="#5264E8" stop-opacity="0"/></linearGradient></defs>'+
  '<path d="M20 40 H700 M20 78 H700 M20 116 H700 M20 154 H700" stroke="#5caad3" stroke-opacity=".13" fill="none"/>'+
  '<path d="'+area('D')+'" fill="url(#shift72TrendDayFill)"/><path d="'+area('N')+'" fill="url(#shift72TrendNightFill)"/>'+
- '<path d="'+path('D')+'" fill="none" stroke="#B7FF43" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>'+
- '<path d="'+path('N')+'" fill="none" stroke="#B27AFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>'+
+ '<path d="'+path('D')+'" fill="none" stroke="#D6F36A" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>'+
+ '<path d="'+path('N')+'" fill="none" stroke="#5264E8" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>'+
  points.filter(p=>p.day===shiftNovSelectedDay).map(p=>
- '<circle cx="'+scale(p.day)+'" cy="'+y(p.counts.D,0)+'" r="5" fill="#C9FF7D" stroke="#091c2b" stroke-width="3"/>'+
- '<circle cx="'+scale(p.day)+'" cy="'+y(p.counts.N,1)+'" r="5" fill="#CEA9FF" stroke="#091c2b" stroke-width="3"/>').join('')+
+ '<circle cx="'+scale(p.day)+'" cy="'+y(p.counts.D,0)+'" r="5" fill="#DAFB7E" stroke="#091c2b" stroke-width="3"/>'+
+ '<circle cx="'+scale(p.day)+'" cy="'+y(p.counts.N,1)+'" r="5" fill="#7282FF" stroke="#091c2b" stroke-width="3"/>').join('')+
  '</svg>';
 }
 function shift72SummaryMarkup(){
@@ -67,7 +67,7 @@ function shift72SummaryMarkup(){
  const status=anomalous?'รอการตรวจสอบข้อมูลต้นฉบับ':isToday?'วันที่ปัจจุบัน':'ข้อมูลตารางเวรที่บันทึกไว้';
  return '<div class="shift72-command">'+
  '<div class="shift72-command-copy"><div class="shift72-eyebrow">NOVEMBER 2026 <span>•</span> TEAM OPERATIONS</div>'+
- '<h3>กราฟิกตารางเวร <em>พฤศจิกายน 2569</em></h3>'+
+ '<h3>ตารางเวร<span class="end770-nov-dot" aria-hidden="true">✳</span> <em>พฤศจิกายน 2569</em></h3>'+
  '<p>เลือกวันหรือช่องเวรเพื่อดูชื่อและตำแหน่งจริง · กราฟิกทั้งหมดสร้างจากข้อมูล ไม่ใช่ภาพ</p></div>'+
  '<div class="shift72-control-group"><button type="button" data-shift72-action="prev" aria-label="วันก่อนหน้า"'+(model.day===1?' disabled':'')+'>‹</button>'+
  '<strong class="shift72-current-day">'+String(model.day).padStart(2,'0')+' <span>NOV</span></strong>'+
