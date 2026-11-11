@@ -1,7 +1,12 @@
 /* v6.5.35 — November 2569: independent read-only monthly view.
    October's existing 31-day panels remain untouched. */
 const SHIFT_NOV_DAYS=30;
-let shiftNovSelectedDay=1,shiftNovWeekStart=1,shiftMonthDisplay='10';
+function shiftNovToday(){
+ const now=new Date();
+ return now.getFullYear()===2026&&now.getMonth()===10?now.getDate():null;
+}
+const SHIFT_NOV_INITIAL_DAY=shiftNovToday()||1;
+let shiftNovSelectedDay=SHIFT_NOV_INITIAL_DAY,shiftNovWeekStart=Math.floor((SHIFT_NOV_INITIAL_DAY-1)/7)*7+1,shiftMonthDisplay='10';
 function shiftNovEscape(value){return String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
 function shiftNovRole(person,day){return NOVEMBER_2026_DUTY_POSITIONS[person]?.[day-1]||'H';}
 function shiftNovType(role){return role==='H'?'O':role[0];}
@@ -36,6 +41,21 @@ function shiftNovMarkDay(){
  if(!host)return;
  host.querySelectorAll('.shift-nov-selected').forEach(el=>el.classList.remove('shift-nov-selected'));
  host.querySelectorAll('[data-shift-nov-date="'+shiftNovSelectedDay+'"]').forEach(el=>el.classList.add('shift-nov-selected'));
+ host.querySelectorAll('button[data-shift-nov-date]').forEach(button=>{
+  button.setAttribute('aria-pressed',String(Number(button.dataset.shiftNovDate)===shiftNovSelectedDay));
+ });
+}
+function shiftNovRevealSelectedDay(){
+ const region=document.querySelector('#shiftNovemberView .shift-nov-scroll');
+ if(!region||!region.clientWidth)return;
+ const button=region.querySelector('thead button[data-shift-nov-date="'+shiftNovSelectedDay+'"]');
+ if(!button)return;
+ const bounds=region.getBoundingClientRect(),cell=button.getBoundingClientRect();
+ const pinned=region.querySelector('tbody .shift-nov-name');
+ const fixedWidth=pinned?Math.min(pinned.getBoundingClientRect().width,region.clientWidth*.45):0;
+ const left=bounds.left+fixedWidth+8,right=bounds.right-8;
+ if(cell.left<left)region.scrollLeft-=left-cell.left;
+ else if(cell.right>right)region.scrollLeft+=cell.right-right;
 }
 function shiftNovWeekMarkup(){
  const dates=Array.from({length:7},(_,i)=>shiftNovWeekStart+i).filter(day=>day<=SHIFT_NOV_DAYS);
@@ -52,10 +72,12 @@ function shiftNovRenderDetails(personIndex=null){
  const roles=NOVEMBER_2026_DUTY_POSITIONS.map((r,i)=>({i,role:r[d-1],name:staff[i].name}));
  const dayWorkers=roles.filter(x=>x.role.startsWith('D')),nightWorkers=roles.filter(x=>x.role.startsWith('N')),off=roles.filter(x=>x.role==='H');
  const issue=shiftNovIssues(d);
+ const activeToday=shiftNovToday();
+ const todayControl=activeToday&&activeToday!==d?'<button type="button" class="shift-nov-today" data-shift-nov-today="1" aria-label="กลับไปดูตารางเวรวันนี้">วันนี้</button>':'';
  const alert=issue.repeated.length||issue.missing.length;
  const warning=alert?'<p class="shift-nov-alert" role="alert">ภาพต้นฉบับวันที่ '+d+' พ.ย. มี '+(issue.repeated.length?'ตำแหน่ง '+issue.repeated.join(', ')+' ซ้ำ':'')+(issue.repeated.length&&issue.missing.length?' และ ':'')+(issue.missing.length?'ไม่พบ '+issue.missing.join(', '):'')+' • แสดงตามภาพโดยไม่แก้ไขอัตโนมัติ</p>':'';
  const renderList=(entries,title,kind)=>'<section class="shift-nov-crew '+kind+'"><h4>'+title+' <small>'+entries.length+' คน</small></h4><div>'+entries.map(x=>'<button type="button" class="shift-nov-crew-person'+(x.i===personIndex?' highlighted':'')+'" data-shift-nov-person="'+x.i+'" data-shift-nov-date="'+d+'"><b>'+x.role+'</b><span>'+shiftNovEscape(x.name)+'</span></button>').join('')+'</div></section>';
- panel.querySelector('.shift-nov-summary').innerHTML='<div class="shift-nov-selected-date"><button data-shift-nov-adjacent="-1"'+(d===1?' disabled':'')+'>‹</button><div><b>'+d+' พฤศจิกายน 2569</b><small>รายชื่อพนักงานและตำแหน่งเวรจริงในวันนี้</small></div><button data-shift-nov-adjacent="1"'+(d===30?' disabled':'')+'>›</button></div>'+
+ panel.querySelector('.shift-nov-summary').innerHTML='<div class="shift-nov-selected-date"><button data-shift-nov-adjacent="-1"'+(d===1?' disabled':'')+'>‹</button><div><b>'+d+' พฤศจิกายน 2569</b><small>รายชื่อพนักงานและตำแหน่งเวรจริงในวันนี้</small></div><button data-shift-nov-adjacent="1"'+(d===30?' disabled':'')+'>›</button>'+todayControl+'</div>'+
  warning+'<div class="shift-nov-crews">'+renderList(dayWorkers,'DAY • D1–D4','D')+renderList(nightWorkers,'NIGHT • N1–N2','N')+renderList(off,'H • วันหยุด','O')+'</div>';
  panel.querySelector('.shift-nov-week').innerHTML=shiftNovWeekMarkup();
  shiftNovMarkDay();
@@ -65,6 +87,7 @@ function shiftNovSetDay(day,personIndex=null){
  shiftNovSelectedDay=day;
  if(day<shiftNovWeekStart||day>=shiftNovWeekStart+7)shiftNovWeekStart=Math.floor((day-1)/7)*7+1;
  shiftNovRenderDetails(personIndex);
+ shiftNovRevealSelectedDay();
 }
 function shiftNovChangeMonth(month){
  if(month!=='10'&&month!=='11')return;
@@ -79,7 +102,11 @@ function shiftNovChangeMonth(month){
  const nov=document.getElementById('shiftNovemberView');
  if(nov)nov.hidden=month!=='11';
  try{localStorage.setItem('shift-month-view-2026',month)}catch{}
- if(month==='11'){shiftNovMarkDay();shiftNovRenderDetails();}
+ if(month==='11'){
+  shiftNovMarkDay();
+  shiftNovRenderDetails();
+  if(typeof requestAnimationFrame==='function')requestAnimationFrame(shiftNovRevealSelectedDay);
+ }
 }
 function shiftNovInit(){
  const panel=document.querySelector('#monthView .month-panel');
@@ -105,6 +132,7 @@ function shiftNovInit(){
   if(button.hasAttribute('data-shift-month')){shiftNovChangeMonth(button.dataset.shiftMonth);return;}
   if(shiftMonthDisplay!=='11')return;
   if(button.hasAttribute('data-shift-nov-step')){shiftNovWeekStart=Math.min(24,Math.max(1,shiftNovWeekStart+Number(button.dataset.shiftNovStep)));shiftNovRenderDetails();return;}
+  if(button.hasAttribute('data-shift-nov-today')){const today=shiftNovToday();if(today)shiftNovSetDay(today);return;}
   if(button.hasAttribute('data-shift-nov-adjacent')){shiftNovSetDay(shiftNovSelectedDay+Number(button.dataset.shiftNovAdjacent));return;}
   if(button.hasAttribute('data-shift-nov-date')){
    const person=button.hasAttribute('data-shift-nov-person')?Number(button.dataset.shiftNovPerson):null;

@@ -51,3 +51,21 @@ test('generated PWA embeds the November roster, view, and upgraded cache',()=>{
  assert.ok(build.includes('v6535-november-view.css'));
  assert.ok(read('sw.js').includes("CACHE_NAME='shift-shell-v6.5.20-r18'"));
 });
+
+test('November begins on the current day and puts its seven-day mobile view in the matching week',()=>{
+ const source=read('src/v6535-november-view.js');
+ function stateAt(iso){
+  class MockDate extends Date {constructor(...args){super(...(args.length?args:[iso]))}}
+  const fakeDocument={readyState:'loading',addEventListener(){}};
+  return new Function('Date','document',source+'\nreturn {today:shiftNovToday(),selected:shiftNovSelectedDay,week:shiftNovWeekStart};')(MockDate,fakeDocument);
+ }
+ assert.deepEqual(stateAt('2026-11-11T07:00:00+07:00'),{today:11,selected:11,week:8});
+ assert.deepEqual(stateAt('2026-12-01T07:00:00+07:00'),{today:null,selected:1,week:1});
+ assert.ok(source.includes('data-shift-nov-today="1"'));
+ assert.ok(source.includes("shiftNovRevealSelectedDay();"));
+ assert.ok(source.includes("button.setAttribute('aria-pressed'"));
+ const css=read('src/v6535-november-view.css');
+ assert.ok(css.includes('.shift-nov-selected-date .shift-nov-today'));
+ assert.ok(read('index.html').includes(source));
+ assert.ok(read('index.html').includes(css));
+});
