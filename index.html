@@ -4619,6 +4619,249 @@ html[data-v65-mode="ECO"] .view.active{animation:none!important}
 }
 
 </style>
+<style id="v700-experience-style">
+/* Shift V6.6–V7.1 — additive visual experience.
+   Source-of-truth duty matrices and the November reference-sheet cells are never modified. */
+:root{
+ --shift7-bg:#060e1b;--shift7-surface:#0b1c30;--shift7-surface-2:#102840;
+ --shift7-stroke:rgba(92,183,226,.22);--shift7-text:#e9f6ff;--shift7-muted:#a4c2d7;
+ --shift7-cyan:#35d5f9;--shift7-blue:#5c96ff;--shift7-violet:#9a8cff;
+ --shift7-green:#34d399;--shift7-amber:#ffd184;--shift7-radius:18px;
+ --shift7-ease:cubic-bezier(.2,.8,.2,1);
+}
+html[data-shift-v7="true"] body{
+ background:radial-gradient(ellipse 76% 48% at 88% 0%,rgba(25,102,155,.14),transparent 72%),
+ radial-gradient(ellipse 60% 42% at 4% 50%,rgba(43,38,135,.10),transparent 76%),var(--shift7-bg)!important;
+ color:var(--shift7-text);
+}
+html[data-shift-v7="true"] .app{isolation:isolate}
+html[data-shift-v7="true"] .command-bar{
+ background:linear-gradient(125deg,rgba(10,27,46,.97),rgba(6,15,29,.96))!important;
+ border:1px solid var(--shift7-stroke)!important;
+ border-radius:var(--shift7-radius)!important;
+ box-shadow:0 18px 48px rgba(0,3,13,.30),inset 0 1px rgba(210,246,255,.07)!important;
+}
+html[data-shift-v7="true"] .brand-copy h1{letter-spacing:-.028em!important;color:#f3fbff!important}
+html[data-shift-v7="true"] .brand-copy :is(p,small){color:#a5c9e2!important}
+html[data-shift-v7="true"] .nav-tabs .nav-btn{
+ border-radius:11px!important;transition:background .25s var(--shift7-ease),box-shadow .25s var(--shift7-ease),color .25s!important;
+}
+html[data-shift-v7="true"] .nav-tabs .nav-btn.active{
+ color:#effcff!important;
+ background:linear-gradient(145deg,rgba(25,110,170,.35),rgba(38,52,113,.25))!important;
+ box-shadow:inset 0 0 0 1px rgba(83,201,250,.32),0 6px 22px rgba(20,117,193,.13)!important;
+}
+html[data-shift-v7="true"] .nav-tabs .nav-btn:focus-visible,
+html[data-shift-v7="true"] :is(.ghost-btn,.sys-btn,.shift-v7-button,.shift-v7-post,.shift-v7-filter,.shift-v7-quality):focus-visible{
+ outline:2px solid #72e8ff!important;outline-offset:3px!important;
+}
+html[data-shift-v7="true"] .hud-panel{
+ border-color:rgba(85,163,212,.24)!important;
+ background-image:linear-gradient(150deg,rgba(16,39,65,.70),rgba(5,17,33,.90))!important;
+ box-shadow:0 16px 35px rgba(1,7,19,.22),inset 0 1px rgba(217,245,255,.035)!important;
+}
+html[data-shift-v7="true"] #overviewView .hero-stage{
+ position:relative;overflow:hidden;
+ background:linear-gradient(118deg,#0c2540,#08162c 58%,#0a1632)!important;
+ border-color:rgba(66,195,238,.34)!important;
+}
+html[data-shift-v7="true"] #overviewView .hero-stage .copy{position:relative;z-index:3}
+html[data-shift-v7="true"] #overviewView .hero-stage .cyber-scene{z-index:1}
+.shift-v7-aurora{position:absolute;inset:-20%;overflow:hidden;pointer-events:none;z-index:0;opacity:.75;
+ background:radial-gradient(circle at var(--shift-v7-x,72%) var(--shift-v7-y,24%),rgba(59,198,252,.26),transparent 31%),
+ radial-gradient(ellipse at 74% 42%,rgba(123,82,238,.22),transparent 43%),
+ radial-gradient(ellipse at 14% 82%,rgba(32,141,214,.17),transparent 45%);
+ animation:shift7-aurora 22s ease-in-out infinite alternate}
+.shift-v7-aurora::after{content:"";position:absolute;inset:0;opacity:.24;
+ background-image:linear-gradient(rgba(91,205,240,.12) 1px,transparent 1px),
+ linear-gradient(90deg,rgba(91,205,240,.12) 1px,transparent 1px);
+ background-size:38px 38px;mask-image:linear-gradient(125deg,transparent 10%,black 85%);
+ transform:perspective(640px) rotateX(45deg) scale(1.3)}
+html[data-shift-v7="true"] .metric-card{
+ position:relative;overflow:hidden;transition:transform .3s var(--shift7-ease),border-color .3s,box-shadow .3s!important;
+}
+html[data-shift-v7="true"] .metric-card::after{content:"";position:absolute;pointer-events:none;inset:0;
+ background:linear-gradient(110deg,transparent 15%,rgba(176,231,255,.055) 48%,transparent 78%);
+ transform:translateX(-115%);transition:transform .75s var(--shift7-ease)}
+html[data-shift-v7="true"] .metric-card:hover{transform:translateY(-3px)!important;
+ border-color:rgba(87,212,247,.48)!important;box-shadow:0 23px 48px rgba(0,5,20,.33)!important}
+html[data-shift-v7="true"] .metric-card:hover::after{transform:translateX(115%)}
+html[data-shift-v7="true"] .metric-card .metric-num{font-variant-numeric:tabular-nums}
+html[data-shift-v7="true"] .shift-v7-experience{
+ position:relative;margin:18px 0 21px;overflow:hidden;isolation:isolate;
+ border:1px solid rgba(92,201,244,.25);border-radius:22px;
+ background:radial-gradient(circle at 75% 50%,rgba(34,97,175,.15),transparent 50%),
+ linear-gradient(126deg,#0b223a 0%,#071729 54%,#091a32 100%);
+ box-shadow:0 28px 65px rgba(0,4,15,.29),inset 0 1px rgba(226,251,255,.055);
+}
+.shift-v7-experience::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+ background:linear-gradient(rgba(105,193,244,.045) 1px,transparent 1px),
+ linear-gradient(90deg,rgba(105,193,244,.045) 1px,transparent 1px);
+ background-size:40px 40px;mask-image:linear-gradient(100deg,transparent,black)}
+.shift-v7-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:20px 24px 0}
+.shift-v7-kicker{display:block;color:#72cff8;font-size:10px;letter-spacing:.16em;font-weight:850}
+.shift-v7-heading{margin:5px 0!important;color:#f3fbff!important;font-size:clamp(19px,2.1vw,26px)!important;line-height:1.25;font-weight:850;letter-spacing:-.025em}
+.shift-v7-sub{color:var(--shift7-muted);font-size:12px;margin:5px 0 0;line-height:1.5}
+.shift-v7-controls{display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap}
+.shift-v7-month,.shift-v7-button,.shift-v7-quality{
+ appearance:none;min-height:36px;border-radius:9px;border:1px solid rgba(91,176,220,.35);
+ background:rgba(7,29,51,.85);color:#eaf8ff;font-family:inherit;
+ font-size:11px;font-weight:750;padding:7px 10px;cursor:pointer;
+ transition:background .2s,border-color .2s,transform .2s}
+.shift-v7-month{min-width:118px}
+.shift-v7-button:hover,.shift-v7-quality:hover{background:#17466b;border-color:#61d9ff}
+.shift-v7-button:disabled{opacity:.35;cursor:not-allowed}
+.shift-v7-button[data-shift-v7-action="today"]{color:#8fe8ff}
+.shift-v7-date{min-width:28px;text-align:center;font-size:14px;font-weight:900;font-variant-numeric:tabular-nums}
+.shift-v7-body{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(240px,.92fr);gap:16px;align-items:center;padding:2px 24px 20px}
+.shift-v7-dial{position:relative;max-width:620px;height:295px;width:100%;margin:auto;perspective:880px;isolation:isolate}
+.shift-v7-rings{position:absolute;inset:8% 9%;border-radius:50%;pointer-events:none;
+ transform-style:preserve-3d;transform:rotateX(20deg)}
+.shift-v7-rings::before,.shift-v7-rings::after{content:"";position:absolute;border-radius:50%;inset:5%;
+ border:1px solid rgba(94,213,255,.34);box-shadow:0 0 38px rgba(62,153,251,.07),inset 0 0 38px rgba(65,171,244,.05)}
+.shift-v7-rings::after{inset:18%;border-style:dashed;border-color:rgba(142,115,246,.38);
+ animation:shift7-spin 42s linear infinite}
+.shift-v7-dial::before{content:"";position:absolute;inset:24% 30%;border-radius:50%;
+ background:radial-gradient(circle,rgba(79,158,253,.2),rgba(41,84,175,.05) 65%,transparent 76%);
+ filter:blur(12px);pointer-events:none}
+.shift-v7-core{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+ width:118px;height:118px;border-radius:50%;border:1px solid rgba(104,226,251,.35);
+ background:radial-gradient(circle at 36% 22%,rgba(59,171,234,.29),rgba(9,25,51,.95) 72%);
+ box-shadow:0 0 0 11px rgba(21,83,139,.07),0 15px 35px rgba(0,5,22,.5),inset 0 2px 9px rgba(120,221,255,.12);
+ display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center}
+.shift-v7-core span{font-size:10px;letter-spacing:.11em;font-weight:900;color:#8bddf5}
+.shift-v7-core strong{font-size:28px;color:#fff;line-height:1;font-variant-numeric:tabular-nums}
+.shift-v7-core small{font-size:9px;color:#a5c6df}
+.shift-v7-post{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);
+ z-index:2;min-width:92px;max-width:112px;min-height:62px;padding:8px 7px;
+ border:1px solid rgba(109,185,226,.37);border-radius:13px;color:#effbff;
+ background:linear-gradient(145deg,rgba(19,55,89,.97),rgba(7,26,49,.98));
+ text-align:center;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+ box-shadow:0 13px 24px rgba(0,3,18,.3);transition:transform .3s var(--shift7-ease),border-color .3s,box-shadow .3s}
+.shift-v7-post b{font-size:15px;letter-spacing:.02em;line-height:1}
+.shift-v7-post span{font-size:10px;line-height:1.25;color:#d2eafc;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.shift-v7-post[data-kind="D"] b{color:#67f0bb}
+.shift-v7-post[data-kind="N"] b{color:#8ebcff}
+.shift-v7-post[data-empty="true"]{opacity:.61;border-style:dashed}
+.shift-v7-post[data-alert="true"]{border-color:#ffd184;box-shadow:0 0 0 1px rgba(255,209,132,.28)}
+.shift-v7-post:hover,.shift-v7-post[aria-pressed="true"]{transform:translate(-50%,-50%) scale(1.06);
+ border-color:#75eaff;box-shadow:0 16px 36px rgba(0,4,20,.4),0 0 0 2px rgba(77,224,255,.19)}
+.shift-v7-aside{min-width:0;display:grid;gap:10px;align-content:center}
+.shift-v7-stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.shift-v7-stat{border:1px solid rgba(100,184,226,.2);border-radius:12px;background:rgba(9,35,62,.72);padding:13px 10px}
+.shift-v7-stat span{display:block;font-size:10px;font-weight:760;color:#a9cfe2;line-height:1.3}
+.shift-v7-stat strong{display:block;color:#f1faff;font-size:27px;line-height:1.3;margin-top:5px;font-variant-numeric:tabular-nums}
+.shift-v7-stat[data-kind="D"]{border-top:2px solid #34d399}
+.shift-v7-stat[data-kind="N"]{border-top:2px solid #5c96ff}
+.shift-v7-stat[data-kind="H"]{border-top:2px solid #f2ae72}
+.shift-v7-detail{min-height:94px;padding:14px 16px;border-radius:13px;
+ background:linear-gradient(115deg,rgba(17,54,82,.82),rgba(9,30,51,.82));
+ border:1px solid rgba(100,195,238,.24)}
+.shift-v7-detail-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+.shift-v7-detail-top b{color:#84ddfa;font-size:11px;letter-spacing:.07em}
+.shift-v7-detail-top span{font-size:10px;color:#b0cddd}
+.shift-v7-detail-name{font-size:16px;font-weight:800;color:#fff;line-height:1.45;overflow-wrap:anywhere}
+.shift-v7-detail p{margin:5px 0 0;font-size:11px;color:#a9c9dc;line-height:1.5}
+.shift-v7-foot{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;padding:0 24px 18px}
+.shift-v7-status{color:#adcbdc;font-size:11px;line-height:1.4}
+.shift-v7-status[data-warning="true"]{color:#ffdb98}
+.shift-v7-trend{display:flex;align-items:center;gap:9px;color:#b3d5e9;font-size:10px}
+.shift-v7-trend svg{height:31px;width:124px;overflow:visible}
+.shift-v7-quality{font-size:10px;min-height:30px;padding:6px 9px}
+#shiftNovemberView .shift-v7-matrix-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+ margin:10px 0 12px;padding:11px 12px;border:1px solid rgba(86,177,226,.3);
+ background:linear-gradient(115deg,rgba(8,34,57,.97),rgba(10,25,46,.92));border-radius:12px}
+.shift-v7-matrix-title{color:#effbff;font-weight:800;font-size:12px}
+.shift-v7-matrix-title small{display:block;margin-top:4px;color:#9dbcd0;font-size:10px;font-weight:550}
+.shift-v7-filters{display:flex;gap:5px;flex-wrap:wrap}
+.shift-v7-filter{border:1px solid rgba(94,174,218,.3);border-radius:8px;background:rgba(10,38,63,.75);
+ color:#bed9ec;padding:7px 11px;font-size:11px;font-weight:800;cursor:pointer;min-height:33px}
+.shift-v7-filter[aria-pressed="true"]{background:#16486c;color:#fff;border-color:#67d9ff;box-shadow:0 0 0 1px rgba(69,206,250,.18)}
+#shiftNovemberView[data-shift-v7-filter="D"] .shift-nov-reference-sheet .shift-nov-sheet-duty:not(.D),
+#shiftNovemberView[data-shift-v7-filter="N"] .shift-nov-reference-sheet .shift-nov-sheet-duty:not(.N),
+#shiftNovemberView[data-shift-v7-filter="H"] .shift-nov-reference-sheet .shift-nov-sheet-duty:not(.H){opacity:.34!important}
+#shiftNovemberView .shift-nov-reference-sheet :is(td,th).shift-v7-col-active{
+ box-shadow:inset 0 0 0 2px rgba(255,247,116,.90)!important;
+}
+#shiftNovemberView .shift-nov-reference-sheet tr.shift-v7-row-active>.shift-nov-name{
+ box-shadow:inset 0 0 0 2px rgba(95,222,247,.88)!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-duty button:focus-visible{
+ outline:2px solid #fce979!important;outline-offset:-3px!important}
+html[data-shift-v7="true"] #monthView .month-panel{
+ border-radius:18px!important;overflow:visible!important}
+html[data-shift-v7="true"] #monthView .table-wrap{border-radius:12px}
+html[data-shift-v7="true"] #heatmapTable tr.shift-v7-row-active>th,
+html[data-shift-v7="true"] #heatmapTable td.shift-v7-col-active{
+ box-shadow:inset 0 0 0 2px rgba(94,224,247,.7)!important}
+html[data-shift-v7="true"] #monthView .shift-nov-source-warning{border-left:3px solid #f8c578}
+html[data-shift-v7="true"] .view.active{animation:shift7-view-enter .35s var(--shift7-ease) both}
+html[data-shift-v7="true"] :is(.ghost-btn,.nav-btn,.sys-btn,.range-btn,.filter-btn,.shift-nov-crew-person){
+ transition:background-color .24s var(--shift7-ease),transform .24s var(--shift7-ease),border-color .24s var(--shift7-ease),box-shadow .24s var(--shift7-ease)!important}
+html[data-shift-v7="true"] button:active:not(:disabled){filter:brightness(1.16)}
+@keyframes shift7-aurora{from{transform:translate3d(-2%,1%,0) scale(1)}to{transform:translate3d(2%,-2%,0) scale(1.06)}}
+@keyframes shift7-spin{to{transform:rotate(360deg)}}
+@keyframes shift7-view-enter{from{opacity:.45;transform:translate3d(0,7px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@media(hover:none){html[data-shift-v7="true"] .metric-card:hover{transform:none!important}}
+@media(max-width:1000px){
+ .shift-v7-body{grid-template-columns:minmax(0,1fr) minmax(230px,.9fr);gap:10px;padding-left:16px;padding-right:16px}
+ .shift-v7-head{padding:16px 16px 0}
+ .shift-v7-foot{padding:0 16px 15px}
+ .shift-v7-dial{height:270px}
+ .shift-v7-post{min-width:78px;max-width:91px;font-size:10px;padding:7px 5px}
+ .shift-v7-core{width:105px;height:105px}
+}
+@media(max-width:760px){
+ .shift-v7-experience{margin:12px 0 14px;border-radius:16px}
+ .shift-v7-head{display:block;padding:15px 13px 0}
+ .shift-v7-controls{justify-content:flex-start;margin-top:13px}
+ .shift-v7-body{display:block;padding:0 12px 10px}
+ .shift-v7-dial{height:268px;max-width:450px}
+ .shift-v7-post{min-width:76px;max-width:89px;min-height:55px;padding:6px 5px}
+ .shift-v7-post b{font-size:13px}
+ .shift-v7-post span{font-size:9px}
+ .shift-v7-core{width:96px;height:96px}
+ .shift-v7-core strong{font-size:23px}
+ .shift-v7-aside{margin:0 auto;max-width:540px}
+ .shift-v7-stat{padding:10px}
+ .shift-v7-stat strong{font-size:23px}
+ .shift-v7-detail{min-height:auto}
+ .shift-v7-foot{padding:0 13px 15px}
+ .shift-v7-trend{width:100%;justify-content:space-between}
+ .shift-v7-month{flex:1;min-width:90px}
+ #shiftNovemberView .shift-v7-matrix-toolbar{padding:10px}
+ #shiftNovemberView .shift-v7-filters{width:100%}
+ #shiftNovemberView .shift-v7-filter{flex:1;min-width:0;padding:8px 6px}
+ html[data-shift-v7="true"] #shiftNovemberView .shift-nov-scroll{max-height:none!important;max-width:100%;overscroll-behavior-x:contain}
+ html[data-shift-v7="true"] .mobile-nav{background:linear-gradient(180deg,rgba(10,28,47,.97),rgba(5,15,28,.99))!important;
+  border-top:1px solid rgba(89,180,226,.36)!important;box-shadow:0 -9px 30px rgba(0,4,13,.25)!important}
+ html[data-shift-v7="true"] .mobile-nav button{min-width:0}
+}
+@media(max-width:380px){
+ .shift-v7-dial{height:250px}
+ .shift-v7-post{min-width:69px;max-width:77px;min-height:52px}
+ .shift-v7-controls{gap:4px}
+ .shift-v7-button{padding:7px 8px}
+ .shift-v7-foot{align-items:flex-start}
+}
+html[data-shift-effects="lite"] .shift-v7-aurora,
+html[data-shift-effects="lite"] .shift-v7-rings::after{animation:none!important}
+html[data-shift-effects="lite"] .shift-v7-post,
+html[data-shift-effects="lite"] .metric-card,
+html[data-shift-effects="lite"] .view.active{animation:none!important;transition:none!important}
+html[data-shift-effects="lite"] .metric-card:hover{transform:none!important}
+@media(prefers-reduced-motion:reduce){
+ html[data-shift-v7="true"] .view.active,
+ html[data-shift-v7="true"] .shift-v7-aurora,
+ html[data-shift-v7="true"] .shift-v7-rings::after{animation:none!important}
+ html[data-shift-v7="true"] .metric-card,
+ html[data-shift-v7="true"] .shift-v7-post{transition:none!important;transform:none}
+ html[data-shift-v7="true"] .shift-v7-post{transform:translate(-50%,-50%)!important}
+}
+/* Suspend nonessential animation offscreen; hover and data remain responsive. */
+#heroStage[data-shift-v7-visible="false"] .shift-v7-aurora,
+#shiftExperience[data-shift-v7-visible="false"] .shift-v7-rings::after{animation-play-state:paused!important}
+
+</style>
 </head>
 <!-- REFERENCE LOCK V4 -->
 <body>
@@ -7226,6 +7469,358 @@ function shiftNovRenderReferenceSheet(){
 }
 shiftNovRenderGrid=shiftNovRenderReferenceSheet;
 
+// v700-experience.js
+/* Shift V6.6–V7.1 visual experience. Presentation only: never writes to roster arrays. */
+const SHIFT_V7_POSTS=Object.freeze(['D1','D2','D3','D4','N1','N2']);
+const SHIFT_V7_LOCATIONS=Object.freeze([[27,19],[73,19],[91,49],[73,81],[27,81],[9,49]]);
+let shiftV7Month=11,shiftV7Day=1,shiftV7SelectedPost='D1',shiftV7Filter='ALL';
+let shiftV7LastColumn='',shiftV7LastRow=null,shiftV7LastCells=[];
+function shiftV7Escape(value){
+ return String(value===undefined||value===null?'':value).replace(/[&<>"']/g,function(char){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[char];
+ });
+}
+function shiftV7BangkokToday(){
+ const parts=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Bangkok',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+ const value={};
+ for(const item of parts)if(item.type==='year'||item.type==='month'||item.type==='day')value[item.type]=Number(item.value);
+ return {year:value.year,month:value.month,day:value.day};
+}
+function shiftV7English(){return document.documentElement.lang==='en'}
+function shiftV7MonthTitle(month){
+ return shiftV7English()?(month===10?'October 2026':'November 2026'):(month===10?'ตุลาคม 2569':'พฤศจิกายน 2569');
+}
+function shiftV7SourceRows(month){
+ return month===10?OCTOBER_2026_DUTY_POSITIONS:NOVEMBER_2026_DUTY_POSITIONS;
+}
+function shiftV7Model(month,day){
+ month=month===10?10:11;
+ const max=month===10?31:30;
+ if(!Number.isInteger(day)||day<1||day>max)throw new RangeError('Invalid Shift day');
+ const source=shiftV7SourceRows(month);
+ if(!Array.isArray(source)||!Array.isArray(staff)||source.length!==staff.length)throw new Error('Roster source/staff mismatch');
+ const records=source.map(function(row,index){
+  const code=row[day-1];
+  return {name:staff[index].name,index:index,code:code};
+ });
+ // The optional October override editor is authoritative for named posts.
+ if(month===10&&typeof shiftRolesForDay==='function'){
+  const overrides=shiftRolesForDay(day);
+  records.forEach(function(item){
+   if(item.code!=='H'&&item.code!=='O'){
+    const matching=SHIFT_V7_POSTS.find(function(post){return overrides[post]===item.name});
+    if(matching)item.code=matching;
+    else if(SHIFT_V7_POSTS.includes(item.code)&&overrides[item.code]&&overrides[item.code]!==item.name)item.code=item.code[0]+'?';
+   }
+  });
+ }
+ const positions=SHIFT_V7_POSTS.map(function(post){
+  const matches=records.filter(function(item){return item.code===post});
+  return {post:post,kind:post.charAt(0),people:matches,duplicate:matches.length>1,missing:matches.length===0};
+ });
+ const dayCount=records.filter(function(item){return item.code.charAt(0)==='D'}).length;
+ const nightCount=records.filter(function(item){return item.code.charAt(0)==='N'}).length;
+ const offCount=records.filter(function(item){return item.code==='H'||item.code==='O'}).length;
+ const duplicates=positions.filter(function(item){return item.duplicate}).map(function(item){return item.post});
+ const incomplete=positions.filter(function(item){return item.post==='N1'||item.post==='N2'}).filter(function(item){return item.missing}).map(function(item){return item.post});
+ const unknown=records.filter(function(item){return item.code.endsWith('?')});
+ return {month:month,day:day,max:max,positions:positions,records:records,dayCount:dayCount,nightCount:nightCount,offCount:offCount,
+  duplicates:duplicates,incomplete:incomplete,unknown:unknown};
+}
+function shiftV7ShortName(person){
+ if(!person)return '—';
+ if(typeof SHIFT_NOV_SHEET_NICKNAMES!=='undefined'&&SHIFT_NOV_SHEET_NICKNAMES[person.index])return SHIFT_NOV_SHEET_NICKNAMES[person.index];
+ return String(person.name).replace(/^นาย\s*/,'').split(/\s+/)[0]||person.name;
+}
+function shiftV7InitialDate(){
+ const now=shiftV7BangkokToday();
+ shiftV7Month=now.year===2026&&(now.month===10||now.month===11)?now.month:11;
+ shiftV7Day=now.year===2026&&(now.month===10||now.month===11)?now.day:1;
+}
+function shiftV7DayRange(month){
+ return month===10?31:30;
+}
+function shiftV7QualityLite(){
+ return document.documentElement.dataset.shiftEffects==='lite';
+}
+function shiftV7ApplyQuality(){
+ let quality='auto';
+ try{quality=localStorage.getItem('shift-v7-motion-quality')||'auto'}catch{}
+ const reduced=typeof matchMedia==='function'&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const save=typeof navigator!=='undefined'&&Boolean(navigator.connection&&navigator.connection.saveData);
+ const compact=typeof matchMedia==='function'&&matchMedia('(max-width: 760px)').matches;
+ const lowMemory=typeof navigator!=='undefined'&&Number(navigator.deviceMemory)>0&&Number(navigator.deviceMemory)<=3;
+ const lite=reduced||quality==='lite'||quality==='auto'&&(save||compact||lowMemory);
+ document.documentElement.dataset.shiftEffects=lite?'lite':'full';
+ const button=document.getElementById('shiftV7Quality');
+ if(button){
+  button.textContent=shiftV7English()?(lite?'Motion: lite':'Motion: full'):(lite?'โมชั่น: เบา':'โมชั่น: เต็ม');
+  button.setAttribute('aria-pressed',String(!lite));
+  button.title=shiftV7English()?'Toggle motion intensity':'สลับความเข้มของโมชั่น';
+ }
+}
+function shiftV7SetQuality(){
+ const next=shiftV7QualityLite()?'full':'lite';
+ try{localStorage.setItem('shift-v7-motion-quality',next)}catch{}
+ shiftV7ApplyQuality();
+}
+function shiftV7Graph(model){
+ const first=Math.max(1,model.day-6);
+ const points=[];
+ for(let day=first;day<=model.day;day++){
+  const rows=shiftV7SourceRows(model.month);
+  points.push({
+   day:day,
+   D:rows.filter(function(row){return row[day-1]&&row[day-1].charAt(0)==='D'}).length,
+   N:rows.filter(function(row){return row[day-1]&&row[day-1].charAt(0)==='N'}).length
+  });
+ }
+ const peak=Math.max(4,...points.map(function(p){return Math.max(p.D,p.N)}));
+ function path(kind){
+  return points.map(function(p,index){
+   const x=4+index*(118/Math.max(1,points.length-1));
+   const y=28-(p[kind]/peak)*23;
+   return (index===0?'M':'L')+x.toFixed(1)+' '+y.toFixed(1);
+  }).join(' ');
+ }
+ return {day:path('D'),night:path('N'),length:points.length};
+}
+function shiftV7MountExperience(){
+ const overview=document.getElementById('overviewView');
+ const hero=overview&&overview.querySelector('.hero-grid');
+ if(!hero||document.getElementById('shiftExperience'))return;
+ const panel=document.createElement('section');
+ panel.id='shiftExperience';panel.className='shift-v7-experience';
+ panel.setAttribute('aria-label','Duty Orbit แสดงตำแหน่งเวรจากตารางจริง');
+ const positions=SHIFT_V7_POSTS.map(function(post,index){
+  const location=SHIFT_V7_LOCATIONS[index];
+  return '<button class="shift-v7-post" type="button" data-v7-post="'+post+'" data-kind="'+post[0]+'" style="--x:'+location[0]+'%;--y:'+location[1]+'%" aria-pressed="false"><b>'+post+'</b><span>—</span></button>';
+ }).join('');
+ panel.innerHTML=
+  '<div class="shift-v7-head"><div><span class="shift-v7-kicker">V7.1 • OPERATIONS EXPERIENCE</span>'+
+   '<h2 class="shift-v7-heading">Duty Orbit <span aria-hidden="true">/</span> ตำแหน่งเวรทั้งทีม</h2>'+
+   '<p class="shift-v7-sub">Interactive 3D • อ้างอิงตำแหน่ง D1–D4 / N1–N2 จากตารางจริง (พ.ศ. 2569)</p></div>'+
+   '<div class="shift-v7-controls">'+
+    '<label class="visually-hidden" for="shiftV7Month">เลือกเดือนสำหรับ Duty Orbit</label>'+
+    '<select class="shift-v7-month" id="shiftV7Month" aria-label="เลือกเดือน"><option value="10">ตุลาคม 2569</option><option value="11">พฤศจิกายน 2569</option></select>'+
+    '<button type="button" class="shift-v7-button" data-shift-v7-action="prev" aria-label="วันก่อนหน้า">‹</button>'+
+    '<span class="shift-v7-date" id="shiftV7Date" aria-live="polite">1</span>'+
+    '<button type="button" class="shift-v7-button" data-shift-v7-action="next" aria-label="วันถัดไป">›</button>'+
+    '<button type="button" class="shift-v7-button" data-shift-v7-action="today">วันนี้</button>'+
+   '</div></div>'+
+  '<div class="shift-v7-body"><div class="shift-v7-dial" role="group" aria-label="ตำแหน่งเวรรอบวงแหวน">'+
+    '<div class="shift-v7-rings" aria-hidden="true"></div>'+
+    '<div class="shift-v7-core" aria-hidden="true"><span>DUTY MATRIX</span><strong id="shiftV7Core">—</strong><small id="shiftV7CoreMonth">2026</small></div>'+
+    positions+'</div>'+
+   '<div class="shift-v7-aside"><div class="shift-v7-stat-grid">'+
+    '<div class="shift-v7-stat" data-kind="D"><span>DAY • D</span><strong id="shiftV7DayStat">—</strong></div>'+
+    '<div class="shift-v7-stat" data-kind="N"><span>NIGHT • N</span><strong id="shiftV7NightStat">—</strong></div>'+
+    '<div class="shift-v7-stat" data-kind="H"><span>OFF • H</span><strong id="shiftV7OffStat">—</strong></div>'+
+   '</div>'+
+   '<div class="shift-v7-detail" id="shiftV7Detail" aria-live="polite"></div>'+
+   '<button type="button" class="shift-v7-button" data-shift-v7-action="open">ดูตารางเวรและรายละเอียดวันที่เลือก</button>'+
+   '</div></div>'+
+  '<div class="shift-v7-foot"><span class="shift-v7-status" id="shiftV7Status"></span>'+
+   '<div class="shift-v7-trend"><span>7-DAY DUTY TREND</span>'+
+    '<svg id="shiftV7Trend" viewBox="0 0 126 32" role="img" aria-label="แนวโน้มจำนวนเวรกลางวันและกลางคืนย้อนหลังไม่เกิน 7 วัน">'+
+    '<path data-v7-trend="D" d="" fill="none" stroke="#51ddad" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>'+
+    '<path data-v7-trend="N" d="" fill="none" stroke="#669fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg>'+
+   '<button type="button" id="shiftV7Quality" class="shift-v7-quality" data-shift-v7-action="quality" aria-pressed="true">โมชั่น: เต็ม</button>'+
+   '</div></div>';
+ hero.after(panel);
+ const select=panel.querySelector('#shiftV7Month');
+ select.value=String(shiftV7Month);
+ panel.addEventListener('change',function(event){
+  if(event.target!==select)return;
+  shiftV7Month=Number(select.value)===10?10:11;
+  shiftV7Day=Math.min(shiftV7Day,shiftV7DayRange(shiftV7Month));
+  shiftV7Render();
+ });
+ panel.addEventListener('click',function(event){
+  const button=event.target.closest('button');
+  if(!button||!panel.contains(button))return;
+  if(button.hasAttribute('data-v7-post')){shiftV7SelectedPost=button.dataset.v7Post;shiftV7Render();return}
+  const action=button.dataset.shiftV7Action;
+  if(action==='prev'&&shiftV7Day>1){shiftV7Day--;shiftV7Render();}
+  if(action==='next'&&shiftV7Day<shiftV7DayRange(shiftV7Month)){shiftV7Day++;shiftV7Render();}
+  if(action==='today'){
+   const today=shiftV7BangkokToday();
+   if(today.year===2026&&(today.month===10||today.month===11)){
+    shiftV7Month=today.month;shiftV7Day=today.day;
+   }else{shiftV7Month=11;shiftV7Day=1;}
+   select.value=String(shiftV7Month);shiftV7Render();
+  }
+  if(action==='quality')shiftV7SetQuality();
+  if(action==='open')shiftV7OpenMonth();
+ });
+ shiftV7ApplyQuality();
+ shiftV7Render();
+}
+function shiftV7Render(){
+ const panel=document.getElementById('shiftExperience');
+ if(!panel)return;
+ const model=shiftV7Model(shiftV7Month,shiftV7Day);
+ const shortTitle=shiftV7MonthTitle(model.month);
+ const date=document.getElementById('shiftV7Date');
+ if(date){date.textContent=String(model.day);date.title=shortTitle+' • '+model.day;}
+ panel.querySelector('#shiftV7Month').value=String(model.month);
+ panel.querySelector('[data-shift-v7-action="prev"]').disabled=model.day===1;
+ panel.querySelector('[data-shift-v7-action="next"]').disabled=model.day===model.max;
+ panel.querySelector('#shiftV7Core').textContent=String(model.day).padStart(2,'0');
+ panel.querySelector('#shiftV7CoreMonth').textContent=model.month===10?'OCT 2026':'NOV 2026';
+ panel.querySelector('#shiftV7DayStat').textContent=String(model.dayCount);
+ panel.querySelector('#shiftV7NightStat').textContent=String(model.nightCount);
+ panel.querySelector('#shiftV7OffStat').textContent=String(model.offCount);
+ model.positions.forEach(function(item){
+  const node=panel.querySelector('[data-v7-post="'+item.post+'"]');
+  if(!node)return;
+  node.dataset.empty=String(item.missing);
+  node.dataset.alert=String(item.duplicate||item.post==='N2'&&model.incomplete.includes('N2'));
+  node.setAttribute('aria-pressed',String(shiftV7SelectedPost===item.post));
+  let label=item.people.length===1?shiftV7ShortName(item.people[0]):item.people.length>1?item.people.length+' คน':'—';
+  node.querySelector('span').textContent=label;
+  const description=item.people.map(function(person){return person.name}).join(', ')||'ยังไม่มีผู้รับตำแหน่ง';
+  node.title=item.post+' • '+model.day+' '+shortTitle+' • '+description;
+  node.setAttribute('aria-label',node.title);
+ });
+ const selected=model.positions.find(function(item){return item.post===shiftV7SelectedPost})||model.positions[0];
+ const chosenNames=selected.people.map(function(person){return shiftV7Escape(person.name)}).join(' / ')||'—';
+ const caption=selected.duplicate?'ตำแหน่งซ้ำในต้นฉบับ • กรุณาตรวจสอบ':selected.missing?'ไม่มีผู้รับตำแหน่งนี้ในวันที่เลือก':'ข้อมูลจากตารางเวรต้นฉบับ';
+ panel.querySelector('#shiftV7Detail').innerHTML='<div class="shift-v7-detail-top"><b>'+selected.post+' • '+model.day+' '+shiftV7Escape(shortTitle)+'</b><span>POSITION DETAIL</span></div>'+
+  '<div class="shift-v7-detail-name">'+chosenNames+'</div><p>'+caption+'</p>';
+ const warning=model.duplicates.length||model.incomplete.length||model.unknown.length;
+ let msg=warning?'ต้องตรวจสอบ: '+(model.duplicates.length?'ตำแหน่งซ้ำ '+model.duplicates.join(', ')+' • ':'')+
+  (model.incomplete.length?'ไม่พบ '+model.incomplete.join(', ')+' • ':'')+
+  (model.unknown.length?'ตำแหน่งยังไม่ยืนยัน '+model.unknown.length+' คน':''):'ครบตามข้อมูลเวรที่บันทึกไว้';
+ const status=panel.querySelector('#shiftV7Status');
+ status.textContent=model.day+' '+shortTitle+' • '+msg;
+ status.dataset.warning=String(Boolean(warning));
+ const trend=shiftV7Graph(model);
+ panel.querySelector('[data-v7-trend="D"]').setAttribute('d',trend.day);
+ panel.querySelector('[data-v7-trend="N"]').setAttribute('d',trend.night);
+}
+function shiftV7OpenMonth(){
+ if(typeof showView==='function')showView('month');
+ if(typeof shiftNovChangeMonth==='function')shiftNovChangeMonth(String(shiftV7Month));
+ if(shiftV7Month===11&&typeof shiftNovSetDay==='function')shiftNovSetDay(shiftV7Day);
+ if(shiftV7Month===10&&typeof setSelectedDay==='function')setSelectedDay(shiftV7Day);
+}
+function shiftV7MountMatrixFilters(){
+ const view=document.getElementById('shiftNovemberView');
+ if(!view||view.querySelector('.shift-v7-matrix-toolbar'))return;
+ view.dataset.shiftV7Filter=shiftV7Filter;
+ const bar=document.createElement('div');
+ bar.className='shift-v7-matrix-toolbar';
+ bar.innerHTML='<div class="shift-v7-matrix-title">INTERACTIVE DUTY MATRIX<small>กรองสีตำแหน่งเพื่ออ่านง่ายขึ้น • ไม่เปลี่ยนข้อมูลเวร</small></div>'+
+  '<div class="shift-v7-filters" role="group" aria-label="เน้นตำแหน่งในตารางเวร">'+
+  [['ALL','ทั้งหมด'],['D','กลางวัน D'],['N','กลางคืน N'],['H','หยุด H']].map(function(pair){
+   return '<button type="button" class="shift-v7-filter" data-v7-filter="'+pair[0]+'" aria-pressed="'+String(pair[0]===shiftV7Filter)+'">'+pair[1]+'</button>';
+  }).join('')+'</div>';
+ const anchor=view.querySelector('.shift-nov-week');
+ if(anchor)anchor.before(bar);else view.prepend(bar);
+ view.addEventListener('click',function(event){
+  const button=event.target.closest('button[data-v7-filter]');
+  if(!button||!view.contains(button))return;
+  shiftV7Filter=button.dataset.v7Filter;
+  view.dataset.shiftV7Filter=shiftV7Filter;
+  view.querySelectorAll('[data-v7-filter]').forEach(function(el){
+   el.setAttribute('aria-pressed',String(el.dataset.v7Filter===shiftV7Filter));
+  });
+ });
+}
+function shiftV7ClearCellFocus(){
+ shiftV7LastCells.forEach(function(cell){cell.classList.remove('shift-v7-col-active')});
+ shiftV7LastCells=[];
+ if(shiftV7LastRow)shiftV7LastRow.classList.remove('shift-v7-row-active');
+ shiftV7LastRow=null;shiftV7LastColumn='';
+}
+function shiftV7FocusCell(cell){
+ if(!cell)return;
+ const table=cell.closest('table');
+ if(!table)return;
+ const november=Boolean(table.closest('#shiftNovemberView'));
+ const dataDate=cell.getAttribute('data-shift-nov-date');
+ const column=november?Number(dataDate):cell.cellIndex;
+ if(!Number.isInteger(column)||column<1)return;
+ const id=(november?'11:':'10:')+column;
+ if(shiftV7LastColumn===id&&shiftV7LastRow===cell.parentElement)return;
+ shiftV7ClearCellFocus();
+ const rows=table.querySelectorAll('tr');
+ rows.forEach(function(row){
+  let active=null;
+  if(november)active=row.querySelector('[data-shift-nov-date="'+column+'"]');
+  else active=row.cells&&row.cells[column];
+  if(active&&active.classList){active.classList.add('shift-v7-col-active');shiftV7LastCells.push(active)}
+ });
+ shiftV7LastColumn=id;
+ shiftV7LastRow=cell.parentElement;
+ shiftV7LastRow.classList.add('shift-v7-row-active');
+}
+function shiftV7MountMatrixHover(){
+ const panel=document.getElementById('monthView');
+ if(!panel)return;
+ panel.addEventListener('pointerover',function(event){
+  const cell=event.target.closest('#shiftNovemberView td[data-shift-nov-date],#heatmapTable td.shift');
+  if(cell)shiftV7FocusCell(cell);
+ });
+ panel.addEventListener('focusin',function(event){
+  const cell=event.target.closest('#shiftNovemberView td[data-shift-nov-date],#heatmapTable td.shift');
+  if(cell)shiftV7FocusCell(cell);
+ });
+ panel.addEventListener('pointerleave',shiftV7ClearCellFocus);
+ panel.addEventListener('focusout',function(event){
+  if(!event.relatedTarget||!panel.contains(event.relatedTarget))shiftV7ClearCellFocus();
+ });
+}
+function shiftV7MountAmbient(){
+ const hero=document.getElementById('heroStage');
+ if(!hero||hero.querySelector('.shift-v7-aurora'))return;
+ const glow=document.createElement('div');
+ glow.className='shift-v7-aurora';glow.setAttribute('aria-hidden','true');hero.prepend(glow);
+ if(typeof matchMedia==='function'&&matchMedia('(hover: hover) and (pointer: fine)').matches){
+  let frame=0,px=70,py=30;
+  hero.addEventListener('pointermove',function(event){
+   if(shiftV7QualityLite())return;
+   const rect=hero.getBoundingClientRect();
+   px=Math.max(0,Math.min(100,100*(event.clientX-rect.left)/Math.max(1,rect.width)));
+   py=Math.max(0,Math.min(100,100*(event.clientY-rect.top)/Math.max(1,rect.height)));
+   if(frame)return;
+   frame=requestAnimationFrame(function(){
+    frame=0;glow.style.setProperty('--shift-v7-x',px+'%');
+    glow.style.setProperty('--shift-v7-y',py+'%');
+   });
+  },{passive:true});
+ }
+ if(typeof IntersectionObserver==='function'){
+  const watch=new IntersectionObserver(function(entries){
+   entries.forEach(function(entry){entry.target.dataset.shiftV7Visible=String(entry.isIntersecting)});
+  },{threshold:0});
+  watch.observe(hero);
+  const orbit=document.getElementById('shiftExperience');
+  if(orbit)watch.observe(orbit);
+ }
+}
+function shiftV7Boot(){
+ if(document.documentElement.dataset.shiftV7==='true')return;
+ const host=document.getElementById('overviewView');
+ if(!host||typeof NOVEMBER_2026_DUTY_POSITIONS==='undefined'||typeof OCTOBER_2026_DUTY_POSITIONS==='undefined')return;
+ document.documentElement.dataset.shiftV7='true';
+ document.documentElement.dataset.shiftExperienceVersion='7.1';
+ shiftV7InitialDate();
+ shiftV7MountExperience();
+ shiftV7MountMatrixFilters();
+ shiftV7MountMatrixHover();
+ shiftV7MountAmbient();
+ shiftV7ApplyQuality();
+ if(typeof matchMedia==='function'){
+  const preference=matchMedia('(prefers-reduced-motion: reduce)');
+  if(typeof preference.addEventListener==='function')preference.addEventListener('change',shiftV7ApplyQuality);
+ }
+}
+if(typeof document!=='undefined'){
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',shiftV7Boot,{once:true});
+ else shiftV7Boot();
+}
 })();</script>
 </body>
 </html>
