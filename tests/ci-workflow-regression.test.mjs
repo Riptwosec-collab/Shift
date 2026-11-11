@@ -8,7 +8,8 @@ test('main Cloudflare deploy validates source and icons before checking credenti
  const steps=['Build PWA and icon assets','Verify generated HTML','Test','Verify icon assets','Check Cloudflare credentials','Deploy to Cloudflare Workers'];
  for(const s of steps)assert.ok(indexOf(s)>0,s);
  for(let i=1;i<steps.length;i++)assert.ok(indexOf(steps[i])>indexOf(steps[i-1]),'wrong order '+steps[i]);
- assert.ok(wf.includes('branches: [main]'));
+ assert.ok(wf.includes('  workflow_dispatch:'));
+ assert.ok(!wf.includes('branches: [main]'),'Cloudflare is auto-deployed separately; GitHub fallback must be manual');
  assert.ok(wf.includes('CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}'));
  assert.ok(wf.includes('CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}'));
  assert.ok(!wf.includes('    env:\n      CLOUDFLARE_API_TOKEN'));
@@ -20,4 +21,11 @@ test('release branch CI cancels redundant work but keeps all build, test and rel
   for(const marker of ['cancel-in-progress: true','contents: read','paths-ignore:','run: npm run build','git diff --exit-code -- index.html','run: npm test','workflow_dispatch:','timeout-minutes:'])assert.ok(wf.includes(marker),path+': '+marker);
   assert.ok(!wf.includes('branches: [main]'),path+' must not deploy');
  }
+});
+
+test('main quality gate validates generated artifact and tests without double-deploying',()=>{
+ const wf=read('.github/workflows/shift-main-ci.yml');
+ for(const marker of ['branches: [main]','run: npm run build','git diff --exit-code -- index.html','run: npm test','workflow_dispatch:'])
+  assert.ok(wf.includes(marker),marker);
+ assert.ok(!wf.includes('wrangler deploy'),'Only Cloudflare Builds deploys from main');
 });

@@ -47,3 +47,7 @@ Source files: src/v700-experience.css and src/v700-experience.js. Build assembly
 ## Rollback
 
 Remove v700-experience.js and v700-experience.css from scripts/build.mjs, run build and deploy. No source roster data migration is required.
+
+## CI wiring
+
+The new .github/workflows/shift-main-ci.yml runs Node 24 build, artifact diff, and tests on main pushes. Cloudflare remains the sole automatic production deployer; the existing manual deploy fallback is not triggered by CI.

@@ -1,0 +1,37 @@
+name: Shift Main Quality Gate
+
+# Test every main push. Cloudflare Builds owns automatic production deployment.
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**/*.md'
+      - 'docs/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: shift-main-quality
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+      - name: Set up Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install
+        run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Build standalone PWA
+        run: npm run build
+      - name: Verify tracked HTML
+        run: git diff --exit-code -- index.html
+      - name: Run complete regression suite
+        run: npm test

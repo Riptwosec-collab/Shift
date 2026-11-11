@@ -195,6 +195,8 @@ html[data-shift-v7="true"] button:active:not(:disabled){filter:brightness(1.16)}
  .shift-v7-body{display:block;padding:0 12px 10px}
  .shift-v7-dial{height:268px;max-width:450px}
  .shift-v7-post{min-width:76px;max-width:89px;min-height:55px;padding:6px 5px}
+ .shift-v7-post[data-v7-post="D3"]{left:85%!important}
+ .shift-v7-post[data-v7-post="N2"]{left:15%!important}
  .shift-v7-post b{font-size:13px}
  .shift-v7-post span{font-size:9px}
  .shift-v7-core{width:96px;height:96px}
