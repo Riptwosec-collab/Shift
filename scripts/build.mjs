@@ -53,4 +53,4 @@ html=html.replace('</head>',`<style id="v64-additive-style">\n${addCss}\n</style
 html=html.replace('</body>',`<script id="v652-engine">(()=>{\n${addJs}\n})();</script>\n</body>`);
 fs.writeFileSync('index.html',html);
 const dist=path.join(root,'dist');fs.rmSync(dist,{recursive:true,force:true});fs.mkdirSync(dist,{recursive:true});fs.writeFileSync(path.join(dist,'index.html'),html);
-console.log(`built v7.1 Shift visual experience index.html ${Buffer.byteLength(html)} bytes`);
+console.log(`built v6.5.20 legacy index.html ${Buffer.byteLength(html)} bytes + Shift visual experience V7.1`);

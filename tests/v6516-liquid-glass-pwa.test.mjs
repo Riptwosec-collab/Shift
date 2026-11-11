@@ -23,10 +23,14 @@ test('desktop matrix stays zero scroll and mobile calendar keeps 7 native column
   assert.match(css,/\.v6511-board-scroll[\s\S]*overflow:hidden/);
   assert.match(css,/\.v6515-month-days[\s\S]*repeat\(7,minmax\(0,1fr\)\)/);
 });
-test('service worker returns cached navigation immediately and revalidates in background, without caching API responses',()=>{
+test('service worker uses Safari-safe network-first navigation with offline fallback and never caches API responses',()=>{
   const sw=read('sw.js');
   for(const k of ['shift-shell-v6.5.20','networkFirst','event.waitUntil','caches.open','request.mode','navigate','cache.match','safeFetch(request'])assert.ok(sw.includes(k),`missing ${k}`);
-  assert.match(sw,/if\(cached\)[\s\S]*return cached/);
+  assert.match(sw,/async function networkFirst\(request,event\)/);
+  assert.match(sw,/const fresh=await safeFetch\(request,'html'\)/);
+  assert.match(sw,/const fallback=await cachedShell\(cache\)/);
+  assert.match(sw,/if\(fallback\)return fallback/);
+  assert.match(sw,/return withoutRedirect\(response\)/);
   assert.match(sw,/url\.origin!==self\.location\.origin/);
   assert.match(sw,/request\.method!=='GET'/);
   assert.match(sw,/\/api\//);
