@@ -36,7 +36,9 @@ test('V7.3 boot is bundled in checked-in standalone PWA and does not mutate rost
  assert.ok(build.includes("v731-november-access.css"));
  assert.ok(html.includes(source));
  assert.ok(html.includes(styles));
- assert.ok(html.includes('data-shift-release="7.3"'));
+ const match=html.match(/data-shift-release="(\d+\.\d+)"/);
+ assert.ok(match,'release identifier is missing');
+ assert.ok(Number(match[1])>=7.3,'November navigation requires release v7.3+');
  assert.match(html,/data-app-version="6\.5\.20"/);
  assert.match(html,/id="v731-november-access-style"/);
  assert.doesNotMatch(source,/NOVEMBER_2026_DUTY_POSITIONS\s*\[/);
