@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="th" data-app-version="6.5.20" data-shift-release="7.3" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">
+<html lang="th" data-app-version="6.5.20" data-shift-release="7.4" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -5257,6 +5257,286 @@ html[data-shift731="ready"] .shift731-tab:focus-visible{
  html[data-shift731="ready"] .command-bar .shift731-header-btn{transition:none!important}
 }
 </style>
+<style id="v740-full-month-overview-style">
+/* Shift V7.4 — Precision Operations design: Float planning geometry, Attio-like quiet panels,
+   RotaCloud/When I Work full-month visual summary. CSS/SVG only, no image overlays. */
+html[data-shift740="ready"]{
+ --s740-bg:#0d121a;--s740-panel:#151e28;--s740-panel2:#192531;--s740-stroke:rgba(170,193,214,.16);
+ --s740-text:#edf3fa;--s740-muted:#96adbe;--s740-accent:#9cd8e5;
+ --s740-day:#5ad6ae;--s740-night:#9cafff;--s740-off:#ac8793;
+ --s740-glow:none;
+}
+html[data-shift740="ready"] body{
+ background:radial-gradient(ellipse 90% 50% at 100% 0%,rgba(83,112,151,.075),transparent 75%),#0d121a!important;
+}
+html[data-shift740="ready"] #overviewView .hud-panel,
+html[data-shift740="ready"] #overviewView .v6517-glass{
+ background:linear-gradient(140deg,#151e28,#101823)!important;
+ border:1px solid var(--s740-stroke)!important;
+ box-shadow:0 12px 27px rgba(0,0,0,.13)!important;
+}
+html[data-shift740="ready"] #overviewView .v6517-main-grid>.v6517-matrix,
+html[data-shift740="ready"] #overviewView #v6517MobileMatrix,
+html[data-shift740="ready"] #overviewView #v6517MatrixTarget{display:none!important}
+html[data-shift740="ready"] #overviewView .v6517-main-grid{grid-template-columns:minmax(0,1fr)!important}
+html[data-shift740="ready"] #overviewView .hero-stage .shift-v7-aurora{opacity:.15!important;animation:none!important}
+html[data-shift740="ready"] #overviewView .metric-card:hover{transform:none!important}
+html[data-shift740="ready"] .shift72-feature-entry{margin-top:10px;opacity:.82}
+html[data-shift740="ready"] .shift72-feature-entry::before{opacity:.1}
+#shift740FullMonth.s740-board{
+ box-sizing:border-box;position:relative;isolation:isolate;width:100%;min-width:0;
+ margin:10px 0 20px;border-radius:18px;border:1px solid rgba(182,210,232,.22);
+ background:#131c26;color:var(--s740-text);
+ box-shadow:0 18px 50px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.03);
+ padding:clamp(12px,2.2vw,26px);
+ font-family:inherit;font-size:14px;line-height:1.45;
+}
+#shift740FullMonth .s740-kicker{
+ color:#a6ceda;letter-spacing:.13em;font-size:10px;font-weight:850;line-height:1.4;
+}
+#shift740FullMonth .s740-top{
+ display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap;
+ margin:0 0 14px;
+}
+#shift740FullMonth .s740-topcopy{flex:1 1 250px;max-width:600px}
+#shift740FullMonth h2{
+ margin:4px 0 6px!important;font-size:clamp(23px,2.6vw,36px)!important;line-height:1.15;
+ color:#eef5fb!important;font-weight:850;letter-spacing:-.042em;
+}
+#shift740FullMonth h2 em{font-style:normal;color:#9ebbc9;font-weight:550}
+#shift740FullMonth .s740-topcopy p{margin:0;color:var(--s740-muted);font-size:12px;line-height:1.6}
+#shift740FullMonth .s740-control{
+ display:flex;flex:0 1 410px;justify-content:flex-end;align-items:flex-end;
+ flex-direction:column;gap:9px;min-width:0;
+}
+#shift740FullMonth .s740-months{
+ display:flex;gap:4px;padding:4px;background:#0e1721;border:1px solid var(--s740-stroke);
+ border-radius:11px;
+}
+#shift740FullMonth .s740-months button{
+ background:transparent;color:#a5bccb;font-family:inherit;min-height:36px;
+ padding:7px 13px;border:1px solid transparent;border-radius:8px;font-size:12px;
+ font-weight:750;cursor:pointer;white-space:nowrap;
+}
+#shift740FullMonth .s740-months button[aria-pressed="true"]{
+ color:#eef8ff;background:#2a3f4d;border-color:rgba(183,225,236,.25);
+ box-shadow:0 4px 12px rgba(0,0,0,.12);
+}
+#shift740FullMonth .s740-actions{display:flex;align-items:center;gap:6px}
+#shift740FullMonth .s740-actions button{
+ min-height:35px;padding:7px 13px;border:1px solid rgba(180,206,230,.22);border-radius:9px;
+ background:#202c39;color:#dcecf4;font:750 12px/1.3 inherit;
+ font-family:inherit;font-size:12px;font-weight:750;cursor:pointer;
+ transition:background .2s,border-color .2s;
+}
+#shift740FullMonth .s740-actions button:hover{background:#304555;border-color:rgba(185,226,241,.48)}
+#shift740FullMonth .s740-actions .s740-more{background:#bcdbe5;color:#15232d;border-color:transparent}
+#shift740FullMonth .s740-period-bar{
+ display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;border-top:1px solid rgba(181,209,229,.13);
+ border-bottom:1px solid rgba(181,209,229,.13);padding:12px 0;
+ margin:0 0 16px;color:#839cae;font-size:10px;font-weight:800;letter-spacing:.03em;
+}
+#shift740FullMonth .s740-period-bar strong{font-size:13px;color:#e9f2f8;margin-right:auto}
+#shift740FullMonth .s740-layout{
+ display:grid;grid-template-columns:minmax(0,1.12fr) minmax(280px,.88fr);gap:14px;align-items:stretch;
+}
+#shift740FullMonth :is(.s740-calendar-panel,.s740-detail,.s740-roster-panel){
+ min-width:0;border-radius:13px;border:1px solid var(--s740-stroke);
+ background:#18232f;overflow:hidden;
+}
+#shift740FullMonth .s740-calendar-panel{padding:15px}
+#shift740FullMonth .s740-panel-header,.s740-detail-head{
+ display:flex;align-items:flex-end;justify-content:space-between;gap:10px;flex-wrap:wrap;
+ margin:0 0 12px;
+}
+#shift740FullMonth :is(.s740-panel-header h3,.s740-detail-head h3){
+ margin:3px 0 0!important;color:#e9f3fa!important;font-size:clamp(14px,1.4vw,18px)!important;
+ line-height:1.35;font-weight:800!important;letter-spacing:-.025em;
+}
+#shift740FullMonth :is(.s740-panel-header h3,.s740-detail-head h3) small{
+ margin-left:4px;color:#97afc1;font-size:11px;font-weight:580;letter-spacing:0;white-space:nowrap;
+}
+#shift740FullMonth .s740-legend{
+ display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+#shift740FullMonth .s740-legend span{display:flex;gap:4px;align-items:center;color:#b3c7d5;font-size:10px}
+#shift740FullMonth .s740-legend i{display:block;width:7px;height:7px;border-radius:2px}
+#shift740FullMonth .s740-legend .d{background:var(--s740-day)}
+#shift740FullMonth .s740-legend .n{background:var(--s740-night)}
+#shift740FullMonth .s740-legend .h{background:var(--s740-off)}
+#shift740FullMonth .s740-calendar-grid{
+ display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;
+}
+#shift740FullMonth .s740-weekday{
+ text-align:center;padding:5px 0 7px;color:#829daf;font-size:10px;font-weight:850;
+}
+#shift740FullMonth .s740-calendar-blank{min-height:61px}
+#shift740FullMonth .s740-calendar-day{
+ min-width:0;min-height:67px;display:flex;flex-direction:column;align-items:stretch;gap:4px;
+ padding:7px 6px 6px;border:1px solid rgba(154,181,202,.09);border-radius:8px;
+ background:#202d3a;color:#dbeafa;text-align:left;font:inherit;cursor:pointer;
+ transition:background .16s,border-color .16s,transform .16s;
+}
+#shift740FullMonth .s740-calendar-day.is-weekend{background:#1b2733}
+#shift740FullMonth .s740-calendar-day:hover{background:#2a3b4b;border-color:rgba(174,217,238,.38)}
+#shift740FullMonth .s740-calendar-day.is-selected{
+ background:#2d4553;border-color:#9ed1dc;box-shadow:inset 0 0 0 1px rgba(202,242,255,.10);
+}
+#shift740FullMonth .s740-calendar-day.is-today .s740-date{
+ color:#d0f7ea;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px;
+}
+#shift740FullMonth .s740-calendar-day.has-warning{border-color:rgba(223,166,115,.62)}
+#shift740FullMonth .s740-date{font-size:12px;font-weight:850;line-height:1.2;color:#f1f6fb}
+#shift740FullMonth .s740-cal-info{display:flex;gap:6px;align-items:center}
+#shift740FullMonth .s740-cal-info b{font-size:9px;line-height:1.15;color:#90cdb7;font-weight:800}
+#shift740FullMonth .s740-cal-info b:last-child{color:#afbfff}
+#shift740FullMonth .s740-cal-bar{display:flex;overflow:hidden;gap:1px;width:100%;height:4px;border-radius:4px;background:#293946;margin-top:auto}
+#shift740FullMonth .s740-cal-bar i{display:block;height:100%;min-width:0;flex-shrink:0}
+#shift740FullMonth .s740-cal-bar .d{background:var(--s740-day)}
+#shift740FullMonth .s740-cal-bar .n{background:var(--s740-night)}
+#shift740FullMonth .s740-cal-bar .h{background:var(--s740-off)}
+#shift740FullMonth .s740-detail{padding:15px}
+#shift740FullMonth .s740-coverage{
+ color:#a5d9c4;border:1px solid rgba(96,205,166,.25);background:rgba(39,92,79,.23);
+ padding:5px 9px;font-size:10px;font-weight:700;border-radius:8px;
+}
+#shift740FullMonth .s740-coverage.s740-warning{
+ color:#ebc69c;border-color:rgba(218,166,112,.42);background:rgba(106,71,39,.22)
+}
+#shift740FullMonth .s740-stat-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:0 0 15px}
+#shift740FullMonth .s740-stat{
+ border:1px solid rgba(179,205,222,.11);background:#1f2b38;
+ border-radius:9px;padding:10px;display:flex;flex-direction:column;gap:4px;min-width:0;
+}
+#shift740FullMonth .s740-stat>span:first-child{font-size:9px;font-weight:850;letter-spacing:.04em;color:#99adbb;white-space:nowrap}
+#shift740FullMonth .s740-stat strong{font-size:clamp(23px,2.2vw,31px);line-height:1.1;font-weight:850;font-variant-numeric:tabular-nums;color:#f2f8fd}
+#shift740FullMonth .s740-stat strong small{font-size:11px;color:#7f97a8;font-weight:650}
+#shift740FullMonth .s740-stat>span:last-child{font-size:10px;color:#9fb5c3}
+#shift740FullMonth .s740-stat.s740-D{border-top:2px solid var(--s740-day)}
+#shift740FullMonth .s740-stat.s740-N{border-top:2px solid var(--s740-night)}
+#shift740FullMonth .s740-stat.s740-H{border-top:2px solid var(--s740-off)}
+#shift740FullMonth .s740-crew-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+#shift740FullMonth .s740-post{
+ min-width:0;min-height:66px;display:flex;align-items:flex-start;flex-direction:column;gap:7px;
+ padding:10px 11px;border:1px solid rgba(176,201,219,.12);background:#202d39;border-radius:9px;
+}
+#shift740FullMonth .s740-post b{
+ display:inline-flex;align-items:center;min-height:22px;padding:2px 8px;border-radius:6px;
+ color:#9cdfc6;background:rgba(80,167,138,.14);font-size:11px;font-weight:900;
+}
+#shift740FullMonth .s740-post.s740-N b{color:#b0bfff;background:rgba(104,130,220,.13)}
+#shift740FullMonth .s740-post span{font-size:11px;color:#d8e7f0;line-height:1.4;overflow-wrap:anywhere}
+#shift740FullMonth .s740-post.s740-post-alert{border-color:rgba(215,155,113,.53)}
+#shift740FullMonth .s740-post.s740-post-alert span{color:#efc6a4}
+#shift740FullMonth .s740-roster-panel{margin-top:14px;padding:15px}
+#shift740FullMonth .s740-hint{color:#8ba9bc;font-size:10px}
+#shift740FullMonth .s740-matrix-viewport{
+ position:relative;width:100%;max-width:100%;overflow:auto;overscroll-behavior-x:contain;
+ scrollbar-color:#4c687c #15232f;scrollbar-width:thin;border:1px solid rgba(172,200,225,.14);
+ border-radius:9px;background:#131e29;
+}
+#shift740FullMonth .s740-matrix{
+ width:max-content!important;min-width:100%!important;border-collapse:separate!important;
+ border-spacing:3px!important;table-layout:fixed!important;padding:3px!important;color:#e5f0f7!important;
+}
+#shift740FullMonth .s740-matrix :is(td,th){padding:0!important;border:0!important;background:transparent!important;white-space:nowrap!important;text-align:center!important}
+#shift740FullMonth .s740-matrix thead th{position:sticky;top:0;background:#1c2a36!important;z-index:3}
+#shift740FullMonth .s740-matrix .s740-name{
+ position:sticky!important;left:0;z-index:4;width:172px!important;min-width:172px!important;max-width:172px!important;
+ background:#22313e!important;box-shadow:7px 0 14px rgba(6,13,20,.20);text-align:left!important;
+ border-radius:6px;padding:4px 8px!important;color:#edf3f8!important;
+}
+#shift740FullMonth .s740-matrix .s740-corner{z-index:5!important;text-align:left!important;font-size:10px!important;color:#b0c8d8!important}
+#shift740FullMonth .s740-name b{display:block;font-size:11px;font-weight:850;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+#shift740FullMonth .s740-name span{display:block;font-size:9px;overflow:hidden;text-overflow:ellipsis;color:#95adbd}
+#shift740FullMonth .s740-matrix thead th.s740-matrix-date{width:43px!important;min-width:43px!important;max-width:43px!important}
+#shift740FullMonth .s740-matrix .s740-matrix-date button{
+ display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
+ min-width:0;width:43px;height:43px;border:1px solid transparent;border-radius:7px;
+ background:#263643;color:#edf4f9;cursor:pointer;font-family:inherit;
+}
+#shift740FullMonth .s740-matrix .s740-matrix-date.weekend button{background:#21303c}
+#shift740FullMonth .s740-matrix .s740-matrix-date.selected button{
+ background:#375464;border-color:#afd8e2;
+}
+#shift740FullMonth .s740-matrix-date button small{font-size:9px;color:#9ab3c3}
+#shift740FullMonth .s740-matrix-date button b{font-size:12px;line-height:1.2}
+#shift740FullMonth .s740-matrix td.s740-cell{min-width:43px!important;width:43px!important;height:41px!important}
+#shift740FullMonth .s740-duty{
+ width:43px;min-height:40px;height:40px;border:1px solid rgba(177,206,224,.09);border-radius:7px;
+ background:#273541;color:#e4ebf0;font-size:10px;font-family:inherit;font-weight:850;cursor:pointer;
+ transition:border-color .14s,background .14s;
+}
+#shift740FullMonth .s740-duty.s740-D{color:#8ee5c4;background:#27463f;border-color:rgba(88,191,151,.14)}
+#shift740FullMonth .s740-duty.s740-N{color:#bec8ff;background:#303c5b;border-color:rgba(144,163,255,.16)}
+#shift740FullMonth .s740-duty.s740-H{color:#bd9fab;background:#30303c;border-color:rgba(171,134,157,.10)}
+#shift740FullMonth .s740-duty.warning{border-color:#d7a37a;border-style:dashed}
+#shift740FullMonth .s740-cell.selected .s740-duty{outline:1px solid rgba(194,227,236,.72);outline-offset:0}
+#shift740FullMonth .s740-duty:hover{border-color:#c0e7f1;background:#415866}
+#shift740FullMonth .s740-source-note{margin:11px 0 1px;color:#8ca5b6;font-size:10px;line-height:1.5}
+#shift740FullMonth button:focus-visible{
+ outline:2px solid #bceaf5!important;outline-offset:2px!important;z-index:8;
+}
+#overviewView .s740-visual-lab{margin:12px 0;border:1px solid rgba(175,204,228,.16);border-radius:12px;background:#151f29}
+#overviewView .s740-visual-lab>summary{
+ list-style-position:inside;padding:13px 18px;color:#b5cddd;font-size:12px;font-weight:800;
+ cursor:pointer;
+}
+#overviewView .s740-visual-lab[open] #shiftExperience{margin:0 12px 12px!important}
+@media(max-width:1100px){
+ #shift740FullMonth .s740-layout{grid-template-columns:minmax(0,1fr)}
+ #shift740FullMonth .s740-calendar-panel{padding:14px}
+ #shift740FullMonth .s740-detail{padding:14px}
+ #shift740FullMonth .s740-crew-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ #shift740FullMonth .s740-control{flex:1 1 300px}
+}
+@media(max-width:760px){
+ #shift740FullMonth.s740-board{margin:7px 0 14px;padding:11px;border-radius:13px}
+ #shift740FullMonth .s740-top{gap:10px}
+ #shift740FullMonth h2{font-size:27px!important}
+ #shift740FullMonth .s740-topcopy p{font-size:11px}
+ #shift740FullMonth .s740-control{align-items:stretch;flex:1 1 100%;width:100%}
+ #shift740FullMonth .s740-months button{flex:1}
+ #shift740FullMonth .s740-months{display:flex;width:100%;box-sizing:border-box}
+ #shift740FullMonth .s740-actions{display:grid;grid-template-columns:1fr 1.6fr}
+ #shift740FullMonth .s740-period-bar{gap:5px 11px;padding:10px 0;font-size:9px}
+ #shift740FullMonth .s740-period-bar strong{flex:1 0 100%;font-size:12px}
+ #shift740FullMonth .s740-calendar-panel{padding:9px}
+ #shift740FullMonth .s740-panel-header{margin-bottom:10px}
+ #shift740FullMonth :is(.s740-panel-header h3,.s740-detail-head h3){font-size:15px!important}
+ #shift740FullMonth .s740-calendar-grid{gap:3px}
+ #shift740FullMonth .s740-calendar-blank{min-height:49px}
+ #shift740FullMonth .s740-calendar-day{min-height:52px;gap:3px;padding:5px 3px;border-radius:5px}
+ #shift740FullMonth .s740-date{font-size:11px}
+ #shift740FullMonth .s740-cal-info{gap:3px}
+ #shift740FullMonth .s740-cal-info b{font-size:8px}
+ #shift740FullMonth .s740-legend{gap:5px}
+ #shift740FullMonth .s740-legend span{font-size:9px}
+ #shift740FullMonth .s740-detail{padding:11px}
+ #shift740FullMonth .s740-crew-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #shift740FullMonth .s740-stat{padding:8px}
+ #shift740FullMonth .s740-roster-panel{padding:9px;margin-top:10px}
+ #shift740FullMonth .s740-matrix .s740-name{
+  width:110px!important;min-width:110px!important;max-width:110px!important;padding:4px 5px!important
+ }
+ #shift740FullMonth .s740-name b{font-size:10px}
+ #shift740FullMonth .s740-name span{display:none}
+ #shift740FullMonth .s740-hint{width:100%;font-size:9px}
+}
+@media(max-width:370px){
+ #shift740FullMonth .s740-calendar-day{padding:4px 2px;min-height:49px}
+ #shift740FullMonth .s740-cal-info b{font-size:7px}
+ #shift740FullMonth .s740-calendar-panel{padding:7px}
+ #shift740FullMonth .s740-legend{width:100%}
+ #shift740FullMonth .s740-crew-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+ #shift740FullMonth .s740-post{padding:7px}
+}
+@media(prefers-reduced-motion:reduce){
+ #shift740FullMonth *,
+ #overviewView .s740-visual-lab *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+
+</style>
 </head>
 <!-- REFERENCE LOCK V4 -->
 <body>
@@ -8625,6 +8905,258 @@ if(typeof document!=='undefined'){
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',shift731Boot,{once:true});
  else shift731Boot();
 }
+// v740-full-month-overview.js
+/* Shift V7.4 — Full month workforce planner.
+ * Standalone, additive presentation. Source roster data is NEVER edited.
+ * Replaces the visual 8-day overview preview with an inspectable 30/31-day calendar + 10-person role matrix.
+ */
+const SHIFT740_WEEKDAYS=['อา','จ','อ','พ','พฤ','ศ','ส'];
+const SHIFT740_POSTS=['D1','D2','D3','D4','N1','N2'];
+let shift740Month=11;
+let shift740Day=1;
+let shift740Filter='ALL';
+const shift740Esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const shift740Days=month=>month===10?31:30;
+const shift740MonthText=(month,en=false)=>en?(month===10?'October 2026':'November 2026'):(month===10?'ตุลาคม 2569':'พฤศจิกายน 2569');
+const shift740Source=month=>month===10?OCTOBER_2026_DUTY_POSITIONS:NOVEMBER_2026_DUTY_POSITIONS;
+function shift740Today(){
+ const parts=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Bangkok',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+ const v={};for(const p of parts)if(['year','month','day'].includes(p.type))v[p.type]=Number(p.value);
+ return v;
+}
+function shift740Model(month,day){
+ if(![10,11].includes(month)||!Number.isInteger(day)||day<1||day>shift740Days(month))
+  throw new RangeError('Shift V7.4: invalid period');
+ const source=shift740Source(month);
+ if(!Array.isArray(source)||!Array.isArray(staff)||source.length!==staff.length)
+  throw new Error('Shift V7.4: roster source mismatch');
+ const records=source.map((r,i)=>({index:i,name:staff[i].name,code:r[day-1]}));
+ // Reuse validated October overrides when present; never invent missing positions.
+ if(month===10&&typeof shiftRolesForDay==='function'){
+  const assigned=shiftRolesForDay(day);
+  records.forEach(person=>{
+   if(person.code==='H'||person.code==='O')return;
+   const role=SHIFT740_POSTS.find(p=>assigned[p]===person.name);
+   if(role)person.code=role;
+   else if(SHIFT740_POSTS.includes(person.code)&&assigned[person.code]&&assigned[person.code]!==person.name)
+    person.code=person.code[0]+'?';
+  });
+ }
+ const posts=SHIFT740_POSTS.map(code=>({code,people:records.filter(r=>r.code===code)}));
+ const counts={D:records.filter(r=>r.code.startsWith('D')).length,
+  N:records.filter(r=>r.code.startsWith('N')).length,
+  H:records.filter(r=>['H','O'].includes(r.code)).length};
+ const anomalies=posts.filter(p=>p.people.length!==1).map(p=>({code:p.code,count:p.people.length}));
+ return {month,day,records,posts,counts,anomalies};
+}
+function shift740ShortName(index){
+ return typeof SHIFT_NOV_SHEET_NICKNAMES!=='undefined'&&SHIFT_NOV_SHEET_NICKNAMES[index]
+  ?SHIFT_NOV_SHEET_NICKNAMES[index] : (staff[index]?.name||'').replace(/^นาย\s*/,'').split(/\s+/)[0];
+}
+function shift740DayMeta(month,day){
+ const date=new Date(2026,month-1,day);
+ return {weekDay:date.getDay(),weekend:[0,6].includes(date.getDay()),today:(()=>{
+  const t=shift740Today();return t.year===2026&&t.month===month&&t.day===day;
+ })()};
+}
+function shift740MonthStats(month){
+ const source=shift740Source(month),stats={D:0,N:0,H:0,days:shift740Days(month)};
+ source.forEach(row=>row.forEach(role=>{
+  const bucket=['H','O'].includes(role)?'H':role[0];
+  if(bucket in stats)stats[bucket]++;
+ }));
+ return stats;
+}
+function shift740MiniSummary(model){
+ const out=model.counts;const total=model.records.length;
+ return '<div class="s740-stat-row">'+
+ [['D','DAY SHIFT','กลางวัน'],['N','NIGHT SHIFT','กลางคืน'],['H','OFF','หยุด']].map(x=>
+  '<div class="s740-stat s740-'+x[0]+'"><span>'+x[1]+'</span><strong>'+out[x[0]]+
+  '<small> / '+total+'</small></strong><span>'+x[2]+'</span></div>').join('')+'</div>';
+}
+function shift740Crew(model){
+ const label=model.day+' '+shift740MonthText(model.month);
+ const messages=model.anomalies.map(x=>x.code+(x.count>1?' ซ้ำ '+x.count+' คน':' ไม่มีข้อมูล'));
+ return '<div class="s740-detail-head"><div><span class="s740-kicker">SELECTED DAY / CREW COVERAGE</span>'+
+ '<h3>'+label+'</h3></div><div class="s740-coverage '+(messages.length?'s740-warning':'')+'">'+
+ (messages.length?'ต้องตรวจสอบ: '+messages.join(' · '):'บันทึกเวรครบตามตำแหน่งหลัก')+'</div></div>'+
+ shift740MiniSummary(model)+
+ '<div class="s740-crew-grid">'+model.posts.map(post=>{
+  const ok=post.people.length===1;
+  return '<div class="s740-post s740-'+post.code[0]+(ok?'':' s740-post-alert')+'"><b>'+post.code+'</b><span>'+
+   (post.people.map(p=>shift740Esc(p.name)).join(' / ')||'— ไม่มีผู้รับตำแหน่ง')+'</span></div>';
+ }).join('')+'</div>';
+}
+function shift740Calendar(month,day){
+ const total=shift740Days(month);
+ const dayModels=Array.from({length:total},(_,i)=>shift740Model(month,i+1));
+ const leading=new Date(2026,month-1,1).getDay();
+ const blank=Array.from({length:leading},()=>'<span class="s740-calendar-blank" aria-hidden="true"></span>').join('');
+ const days=Array.from({length:total},(_,i)=>{
+  const d=i+1,meta=shift740DayMeta(month,d),m=dayModels[i];
+  const counts=m.counts;
+  const warnings=m.anomalies.length>0;
+  return '<button type="button" class="s740-calendar-day'+(meta.weekend?' is-weekend':'')+
+   (meta.today?' is-today':'')+(d===day?' is-selected':'')+(warnings?' has-warning':'')+
+   '" data-s740-day="'+d+'" aria-pressed="'+(d===day)+'" aria-label="'+
+   d+' '+shift740MonthText(month)+' กลางวัน '+counts.D+' กลางคืน '+counts.N+' หยุด '+counts.H+'">'+
+   '<span class="s740-date">'+d+'</span>'+
+   '<span class="s740-cal-info"><b>D'+counts.D+'</b><b>N'+counts.N+'</b></span>'+
+   '<span class="s740-cal-bar" aria-hidden="true"><i class="d" style="width:'+(counts.D*10)+'%"></i>'+
+   '<i class="n" style="width:'+(counts.N*10)+'%"></i><i class="h" style="width:'+(counts.H*10)+'%"></i></span>'+
+   '</button>';
+ }).join('');
+ return '<section class="s740-calendar-panel" aria-label="ปฏิทินเวรเต็มเดือน">'+
+ '<div class="s740-panel-header"><div><span class="s740-kicker">MONTHLY OVERVIEW</span>'+
+ '<h3>ปฏิทินทั้งเดือน <small>1–'+total+' '+shift740MonthText(month)+'</small></h3></div>'+
+ '<div class="s740-legend"><span><i class="d"></i>D กลางวัน</span><span><i class="n"></i>N กลางคืน</span><span><i class="h"></i>H หยุด</span></div></div>'+
+ '<div class="s740-calendar-grid">'+SHIFT740_WEEKDAYS.map(d=>'<div class="s740-weekday">'+d+'</div>').join('')+
+ blank+days+'</div></section>';
+}
+function shift740Matrix(month,day){
+ const source=shift740Source(month),days=shift740Days(month);
+ const dayModels=Array.from({length:days},(_,i)=>shift740Model(month,i+1));
+ const headers=Array.from({length:days},(_,i)=>{
+  const d=i+1,meta=shift740DayMeta(month,d);
+  return '<th class="s740-matrix-date'+(meta.weekend?' weekend':'')+(d===day?' selected':'')+
+   '" scope="col" data-s740-col="'+d+'"><button type="button" data-s740-day="'+d+'" aria-pressed="'+(d===day)+'">'+
+   '<small>'+SHIFT740_WEEKDAYS[meta.weekDay]+'</small><b>'+d+'</b></button></th>';
+ }).join('');
+ const rows=source.map((row,i)=>{
+  const name=staff[i].name,short=shift740ShortName(i);
+  const items=Array.from({length:days},(_,j)=>{
+   const d=j+1;
+   const role=dayModels[j].records[i].code;
+   const tone=role==='H'||role==='O'?'H':role[0],warning=role.includes('?')||(month===11&&d===30&&role==='N1');
+   return '<td data-s740-col="'+d+'" class="s740-cell'+(d===day?' selected':'')+'"><button type="button" '+
+    'data-s740-person="'+i+'" data-s740-day="'+d+'" class="s740-duty s740-'+tone+(warning?' warning':'')+'" '+
+    'aria-label="'+shift740Esc(name+' '+d+' '+shift740MonthText(month)+' '+role)+'" '+
+    'title="'+shift740Esc(name+' • '+d+' • '+role)+'">'+role+'</button></td>';
+  }).join('');
+  return '<tr><th scope="row" class="s740-name" title="'+shift740Esc(name)+'"><b>'+
+   shift740Esc(short)+'</b><span>'+shift740Esc(name)+'</span></th>'+items+'</tr>';
+ }).join('');
+ return '<section class="s740-roster-panel"><div class="s740-panel-header"><div>'+
+ '<span class="s740-kicker">TEAM × DAY / FULL MATRIX</span>'+
+ '<h3>เวรทุกคน ทุกตำแหน่ง <small>10 คน × '+days+' วัน</small></h3></div>'+
+ '<span class="s740-hint">เลื่อนตารางในกรอบ ⇆ • แตะช่องเพื่อดูรายชื่อจริง</span></div>'+
+ '<div class="s740-matrix-viewport" id="shift740MatrixViewport" role="region" tabindex="0" aria-label="ตารางเวรเต็มเดือน '+shift740MonthText(month)+' เลื่อนแนวนอนได้">'+
+ '<table class="s740-matrix" aria-label="ตารางเวรทุกตำแหน่งทุกวัน"><thead><tr>'+
+ '<th scope="col" class="s740-name s740-corner">พนักงาน / TEAM</th>'+headers+'</tr></thead><tbody>'+rows+'</tbody></table></div></section>';
+}
+function shift740Markup(month,day){
+ const total=shift740Days(month),en=typeof document!=='undefined'&&document.documentElement.lang==='en',stats=shift740MonthStats(month);
+ return '<div class="s740-top"><div class="s740-topcopy"><span class="s740-kicker">SHIFT / WORKFORCE PLANNING</span>'+
+ '<h2>Full Month <em>Schedule</em></h2>'+
+ '<p>ตารางเวรทีมเต็มเดือน '+total+' วัน • รหัสตำแหน่งจริง D1–D4 / N1–N2 / H • เลือกวันที่เพื่อดูรายละเอียด</p></div>'+
+ '<div class="s740-control"><div class="s740-months" role="group" aria-label="เลือกเดือนของภาพรวม">'+
+ [[10,'ตุลาคม'],[11,'พฤศจิกายน']].map(([value,title])=>
+ '<button type="button" data-s740-month="'+value+'" aria-pressed="'+(value===month)+'">'+title+'</button>').join('')+
+ '</div><div class="s740-actions"><button type="button" data-s740-action="today">วันนี้</button>'+
+ '<button type="button" class="s740-more" data-s740-action="open">เปิดหน้าตารางเวร ↗</button></div></div></div>'+
+ '<div class="s740-period-bar"><strong>'+shift740MonthText(month,en)+'</strong><span>10 TEAM MEMBERS</span>'+
+ '<span>'+total+' DAYS</span><span>'+stats.D+' DAY SHIFTS</span><span>'+stats.N+' NIGHT SHIFTS</span></div>'+
+ '<div class="s740-layout">'+shift740Calendar(month,day)+
+ '<aside class="s740-detail" id="shift740Detail">'+shift740Crew(shift740Model(month,day))+'</aside></div>'+
+ shift740Matrix(month,day)+
+ '<p class="s740-source-note">ข้อมูลเวรอ้างอิงตารางจริงเดือนตุลาคมและพฤศจิกายน 2569 • วันที่ 30 พ.ย. มี N1 ซ้ำและไม่มี N2 ตามต้นฉบับ (ยังไม่แก้เอง)</p>';
+}
+function shift740MarkSelection(scroll=false){
+ const host=document.getElementById('shift740FullMonth');
+ if(!host)return;
+ host.querySelectorAll('[data-s740-day]').forEach(node=>{
+  const selected=Number(node.dataset.s740Day)===shift740Day;
+  node.classList.toggle('is-selected',selected);
+  node.setAttribute('aria-pressed',String(selected));
+ });
+ host.querySelectorAll('[data-s740-col]').forEach(node=>
+  node.classList.toggle('selected',Number(node.dataset.s740Col)===shift740Day));
+ const detail=host.querySelector('#shift740Detail');
+ if(detail)detail.innerHTML=shift740Crew(shift740Model(shift740Month,shift740Day));
+ if(scroll){
+  const viewport=host.querySelector('#shift740MatrixViewport');
+  const cell=viewport?.querySelector('thead [data-s740-col="'+shift740Day+'"]');
+  if(viewport&&cell)viewport.scrollTo({left:Math.max(0,cell.offsetLeft-200),behavior:
+   typeof matchMedia==='function'&&matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+ }
+}
+function shift740Render(){
+ const host=document.getElementById('shift740FullMonth');
+ if(!host)return;
+ host.innerHTML=shift740Markup(shift740Month,shift740Day);
+ shift740MarkSelection(true);
+}
+function shift740SetMonth(month){
+ month=Number(month);
+ if(month!==10&&month!==11)return;
+ shift740Month=month;
+ const now=shift740Today();
+ shift740Day=now.year===2026&&now.month===month?now.day:Math.min(shift740Day,shift740Days(month));
+ shift740Render();
+}
+function shift740SetDay(day){
+ day=Number(day);
+ if(!Number.isInteger(day)||day<1||day>shift740Days(shift740Month))return;
+ shift740Day=day;
+ shift740MarkSelection();
+}
+function shift740OpenDetail(personIndex=null){
+ if(shift740Month===11){
+  if(typeof shift731Open==='function')shift731Open('11',{navigate:true,graphic:true});
+  else{showView('month');shiftNovChangeMonth('11');}
+  if(typeof shiftNovSetDay==='function')shiftNovSetDay(shift740Day,personIndex);
+ }else{
+  if(typeof shift731Open==='function')shift731Open('10',{navigate:true,graphic:false});
+  else{showView('month');shiftNovChangeMonth('10');}
+  if(typeof setSelectedDay==='function')setSelectedDay(shift740Day,false);
+ }
+}
+function shift740AddVisualLab(overview){
+ const old=document.getElementById('shiftExperience');
+ if(!old||old.closest('details.s740-visual-lab'))return;
+ const details=document.createElement('details');
+ details.className='s740-visual-lab';
+ const summary=document.createElement('summary');
+ summary.textContent='Visual Lab · เปิด Duty Orbit 3D';
+ details.appendChild(summary);old.before(details);details.appendChild(old);
+}
+function shift740Mount(){
+ const overview=document.getElementById('overviewView');
+ if(!overview||document.getElementById('shift740FullMonth'))return;
+ if(typeof OCTOBER_2026_DUTY_POSITIONS==='undefined'||typeof NOVEMBER_2026_DUTY_POSITIONS==='undefined')return;
+ const now=shift740Today();
+ shift740Month=now.year===2026&&[10,11].includes(now.month)?now.month:11;
+ shift740Day=now.year===2026&&now.month===shift740Month?now.day:1;
+ const host=document.createElement('section');
+ host.id='shift740FullMonth';host.className='s740-board';
+ host.setAttribute('aria-label','Full Month Schedule ดูเวรทุกคนทั้งเดือน');
+ overview.insertBefore(host,overview.firstChild);
+ host.addEventListener('click',event=>{
+  const button=event.target.closest('button');
+  if(!button||!host.contains(button))return;
+  if(button.hasAttribute('data-s740-month')){shift740SetMonth(button.dataset.s740Month);return}
+  if(button.hasAttribute('data-s740-day')){
+   shift740SetDay(button.dataset.s740Day);
+   if(button.hasAttribute('data-s740-person'))shift740OpenDetail(Number(button.dataset.s740Person));
+   return;
+  }
+  if(button.dataset.s740Action==='today'){
+   const date=shift740Today();
+   if(date.year===2026&&[10,11].includes(date.month)){
+    shift740Month=date.month;shift740Day=date.day;shift740Render();
+   }else shift740SetMonth(11);
+  }
+  if(button.dataset.s740Action==='open')shift740OpenDetail();
+ });
+ shift740Render();
+ shift740AddVisualLab(overview);
+ document.documentElement.dataset.shift740='ready';
+}
+if(typeof document!=='undefined'){
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',shift740Mount,{once:true});
+ else shift740Mount();
+}
+
 })();</script>
 </body>
 </html>
