@@ -1,0 +1,53 @@
+/* V7.3 — make the November duty board impossible to miss without covering the table. */
+html[data-shift731="ready"] .command-bar .shift731-header-btn{
+ display:inline-flex!important;gap:7px;align-items:center;justify-content:center;
+ min-height:39px;max-width:180px;flex:0 0 auto;
+ padding:7px 12px;border:1px solid rgba(84,231,247,.55);border-radius:11px;
+ background:linear-gradient(120deg,rgba(9,91,129,.96),rgba(19,61,113,.95));
+ color:#e8faff;font-size:11px;font-weight:850;cursor:pointer;white-space:nowrap;
+ box-shadow:inset 0 1px rgba(240,252,255,.12),0 8px 20px rgba(10,131,187,.16);
+ transition:transform .23s ease,box-shadow .23s ease,border-color .23s ease;
+}
+html[data-shift731="ready"] .command-bar .shift731-header-btn:hover{
+ transform:translateY(-2px);border-color:#8cf4ff;
+ box-shadow:0 12px 26px rgba(12,134,201,.25),inset 0 1px rgba(240,252,255,.15)}
+html[data-shift731="ready"] .command-bar .shift731-header-btn>span{
+ font-size:17px;line-height:1;color:#a9f5ff}
+html[data-shift731="ready"] .nav-tabs .shift731-tab{
+ border:1px solid rgba(68,185,229,.38)!important;min-width:105px;white-space:nowrap;
+ background:linear-gradient(140deg,rgba(18,97,130,.22),rgba(21,48,105,.21))!important}
+html[data-shift731="ready"] .nav-tabs .shift731-tab.shift731-active{
+ border-color:#74e5fb!important;background:#155474!important;
+ box-shadow:0 0 0 1px rgba(73,209,241,.28)!important;color:#fff!important}
+html[data-shift731="ready"] .mobile-nav .shift731-mobile-btn{
+ border-radius:9px;background:rgba(14,78,113,.37);color:#a7e5fa!important;
+ font-size:9px!important;font-weight:800!important;min-width:0;min-height:42px}
+html[data-shift731="ready"] .mobile-nav .shift731-mobile-btn.shift731-active{
+ color:#fff!important;background:#176088!important;box-shadow:inset 0 0 0 1px rgba(100,231,252,.58)!important}
+html[data-shift731="ready"] #shiftMonthTabs button[data-shift-month="11"]{
+ position:relative;border-color:rgba(72,199,242,.52)!important;
+ background:linear-gradient(120deg,#0c3c61,#092a50)!important}
+html[data-shift731="ready"] #shiftMonthTabs button[data-shift-month="11"].active{
+ border-color:#7deeff!important;box-shadow:0 0 0 1px rgba(74,213,251,.23),0 8px 25px rgba(4,97,157,.21)!important}
+html[data-shift731="ready"] #shiftNovemberView .shift72-view-switch{
+ border-color:rgba(84,218,244,.49)!important}
+html[data-shift731="ready"] #shiftNovemberView .shift72-graphic-host{
+ display:block;width:100%;min-width:0}
+html[data-shift731="ready"] .shift731-header-btn:focus-visible,
+html[data-shift731="ready"] .shift731-mobile-btn:focus-visible,
+html[data-shift731="ready"] .shift731-tab:focus-visible{
+ outline:2px solid #9cefff!important;outline-offset:2px}
+@media(max-width:860px){
+ html[data-shift731="ready"] .command-bar .shift731-header-btn{
+  min-height:37px;padding:7px 9px;font-size:10px;max-width:132px}
+ html[data-shift731="ready"] .mobile-nav{gap:1px}
+ html[data-shift731="ready"] .mobile-nav button{flex:1 1 0;min-width:0}
+ html[data-shift731="ready"] .mobile-nav .shift731-mobile-btn{flex:1 1 0;min-width:0}
+}
+@media(max-width:430px){
+ html[data-shift731="ready"] .command-actions>.live-pill{display:none!important}
+ html[data-shift731="ready"] .command-bar .shift731-header-btn{max-width:130px;font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-shift731="ready"] .command-bar .shift731-header-btn{transition:none!important}
+}
