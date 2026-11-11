@@ -48,7 +48,7 @@ test('October and November navigation no longer display a misleading month badge
 test('consistent page typography, navigation, accessibility and mobile scroll',()=>{
  for(const marker of ['#dailyView .person-row','#personView .person-pick',
   '#monthView .heatmap','#analyticsView .analytics-card',
-  '#oncallView .v652-matrix-day','#shift740FullMonth .s740-top',
+  '(.v652-matrix-day,.v652-matrix-name,.v652-matrix-cell)','#shift740FullMonth .s740-top',
   '#shiftNovemberView .shift72-graphic','.command-actions .v65-language',
   '.nav-tabs .nav-btn','max-width:860px','max-width:520px',
   'prefers-reduced-motion:reduce','focus-visible','overscroll-behavior-x:contain'])
