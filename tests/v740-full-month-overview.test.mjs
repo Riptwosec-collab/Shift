@@ -60,7 +60,8 @@ test('Source and built PWA match while existing 8-day preview remains reversible
  assert.ok(build.includes("'v740-full-month-overview.js'"));
  assert.ok(build.includes("v740-full-month-overview.css"));
  assert.ok(html.includes(src)&&html.includes(css));
- assert.ok(html.includes('data-shift-release="7.4"'));
+ const release=html.match(/data-shift-release="(\d+\.\d+)"/);
+ assert.ok(release&&Number(release[1])>=7.4,'Full Month Overview requires release 7.4+');
  assert.match(html,/data-app-version="6\.5\.20"/);
  assert.ok(html.includes('v6526-overview-eight.js'));
  assert.ok(html.includes('shift740AddVisualLab'));

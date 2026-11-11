@@ -1,0 +1,223 @@
+/* Shift V7.5 — Vivid Depth + interaction performance.
+   Single theme contract across existing pages, no background images, no WebGL,
+   no permanent GPU compositing. Full-month CSS owns its more specific grid geometry. */
+html[data-shift750="ready"]{
+ --bg:#06111f;--bg2:#0a1b2e;--bg3:#0f2841;
+ --panel:#0c2339;--panel2:#102b45;
+ --text:#f3fbff;--muted:#b2d4e6;--cyan:#4fdbff;--blue:#7da1ff;--purple:#a692ff;
+ --day:#3ce9ae;--night:#899eff;--off:#ffc17d;
+ --success:#3ce9ae;--danger:#ff9a94;
+ --glass-bg:#0b2035;--glass-strong:#0c2944;
+ --glass-edge:rgba(78,199,249,.38);
+ --glass-highlight:rgba(246,252,255,.10);
+ --glass-shadow:0 11px 32px rgba(1,7,19,.22),inset 0 1px rgba(193,244,255,.07);
+ --shift7-bg:#06111f;--shift7-surface:#0d2841;--shift7-surface-2:#123a54;
+ --shift7-text:#f5fcff;--shift7-muted:#b2d6e8;
+ --shift7-cyan:#4fdbff;--shift7-blue:#7da1ff;--shift7-violet:#a692ff;
+ --shift7-green:#42e8ae;
+ color-scheme:dark;
+}
+html[data-shift750="ready"] body{
+ background:radial-gradient(ellipse 75% 45% at 84% -12%,rgba(23,130,213,.22),transparent 78%),
+ linear-gradient(165deg,#06101d,#071526 65%,#09172b)!important;
+ color:#f3fbff!important;
+}
+html[data-shift750="ready"] .app{background:transparent!important}
+html[data-shift750="ready"] .command-bar{
+ background:linear-gradient(115deg,#0d2b45,#0a1d31 62%,#101d36)!important;
+ border:1px solid rgba(77,204,246,.47)!important;border-radius:16px!important;
+ box-shadow:0 12px 30px rgba(0,5,21,.30),inset 0 1px rgba(192,243,255,.12)!important;
+ -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+}
+html[data-shift750="ready"] .command-bar .brand-copy h1{
+ font-weight:880!important;letter-spacing:-.043em!important;color:#fff!important;
+}
+html[data-shift750="ready"] .command-bar .brand-copy p{color:#a6e4f7!important}
+html[data-shift750="ready"] .nav-tabs{
+ background:#0b1a30!important;border:1px solid rgba(80,175,231,.27)!important;
+ box-shadow:inset 0 1px rgba(209,243,255,.06)!important;
+ backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+html[data-shift750="ready"] .nav-tabs .nav-btn{
+ color:#b7d7e9!important;
+ transition:background-color .18s ease,color .18s ease,border-color .18s ease!important;
+}
+html[data-shift750="ready"] .nav-tabs .nav-btn span{color:#94c5dd!important}
+html[data-shift750="ready"] .nav-tabs .nav-btn.active{
+ background:linear-gradient(115deg,#135778,#1d426d)!important;
+ color:#fff!important;box-shadow:inset 0 0 0 1px rgba(119,225,255,.53)!important;
+}
+html[data-shift750="ready"] .nav-tabs .nav-btn.active span{color:#aeeeff!important}
+html[data-shift750="ready"] .nav-tabs .nav-btn:hover{color:#fff!important;background:#143b55!important;transform:none!important}
+html[data-shift750="ready"] .command-bar .shift731-header-btn{
+ background:linear-gradient(110deg,#157d9f,#1b5385)!important;
+ color:#fff!important;border-color:#88e4ff!important;
+ box-shadow:inset 0 1px rgba(218,249,255,.18),0 6px 17px rgba(4,120,203,.17)!important;
+}
+html[data-shift750="ready"] .search-row .smart-search input{
+ background:#0d2135!important;color:#f5fbff!important;
+ border:1px solid rgba(76,191,236,.4)!important;
+ box-shadow:inset 0 1px rgba(219,247,255,.045)!important;
+}
+html[data-shift750="ready"] .search-row .smart-search input::placeholder{color:#87aebf!important}
+html[data-shift750="ready"] .search-row .smart-search input:focus{
+ border-color:#6ce1fa!important;box-shadow:0 0 0 3px rgba(65,211,246,.17)!important;
+}
+html[data-shift750="ready"] .hud-panel,
+html[data-shift750="ready"] :is(.roster-card,.insights-panel,.network-panel,.analytics-card,.analytics-panel,.month-panel,.person-detail,.people-panel,.v652-control-deck,.v652-timeline-panel){
+ background:linear-gradient(142deg,#0c2338,#091a2e)!important;
+ background-image:none!important;
+ border:1px solid rgba(79,159,206,.32)!important;
+ box-shadow:0 11px 31px rgba(0,5,19,.23),inset 0 1px rgba(198,242,255,.045)!important;
+ backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+html[data-shift750="ready"] #overviewView .hud-panel,
+html[data-shift750="ready"] #overviewView .v6517-glass{
+ background:linear-gradient(140deg,#0e2740,#0a1b32)!important;
+ border-color:rgba(71,165,215,.35)!important;
+}
+html[data-shift750="ready"] :is(.section-title,.roster-title b,.analytics-panel h2,.month-head .section-title){
+ color:#f4fbff!important;letter-spacing:-.015em;
+}
+html[data-shift750="ready"] :is(.eyebrow,.v6517-caption){color:#77dafa!important}
+html[data-shift750="ready"] .hud-panel :is(small,.hint,.subtext){color:#a7c8dc}
+html[data-shift750="ready"] .roster-card.day{border-left:3px solid #34e8aa!important}
+html[data-shift750="ready"] .roster-card.night{border-left:3px solid #89a3ff!important}
+html[data-shift750="ready"] .roster-card.off{border-left:3px solid #ffc07e!important}
+html[data-shift750="ready"] .metric-card.day{border-top:2px solid #3ae9af!important}
+html[data-shift750="ready"] .metric-card.night{border-top:2px solid #84a9ff!important}
+html[data-shift750="ready"] .metric-card.off{border-top:2px solid #ffc17d!important}
+html[data-shift750="ready"] #overviewView .hero-stage{
+ background:radial-gradient(ellipse at 77% 18%,rgba(19,159,231,.28),transparent 48%),
+ linear-gradient(116deg,#0e3653 0%,#0b213b 52%,#101b36 100%)!important;
+ border-color:rgba(87,205,247,.49)!important;
+}
+html[data-shift750="ready"] #overviewView #shift72OverviewEntry{display:none!important}
+html[data-shift750="ready"] #overviewView .hero-stage .shift-v7-aurora{animation:none!important;opacity:.16!important}
+html[data-shift750="ready"] #overviewView .v6517-donut{filter:none!important}
+html[data-shift750="ready"] #overviewView .v6517-kpi{backdrop-filter:none!important}
+html[data-shift750="ready"] .view.active{
+ animation:none!important;
+}
+html[data-shift750="ready"] .nav-btn,
+html[data-shift750="ready"] .mobile-nav button,
+html[data-shift750="ready"] .ghost-btn{
+ transition:background-color .18s ease,color .18s ease,border-color .18s ease!important;
+}
+html[data-shift750="ready"] .mobile-nav{
+ background:#0b2036!important;border:1px solid rgba(73,190,235,.44)!important;
+ box-shadow:0 8px 28px rgba(1,6,23,.45)!important;
+ backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+html[data-shift750="ready"] .mobile-nav button{color:#b4d1e4!important}
+html[data-shift750="ready"] .mobile-nav button.active,
+html[data-shift750="ready"] .mobile-nav .shift731-mobile-btn.shift731-active{
+ background:linear-gradient(155deg,#13587b,#204574)!important;color:#fff!important;
+ box-shadow:inset 0 0 0 1px rgba(132,237,255,.46)!important;
+}
+html[data-shift750="ready"] #monthView .month-panel{
+ background:linear-gradient(130deg,#0a2035,#08182a)!important;
+}
+html[data-shift750="ready"] #shiftMonthTabs button{
+ background:#10334e!important;color:#c0e7fa!important;
+ border-color:rgba(85,180,238,.40)!important;
+ transition:background-color .18s ease,border-color .18s ease!important;
+}
+html[data-shift750="ready"] #shiftMonthTabs button.active{
+ background:#165b82!important;color:#fff!important;border-color:#6bdcfb!important;
+ box-shadow:inset 0 1px rgba(210,246,255,.09)!important;
+}
+/* The November graphic is now part of the same visual design system. */
+html[data-shift750="ready"] #shiftNovemberView .shift72-graphic{
+ background:linear-gradient(146deg,#0b2440,#081729 66%,#0d1b33)!important;
+ border-color:rgba(75,183,230,.41)!important;
+}
+html[data-shift750="ready"] #shiftNovemberView .shift72-ambient{
+ animation:none!important;opacity:.3;
+}
+html[data-shift750="ready"] #shiftNovemberView .shift72-overview-card{
+ background:linear-gradient(134deg,#0d314c,#0b243b)!important;
+ border-color:rgba(82,178,231,.32)!important;
+}
+html[data-shift750="ready"] #shiftNovemberView .shift72-position-card{
+ background:linear-gradient(130deg,#123550,#0b2642)!important;
+ border-color:rgba(81,194,241,.36)!important;
+ animation:none!important;
+ transition:border-color .18s,background-color .18s!important;
+}
+html[data-shift750="ready"] #shiftNovemberView .shift72-position-card.shift72-n{
+ background:linear-gradient(135deg,#162b56,#0d2446)!important;
+}
+html[data-shift750="ready"] #shiftNovemberView .shift72-position-card.has-warning{border-color:#ffcd89!important}
+html[data-shift750="ready"] #shiftNovemberView .shift72-board-section,
+html[data-shift750="ready"] #shiftNovemberView .shift72-analytics-chart,
+html[data-shift750="ready"] #shiftNovemberView .shift72-analytics-workload{
+ background:linear-gradient(145deg,#09263d,#081e33)!important;
+ border-color:rgba(71,163,221,.35)!important;
+}
+html[data-shift750="ready"] #shiftNovemberView .shift72-duty-pill.tone-D{
+ color:#82ffd0!important;background:#104d41!important;border-color:rgba(57,236,170,.43)!important;
+}
+html[data-shift750="ready"] #shiftNovemberView .shift72-duty-pill.tone-N{
+ color:#bec9ff!important;background:#233e7a!important;border-color:rgba(145,164,255,.43)!important;
+}
+html[data-shift750="ready"] #shiftNovemberView .shift72-duty-pill.tone-H{
+ color:#ffd6a7!important;background:#483a3c!important;border-color:rgba(251,192,128,.30)!important;
+}
+html[data-shift750="ready"] #shiftNovemberView .shift72-date-chip{
+ background:#113c59!important;color:#e8faff!important;
+}
+html[data-shift750="ready"] #shiftNovemberView .shift72-date-chip.is-active{
+ background:#176a92!important;box-shadow:0 0 0 1px #68ddfa!important;
+}
+html[data-shift750="ready"] #shiftNovemberView .shift72-duty-pill{
+ transition:background-color .14s,border-color .14s!important;
+}
+html[data-shift750="ready"] #shiftNovemberView .shift72-duty-pill:hover{
+ transform:none!important;outline-offset:0!important;
+}
+html[data-shift750="ready"] .shift72-graphic :is(.shift72-eyebrow,.shift72-section-heading .shift72-eyebrow){color:#6ae1ff!important}
+html[data-shift750="ready"] .shift72-graphic .shift72-command h3 em{color:#82e8ff!important}
+html[data-shift750="ready"] #shiftNovemberView .shift72-workload-bar{background:#1f4059!important}
+html[data-shift750="ready"] #shiftNovemberView .shift72-trend-svg{filter:none!important}
+html[data-shift750="ready"] #shiftNovemberView .shift72-crew-section{
+ animation:shift750-reveal .17s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes shift750-reveal{
+ from{opacity:.60;transform:translate3d(0,3px,0)}
+ to{opacity:1;transform:translate3d(0,0,0)}
+}
+/* Remove costly always-running effects; interaction feedback remains. */
+html[data-shift750="ready"] .shift-v7-rings::after,
+html[data-shift750="ready"] .live-dot,
+html[data-shift750="ready"] .scan-beam,
+html[data-shift750="ready"] .v6517-trend-selected,
+html[data-shift750="ready"] .mobile-nav button.active b{
+ animation:none!important;
+}
+html[data-shift750="ready"] .v6517-glass,
+html[data-shift750="ready"] .v6515-oncall-month{
+ -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+}
+html[data-shift750="ready"] :is(button,a,input,select):focus-visible{
+ outline:2px solid #8eecff!important;outline-offset:2px!important;
+}
+@media(hover:none){
+ html[data-shift750="ready"] :is(.metric-card,.shift72-position-card,.roster-card):hover{
+  transform:none!important;
+ }
+}
+@media(max-width:860px){
+ html[data-shift750="ready"] .hud-panel,
+ html[data-shift750="ready"] .v6517-glass{
+  box-shadow:0 6px 18px rgba(0,3,16,.18)!important;
+ }
+ html[data-shift750="ready"] .mobile-nav{border-radius:15px!important}
+ html[data-shift750="ready"] .shift72-graphic .shift72-crew-section{animation:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-shift750="ready"] .shift72-graphic .shift72-crew-section,
+ html[data-shift750="ready"] :is(.nav-btn,.mobile-nav button,.shift72-duty-pill){
+  animation:none!important;transition:none!important;
+ }
+}

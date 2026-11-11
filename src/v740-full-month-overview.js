@@ -45,11 +45,10 @@ function shift740ShortName(index){
  return typeof SHIFT_NOV_SHEET_NICKNAMES!=='undefined'&&SHIFT_NOV_SHEET_NICKNAMES[index]
   ?SHIFT_NOV_SHEET_NICKNAMES[index] : (staff[index]?.name||'').replace(/^นาย\s*/,'').split(/\s+/)[0];
 }
-function shift740DayMeta(month,day){
+function shift740DayMeta(month,day,today=shift740Today()){
  const date=new Date(2026,month-1,day);
- return {weekDay:date.getDay(),weekend:[0,6].includes(date.getDay()),today:(()=>{
-  const t=shift740Today();return t.year===2026&&t.month===month&&t.day===day;
- })()};
+ return {weekDay:date.getDay(),weekend:[0,6].includes(date.getDay()),
+  today:today.year===2026&&today.month===month&&today.day===day};
 }
 function shift740MonthStats(month){
  const source=shift740Source(month),stats={D:0,N:0,H:0,days:shift740Days(month)};
@@ -81,11 +80,12 @@ function shift740Crew(model){
 }
 function shift740Calendar(month,day){
  const total=shift740Days(month);
+ const today=shift740Today();
  const dayModels=Array.from({length:total},(_,i)=>shift740Model(month,i+1));
  const leading=new Date(2026,month-1,1).getDay();
  const blank=Array.from({length:leading},()=>'<span class="s740-calendar-blank" aria-hidden="true"></span>').join('');
  const days=Array.from({length:total},(_,i)=>{
-  const d=i+1,meta=shift740DayMeta(month,d),m=dayModels[i];
+  const d=i+1,meta=shift740DayMeta(month,d,today),m=dayModels[i];
   const counts=m.counts;
   const warnings=m.anomalies.length>0;
   return '<button type="button" class="s740-calendar-day'+(meta.weekend?' is-weekend':'')+
@@ -107,9 +107,10 @@ function shift740Calendar(month,day){
 }
 function shift740Matrix(month,day){
  const source=shift740Source(month),days=shift740Days(month);
+ const today=shift740Today();
  const dayModels=Array.from({length:days},(_,i)=>shift740Model(month,i+1));
  const headers=Array.from({length:days},(_,i)=>{
-  const d=i+1,meta=shift740DayMeta(month,d);
+  const d=i+1,meta=shift740DayMeta(month,d,today);
   return '<th class="s740-matrix-date'+(meta.weekend?' weekend':'')+(d===day?' selected':'')+
    '" scope="col" data-s740-col="'+d+'"><button type="button" data-s740-day="'+d+'" aria-pressed="'+(d===day)+'">'+
    '<small>'+SHIFT740_WEEKDAYS[meta.weekDay]+'</small><b>'+d+'</b></button></th>';
@@ -153,34 +154,65 @@ function shift740Markup(month,day){
  shift740Matrix(month,day)+
  '<p class="s740-source-note">ข้อมูลเวรอ้างอิงตารางจริงเดือนตุลาคมและพฤศจิกายน 2569 • วันที่ 30 พ.ย. มี N1 ซ้ำและไม่มี N2 ตามต้นฉบับ (ยังไม่แก้เอง)</p>';
 }
+/* Update only the old/new day columns, instead of touching 300–310 roster cells per click. */
 function shift740MarkSelection(scroll=false){
  const host=document.getElementById('shift740FullMonth');
  if(!host)return;
- host.querySelectorAll('[data-s740-day]').forEach(node=>{
-  const selected=Number(node.dataset.s740Day)===shift740Day;
-  node.classList.toggle('is-selected',selected);
-  node.setAttribute('aria-pressed',String(selected));
- });
- host.querySelectorAll('[data-s740-col]').forEach(node=>
-  node.classList.toggle('selected',Number(node.dataset.s740Col)===shift740Day));
+ const previous=Number(host.dataset.s740ActiveDay||0);
+ const current=shift740Day;
+ if(previous!==current){
+  for(const day of [previous,current]){
+   if(day<1)continue;
+   const active=day===current;
+   const calendar=host.querySelector('.s740-calendar-day[data-s740-day="'+day+'"]');
+   if(calendar){
+    calendar.classList.toggle('is-selected',active);
+    calendar.setAttribute('aria-pressed',String(active));
+   }
+   const heading=host.querySelector('th.s740-matrix-date[data-s740-col="'+day+'"]');
+   if(heading){
+    heading.classList.toggle('selected',active);
+    const button=heading.querySelector('button');
+    if(button)button.setAttribute('aria-pressed',String(active));
+   }
+   host.querySelectorAll('td.s740-cell[data-s740-col="'+day+'"]').forEach(cell=>{
+    cell.classList.toggle('selected',active);
+   });
+  }
+  host.dataset.s740ActiveDay=String(current);
+ }
  const detail=host.querySelector('#shift740Detail');
- if(detail)detail.innerHTML=shift740Crew(shift740Model(shift740Month,shift740Day));
+ if(detail&&detail.dataset.s740Day!==String(current)){
+  detail.innerHTML=shift740Crew(shift740Model(shift740Month,current));
+  detail.dataset.s740Day=String(current);
+  const reduce=typeof matchMedia==='function'&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce&&typeof detail.animate==='function'){
+   detail.getAnimations?.().forEach(animation=>animation.cancel());
+   detail.animate([{opacity:.68,transform:'translate3d(0,4px,0)'},{opacity:1,transform:'translate3d(0,0,0)'}],
+    {duration:170,easing:'cubic-bezier(.2,.8,.2,1)'});
+  }
+ }
  if(scroll){
   const viewport=host.querySelector('#shift740MatrixViewport');
-  const cell=viewport?.querySelector('thead [data-s740-col="'+shift740Day+'"]');
-  if(viewport&&cell)viewport.scrollTo({left:Math.max(0,cell.offsetLeft-200),behavior:
-   typeof matchMedia==='function'&&matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+  const cell=viewport?.querySelector('thead [data-s740-col="'+current+'"]');
+  if(viewport&&cell){
+   const left=Math.max(0,cell.offsetLeft-200);
+   if(Math.abs(viewport.scrollLeft-left)>5)viewport.scrollLeft=left;
+  }
  }
 }
 function shift740Render(){
  const host=document.getElementById('shift740FullMonth');
  if(!host)return;
  host.innerHTML=shift740Markup(shift740Month,shift740Day);
+ host.dataset.s740ActiveDay=String(shift740Day);
+ const detail=host.querySelector('#shift740Detail');
+ if(detail)detail.dataset.s740Day=String(shift740Day);
  shift740MarkSelection(true);
 }
 function shift740SetMonth(month){
  month=Number(month);
- if(month!==10&&month!==11)return;
+ if(month!==10&&month!==11||month===shift740Month)return;
  shift740Month=month;
  const now=shift740Today();
  shift740Day=now.year===2026&&now.month===month?now.day:Math.min(shift740Day,shift740Days(month));
@@ -188,7 +220,7 @@ function shift740SetMonth(month){
 }
 function shift740SetDay(day){
  day=Number(day);
- if(!Number.isInteger(day)||day<1||day>shift740Days(shift740Month))return;
+ if(!Number.isInteger(day)||day<1||day>shift740Days(shift740Month)||day===shift740Day)return;
  shift740Day=day;
  shift740MarkSelection();
 }
@@ -235,7 +267,8 @@ function shift740Mount(){
   if(button.dataset.s740Action==='today'){
    const date=shift740Today();
    if(date.year===2026&&[10,11].includes(date.month)){
-    shift740Month=date.month;shift740Day=date.day;shift740Render();
+    if(shift740Month===date.month)shift740SetDay(date.day);
+    else{shift740Month=date.month;shift740Day=date.day;shift740Render();}
    }else shift740SetMonth(11);
   }
   if(button.dataset.s740Action==='open')shift740OpenDetail();
@@ -243,6 +276,7 @@ function shift740Mount(){
  shift740Render();
  shift740AddVisualLab(overview);
  document.documentElement.dataset.shift740='ready';
+ document.documentElement.dataset.shift750='ready';
 }
 if(typeof document!=='undefined'){
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',shift740Mount,{once:true});

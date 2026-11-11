@@ -193,6 +193,69 @@ function shift72RenderGraph(options={}){
   }
  }
 }
+/* Fast path: keep all 300 source cells and the scroll position mounted.
+   Only change the selected date, crew summary and six position cards. */
+function shift72UpdateDayFast(){
+ const host=document.getElementById('shift72Graphic');
+ if(!host||!host.querySelector('.shift72-board-table')){shift72RenderGraph();return;}
+ const selected=shiftNovSelectedDay;
+ if(shift72Span==='week'&&(selected<shift72Week||selected>shift72Week+6)){
+  shift72Week=shift72WeekFor(selected);
+  shift72RenderGraph();return;
+ }
+ const snapshot=shift72DayModel(selected);
+ const date=host.querySelector('.shift72-current-day');
+ if(date)date.innerHTML=String(selected).padStart(2,'0')+' <span>NOV</span>';
+ const prev=host.querySelector('[data-shift72-action="prev"]');
+ const next=host.querySelector('[data-shift72-action="next"]');
+ if(prev)prev.disabled=selected===1;
+ if(next)next.disabled=selected===30;
+ const coverage=snapshot.posts.filter(p=>p.people.length===1).length;
+ const values=[snapshot.counts.D,snapshot.counts.N,snapshot.counts.H,coverage];
+ host.querySelectorAll('.shift72-overview-card').forEach((card,index)=>{
+  const strong=card.querySelector('strong');
+  if(strong&&strong.firstChild)strong.firstChild.textContent=String(values[index]);
+  const bar=card.querySelector('.shift72-mini-bar i');
+  if(bar)bar.style.width=(index===3?coverage/6*100:values[index]*10)+'%';
+ });
+ const status=host.querySelector('.shift72-status-line');
+ if(status){
+  const anomalous=snapshot.duplicate.length||snapshot.missing.some(code=>code==='N1'||code==='N2');
+  status.dataset.warning=String(Boolean(anomalous));
+  const text=status.querySelector('span:last-child');
+  if(text)text.textContent=(anomalous?'รอการตรวจสอบข้อมูลต้นฉบับ':'ข้อมูลตารางเวรที่บันทึกไว้')+
+   (anomalous?' • '+snapshot.duplicate.concat(snapshot.missing).join(' / '):'');
+ }
+ const currentCrew=host.querySelector('.shift72-crew-section');
+ if(currentCrew){
+  const template=document.createElement('template');
+  template.innerHTML=shift72CrewMarkup();
+  const nextCrew=template.content.firstElementChild;
+  if(nextCrew)currentCrew.replaceWith(nextCrew);
+ }
+ host.querySelectorAll('.shift72-date-chip').forEach(button=>{
+  const active=Number(button.dataset.shift72Day)===selected;
+  button.classList.toggle('is-active',active);
+  button.setAttribute('aria-pressed',String(active));
+ });
+ host.querySelectorAll('.shift72-date-heading').forEach(cell=>{
+  cell.classList.toggle('is-selected',Number(cell.querySelector('[data-shift72-day]')?.dataset.shift72Day)===selected);
+ });
+ host.querySelectorAll('.shift72-duty-cell.is-today').forEach(cell=>cell.classList.remove('is-today'));
+ host.querySelectorAll('.shift72-duty-cell[data-shift72-column="'+selected+'"]').forEach(cell=>cell.classList.add('is-today'));
+ host.querySelectorAll('.shift72-duty-pill[aria-pressed="true"]').forEach(button=>button.setAttribute('aria-pressed','false'));
+ if(Number.isInteger(shift72FocusPerson)){
+  const pressed=host.querySelector('[data-shift72-person="'+shift72FocusPerson+'"][data-shift72-day="'+selected+'"]');
+  if(pressed)pressed.setAttribute('aria-pressed','true');
+ }
+ host.querySelectorAll('.shift72-board-table tbody tr.is-person-selected').forEach(row=>row.classList.remove('is-person-selected'));
+ if(Number.isInteger(shift72FocusPerson)){
+  const row=host.querySelector('.shift72-board-table tbody tr:nth-child('+(shift72FocusPerson+1)+')');
+  if(row)row.classList.add('is-person-selected');
+ }
+ const currentTrend=host.querySelector('.shift72-trend-svg');
+ if(currentTrend)currentTrend.outerHTML=shift72TrendMarkup();
+}
 function shift72SelectDay(day,person=null){
  if(!Number.isInteger(day)||day<1||day>30)return;
  shift72FocusPerson=Number.isInteger(person)?person:null;
@@ -282,7 +345,7 @@ function shift72Init(){
   const result=originalSetDay(day,person);
   if(Number.isInteger(day)&&day>=1&&day<=30){
    if(Number.isInteger(person))shift72FocusPerson=person;
-   shift72RenderGraph({preserveScroll:shift72Span==='month'});
+   shift72UpdateDayFast();
   }
   return result;
  };

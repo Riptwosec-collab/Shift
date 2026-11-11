@@ -1,17 +1,17 @@
 /* Shift V7.4 — Precision Operations design: Float planning geometry, Attio-like quiet panels,
    RotaCloud/When I Work full-month visual summary. CSS/SVG only, no image overlays. */
 html[data-shift740="ready"]{
- --s740-bg:#0d121a;--s740-panel:#151e28;--s740-panel2:#192531;--s740-stroke:rgba(170,193,214,.16);
- --s740-text:#edf3fa;--s740-muted:#96adbe;--s740-accent:#9cd8e5;
- --s740-day:#5ad6ae;--s740-night:#9cafff;--s740-off:#ac8793;
+ --s740-bg:#06111e;--s740-panel:#0b2034;--s740-panel2:#102b45;--s740-stroke:rgba(89,188,235,.29);
+ --s740-text:#f4fbff;--s740-muted:#b3d3e6;--s740-accent:#43dafa;
+ --s740-day:#36e7ae;--s740-night:#91a4ff;--s740-off:#ffc483;
  --s740-glow:none;
 }
 html[data-shift740="ready"] body{
- background:radial-gradient(ellipse 90% 50% at 100% 0%,rgba(83,112,151,.075),transparent 75%),#0d121a!important;
+ background:radial-gradient(ellipse 75% 48% at 90% 0%,rgba(20,125,198,.19),transparent 73%),#06111e!important;
 }
 html[data-shift740="ready"] #overviewView .hud-panel,
 html[data-shift740="ready"] #overviewView .v6517-glass{
- background:linear-gradient(140deg,#151e28,#101823)!important;
+ background:linear-gradient(142deg,#0d243c,#081629)!important;
  border:1px solid var(--s740-stroke)!important;
  box-shadow:0 12px 27px rgba(0,0,0,.13)!important;
 }
@@ -25,14 +25,14 @@ html[data-shift740="ready"] .shift72-feature-entry{margin-top:10px;opacity:.82}
 html[data-shift740="ready"] .shift72-feature-entry::before{opacity:.1}
 #shift740FullMonth.s740-board{
  box-sizing:border-box;position:relative;isolation:isolate;width:100%;min-width:0;
- margin:10px 0 20px;border-radius:18px;border:1px solid rgba(182,210,232,.22);
- background:#131c26;color:var(--s740-text);
- box-shadow:0 18px 50px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.03);
+ margin:10px 0 20px;border-radius:18px;border:1px solid rgba(83,200,241,.40);
+ background:linear-gradient(145deg,#0a2035 0%,#09182a 65%,#0b1832 100%);color:var(--s740-text);
+ box-shadow:0 20px 52px rgba(0,3,16,.35),inset 0 1px rgba(185,242,255,.10);
  padding:clamp(12px,2.2vw,26px);
  font-family:inherit;font-size:14px;line-height:1.45;
 }
 #shift740FullMonth .s740-kicker{
- color:#a6ceda;letter-spacing:.13em;font-size:10px;font-weight:850;line-height:1.4;
+ color:#69deff;letter-spacing:.13em;font-size:10px;font-weight:850;line-height:1.4;
 }
 #shift740FullMonth .s740-top{
  display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap;
@@ -43,7 +43,7 @@ html[data-shift740="ready"] .shift72-feature-entry::before{opacity:.1}
  margin:4px 0 6px!important;font-size:clamp(23px,2.6vw,36px)!important;line-height:1.15;
  color:#eef5fb!important;font-weight:850;letter-spacing:-.042em;
 }
-#shift740FullMonth h2 em{font-style:normal;color:#9ebbc9;font-weight:550}
+#shift740FullMonth h2 em{font-style:normal;color:#7fdfff;font-weight:650}
 #shift740FullMonth .s740-topcopy p{margin:0;color:var(--s740-muted);font-size:12px;line-height:1.6}
 #shift740FullMonth .s740-control{
  display:flex;flex:0 1 410px;justify-content:flex-end;align-items:flex-end;
@@ -59,18 +59,18 @@ html[data-shift740="ready"] .shift72-feature-entry::before{opacity:.1}
  font-weight:750;cursor:pointer;white-space:nowrap;
 }
 #shift740FullMonth .s740-months button[aria-pressed="true"]{
- color:#eef8ff;background:#2a3f4d;border-color:rgba(183,225,236,.25);
+ color:#fff;background:#135778;border-color:rgba(107,231,255,.65);
  box-shadow:0 4px 12px rgba(0,0,0,.12);
 }
 #shift740FullMonth .s740-actions{display:flex;align-items:center;gap:6px}
 #shift740FullMonth .s740-actions button{
  min-height:35px;padding:7px 13px;border:1px solid rgba(180,206,230,.22);border-radius:9px;
- background:#202c39;color:#dcecf4;font:750 12px/1.3 inherit;
+ background:#202c39;color:#e4f7ff;font:750 12px/1.3 inherit;
  font-family:inherit;font-size:12px;font-weight:750;cursor:pointer;
  transition:background .2s,border-color .2s;
 }
 #shift740FullMonth .s740-actions button:hover{background:#304555;border-color:rgba(185,226,241,.48)}
-#shift740FullMonth .s740-actions .s740-more{background:#bcdbe5;color:#15232d;border-color:transparent}
+#shift740FullMonth .s740-actions .s740-more{background:#69dfff;color:#061b2b;border-color:#80e8ff}
 #shift740FullMonth .s740-period-bar{
  display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;border-top:1px solid rgba(181,209,229,.13);
  border-bottom:1px solid rgba(181,209,229,.13);padding:12px 0;
@@ -82,7 +82,7 @@ html[data-shift740="ready"] .shift72-feature-entry::before{opacity:.1}
 }
 #shift740FullMonth :is(.s740-calendar-panel,.s740-detail,.s740-roster-panel){
  min-width:0;border-radius:13px;border:1px solid var(--s740-stroke);
- background:#18232f;overflow:hidden;
+ background:linear-gradient(142deg,#0d2941,#0b1c31);overflow:hidden;
 }
 #shift740FullMonth .s740-calendar-panel{padding:15px}
 #shift740FullMonth .s740-panel-header,.s740-detail-head{
@@ -114,13 +114,13 @@ html[data-shift740="ready"] .shift72-feature-entry::before{opacity:.1}
 #shift740FullMonth .s740-calendar-day{
  min-width:0;min-height:67px;display:flex;flex-direction:column;align-items:stretch;gap:4px;
  padding:7px 6px 6px;border:1px solid rgba(154,181,202,.09);border-radius:8px;
- background:#202d3a;color:#dbeafa;text-align:left;font:inherit;cursor:pointer;
+ background:#123651;color:#eff9ff;text-align:left;font:inherit;cursor:pointer;
  transition:background .16s,border-color .16s,transform .16s;
 }
-#shift740FullMonth .s740-calendar-day.is-weekend{background:#1b2733}
+#shift740FullMonth .s740-calendar-day.is-weekend{background:#112c43}
 #shift740FullMonth .s740-calendar-day:hover{background:#2a3b4b;border-color:rgba(174,217,238,.38)}
 #shift740FullMonth .s740-calendar-day.is-selected{
- background:#2d4553;border-color:#9ed1dc;box-shadow:inset 0 0 0 1px rgba(202,242,255,.10);
+ background:#146a91;border-color:#86e9ff;box-shadow:inset 0 0 0 1px rgba(202,242,255,.10);
 }
 #shift740FullMonth .s740-calendar-day.is-today .s740-date{
  color:#d0f7ea;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px;
@@ -145,7 +145,7 @@ html[data-shift740="ready"] .shift72-feature-entry::before{opacity:.1}
 }
 #shift740FullMonth .s740-stat-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:0 0 15px}
 #shift740FullMonth .s740-stat{
- border:1px solid rgba(179,205,222,.11);background:#1f2b38;
+ border:1px solid rgba(179,205,222,.11);background:#12314a;
  border-radius:9px;padding:10px;display:flex;flex-direction:column;gap:4px;min-width:0;
 }
 #shift740FullMonth .s740-stat>span:first-child{font-size:9px;font-weight:850;letter-spacing:.04em;color:#99adbb;white-space:nowrap}
@@ -158,7 +158,7 @@ html[data-shift740="ready"] .shift72-feature-entry::before{opacity:.1}
 #shift740FullMonth .s740-crew-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 #shift740FullMonth .s740-post{
  min-width:0;min-height:66px;display:flex;align-items:flex-start;flex-direction:column;gap:7px;
- padding:10px 11px;border:1px solid rgba(176,201,219,.12);background:#202d39;border-radius:9px;
+ padding:10px 11px;border:1px solid rgba(176,201,219,.12);background:#14334b;border-radius:9px;
 }
 #shift740FullMonth .s740-post b{
  display:inline-flex;align-items:center;min-height:22px;padding:2px 8px;border-radius:6px;
@@ -204,12 +204,12 @@ html[data-shift740="ready"] .shift72-feature-entry::before{opacity:.1}
 #shift740FullMonth .s740-matrix td.s740-cell{min-width:43px!important;width:43px!important;height:41px!important}
 #shift740FullMonth .s740-duty{
  width:43px;min-height:40px;height:40px;border:1px solid rgba(177,206,224,.09);border-radius:7px;
- background:#273541;color:#e4ebf0;font-size:10px;font-family:inherit;font-weight:850;cursor:pointer;
+ background:#14344b;color:#f3faff;font-size:10px;font-family:inherit;font-weight:850;cursor:pointer;
  transition:border-color .14s,background .14s;
 }
-#shift740FullMonth .s740-duty.s740-D{color:#8ee5c4;background:#27463f;border-color:rgba(88,191,151,.14)}
-#shift740FullMonth .s740-duty.s740-N{color:#bec8ff;background:#303c5b;border-color:rgba(144,163,255,.16)}
-#shift740FullMonth .s740-duty.s740-H{color:#bd9fab;background:#30303c;border-color:rgba(171,134,157,.10)}
+#shift740FullMonth .s740-duty.s740-D{color:#83ffd0;background:#104c40;border-color:rgba(65,232,168,.44)}
+#shift740FullMonth .s740-duty.s740-N{color:#c8d3ff;background:#253e76;border-color:rgba(140,163,255,.45)}
+#shift740FullMonth .s740-duty.s740-H{color:#ffcf95;background:#473b3c;border-color:rgba(247,180,119,.30)}
 #shift740FullMonth .s740-duty.warning{border-color:#d7a37a;border-style:dashed}
 #shift740FullMonth .s740-cell.selected .s740-duty{outline:1px solid rgba(194,227,236,.72);outline-offset:0}
 #shift740FullMonth .s740-duty:hover{border-color:#c0e7f1;background:#415866}
@@ -274,4 +274,40 @@ html[data-shift740="ready"] .shift72-feature-entry::before{opacity:.1}
 @media(prefers-reduced-motion:reduce){
  #shift740FullMonth *,
  #overviewView .s740-visual-lab *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+
+/* V7.5: vivid, bounded microinteraction. Never animate the entire 30-day grid. */
+#shift740FullMonth .s740-top{position:relative;padding-bottom:6px}
+#shift740FullMonth .s740-top::after{content:"";position:absolute;left:0;bottom:-7px;width:100%;height:1px;
+ background:linear-gradient(90deg,rgba(47,214,255,.55),rgba(92,131,244,.24),transparent 86%);pointer-events:none}
+#shift740FullMonth .s740-calendar-day{transition:transform .16s cubic-bezier(.2,.8,.2,1),background-color .16s,border-color .16s,box-shadow .16s!important}
+@media(hover:hover) and (pointer:fine){
+ #shift740FullMonth .s740-calendar-day:hover{transform:translateY(-2px);box-shadow:0 7px 18px rgba(0,7,20,.28)}
+ #shift740FullMonth .s740-duty:hover{background:#205674;color:#f6fcff;box-shadow:0 0 0 1px rgba(119,227,255,.24)}
+}
+#shift740FullMonth .s740-calendar-day.is-selected{box-shadow:inset 0 0 0 1px rgba(111,232,255,.21),0 0 22px rgba(23,166,221,.15)}
+#shift740FullMonth .s740-cal-info b{color:#57f2c2}
+#shift740FullMonth .s740-cal-info b:last-child{color:#a8b5ff}
+#shift740FullMonth .s740-matrix{contain:layout style}
+#shift740FullMonth .s740-matrix-viewport{scroll-behavior:auto;overscroll-behavior-x:contain}
+#shift740FullMonth .s740-matrix .s740-name{background:#12324c!important}
+#shift740FullMonth .s740-matrix thead th{background:#0e2941!important}
+#shift740FullMonth .s740-matrix .s740-matrix-date button{background:#153c56;color:#f6fcff}
+#shift740FullMonth .s740-matrix .s740-matrix-date.selected button{background:#16688b;border-color:#79e4ff}
+#shift740FullMonth .s740-cell.selected .s740-duty{outline:1px solid #7adffd;outline-offset:0}
+#shift740FullMonth .s740-post{border-color:rgba(83,166,208,.27);background:#123149}
+#shift740FullMonth .s740-post.s740-N{background:#152d52}
+#shift740FullMonth .s740-post.s740-H{background:#3b2e31}
+#shift740FullMonth .s740-stat{background:#0d2941;border-color:rgba(84,181,224,.32)}
+#shift740FullMonth .s740-stat strong{color:#fff}
+#shift740FullMonth .s740-stat.s740-D strong{color:#63f5c5}
+#shift740FullMonth .s740-stat.s740-N strong{color:#bcc7ff}
+#shift740FullMonth .s740-stat.s740-H strong{color:#ffd4a0}
+#shift740FullMonth .s740-detail{background:linear-gradient(148deg,#0d2b45,#0a1e35)!important}
+#shift740FullMonth .s740-crew-grid{gap:9px}
+#shift740FullMonth .s740-coverage:not(.s740-warning){color:#87edcb;border-color:rgba(94,219,169,.50);background:rgba(12,115,89,.18)}
+#shift740FullMonth :is(button,.s740-visual-lab summary):focus-visible{outline:2px solid #75e5ff!important;outline-offset:2px}
+@media(max-width:760px){
+ #shift740FullMonth .s740-calendar-day.is-selected{box-shadow:inset 0 0 0 1px rgba(111,232,255,.35)}
+ #shift740FullMonth .s740-calendar-day{transition:background-color .12s,border-color .12s!important}
 }
