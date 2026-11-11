@@ -73,7 +73,8 @@ test('release can be built as a fresh PWA without stale cache-name regression',(
  assert.ok(html.includes(js)&&html.includes(css));
  assert.ok(build.includes("'v780-editorial-cohesion.js'"));
  assert.ok(build.includes('v780-editorial-cohesion.css'));
- assert.match(html,/data-shift-release="7\.8"/);
+ const release=html.match(/data-shift-release="(\d+\.\d+)"/);
+ assert.ok(release&&Number(release[1])>=7.8,"Editorial system requires V7.8 or newer");
  assert.ok(sw.includes("CACHE_NAME='shift-shell-v6.5.20-r19'"));
  assert.ok(sw.includes('networkFirst'));
 });
