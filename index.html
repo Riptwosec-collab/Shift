@@ -8820,7 +8820,7 @@ function shift731InitialMonth(today,search='',saved='10'){
  if(explicit==='10'||explicit==='11')return {month:explicit,openMonth:query.get('view')!=='overview'};
  // Nov 2026 takes priority over a stale October preference stored in previous visits.
  if(today.year===2026&&today.month===11)
-  return {month:'11',openMonth:query.get('view')!=='overview'};
+  return {month:'11',openMonth:query.get('view')==='month'};
  return {month:saved==='11'?'11':'10',openMonth:query.get('view')==='month'};
 }
 function shift731MarkNavigation(){

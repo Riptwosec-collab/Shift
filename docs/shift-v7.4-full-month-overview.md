@@ -36,3 +36,7 @@ This release changes the key data-display surface and its visual architecture im
 ## Rollback
 
 Remove v740-full-month-overview.js and .css imports from scripts/build.mjs and rebuild. No data migration or source content changes are required.
+
+## Landing behavior
+
+November 2026 root visits now land on Overview with the full 30-day calendar already visible and November preselected. The existing direct ?month=11 and ?view=month links still enter the detailed November duty page immediately.

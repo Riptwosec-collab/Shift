@@ -10,10 +10,11 @@ function resolve(today,search='',stored='10'){
  return new Function('document','today','search','stored',source+
  '\nreturn shift731InitialMonth(today,search,stored);')(document,today,search,stored);
 }
-test('November 2026 is the landing screen even when old browser storage remembers October',()=>{
- assert.deepEqual(resolve({year:2026,month:11,day:12},'','10'),{month:'11',openMonth:true});
- assert.deepEqual(resolve({year:2026,month:11,day:30},'','10'),{month:'11',openMonth:true});
+test('November 2026 opens the full-month Overview by default, even when storage remembers October',()=>{
+ assert.deepEqual(resolve({year:2026,month:11,day:12},'','10'),{month:'11',openMonth:false});
+ assert.deepEqual(resolve({year:2026,month:11,day:30},'','10'),{month:'11',openMonth:false});
  assert.deepEqual(resolve({year:2026,month:11,day:12},'?view=overview','10'),{month:'11',openMonth:false});
+ assert.deepEqual(resolve({year:2026,month:11,day:12},'?view=month','10'),{month:'11',openMonth:true});
 });
 test('URL can explicitly open either source month without losing the legacy October view',()=>{
  assert.deepEqual(resolve({year:2026,month:11,day:12},'?month=10','11'),{month:'10',openMonth:true});
