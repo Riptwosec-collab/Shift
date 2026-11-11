@@ -49,7 +49,7 @@ test('generated PWA embeds the November roster, view, and upgraded cache',()=>{
  assert.ok(html.includes(read('src/v6535-november-view.css')));
  assert.ok(build.includes("'november-2026-duty-roster.js','v6535-november-view.js'"));
  assert.ok(build.includes('v6535-november-view.css'));
- assert.ok(read('sw.js').includes("CACHE_NAME='shift-shell-v6.5.20-r18'"));
+ assert.ok(read('sw.js').includes("CACHE_NAME='shift-shell-v6.5.20-r19'"));
 });
 
 test('November begins on the current day and puts its seven-day mobile view in the matching week',()=>{

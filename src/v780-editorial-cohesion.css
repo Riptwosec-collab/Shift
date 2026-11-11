@@ -581,6 +581,29 @@ html[data-shift780="ready"] :is(#dailyView,#personView,#monthView,#analyticsView
  :is(.shift78-section-hero button,.person-pick,.heatmap button):focus-visible{
  outline:3px solid var(--shift78-ink)!important;
 }
+
+/* Keep the six/seven-item mobile navigation tidy at narrow widths. */
+html[data-shift780="ready"] .mobile-nav{
+ display:flex;align-items:stretch;gap:3px!important;
+ padding:5px!important;background:var(--shift78-paper)!important;
+ border:2px solid var(--shift78-ink)!important;border-radius:13px!important;
+ box-shadow:0 -6px 20px rgba(0,0,0,.24)!important;
+}
+html[data-shift780="ready"] .mobile-nav button{
+ flex:1 1 0;min-width:0!important;min-height:43px!important;
+ padding:5px 2px!important;border-radius:8px!important;
+ background:transparent!important;color:var(--shift78-ink)!important;
+ font-size:10px!important;font-weight:850!important;
+}
+html[data-shift780="ready"] .mobile-nav button.active,
+html[data-shift780="ready"] .mobile-nav .shift731-mobile-btn.shift731-active{
+ background:var(--shift78-coral)!important;color:var(--shift78-ink)!important;
+ box-shadow:inset 0 0 0 1px var(--shift78-ink)!important;
+}
+html[data-shift780="ready"] .mobile-nav button b{
+ color:inherit!important;font-weight:900!important;
+}
+
 /* Responsive layouts: mobile stays readable rather than clipping content. */
 @media(max-width:1100px){
  html[data-shift780="ready"] #analyticsView .analytics-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
