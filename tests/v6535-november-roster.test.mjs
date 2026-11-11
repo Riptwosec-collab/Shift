@@ -72,7 +72,7 @@ test('November begins on the current day and puts its seven-day mobile view in t
 
 test('mobile last-week navigation stays reversible and always includes November 30',()=>{
  const source=read('src/v6535-november-view.js');
- const mockDocument={readyState:'loading',addEventListener(){}};
+ const mockDocument={readyState:'loading',addEventListener(){},getElementById(){return null},querySelector(){return null}};
  const state=new Function('document',source+'\nshiftNovWeekStart=22;shiftNovStepWeek(7);const forward=shiftNovWeekStart;shiftNovStepWeek(-7);const backward=shiftNovWeekStart;shiftNovWeekStart=22;shiftNovSetDay(30);return {forward,backward,selected:shiftNovSelectedDay,lastWeek:shiftNovWeekStart};')(mockDocument);
  assert.deepEqual(state,{forward:24,backward:22,selected:30,lastWeek:24});
  assert.ok(read('index.html').includes(source));
