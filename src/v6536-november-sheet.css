@@ -1,0 +1,91 @@
+/* Shift v6.5.36 — November worksheet faithfully mapped to the supplied image. */
+#shiftNovemberView .shift-nov-scroll{border:1px solid #235b7c!important;border-radius:4px!important;background:#f5f7fc!important;max-height:none!important;max-width:100%;overscroll-behavior-x:contain;scrollbar-color:#88add0 #d6e8f5}
+#shiftNovemberView .shift-nov-reference-sheet{border-spacing:0!important;border-collapse:collapse!important;width:max-content!important;min-width:1800px!important;table-layout:fixed!important;color:#14192a!important;font-family:Tahoma,Arial,sans-serif!important;font-variant-numeric:tabular-nums;line-height:1.2}
+#shiftNovemberView .shift-nov-reference-sheet col.shift-nov-col-name{width:208px}
+#shiftNovemberView .shift-nov-reference-sheet col.shift-nov-col-day{width:33px}
+#shiftNovemberView .shift-nov-reference-sheet col.shift-nov-col-summary{width:47px}
+#shiftNovemberView .shift-nov-reference-sheet col.shift-nov-col-workdays{width:58px}
+#shiftNovemberView .shift-nov-reference-sheet col.shift-nov-col-hours{width:65px}
+#shiftNovemberView .shift-nov-reference-sheet col.shift-nov-col-companydays{width:58px}
+#shiftNovemberView .shift-nov-reference-sheet col.shift-nov-col-companyhours{width:72px}
+#shiftNovemberView .shift-nov-reference-sheet col.shift-nov-col-nickname{width:72px}
+#shiftNovemberView .shift-nov-reference-sheet :is(th,td){border:1px solid #53626c!important;box-sizing:border-box!important;min-width:0!important;max-width:none!important;margin:0!important;padding:1px 2px!important;border-radius:0!important;text-align:center!important;box-shadow:none!important;color:#111827;font-weight:600}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-title-row th{height:120px!important;background:#5b9bce!important;color:#07192d!important;font-size:15px!important;vertical-align:middle!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-title{font-family:Tahoma,Arial,sans-serif!important;font-size:26px!important;font-weight:850!important;text-align:center!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-title.shift-nov-sheet-metric-title{font-size:13px!important;font-weight:700!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-name{width:208px!important;min-width:208px!important;max-width:208px!important;position:sticky!important;left:0!important;z-index:3!important;background:#94acd7!important;color:#0b1930!important;padding:2px 4px!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap!important;text-align:left!important;font-size:11px!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-name.shift-nov-sheet-name-header{font-size:13px!important;text-align:center!important;z-index:4!important;background:#8eaada!important;vertical-align:middle!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-weekday-row th{height:30px!important;font-size:12px!important;background:#9bb5e1!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-date-row th{height:33px!important;font-size:11px!important;background:#9cb8e8!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-weekday-row th.weekend,
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-date-row th.weekend{background:#f9b99e!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-weekday-row th.weekday,
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-date-row th.weekday{background:#9ab6e4!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-date button{display:block;width:100%!important;height:29px!important;background:transparent!important;color:#071b35!important;border:0!important;padding:0!important;border-radius:0!important;cursor:pointer!important;font-size:11px!important;font-weight:750!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-phantom-head{background:#ffdfcd!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-tall{vertical-align:middle!important;padding:5px 2px!important;background:#aad1f0!important;font-size:12px!important;line-height:1.45!important;white-space:normal!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-tall small{display:block;font-size:10px;margin-top:5px}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-tall.companydays,
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-tall.companyhours{background:#06ad5a!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-tall.nickname{background:#5d9fcb!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-summary-head{font-size:11px!important;background:#99b5e0!important;white-space:nowrap}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-summary-head.special,
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-summary-head.S{background:#888787!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-summary-code{font-size:11px!important;color:white!important;background:#859bae!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-summary-code.day,
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-summary-code.D{background:#049e5e!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-summary-code.night,
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-summary-code.N{background:#4378c7!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-summary-code.replace{background:#83b55d!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-summary-code.special{background:#787878!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-summary-code.leave,
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-summary-code.holiday{background:#ef787d!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-person :is(td,th){height:29px!important;font-size:11px!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-duty{border-color:#778084!important;height:29px!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-duty.D{background:#009f57!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-duty.N{background:#4a7cc4!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-duty.H{background:#ffd7bb!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-duty button{display:block!important;width:100%!important;height:26px!important;min-height:26px!important;font-size:10px!important;font-weight:750!important;border:0!important;padding:0!important;color:white!important;background:transparent!important;cursor:pointer!important;border-radius:0!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-duty.H{color:#2e2221!important;font-size:10px!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-duty.H button{color:#29201e!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-phantom{background:#ffdec9!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-duty.discrepancy{outline:2px dashed #f19a00!important;outline-offset:-2px!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-metric{background:#e0e0e0!important;font-size:11px!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-metric.workdays,
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-metric.hours{background:#acd0ef!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-metric.companydays,
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-metric.companyhours{background:#08ad60!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-nickname{background:#fff!important;color:#151515!important;white-space:nowrap!important;font-size:11px!important;font-weight:750!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-row-0>.shift-nov-name,
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-row-1>.shift-nov-name{background:#08abe4!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-row-2>.shift-nov-name{background:#ffe19a!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-row-3>.shift-nov-name{background:#f5d38a!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-row-4>.shift-nov-name{background:#ffc300!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-row-5>.shift-nov-name{background:#b8d5a1!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-row-6>.shift-nov-name{background:#c7dbb5!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-row-7>.shift-nov-name{background:#a9b8c9!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-row-8>.shift-nov-name{background:#a7b5c3!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-row-9>.shift-nov-name{background:#c6dfbc!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-totalrow th{background:#06a65e!important;color:#001822!important;font-size:12px!important;text-align:center!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-totalrow.N th{background:#4779cb!important;color:white!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-daily{font-size:11px!important;color:#0d1b2c!important;height:28px!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-daily.D{background:#04a959!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-daily.N{background:#4e82d0!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-daily.H{background:#ffdeca!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-totalblank{background:#fff!important}
+#shiftNovemberView .shift-nov-reference-sheet .shift-nov-selected{outline:2px solid #fff900!important;outline-offset:-2px!important}
+#shiftNovemberView .shift-nov-sheet-legend{display:flex;align-items:center;gap:22px;flex-wrap:wrap;padding:11px 12px;background:#f9fbff;color:#172239;font-size:11px;border:1px solid #9eb0c2;border-top:0}
+#shiftNovemberView .shift-nov-sheet-legend>span{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+#shiftNovemberView .shift-nov-sheet-legend b{padding:7px 10px;color:#fff;font-weight:800;font-size:11px}
+#shiftNovemberView .shift-nov-sheet-legend b.D{background:#07a85c}
+#shiftNovemberView .shift-nov-sheet-legend b.N{background:#4f82c6}
+#shiftNovemberView .shift-nov-sheet-legend b.H{background:#e87982}
+#shiftNovemberView .shift-nov-sheet-legend small{color:#53687b;flex:1 1 350px;font-size:10px;line-height:1.5}
+@media(max-width:860px){
+ #shiftNovemberView .shift-nov-reference-sheet{width:max-content!important;min-width:1800px!important}
+ #shiftNovemberView .shift-nov-reference-sheet .shift-nov-name{width:150px!important;min-width:150px!important;max-width:150px!important;font-size:10px!important}
+ #shiftNovemberView .shift-nov-reference-sheet col.shift-nov-col-name{width:150px}
+ #shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-title{font-size:21px!important}
+ #shiftNovemberView .shift-nov-reference-sheet .shift-nov-sheet-title-row th{height:78px!important}
+ #shiftNovemberView .shift-nov-sheet-legend{gap:11px;padding:10px}
+}
