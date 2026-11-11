@@ -53,8 +53,10 @@ test('no proprietary reference assets, copy or external animations are introduce
  assert.doesNotMatch(css,/animation:\s*[^\n;]*infinite/i);
 });
 test('deployable V7.7 bundle embeds exact updated styling and markup',()=>{
- assert.match(html,/data-shift-release="7\.7"/);
- assert.match(build,/data-shift-release="7\.7"/);
+ const htmlRelease=html.match(/data-shift-release="(\d+\.\d+)"/);
+ assert.ok(htmlRelease&&Number(htmlRelease[1])>=7.7);
+ const buildRelease=build.match(/data-shift-release="(\d+\.\d+)"/);
+ assert.ok(buildRelease&&Number(buildRelease[1])>=7.7);
  for(const src of [css,overview,november])assert.ok(html.includes(src),'source not embedded');
  assert.ok(html.includes('id="v750-vivid-motion-style"'));
  assert.ok(html.includes('shift740MarkSelection'));

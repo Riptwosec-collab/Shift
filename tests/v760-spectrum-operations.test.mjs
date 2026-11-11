@@ -57,7 +57,8 @@ test('V7.6 is embedded into the deployable PWA, keeping immutable duty sources',
  assert.ok(build.includes('v750-vivid-motion.css'));
  const release=html.match(/data-shift-release="(\d+\.\d+)"/);
  assert.ok(release&&Number(release[1])>=7.6,'Earlier duty contracts retained on newer release');
- assert.ok(build.includes('data-shift-release="7.7"'));
+ const builtRelease=build.match(/data-shift-release="(\d+\.\d+)"/);
+ assert.ok(builtRelease&&Number(builtRelease[1])>=7.7,'later releases preserve V7.7 art direction');
  assert.ok(html.includes(css));
  assert.ok(html.includes(novemberJs));
  assert.ok(html.includes(read('src/v740-full-month-overview.css')));
