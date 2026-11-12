@@ -14,8 +14,8 @@ test('V8 theme contract is the same in source and built PWA',()=>{
   '#oncallView .v655-matrix .v652-matrix-cell.active'])
   assert.ok(css.includes(key),key);
  assert.ok(html.includes(css),'standalone generated HTML must include the exact current CSS');
- assert.ok(html.includes('<meta name="theme-color" content="#171820">'));
- assert.ok(base.includes('<meta name="theme-color" content="#171820">'));
+ assert.ok(html.includes('<meta name="theme-color" content="#EFF4FA">'));
+ assert.ok(base.includes('<meta name="theme-color" content="#EFF4FA">'));
  assert.ok(html.includes('Shift — ตารางเวรทีม | Team Schedule'));
 });
 test('V8 palette preserves role distinctions and contrast',()=>{

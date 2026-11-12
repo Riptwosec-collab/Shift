@@ -23,7 +23,7 @@ const server=createServer((req,res)=>{
 await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
 const port=server.address().port;
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
-const widths=[375,768,1440],views=['overview','daily','person','month','analytics','oncall'];
+const widths=[320,375,768,970,1280,1440],views=['overview','daily','person','month','analytics','oncall'];
 const reports=[];
 function colorEvalScript(){
  const bg=parseCssColor=>{const m=parseCssColor?.match(/rgba?\(([^)]+)\)/i);if(!m)return null;const n=m[1].replaceAll(',',' ').replace('/',' ').split(/\s+/).filter(Boolean).map(Number);return [n[0],n[1],n[2],Number.isFinite(n[3])?n[3]:1]};
@@ -62,6 +62,30 @@ function colorEvalScript(){
   samples.push({selector,ratio,foreground:s.color,background:back.map(Math.round),text:el.textContent.slice(0,40)});
   if(ratio<4.5)problems.push({type:'contrast',selector,ratio,text:el.textContent.slice(0,36)});
  }
+
+ // Detect header collisions beyond selected CSS selectors: the original bug
+ // occurred specifically around desktop tablet (970px) with injected controls.
+ const header=document.querySelector('.command-bar');
+ if(header){
+  const brand=header.querySelector('.brand');
+  const nav=header.querySelector('.nav-tabs');
+  const actions=header.querySelector('.command-actions');
+  const items=[['brand',brand],['navigation',nav],['actions',actions]]
+    .filter(([,el])=>el&&getComputedStyle(el).display!=='none'&&el.getBoundingClientRect().width>1);
+  const parent=rect(header);
+  for(const [name,el] of items){
+   const r=rect(el);
+   if(r.x<parent.x-4||r.r>parent.r+4)
+     problems.push({type:'header-overflow',name,rect:r,parent});
+  }
+  for(let i=0;i<items.length;i++)for(let j=i+1;j<items.length;j++){
+   const [nameA,a]=items[i],[nameB,b]=items[j],x=rect(a),y=rect(b);
+   const overX=Math.min(x.r,y.r)-Math.max(x.x,y.x);
+   const overY=Math.min(x.b,y.b)-Math.max(x.y,y.y);
+   if(overX>4&&overY>4)
+     problems.push({type:'header-overlap',between:[nameA,nameB],overX:Math.round(overX),overY:Math.round(overY)});
+  }
+ }
  const checks=[['#overviewView .roster-card .person-row','.row-copy','.status-badge'],
  ['#dailyView .roster-card .person-row','.row-copy','.status-badge'],
  ['#overviewView .insights-panel .insight-item',':scope > span:nth-child(2)','.insight-value']];
@@ -94,6 +118,10 @@ try{
    const page=await context.newPage(),errors=[];
    page.on('pageerror',e=>errors.push(String(e.message)));
    await page.goto('http://127.0.0.1:'+port+'/',{waitUntil:'domcontentloaded',timeout:45000});
+   const boot=page.locator('#bootOverlay');
+   if(await boot.isVisible().catch(()=>false)){
+    await page.screenshot({path:join(out,theme+'-'+width+'-loader.png'),animations:'disabled'}).catch(()=>{});
+   }
    await page.waitForTimeout(1300);
    await page.addStyleTag({content:'.v613-loader,.boot-overlay,#bootOverlay{display:none!important;pointer-events:none!important}'});
    for(const view of views){
