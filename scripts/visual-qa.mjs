@@ -54,7 +54,7 @@ function colorEvalScript(){
  }
  const checks=[['#overviewView .roster-card .person-row','.row-copy','.status-badge'],
  ['#dailyView .roster-card .person-row','.row-copy','.status-badge'],
- ['#overviewView .insights-panel .insight-item','> span:nth-child(2)','.insight-value']];
+ ['#overviewView .insights-panel .insight-item',':scope > span:nth-child(2)','.insight-value']];
  for(const [outer,a,b] of checks){
   for(const el of [...document.querySelectorAll(outer)].slice(0,15)){
    const left=el.querySelector(a),right=el.querySelector(b);
