@@ -1,0 +1,42 @@
+name: Shift UI quality gate
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "scripts/**"
+      - "tests/**"
+      - "index.html"
+      - "package.json"
+      - ".github/workflows/ui-quality.yml"
+  pull_request:
+    paths:
+      - "src/**"
+      - "scripts/**"
+      - "tests/**"
+      - "index.html"
+      - "package.json"
+      - ".github/workflows/ui-quality.yml"
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Rebuild current site from source
+        run: npm run build
+      - name: Run data and visual system regression tests
+        run: npm test
+      - name: Ensure one canonical V10 style and no stale V8 include
+        run: |
+          node --input-type=module -e "
+            import assert from 'node:assert/strict';
+            import fs from 'node:fs';
+            const html=fs.readFileSync('index.html','utf8');
+            assert.equal((html.match(/id=\"shift-v10-professional-style\"/g)||[]).length,1);
+            assert.ok(!html.includes('shift-v88-contrast-style'));
+            assert.ok(html.includes('data-shift-release=\"10.0\"'));
+          "
