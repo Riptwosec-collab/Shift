@@ -46,7 +46,15 @@ function colorEvalScript(){
  '#oncallView .v6515-oncall-title strong',
  '#oncallView .v6515-oncall-row b',
  '#oncallView .v6515-oncall-row small',
- '#dailyView .daily-timeline .date-node.active .mini'];
+ '#dailyView .daily-timeline .date-node.active .mini',
+ '#shift740FullMonth .s740-top .end770-title span',
+ '#shift740FullMonth .s740-top .end770-title em',
+ '#shift740FullMonth .s740-top .s740-kicker',
+ '#shift740FullMonth .s740-top .s740-topcopy p',
+ '#shift740FullMonth .end770-hero-mark b',
+ '#shift740FullMonth .end770-hero-mark small',
+ '#shift740FullMonth .s740-period-bar strong',
+ '#shiftNovemberView .shift72-command h3'];
  const problems=[],samples=[];
  const rootMode=document.documentElement.dataset.shiftTheme;
  for(const selector of selectors){

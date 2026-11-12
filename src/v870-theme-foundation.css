@@ -588,3 +588,137 @@ html[data-shift780="ready"][data-shift-theme] :is(
  overflow-wrap:break-word!important;
  line-height:1.22!important;
 }
+
+
+/* SHIFT V8.9 — Visual-image-verified hero/title + month controls.
+   Dark on coral was valid, but becomes illegible once the hero is navy. */
+html[data-shift780="ready"][data-shift-theme="dark"] #shift740FullMonth .s740-top :is(
+ .s740-kicker,.s740-topcopy p,.end770-title,.end770-title span,
+ .end770-title em){
+ color:#F1F7FF!important;
+ -webkit-text-fill-color:#F1F7FF!important;
+ text-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme="light"] #shift740FullMonth .s740-top :is(
+ .s740-kicker,.s740-topcopy p,.end770-title,.end770-title span,
+ .end770-title em){
+ color:#15283F!important;
+ -webkit-text-fill-color:#15283F!important;
+ text-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .end770-hero-mark{
+ background:#D6F36A!important;
+ border:2px solid #243D35!important;
+ color:#162A37!important;
+ box-shadow:3px 3px 0 #243D35!important;
+}
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .end770-hero-mark :is(b,small){
+ color:#162A37!important;
+ -webkit-text-fill-color:#162A37!important;
+ text-shadow:none!important;
+}
+/* The original editorial parent painted thick ink dividers and beige bars;
+   harmonize their surfaces with the corresponding page theme. */
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth{
+ background:var(--sh87-panel)!important;
+ color:var(--sh87-fg)!important;
+ border:1px solid var(--sh87-border)!important;
+ border-radius:13px!important;
+ box-shadow:none!important;
+ overflow:hidden!important;
+}
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .s740-period-bar{
+ background:var(--sh87-panel)!important;
+ background-image:none!important;
+ border-bottom:1px solid var(--sh87-border)!important;
+ color:var(--sh87-muted)!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .s740-period-bar strong{
+ color:var(--sh87-fg)!important;
+}
+html[data-shift780="ready"][data-shift-theme="light"] #shift740FullMonth .s740-detail{
+ background:#EDF4FF!important;
+ background-image:none!important;
+ border-color:#D4DFEC!important;
+ color:#15283F!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] #shift740FullMonth .s740-detail{
+ background:#142940!important;
+ background-image:none!important;
+ border-color:#344E6B!important;
+ color:#F1F7FF!important;
+}
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .s740-months{
+ background:var(--sh87-soft)!important;
+ border:1px solid var(--sh87-border)!important;
+ border-radius:9px!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .s740-months button{
+ background:transparent!important;
+ color:var(--sh87-fg)!important;
+ border-color:transparent!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .s740-months button[aria-pressed="true"]{
+ background:var(--sh87-accent)!important;
+ color:var(--sh87-accent-fg)!important;
+ border-color:var(--sh87-accent)!important;
+}
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .s740-actions button{
+ background:var(--sh87-card)!important;
+ border-color:var(--sh87-border)!important;
+ color:var(--sh87-fg)!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .s740-actions .s740-more{
+ background:var(--sh87-accent)!important;
+ border-color:var(--sh87-accent)!important;
+ color:var(--sh87-accent-fg)!important;
+}
+/* All active language/performance controls are the same blue interaction
+   color as navigation; old orange active state looked unrelated. */
+html[data-shift780="ready"][data-shift-theme] .command-bar .command-actions .v65-language{
+ background:var(--sh87-soft)!important;
+ border:1px solid var(--sh87-border)!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .command-actions .v65-language button:not(.active),
+html[data-shift780="ready"][data-shift-theme] .command-bar .command-actions .v64-quality button:not(.active){
+ background:transparent!important;
+ color:var(--sh87-fg)!important;
+ border-color:transparent!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .command-actions .v65-language button.active,
+html[data-shift780="ready"][data-shift-theme] .command-bar .command-actions .v64-quality button.active{
+ background:var(--sh87-accent)!important;
+ color:var(--sh87-accent-fg)!important;
+ border-color:var(--sh87-accent)!important;
+ box-shadow:none!important;
+}
+/* Labels in mobile Oncall remain readable; their state accents stay intact. */
+html[data-shift780="ready"][data-shift-theme] #oncallView .v6515-oncall-title strong{
+ color:var(--sh87-fg)!important;
+ -webkit-text-fill-color:var(--sh87-fg)!important;
+}
+html[data-shift780="ready"][data-shift-theme] #oncallView .v6515-oncall-title small{
+ color:var(--sh87-muted)!important;
+}
+/* Other November graphic hero receives the same foreground/background pair. */
+html[data-shift780="ready"][data-shift-theme="dark"] #shiftNovemberView .shift72-command :is(
+ h3,h3 em,p,span,.shift72-eyebrow){
+ color:#F1F7FF!important;
+ -webkit-text-fill-color:#F1F7FF!important;
+}
+html[data-shift780="ready"][data-shift-theme="light"] #shiftNovemberView .shift72-command :is(
+ h3,h3 em,p,span,.shift72-eyebrow){
+ color:#15283F!important;
+ -webkit-text-fill-color:#15283F!important;
+}
+@media(max-width:760px){
+ html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .s740-topcopy{
+  max-width:100%!important;
+ }
+}
