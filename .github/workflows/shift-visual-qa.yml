@@ -1,0 +1,40 @@
+name: Shift Browser Visual QA
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'scripts/**'
+      - 'index.html'
+      - '.github/workflows/shift-visual-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser-visual-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install dependencies
+        run: |
+          npm install --ignore-scripts --no-audit --no-fund
+          npm install --no-save playwright --ignore-scripts --no-audit --no-fund
+          npx playwright install chromium --with-deps
+      - name: Build Shift
+        run: npm run build
+      - name: Validate generated HTML
+        run: git diff --exit-code -- index.html
+      - name: Audit browser contrast and overlap
+        run: node scripts/visual-qa.mjs
+      - name: Upload screenshots and computed-style report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: shift-visual-qa
+          path: artifacts/visual-qa/
+          if-no-files-found: warn
+          retention-days: 7
