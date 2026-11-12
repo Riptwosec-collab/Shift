@@ -36,10 +36,10 @@ test('Theme control persists, restores, is accessible and respects locale',()=>{
  const api=new Function('document','localStorage',js+';return {set:shift81SetTheme,read:shift81StoredTheme,sync:shift81SyncThemeButton}')(document,store);
  assert.equal(api.read(),'dark');
  assert.equal(api.set('dark'), 'dark');assert.equal(root.dataset.shiftTheme,'dark');
- assert.equal(attrs['aria-pressed'],'true');assert.match(attrs['aria-label'],/ธีมมืด/);
- assert.equal(meta.content,'#000000');assert.equal(store.value,'dark');
+ assert.equal(attrs['aria-pressed'],'true');assert.match(attrs['aria-label'],/ธีมน้ำเงินเข้ม/);
+ assert.equal(meta.content,'#071425');assert.equal(store.value,'dark');
  root.dataset.locale='en';api.sync();assert.equal(button.label.textContent,'Dark');
- assert.equal(api.set('light'),'light');assert.equal(meta.content,'#171820');assert.equal(attrs['aria-pressed'],'false');
+ assert.equal(api.set('light'),'light');assert.equal(meta.content,'#EFF4FA');assert.equal(attrs['aria-pressed'],'false');
 });
 test('No remote assets, no perpetual animations in theme layer',()=>{
  assert.doesNotMatch(css,/@import|url\(\s*https?:/i);

@@ -37,9 +37,9 @@ test('Dark mode is truly black and uses neutral graphite stepped surfaces',()=>{
   '--sh81-card:#141414','--sh81-soft:#1F1F1F','--sh81-ink:#F7F7F7',
   '--sh81-muted:#C5C5C5','background:#000000!important'])
   assert.ok(section.includes(marker),marker);
- assert.ok(js.includes("mode==='dark'?'#000000':'#171820'"));
- assert.ok(build.includes("t==='dark'?'#000000':'#171820'"));
- assert.ok(html.includes("t==='dark'?'#000000':'#171820'"));
+ assert.ok(js.includes("mode==='dark'?'#071425':'#EFF4FA'"));
+ assert.ok(build.includes("t==='dark'?'#071425':'#EFF4FA'"));
+ assert.ok(html.includes("t==='dark'?'#071425':'#EFF4FA'"));
 });
 test('All linked style source blocks match built HTML, CSS balanced',()=>{
  for(const path of ['src/v6516-liquid-glass.css','src/v6517-neon-dashboard.css',

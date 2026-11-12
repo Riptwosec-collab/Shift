@@ -15,16 +15,16 @@ function shift81SyncThemeButton(){
  const icon=button.querySelector('.shift81-theme-icon');
  const label=button.querySelector('.shift81-theme-label');
  if(icon)icon.textContent=dark?'☾':'☀';
- if(label)label.textContent=en?(dark?'Dark':'Light'):(dark?'มืด':'สว่าง');
+ if(label)label.textContent=en?(dark?'Dark':'Light'):(dark?'น้ำเงิน':'สว่าง');
  button.setAttribute('aria-pressed',String(dark));
- button.setAttribute('aria-label',en?(dark?'Dark theme active; switch to light':'Light theme active; switch to dark'):(dark?'กำลังใช้ธีมมืด กดเพื่อเปลี่ยนเป็นธีมสว่าง':'กำลังใช้ธีมสว่าง กดเพื่อเปลี่ยนเป็นธีมมืด'));
+ button.setAttribute('aria-label',en?(dark?'Dark theme active; switch to light':'Light theme active; switch to dark'):(dark?'กำลังใช้ธีมน้ำเงินเข้ม กดเพื่อเปลี่ยนเป็นธีมสว่าง':'กำลังใช้ธีมสว่าง กดเพื่อเปลี่ยนเป็นธีมน้ำเงินเข้ม'));
  button.title=button.getAttribute('aria-label');
 }
 function shift81SetTheme(value,persist=true){
  const mode=value==='dark'?'dark':'light';
  document.documentElement.dataset.shiftTheme=mode;
  const meta=document.querySelector('meta[name="theme-color"]');
- if(meta)meta.setAttribute('content',mode==='dark'?'#000000':'#171820');
+ if(meta)meta.setAttribute('content',mode==='dark'?'#071425':'#EFF4FA');
  if(persist){try{localStorage.setItem(SHIFT81_THEME_KEY,mode)}catch{}}
  shift81SyncThemeButton();
  return mode;

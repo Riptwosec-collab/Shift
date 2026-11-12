@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#171820">
+<meta name="theme-color" content="#EFF4FA">
 <meta name="color-scheme" content="light dark">
 <title>Shift — ตารางเวรทีม | Team Schedule</title>
 <style>
@@ -9479,8 +9479,441 @@ html[data-shift780="ready"] #oncallView .v6515-oncall-row.selected{
 }
 
 </style>
+<style id="v870-theme-style">
+/* SHIFT V8.7 — Premium Light × Midnight Blue · Final cascade.
+   Opaque navigation, consistent layout rails, accessible roles and
+   boot surface synchronized with persisted theme. No roster changes. */
+html[data-shift780="ready"][data-shift-theme="light"]{
+ --sh81-shell:#EFF4FA;--sh81-panel:#FFFFFF;--sh81-card:#F8FBFF;
+ --sh81-soft:#EFF4FA;--sh81-border:#D4DFEC;--sh81-ink:#15283F;
+ --sh81-muted:#50667D;--sh81-hover:#E9F2FF;--sh81-action:#2E66E5;
+ --shift78-shell:#EFF4FA;--shift78-paper:#FFFFFF;
+ --shift78-white:#FFFFFF;--shift78-ink:#15283F;--shift78-border:#D4DFEC;
+ --shift80-shell:#EFF4FA;--shift80-paper:#FFFFFF;
+ --shift80-surface:#F8FBFF;--shift80-raised:#EFF4FA;
+ --shift80-ink:#15283F;--shift80-line:#D4DFEC;
+ --shift80-text-subtle:#50667D;
+ --sh84-fg:#15283F;--sh84-muted:#50667D;
+ --sh84-panel:#FFFFFF;--sh84-card:#F8FBFF;--sh84-line:#D4DFEC;
+ --sh87-shell:#EFF4FA;--sh87-panel:#FFFFFF;--sh87-card:#F8FBFF;
+ --sh87-soft:#EFF4FA;--sh87-border:#D4DFEC;--sh87-fg:#15283F;
+ --sh87-muted:#50667D;--sh87-accent:#2E66E5;--sh87-accent-fg:#FFFFFF;
+ color-scheme:light!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"]{
+ --sh81-shell:#071425;--sh81-panel:#0D2036;--sh81-card:#142940;
+ --sh81-soft:#1C344F;--sh81-border:#344E6B;--sh81-ink:#F1F7FF;
+ --sh81-muted:#BBCDE0;--sh81-hover:#203B59;--sh81-action:#4F8CFF;
+ --shift78-shell:#071425;--shift78-paper:#0D2036;
+ --shift78-white:#142940;--shift78-ink:#F1F7FF;--shift78-border:#344E6B;
+ --shift80-shell:#071425;--shift80-paper:#0D2036;
+ --shift80-surface:#142940;--shift80-raised:#1C344F;
+ --shift80-ink:#F1F7FF;--shift80-line:#344E6B;
+ --shift80-text-subtle:#BBCDE0;
+ --sh84-fg:#F1F7FF;--sh84-muted:#BBCDE0;
+ --sh84-panel:#0D2036;--sh84-card:#142940;--sh84-line:#344E6B;
+ --sh87-shell:#071425;--sh87-panel:#0D2036;--sh87-card:#142940;
+ --sh87-soft:#1C344F;--sh87-border:#344E6B;--sh87-fg:#F1F7FF;
+ --sh87-muted:#BBCDE0;--sh87-accent:#4F8CFF;--sh87-accent-fg:#071425;
+ color-scheme:dark!important;
+}
+/* Eliminate layered V6 black/blue backgrounds and decorative noise. */
+html[data-shift780="ready"][data-shift-theme],
+html[data-shift780="ready"][data-shift-theme] :is(body,.app,main,.view){
+ background:var(--sh87-shell)!important;background-image:none!important;
+ color:var(--sh87-fg)!important;
+}
+html[data-shift780="ready"][data-shift-theme] body::before,
+html[data-shift780="ready"][data-shift-theme] body::after,
+html[data-shift780="ready"][data-shift-theme] .ambient{
+ content:none!important;display:none!important;
+}
+/* HEADER: brand/control row + independent full-width navigation.
+   The old minmax(250px,1fr) auto minmax(280px,1fr) grid overflowed.
+   The redundant Nov button in controls is hidden; tabs remain available. */
+html[data-shift780="ready"][data-shift-theme] .command-bar{
+ display:grid!important;
+ grid-template-columns:minmax(0,1fr) minmax(0,max-content)!important;
+ grid-template-rows:auto auto!important;
+ align-items:center!important;gap:10px 14px!important;
+ width:100%!important;max-width:100%!important;min-width:0!important;
+ padding:11px 13px!important;
+ position:sticky!important;top:8px!important;
+ background:var(--sh87-panel)!important;background-image:none!important;
+ border:1px solid var(--sh87-border)!important;border-radius:14px!important;
+ box-shadow:0 8px 25px rgba(18,50,90,.10)!important;
+ backdrop-filter:none!important;
+ isolation:isolate!important;z-index:200!important;overflow:visible!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] .command-bar{
+ box-shadow:0 10px 28px rgba(0,4,12,.36)!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .brand{
+ grid-column:1!important;grid-row:1!important;
+ min-width:0!important;justify-self:start!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .brand-copy h1{
+ color:var(--sh87-fg)!important;text-shadow:none!important;
+ font-size:clamp(17px,1.4vw,23px)!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .brand-copy :is(p,small){
+ color:var(--sh87-muted)!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .brand-mark{
+ background:#2E66E5!important;border-color:var(--sh87-border)!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .nav-tabs{
+ grid-column:1/-1!important;grid-row:2!important;
+ display:flex!important;justify-self:stretch!important;
+ flex-wrap:nowrap!important;align-items:stretch!important;
+ width:100%!important;max-width:100%!important;min-width:0!important;
+ box-sizing:border-box!important;gap:5px!important;padding:5px!important;
+ background:var(--sh87-soft)!important;background-image:none!important;
+ border:1px solid var(--sh87-border)!important;
+ border-radius:11px!important;box-shadow:none!important;
+ overflow-x:auto!important;overflow-y:hidden!important;
+ overscroll-behavior-inline:contain!important;scrollbar-width:thin!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .nav-tabs .nav-btn{
+ flex:1 0 114px!important;min-width:106px!important;max-width:none!important;
+ min-height:49px!important;
+ margin:0!important;padding:7px 9px!important;
+ background:transparent!important;background-image:none!important;
+ color:var(--sh87-fg)!important;
+ border:1px solid transparent!important;border-radius:8px!important;
+ box-shadow:none!important;text-shadow:none!important;
+ transform:none!important;
+ text-align:center!important;white-space:normal!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .nav-tabs .nav-btn :is(b,span){
+ display:block!important;max-width:100%!important;
+ color:inherit!important;
+ font-size:clamp(11px,.88vw,13px)!important;
+ line-height:1.4!important;
+ white-space:normal!important;overflow-wrap:break-word!important;
+ text-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .nav-tabs .nav-btn span{
+ font-size:11px!important;opacity:.77!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .nav-tabs .nav-btn:is(.active,.shift731-active){
+ background:var(--sh87-accent)!important;
+ background-image:none!important;
+ border-color:var(--sh87-accent)!important;
+ color:var(--sh87-accent-fg)!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .nav-tabs .nav-btn::after{
+ display:none!important;content:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .command-actions{
+ grid-column:2!important;grid-row:1!important;
+ display:flex!important;align-items:center!important;
+ flex-wrap:nowrap!important;justify-content:flex-end!important;
+ justify-self:end!important;
+ min-width:0!important;max-width:100%!important;width:auto!important;
+ gap:6px!important;
+ overflow-x:auto!important;overflow-y:hidden!important;
+ scrollbar-width:thin!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .command-actions > *{
+ flex-shrink:0!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .shift731-header-btn{
+ display:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-actions :is(
+ .sys-btn,.shift81-theme-toggle,.v65-language,.v64-quality,
+ .v65-locale-toggle,.v65-lang-switch){
+ background:var(--sh87-card)!important;background-image:none!important;
+ border:1px solid var(--sh87-border)!important;
+ color:var(--sh87-fg)!important;
+ border-radius:9px!important;box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-actions :is(
+ .sys-btn,.shift81-theme-toggle){
+ min-height:40px!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar button:focus-visible{
+ outline:3px solid var(--sh87-accent)!important;outline-offset:2px!important;
+}
+@media(min-width:861px) and (max-width:1280px){
+ html[data-shift780="ready"][data-shift-theme] .command-bar{
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-template-rows:auto auto auto!important;
+ }
+ html[data-shift780="ready"][data-shift-theme] .command-bar .brand{
+  grid-column:1!important;grid-row:1!important;
+ }
+ html[data-shift780="ready"][data-shift-theme] .command-bar .command-actions{
+  grid-column:1!important;grid-row:2!important;
+  width:100%!important;justify-self:stretch!important;
+  justify-content:flex-start!important;padding:4px 0!important;
+ }
+ html[data-shift780="ready"][data-shift-theme] .command-bar .nav-tabs{
+  grid-column:1!important;grid-row:3!important;
+ }
+}
+@media(max-width:860px){
+ html[data-shift780="ready"][data-shift-theme] .command-bar{
+  position:relative!important;top:auto!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-template-rows:auto auto!important;
+  padding:10px!important;gap:6px!important;
+ }
+ html[data-shift780="ready"][data-shift-theme] .command-bar .brand{
+  grid-column:1!important;grid-row:1!important;
+ }
+ html[data-shift780="ready"][data-shift-theme] .command-bar .command-actions{
+  grid-column:1!important;grid-row:2!important;
+  width:100%!important;justify-self:stretch!important;
+  justify-content:flex-start!important;
+  padding:4px 0!important;
+ }
+ html[data-shift780="ready"][data-shift-theme] .command-bar .nav-tabs{
+  display:none!important;
+ }
+ html[data-shift780="ready"][data-shift-theme] body #mobileNav{
+  background:var(--sh87-panel)!important;
+  border-color:var(--sh87-border)!important;
+  color:var(--sh87-fg)!important;
+ }
+ html[data-shift780="ready"][data-shift-theme] body #mobileNav button{
+  color:var(--sh87-fg)!important;
+ }
+ html[data-shift780="ready"][data-shift-theme] body #mobileNav button:is(.active,.shift731-active){
+  background:var(--sh87-accent)!important;
+  color:var(--sh87-accent-fg)!important;
+  border-color:var(--sh87-accent)!important;
+ }
+}
+/* Surfaces + labels are intentionally paired, including legacy screens. */
+html[data-shift780="ready"][data-shift-theme] :is(
+ #overviewView .hud-panel:not(.hero-stage),#dailyView .hud-panel,
+ #personView .hud-panel,#monthView .hud-panel,
+ #analyticsView .hud-panel,#oncallView .hud-panel,
+ #overviewView .v6517-ratio-panel,#overviewView .v6517-shifts-panel,
+ #overviewView .v6517-oncall-panel,#overviewView .v6517-insights-panel,
+ #overviewView .v6517-trend-panel,
+ #personView .person-detail,#monthView .month-panel,
+ #shiftNovemberView .shift72-graphic,#shift740FullMonth .s740-roster-panel){
+ background:var(--sh87-panel)!important;background-image:none!important;
+ border-color:var(--sh87-border)!important;
+ color:var(--sh87-fg)!important;box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #overviewView .v6517-note,#overviewView .v6517-oncall-item,
+ #overviewView .insights-panel .insight-item,
+ #personView .person-pick:not(.active),
+ #analyticsView .analytics-card,
+ #oncallView .v6515-oncall-row,#oncallView .v655-engineer-card,
+ #oncallView .v655-person-mini,#oncallView .v655-now-panel,
+ #oncallView .v652-now-card,#oncallView .v652-stat,
+ #shift740FullMonth .s740-stat,#shiftNovemberView .shift72-position-card){
+ background:var(--sh87-card)!important;background-image:none!important;
+ border-color:var(--sh87-border)!important;
+ color:var(--sh87-fg)!important;box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #overviewView .v6517-note,#overviewView .v6517-oncall-item,
+ #oncallView .v655-engineer-card,#oncallView .v655-now-panel,
+ #oncallView .v6515-oncall-row,#personView .person-pick:not(.active)
+) :is(b,strong,.row-name){
+ color:var(--sh87-fg)!important;
+ -webkit-text-fill-color:var(--sh87-fg)!important;
+ text-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #overviewView .v6517-note,#overviewView .v6517-oncall-item,
+ #oncallView .v655-engineer-card,#oncallView .v655-now-panel,
+ #oncallView .v6515-oncall-row,#personView .person-pick:not(.active)
+) :is(small,em,.row-meta){
+ color:var(--sh87-muted)!important;
+ -webkit-text-fill-color:var(--sh87-muted)!important;
+}
+html[data-shift780="ready"][data-shift-theme] #overviewView .v6517-kpi{
+ background:var(--sh87-panel)!important;
+ color:var(--sh87-fg)!important;
+ border-color:var(--sh87-border)!important;box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] #overviewView .v6517-kpi:nth-child(1){border-top:3px solid #B1D05B!important}
+html[data-shift780="ready"][data-shift-theme] #overviewView .v6517-kpi:nth-child(2){border-top:3px solid #4F8CFF!important}
+html[data-shift780="ready"][data-shift-theme] #overviewView .v6517-kpi:nth-child(3){border-top:3px solid #E5A5BA!important}
+html[data-shift780="ready"][data-shift-theme] #overviewView .v6517-kpi:nth-child(4){border-top:3px solid #FF7959!important}
+html[data-shift780="ready"][data-shift-theme] #overviewView .v6517-kpi:nth-child(5){border-top:3px solid #E9C566!important}
+html[data-shift780="ready"][data-shift-theme] #overviewView .v6517-kpi :is(
+ .v6517-kpi-value,.v6517-kpi-label){
+ color:var(--sh87-fg)!important;
+}
+html[data-shift780="ready"][data-shift-theme] #overviewView .v6517-kpi :is(
+ .v6517-kpi-note,.v6517-caption){
+ color:var(--sh87-muted)!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #monthView .heatmap .name-col,
+ #shift740FullMonth .s740-matrix .s740-name,
+ #shiftNovemberView .shift72-board-table .shift72-person-heading,
+ #oncallView .v655-matrix .v652-matrix-name,
+ #oncallView .v655-matrix .v652-matrix-day){
+ background:var(--sh87-soft)!important;background-image:none!important;
+ color:var(--sh87-fg)!important;
+ border-color:var(--sh87-border)!important;box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #monthView .heatmap .v6519-full-name,
+ #shift740FullMonth .s740-name b,
+ #shiftNovemberView .shift72-person-copy b){
+ color:var(--sh87-fg)!important;
+ -webkit-text-fill-color:var(--sh87-fg)!important;
+ background:transparent!important;text-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] #oncallView :is(
+ .v6515-oncall .v6515-oncall-month,
+ .v655-matrix-scroll,.v652-control-deck,.v652-hero,
+ .v655-selected-day-detail,.v652-matrix-panel,
+ .v652-timeline-panel,.v652-overview-table){
+ background:var(--sh87-panel)!important;background-image:none!important;
+ border-color:var(--sh87-border)!important;
+ color:var(--sh87-fg)!important;box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] #oncallView :is(
+ .v652-view-tabs,.v652-month-switch,.v655-matrix .v652-matrix-cell){
+ background:var(--sh87-card)!important;background-image:none!important;
+ border-color:var(--sh87-border)!important;color:var(--sh87-fg)!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .ghost-btn,.filter-btn,.range-btn,#shiftMonthTabs button:not(.active),
+ #oncallView .v652-view-tabs button:not(.active),
+ #oncallView .v652-month-switch button:not(.active)){
+ background:var(--sh87-card)!important;
+ border-color:var(--sh87-border)!important;
+ color:var(--sh87-fg)!important;box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .filter-btn.active,.range-btn.active,#shiftMonthTabs button.active,
+ #oncallView .v652-view-tabs button.active,
+ #oncallView .v652-month-switch button.active){
+ background:var(--sh87-accent)!important;
+ border-color:var(--sh87-accent)!important;
+ color:var(--sh87-accent-fg)!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #overviewView,#dailyView,#personView,#monthView,#analyticsView,#oncallView
+) .eyebrow{
+ color:var(--sh87-muted)!important;
+ font-size:11px!important;line-height:1.45!important;
+}
+/* Day/night/off retain stable semantic colors across every theme. */
+html[data-shift780="ready"][data-shift-theme] :is(
+ .matrix-cell.D,.v6517-mobile-row button.D,.shift-week-cell.D){
+ background:#D6F36A!important;color:#26310F!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .matrix-cell.N,.v6517-mobile-row button.N,.shift-week-cell.N){
+ background:#5264E8!important;color:#FFFFFF!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .matrix-cell.O,.v6517-mobile-row button.O,.shift-week-cell.O){
+ background:#FFC4D4!important;color:#512537!important;
+}
+html[data-shift780="ready"][data-shift-theme] body .shift-install-dock{
+ background:var(--sh87-panel)!important;
+ border-color:var(--sh87-border)!important;color:var(--sh87-fg)!important;
+}
+html[data-shift780="ready"][data-shift-theme] body .shift-install-dock::after{
+ color:var(--sh87-muted)!important;
+}
+html[data-shift780="ready"][data-shift-theme] body .shift-install-dock .shift-pwa-install{
+ background:var(--sh87-accent)!important;
+ color:var(--sh87-accent-fg)!important;
+ border-color:var(--sh87-accent)!important;
+}
+html[data-shift780="ready"][data-shift-theme] #dailyView .daily-timeline .date-node:not(.active){
+ background:var(--sh87-card)!important;
+ color:var(--sh87-fg)!important;border-color:var(--sh87-border)!important;
+}
+html[data-shift780="ready"][data-shift-theme] #dailyView .daily-timeline .date-node.active{
+ background:var(--sh87-accent)!important;
+ color:var(--sh87-accent-fg)!important;border-color:var(--sh87-accent)!important;
+}
+html[data-shift780="ready"][data-shift-theme] #dailyView .date-node.active :is(.num,.mini,.dow){
+ color:var(--sh87-accent-fg)!important;
+}
+/* Boot inherits theme from the synchronous head preflight script. */
+html[data-shift-theme="light"]{
+ --sh87-boot-shell:#EFF4FA;--sh87-boot-card:#FFFFFF;
+ --sh87-boot-soft:#EFF4FA;--sh87-boot-fg:#15283F;
+ --sh87-boot-muted:#50667D;--sh87-boot-line:#D4DFEC;
+ --sh87-boot-accent:#2E66E5;
+}
+html[data-shift-theme="dark"]{
+ --sh87-boot-shell:#071425;--sh87-boot-card:#0D2036;
+ --sh87-boot-soft:#142940;--sh87-boot-fg:#F1F7FF;
+ --sh87-boot-muted:#BBCDE0;--sh87-boot-line:#344E6B;
+ --sh87-boot-accent:#4F8CFF;
+}
+html[data-shift-theme] #bootOverlay{
+ background:var(--sh87-boot-shell)!important;background-image:none!important;
+ color:var(--sh87-boot-fg)!important;
+}
+html[data-shift-theme] #bootOverlay::before,
+html[data-shift-theme] #bootOverlay::after{
+ content:none!important;display:none!important;
+}
+html[data-shift-theme] #bootOverlay .boot613-shell{
+ background:var(--sh87-boot-card)!important;background-image:none!important;
+ border-color:var(--sh87-boot-line)!important;
+ color:var(--sh87-boot-fg)!important;
+ box-shadow:0 14px 45px rgba(20,45,77,.15)!important;
+}
+html[data-shift-theme] #bootOverlay :is(
+ .boot613-card,.boot613-mini,.boot613-radar,.boot613-logo){
+ background:var(--sh87-boot-soft)!important;background-image:none!important;
+ color:var(--sh87-boot-fg)!important;
+ border-color:var(--sh87-boot-line)!important;box-shadow:none!important;
+}
+html[data-shift-theme] #bootOverlay .boot613-title h2,
+html[data-shift-theme] #bootOverlay :is(
+ .boot613-card-head b,.boot613-mini b,.boot613-pct){
+ color:var(--sh87-boot-fg)!important;
+}
+html[data-shift-theme] #bootOverlay :is(
+ .boot613-title p,.boot613-title small,.boot613-card-head span,
+ .boot613-phase,.boot613-mini span){
+ color:var(--sh87-boot-muted)!important;
+}
+html[data-shift-theme] #bootOverlay :is(.boot613-progress,.boot613-orbit){
+ background:var(--sh87-boot-soft)!important;
+ border-color:var(--sh87-boot-line)!important;box-shadow:none!important;
+}
+html[data-shift-theme] #bootOverlay :is(
+ .boot613-progress i,.boot613-logo::before,.boot613-scan i){
+ background:var(--sh87-boot-accent)!important;background-image:none!important;
+}
+html[data-shift-theme] #bootOverlay .boot613-live{
+ background:var(--sh87-boot-soft)!important;
+ border-color:var(--sh87-boot-line)!important;
+ color:var(--sh87-boot-fg)!important;
+}
+@media(max-width:600px){
+ html[data-shift-theme] #bootOverlay .boot613-shell{
+  max-height:calc(100dvh - 22px)!important;
+  overflow-y:auto!important;padding:15px!important;
+ }
+ html[data-shift-theme] #bootOverlay .boot613-radar{
+  height:130px!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-shift-theme] #bootOverlay :is(.boot613-arc,.boot613-core,.boot613-scan i){
+  animation:none!important;
+ }
+}
+
+</style>
 <script id="shift81-theme-preflight">
-(()=>{let t='light';try{t=localStorage.getItem('shift.theme')==='dark'?'dark':'light'}catch{}document.documentElement.dataset.shiftTheme=t;const m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='dark'?'#000000':'#171820')})();
+(()=>{let t='light';try{t=localStorage.getItem('shift.theme')==='dark'?'dark':'light'}catch{}document.documentElement.dataset.shiftTheme=t;const m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='dark'?'#071425':'#EFF4FA')})();
 </script>
 </head>
 <!-- REFERENCE LOCK V4 -->
@@ -13302,16 +13735,16 @@ function shift81SyncThemeButton(){
  const icon=button.querySelector('.shift81-theme-icon');
  const label=button.querySelector('.shift81-theme-label');
  if(icon)icon.textContent=dark?'☾':'☀';
- if(label)label.textContent=en?(dark?'Dark':'Light'):(dark?'มืด':'สว่าง');
+ if(label)label.textContent=en?(dark?'Dark':'Light'):(dark?'น้ำเงิน':'สว่าง');
  button.setAttribute('aria-pressed',String(dark));
- button.setAttribute('aria-label',en?(dark?'Dark theme active; switch to light':'Light theme active; switch to dark'):(dark?'กำลังใช้ธีมมืด กดเพื่อเปลี่ยนเป็นธีมสว่าง':'กำลังใช้ธีมสว่าง กดเพื่อเปลี่ยนเป็นธีมมืด'));
+ button.setAttribute('aria-label',en?(dark?'Dark theme active; switch to light':'Light theme active; switch to dark'):(dark?'กำลังใช้ธีมน้ำเงินเข้ม กดเพื่อเปลี่ยนเป็นธีมสว่าง':'กำลังใช้ธีมสว่าง กดเพื่อเปลี่ยนเป็นธีมน้ำเงินเข้ม'));
  button.title=button.getAttribute('aria-label');
 }
 function shift81SetTheme(value,persist=true){
  const mode=value==='dark'?'dark':'light';
  document.documentElement.dataset.shiftTheme=mode;
  const meta=document.querySelector('meta[name="theme-color"]');
- if(meta)meta.setAttribute('content',mode==='dark'?'#000000':'#171820');
+ if(meta)meta.setAttribute('content',mode==='dark'?'#071425':'#EFF4FA');
  if(persist){try{localStorage.setItem(SHIFT81_THEME_KEY,mode)}catch{}}
  shift81SyncThemeButton();
  return mode;
