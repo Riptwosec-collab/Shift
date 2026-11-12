@@ -14607,6 +14607,27 @@ html[data-shift780="ready"][data-shift-theme] :is(
  }
 }
 
+/* The boot overlay runs before data-shift780=ready. Supply the same subdued
+   shell here, so opening or reloading the app cannot flash the old bright white. */
+html[data-shift-theme="light"]{
+ --sh87-boot-shell:#E5EBF2;
+ --sh87-boot-card:#F0F3F7;
+ --sh87-boot-soft:#DFE7F0;
+ --sh87-boot-fg:#182C44;
+ --sh87-boot-muted:#455D75;
+ --sh87-boot-line:#B8C8D8;
+ --sh87-boot-accent:#2459B8;
+}
+html[data-shift-theme="dark"]{
+ --sh87-boot-shell:#07182C;
+ --sh87-boot-card:#102844;
+ --sh87-boot-soft:#1B3C5D;
+ --sh87-boot-fg:#F0F6FC;
+ --sh87-boot-muted:#BED0E1;
+ --sh87-boot-line:#365A78;
+ --sh87-boot-accent:#72ADFF;
+}
+
 </style>
 </body>
 </html>
