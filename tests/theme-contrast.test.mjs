@@ -12,7 +12,7 @@ const palette = (theme) => {
   ).exec(css)?.[1];
   assert.ok(declaration, 'Missing scoped ' + theme + ' palette');
   const tokens = {};
-  for (const [, name, value] of declaration.matchAll(/(--[a-z0-9-]+):\\s*(#[a-fA-F0-9]{6})\\s*;/g)) tokens[name] = value;
+  for (const [, name, value] of declaration.matchAll(/(--[a-z0-9-]+):\s*(#[a-fA-F0-9]{6})\s*;/g)) tokens[name] = value;
   return tokens;
 };
 
@@ -52,13 +52,13 @@ test('Network 2.0 overrides tiny illegible legacy text and allows responsive wra
     '#v64NetworkDetails .v64-relation-strip span',
     '#v64NetworkDetails .v64-relation-strip strong',
   ]) assert.ok(css.includes(selector), 'Missing contrast repair for ' + selector);
-  assert.match(css, /grid-template-columns:repeat\\(auto-fit/);
+  assert.match(css, /grid-template-columns:repeat\(auto-fit/);
   assert.match(css, /overflow-wrap:anywhere!important/);
 });
 
 test('contrast repair is present now and persisted through subsequent builds', () => {
-  assert.match(build, /const shiftV88Css=fs\\.readFileSync/);
+  assert.match(build, /const shiftV88Css=fs\.readFileSync/);
   assert.match(build, /shift-v88-contrast-style/);
   assert.match(html, /<style id="shift-v88-contrast-style">/);
-  assert.match(html, /Specific screenshot regression: Network 2\\.0/);
+  assert.match(html, /Specific screenshot regression: Network 2\.0/);
 });
