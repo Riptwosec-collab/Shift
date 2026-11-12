@@ -40,11 +40,11 @@ test('accessible foreground/background color pairs in both modes',()=>{
     }
   }
 });
-test('midnight navy is the default and explicit light theme survives reload',()=>{
+test('black-lime is the default and explicit light theme survives reload',()=>{
   const dark=palette('dark');
-  assert.equal(dark['--sh87-shell'],'#090F1B');
-  assert.equal(dark['--sh87-panel'],'#111C2D');
-  assert.equal(dark['--sh87-card'],'#172538');
+  assert.equal(dark['--sh87-shell'],'#050508');
+  assert.equal(dark['--sh87-panel'],'#0E1219');
+  assert.equal(dark['--sh87-card'],'#111820');
   assert.match(runtime,/catch\{return 'dark'\}/);
   assert.ok(runtime.includes("getItem(SHIFT81_THEME_KEY)==='light'"));
   assert.ok(build.includes("let t='dark'"));
@@ -76,4 +76,31 @@ test('theme explicitly covers all 8 operational view families',()=>{
     'overviewView','dailyView','personView','monthView','analyticsView',
     'oncallView','shiftNovemberView','shift740FullMonth'
   ])assert.ok(css.includes('#'+id),'Missing '+id);
+});
+
+test('MEK CONTROL black-lime palette uses reference accent and high contrast',()=>{
+ const dark=palette('dark');
+ assert.equal(dark['--sh87-accent'],'#C8FF47');
+ assert.equal(dark['--sh87-fg'],'#F2F5F8');
+ assert.equal(dark['--sh87-shell'],'#050508');
+ const light=palette('light');
+ assert.equal(light['--sh87-accent'],'#C8FF47');
+ assert.ok(contrast(dark['--sh87-accent-fg'],dark['--sh87-accent'])>=4.5);
+});
+test('desktop rail and mobile nav preserve existing view handlers',()=>{
+ assert.match(css,/@media\(min-width:1181px\)/);
+ assert.match(css,/\.command-bar \.nav-tabs \.nav-btn/);
+ assert.match(css,/--shift11-sidebar-width:208px/);
+ assert.match(css,/@media\(max-width:860px\)/);
+ assert.match(css,/#mobileNav button\.active/);
+ assert.ok(!build.includes('MEK-CONTRO-10'));
+});
+test('reference lime is restricted to active controls; roster codes retain distinct shades',()=>{
+ const dark=palette('dark');
+ assert.notEqual(dark['--shift10-day-bg'],dark['--shift10-night-bg']);
+ assert.notEqual(dark['--shift10-night-bg'],dark['--shift10-off-bg']);
+ assert.notEqual(dark['--shift10-day-bg'],dark['--sh87-accent']);
+ assert.ok(css.includes('.shift72-duty-pill.tone-D'));
+ assert.ok(css.includes('.s740-duty.s740-N'));
+ assert.ok(css.includes('.s740-duty.s740-H'));
 });
