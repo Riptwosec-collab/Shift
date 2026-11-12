@@ -13,7 +13,7 @@ test('V8.1 both themes use one role palette across six views plus both full-mont
  assert.ok(html.includes(js),'generated HTML must embed theme JS');
  assert.ok(build.includes('v810-theme.css')&&build.includes('v810-theme.js'));
  assert.ok(html.includes('id="shift81-theme-preflight"'));
- assert.ok(html.includes('localStorage.getItem(\\'shift.theme\\')'));
+ assert.ok(html.includes("localStorage.getItem('shift.theme')"));
 });
 test('Staff name cells and outlined titles are repaired without hiding source assignments',()=>{
  for(const marker of ['.v6519-full-name','.s740-name','.shift72-person-copy',
@@ -41,6 +41,6 @@ test('Theme control persists, restores, is accessible and respects locale',()=>{
  assert.equal(api.set('light'),'light');assert.equal(meta.content,'#171820');assert.equal(attrs['aria-pressed'],'false');
 });
 test('No remote assets, no perpetual animations in theme layer',()=>{
- assert.doesNotMatch(css,/@import|url\\(https?:/i);
- assert.doesNotMatch(js,/fetch\\(|setInterval\\(|requestAnimationFrame\\(/);
+ assert.doesNotMatch(css,/@import|url\(\s*https?:/i);
+ assert.doesNotMatch(js,/\b(?:fetch|setInterval|requestAnimationFrame)\s*\(/);
 });
