@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#171820">
-<meta name="color-scheme" content="dark">
+<meta name="color-scheme" content="light dark">
 <title>Shift — ตารางเวรทีม | Team Schedule</title>
 <style>
 :root{
@@ -3059,10 +3059,7 @@ body,body:where(:not(.whatever)),.app{background:transparent!important;backgroun
  box-shadow:var(--shift-neon-rim)!important;
  color:#effaff!important;
 }
-.hud-panel::after,.roster-card::after,.metric-card::after,.v6517-glass::after{
- content:"";pointer-events:none;position:absolute;inset:0;border-radius:inherit;
- background:linear-gradient(115deg,rgba(175,228,255,.09),transparent 27%,transparent 79%,rgba(33,147,255,.08));
-}
+.hud-panel::after,/* V8.4: removed legacy decorative overlay from text-bearing cards */
 .section-title,.v6515-oncall-title strong,.v6515-month-title strong,.roster-title b{color:#f8fdff!important;font-weight:780!important;text-shadow:0 1px 1px #000!important}
 .eyebrow,.muted,.row-meta{color:#a6cce6!important}
 .metric-card.day,.roster-card.day,.v6515-shift-group.day{border-color:rgba(0,237,145,.7)!important;border-left:3px solid var(--shift-neon-green)!important}
@@ -9045,6 +9042,126 @@ html[data-shift780="ready"][data-shift-theme="dark"] :is(
  }
  html[data-shift780="ready"] #overviewView .insights-panel .insight-value{
   max-width:72px!important;font-size:12px!important;
+ }
+}
+
+/* Shift V8.4 — explicit text-to-surface pairing and overlap prevention. */
+html[data-shift780="ready"]:not([data-shift-theme="dark"]){
+ color-scheme:light!important;
+ --sh84-fg:#1B1A20;--sh84-muted:#584B50;
+ --sh84-panel:#F7F2E8;--sh84-card:#FFFCF7;--sh84-line:#CDBEB5;
+}
+html[data-shift780="ready"][data-shift-theme="dark"]{
+ color-scheme:dark!important;
+ --sh84-fg:#F7F7F7;--sh84-muted:#C5C5C5;
+ --sh84-panel:#090909;--sh84-card:#141414;--sh84-line:#414141;
+}
+html[data-shift780="ready"] :is(#overviewView,#dailyView)
+ :is(.roster-card,.metric-card,.v6517-glass)::before,
+html[data-shift780="ready"] :is(#overviewView,#dailyView)
+ :is(.roster-card,.metric-card,.v6517-glass)::after{
+ content:none!important;display:none!important;background:none!important;
+}
+html[data-shift780="ready"] :is(#overviewView,#dailyView) .roster-card .person-row{
+ box-sizing:border-box!important;width:100%!important;max-width:100%!important;
+ grid-template-columns:20px 34px minmax(0,1fr) 46px!important;
+ min-height:60px!important;gap:7px!important;padding:8px!important;
+ border-bottom:1px solid var(--sh84-line)!important;
+}
+html[data-shift780="ready"] :is(#overviewView,#dailyView) .person-row .row-copy{
+ min-width:0!important;max-width:100%!important;overflow:visible!important;
+}
+html[data-shift780="ready"] :is(#overviewView,#dailyView) .person-row .row-name{
+ color:var(--sh84-fg)!important;-webkit-text-fill-color:var(--sh84-fg)!important;
+ background:transparent!important;
+ white-space:normal!important;overflow-wrap:break-word!important;
+ max-width:100%!important;line-height:1.5!important;
+}
+html[data-shift780="ready"] :is(#overviewView,#dailyView) .person-row .row-meta{
+ color:var(--sh84-muted)!important;-webkit-text-fill-color:var(--sh84-muted)!important;
+ background:transparent!important;
+ white-space:normal!important;font-size:11px!important;line-height:1.45!important;
+ max-width:100%!important;
+}
+html[data-shift780="ready"] :is(#overviewView,#dailyView) .person-row .status-badge{
+ min-width:0!important;width:46px!important;box-sizing:border-box!important;
+ padding:5px 2px!important;justify-self:end!important;border-radius:8px!important;
+ text-align:center!important;box-shadow:none!important;
+}
+html[data-shift780="ready"] :is(#overviewView,#dailyView) .person-row .id-glyph{
+ width:34px!important;height:34px!important;
+}
+html[data-shift780="ready"] #overviewView .v6517-dashboard
+ :is(.v6517-note,.v6517-oncall-item,.v6517-shift,.v6517-ratio-row){
+ background:var(--sh84-card)!important;background-image:none!important;
+ color:var(--sh84-fg)!important;border-color:var(--sh84-line)!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"] #overviewView .v6517-dashboard
+ :is(.v6517-note,.v6517-oncall-item) :is(b,strong){
+ color:var(--sh84-fg)!important;-webkit-text-fill-color:var(--sh84-fg)!important;
+}
+html[data-shift780="ready"] #overviewView .v6517-dashboard
+ :is(.v6517-note,.v6517-oncall-item) :is(span,small){
+ color:var(--sh84-muted)!important;-webkit-text-fill-color:var(--sh84-muted)!important;
+}
+html[data-shift780="ready"] #overviewView :is(
+ .v6517-ratio-panel,.v6517-shifts-panel,.v6517-oncall-panel,
+ .v6517-trend-panel,.v6517-insights-panel){
+ background:var(--sh84-panel)!important;background-image:none!important;
+ color:var(--sh84-fg)!important;border-color:var(--sh84-line)!important;
+}
+html[data-shift780="ready"] #overviewView :is(
+ .v6517-panel-header strong,.insight-heading h3){
+ color:var(--sh84-fg)!important;
+}
+html[data-shift780="ready"] #overviewView :is(
+ .v6517-panel-header small,.v6517-shift-label,.v6517-trend-legend span){
+ color:var(--sh84-muted)!important;
+}
+html[data-shift780="ready"] #overviewView .insights-panel .insight-item{
+ min-height:68px!important;overflow:visible!important;
+}
+html[data-shift780="ready"] #overviewView .insights-panel .insight-value{
+ max-width:94px!important;white-space:normal!important;
+ overflow-wrap:break-word!important;
+}
+html[data-shift780="ready"] #oncallView .v655-matrix .v652-matrix-day small{
+ font-size:10px!important;line-height:1.4!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"]
+ :is(main,.app,.view,.v6517-dashboard){
+ background:#000000!important;background-image:none!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] :is(
+ #overviewView .v6517-ratio-panel,#overviewView .v6517-shifts-panel,
+ #overviewView .v6517-oncall-panel,#overviewView .v6517-trend-panel,
+ #overviewView .v6517-insights-panel,#oncallView .v652-oncall,
+ #oncallView .v652-hero,#oncallView .v655-oncall-hero){
+ background:#090909!important;background-image:none!important;
+ color:#F7F7F7!important;border-color:#414141!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] #overviewView
+ :is(.v6517-note,.v6517-oncall-item,.insight-item){
+ background:#141414!important;background-image:none!important;
+ color:#F7F7F7!important;border-color:#414141!important;
+}
+@media(max-width:860px){
+ html[data-shift780="ready"] :is(#overviewView,#dailyView) .roster-card .person-row{
+  grid-template-columns:18px 30px minmax(0,1fr) 42px!important;
+  gap:6px!important;
+ }
+ html[data-shift780="ready"] :is(#overviewView,#dailyView) .person-row .status-badge{width:42px!important}
+ html[data-shift780="ready"] :is(#overviewView,#dailyView) .person-row .id-glyph{width:30px!important;height:30px!important}
+}
+@media(max-width:380px){
+ html[data-shift780="ready"] :is(#overviewView,#dailyView) .roster-card .person-row{
+  grid-template-columns:16px 27px minmax(0,1fr) 37px!important;
+  gap:5px!important;padding:7px 5px!important;
+ }
+ html[data-shift780="ready"] :is(#overviewView,#dailyView) .person-row .status-badge{width:37px!important}
+ html[data-shift780="ready"] #overviewView .insights-panel .insight-item{
+  grid-template-columns:30px minmax(0,1fr) 62px!important;gap:6px!important;
  }
 }
 
