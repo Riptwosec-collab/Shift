@@ -68,7 +68,7 @@ body,body:where(:not(.whatever)),.app{background:transparent!important;backgroun
  box-shadow:var(--shift-neon-rim)!important;
  color:#effaff!important;
 }
-.hud-panel::after,/* V8.4: removed legacy decorative overlay from text-bearing cards */
+/* Removed legacy overlay: no leftover selector comma */
 .section-title,.v6515-oncall-title strong,.v6515-month-title strong,.roster-title b{color:#f8fdff!important;font-weight:780!important;text-shadow:0 1px 1px #000!important}
 .eyebrow,.muted,.row-meta{color:#a6cce6!important}
 .metric-card.day,.roster-card.day,.v6515-shift-group.day{border-color:rgba(0,237,145,.7)!important;border-left:3px solid var(--shift-neon-green)!important}
