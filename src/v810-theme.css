@@ -523,3 +523,30 @@ html[data-shift780="ready"][data-shift-theme="dark"] #shiftNovemberView .shift72
 html[data-shift780="ready"][data-shift-theme="dark"] #shiftNovemberView .shift72-graph-legend span:last-child{
  color:#B3BEFF!important;
 }
+
+/* Cross-page secondary text and warning-state audit: do not let old
+   ink-on-cream assumptions leak into the charcoal theme. */
+html[data-shift780="ready"][data-shift-theme="dark"] :is(
+ #overviewView,#dailyView,#personView,#monthView,#analyticsView,
+ #oncallView,#shift740FullMonth,#shiftNovemberView,
+ .modal-card,.drawer-panel,.v64-palette-box){color-scheme:dark!important}
+html[data-shift780="ready"][data-shift-theme="dark"] #personView .person-detail
+ :is(p,small,em,.muted){color:var(--sh81-muted)!important}
+html[data-shift780="ready"][data-shift-theme="dark"] #analyticsView .analytics-panel
+ :is(small,span,.muted){color:var(--sh81-muted)!important}
+html[data-shift780="ready"][data-shift-theme="dark"] #shiftNovemberView
+ :is(.shift72-graphic-footer,.shift72-board-legend span,.shift72-section-heading small){
+ color:var(--sh81-muted)!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] #shiftNovemberView
+ .shift72-position-card.has-warning{
+ background:#403428!important;border-color:#E3AC67!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] #shift740FullMonth
+ .s740-post.s740-post-alert{
+ background:#423725!important;border-color:#DFB879!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] #shift740FullMonth
+ .s740-legend .d{background:#D6F36A!important}
+html[data-shift780="ready"][data-shift-theme="dark"] #shift740FullMonth
+ .s740-legend .h{background:#FFC4D4!important}

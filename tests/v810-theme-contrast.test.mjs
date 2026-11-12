@@ -8,6 +8,7 @@ test('V8.1 both themes use one role palette across six views plus both full-mont
  for(const token of ['--sh81-day:#D6F36A','--sh81-night:#5264E8','--sh81-off:#FFC4D4',
   'data-shift-theme="dark"','#overviewView','#dailyView','#personView','#monthView',
   '#analyticsView','#oncallView','#shift740FullMonth','#shiftNovemberView',
+  '.shift72-graphic-footer','.s740-post.s740-post-alert',
   '.shift81-theme-toggle','prefers-reduced-motion:reduce'])assert.ok(css.includes(token),token);
  assert.ok(html.includes(css),'generated HTML must embed final theme stylesheet');
  assert.ok(html.includes(js),'generated HTML must embed theme JS');
