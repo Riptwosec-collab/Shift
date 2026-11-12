@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="th" data-app-version="6.5.20" data-shift-release="7.9" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">
+<html lang="th" data-app-version="6.5.20" data-shift-release="10.0" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -14900,10 +14900,55 @@ html[data-shift780="ready"][data-shift-theme] .v64-palette-box {
   box-shadow:var(--shift10-shadow)!important;
 }
 
+/* Brand and dense operations controls: no low contrast logo or tiny labels. */
+html[data-shift780="ready"][data-shift-theme] .command-bar .brand-mark {
+  background:var(--sh87-accent)!important;
+  border:1px solid var(--sh87-border)!important;
+  box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .brand-mark :is(span,b,svg,text) {
+  color:var(--sh87-accent-fg)!important;
+  fill:currentColor;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .brand-copy :is(h1,h2) {
+  color:var(--sh87-fg)!important;
+  -webkit-text-fill-color:var(--sh87-fg)!important;
+  font-size:clamp(17px,1.6vw,23px)!important;
+  letter-spacing:-.025em!important;line-height:1.25!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .brand-copy :is(p,small) {
+  color:var(--sh87-muted)!important;
+  -webkit-text-fill-color:var(--sh87-muted)!important;
+  font-size:11px!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #dailyView .roster-title,#personView .people-panel,
+ #analyticsView .workload-row.head
+){
+  background:var(--sh87-soft)!important;
+  background-image:none!important;
+  border-color:var(--sh87-border)!important;
+  color:var(--sh87-fg)!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #dailyView .roster-title,#personView .people-panel,
+ #analyticsView .workload-row.head
+) :is(b,strong,h2,h3) {
+  color:var(--sh87-fg)!important;
+  -webkit-text-fill-color:var(--sh87-fg)!important;
+}
+
 /* Screen-size integrity, without compressing 30/31 day tables. */
 @media(max-width:1200px) {
  html[data-shift780="ready"][data-shift-theme] #overviewView .v6517-kpis {
   grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ }
+ html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .s740-layout {
+  grid-template-columns:minmax(0,1fr)!important;
+ }
+ html[data-shift780="ready"][data-shift-theme] #shiftNovemberView .shift72-position-grid,
+ html[data-shift780="ready"][data-shift-theme] #shiftNovemberView .shift72-overview-cards {
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
  }
  html[data-shift780="ready"][data-shift-theme] #analyticsView .analytics-grid {
   grid-template-columns:repeat(2,minmax(0,1fr))!important;
