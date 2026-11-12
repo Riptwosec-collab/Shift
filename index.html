@@ -7875,6 +7875,29 @@ html[data-shift780="ready"][data-shift-theme="dark"] :is(
  html[data-shift780="ready"] .shift81-theme-toggle{animation:none!important;transition:none!important}
 }
 
+/* Contrast close-out: dark coral mastheads use ink, while dark inset
+   calendars use bright semantic text. Selected coral dates retain ink. */
+html[data-shift780="ready"][data-shift-theme="dark"] #shift740FullMonth .s740-top :is(
+ .s740-kicker,.s740-topcopy p,.end770-title,.end770-title span,.end770-title em){
+ color:#1B1A20!important;-webkit-text-fill-color:#1B1A20!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] #shift740FullMonth .s740-cal-info b:first-child{
+ color:#D6F36A!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] #shift740FullMonth .s740-cal-info b:last-child{
+ color:#B3BEFF!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] #shift740FullMonth
+ .s740-calendar-day.is-selected .s740-cal-info b{
+ color:#1B1A20!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] #shiftNovemberView .shift72-graph-legend span:first-child{
+ color:#D6F36A!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] #shiftNovemberView .shift72-graph-legend span:last-child{
+ color:#B3BEFF!important;
+}
+
 </style>
 <script id="shift81-theme-preflight">
 (()=>{let t='light';try{t=localStorage.getItem('shift.theme')==='dark'?'dark':'light'}catch{}document.documentElement.dataset.shiftTheme=t;const m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='dark'?'#11141B':'#171820')})();
