@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#E5EBF2">
+<meta name="theme-color" content="#080F1D">
 <meta name="color-scheme" content="light dark">
 <title>Shift — ตารางเวรทีม | Team Schedule</title>
 <style>
@@ -10319,7 +10319,7 @@ html[data-shift780="ready"][data-shift-theme] #shiftNovemberView
 
 </style>
 <script id="shift81-theme-preflight">
-(()=>{let t='light';try{t=localStorage.getItem('shift.theme')==='dark'?'dark':'light'}catch{}document.documentElement.dataset.shiftTheme=t;const m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='dark'?'#07182C':'#E5EBF2')})();
+(()=>{let t='dark';try{t=localStorage.getItem('shift.theme')==='light'?'light':'dark'}catch{}document.documentElement.dataset.shiftTheme=t;const m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='dark'?'#080F1D':'#E8EDF3')})();
 </script>
 </head>
 <!-- REFERENCE LOCK V4 -->
@@ -14128,7 +14128,7 @@ if(typeof document!=='undefined'){
    Only DOM/theme preferences; never touches roster, dates, navigation or data. */
 const SHIFT81_THEME_KEY='shift.theme';
 function shift81StoredTheme(){
- try{return localStorage.getItem(SHIFT81_THEME_KEY)==='dark'?'dark':'light'}catch{return 'light'}
+ try{return localStorage.getItem(SHIFT81_THEME_KEY)==='light'?'light':'dark'}catch{return 'dark'}
 }
 function shift81ThemeLocale(){
  return document.documentElement.dataset.locale==='en'||document.documentElement.lang==='en'?'en':'th';
@@ -14141,7 +14141,7 @@ function shift81SyncThemeButton(){
  const icon=button.querySelector('.shift81-theme-icon');
  const label=button.querySelector('.shift81-theme-label');
  if(icon)icon.textContent=dark?'☾':'☀';
- if(label)label.textContent=en?(dark?'Dark':'Light'):(dark?'น้ำเงิน':'สว่าง');
+ if(label)label.textContent=en?(dark?'Dark':'Light'):(dark?'กรมท่าเข้ม':'สว่าง');
  button.setAttribute('aria-pressed',String(dark));
  button.setAttribute('aria-label',en?(dark?'Dark theme active; switch to light':'Light theme active; switch to dark'):(dark?'กำลังใช้ธีมน้ำเงินเข้ม กดเพื่อเปลี่ยนเป็นธีมสว่าง':'กำลังใช้ธีมสว่าง กดเพื่อเปลี่ยนเป็นธีมน้ำเงินเข้ม'));
  button.title=button.getAttribute('aria-label');
@@ -14164,7 +14164,7 @@ function shift81InitTheme(){
   button.type='button';
   button.className='shift81-theme-toggle';
   button.dataset.shiftThemeToggle='true';
-  button.innerHTML='<span class="shift81-theme-icon" aria-hidden="true">☀</span><span class="shift81-theme-label">สว่าง</span>';
+  button.innerHTML='<span class="shift81-theme-icon" aria-hidden="true">☾</span><span class="shift81-theme-label">กรมท่าเข้ม</span>';
   button.addEventListener('click',()=>{
    const next=document.documentElement.dataset.shiftTheme==='dark'?'light':'dark';
    shift81SetTheme(next);
@@ -14186,43 +14186,43 @@ if(typeof document!=='undefined'){
 /* SHIFT V8.8 — Midnight Blue / Soft Pearl contrast repair.
    Loaded after legacy layers to correct cascade, no roster logic changes. */
 html[data-shift780="ready"][data-shift-theme="light"]{
- --sh81-shell:#E5EBF2;--sh81-panel:#F0F3F7;--sh81-card:#EAF0F6;
- --sh81-soft:#DFE7F0;--sh81-border:#B8C8D8;--sh81-ink:#182C44;
- --sh81-muted:#455D75;--sh81-hover:#DCE8F6;--sh81-action:#2459B8;
- --shift78-shell:#E5EBF2;--shift78-paper:#F0F3F7;
- --shift78-white:#EAF0F6;--shift78-ink:#182C44;--shift78-border:#B8C8D8;
- --shift80-shell:#E5EBF2;--shift80-paper:#F0F3F7;
- --shift80-surface:#EAF0F6;--shift80-raised:#DFE7F0;
- --shift80-ink:#182C44;--shift80-line:#B8C8D8;
- --shift80-text-subtle:#455D75;
- --sh84-fg:#182C44;--sh84-muted:#455D75;
- --sh84-panel:#F0F3F7;--sh84-card:#EAF0F6;--sh84-line:#B8C8D8;
- --sh87-shell:#E5EBF2;--sh87-panel:#F0F3F7;--sh87-card:#EAF0F6;
- --sh87-soft:#DFE7F0;--sh87-border:#B8C8D8;--sh87-fg:#182C44;
- --sh87-muted:#455D75;--sh87-accent:#2459B8;--sh87-accent-fg:#FFFFFF;
- --sh87-boot-shell:#E5EBF2;--sh87-boot-card:#F0F3F7;
- --sh87-boot-soft:#DFE7F0;--sh87-boot-fg:#182C44;
- --sh87-boot-muted:#455D75;--sh87-boot-line:#B8C8D8;--sh87-boot-accent:#2459B8;
+ --sh81-shell:#E8EDF3;--sh81-panel:#F1F3F6;--sh81-card:#E4E9F0;
+ --sh81-soft:#DCE3EC;--sh81-border:#BDCAD8;--sh81-ink:#1B2B43;
+ --sh81-muted:#465B73;--sh81-hover:#DAE3ED;--sh81-action:#31569B;
+ --shift78-shell:#E8EDF3;--shift78-paper:#F1F3F6;
+ --shift78-white:#E4E9F0;--shift78-ink:#1B2B43;--shift78-border:#BDCAD8;
+ --shift80-shell:#E8EDF3;--shift80-paper:#F1F3F6;
+ --shift80-surface:#E4E9F0;--shift80-raised:#DCE3EC;
+ --shift80-ink:#1B2B43;--shift80-line:#BDCAD8;
+ --shift80-text-subtle:#465B73;
+ --sh84-fg:#1B2B43;--sh84-muted:#465B73;
+ --sh84-panel:#F1F3F6;--sh84-card:#E4E9F0;--sh84-line:#BDCAD8;
+ --sh87-shell:#E8EDF3;--sh87-panel:#F1F3F6;--sh87-card:#E4E9F0;
+ --sh87-soft:#DCE3EC;--sh87-border:#BDCAD8;--sh87-fg:#1B2B43;
+ --sh87-muted:#465B73;--sh87-accent:#31569B;--sh87-accent-fg:#FFFFFF;
+ --sh87-boot-shell:#E8EDF3;--sh87-boot-card:#F1F3F6;
+ --sh87-boot-soft:#DCE3EC;--sh87-boot-fg:#1B2B43;
+ --sh87-boot-muted:#465B73;--sh87-boot-line:#BDCAD8;--sh87-boot-accent:#31569B;
  color-scheme:light;
 }
 html[data-shift780="ready"][data-shift-theme="dark"]{
- --sh81-shell:#07182C;--sh81-panel:#102844;--sh81-card:#153453;
- --sh81-soft:#1B3C5D;--sh81-border:#365A78;--sh81-ink:#F0F6FC;
- --sh81-muted:#BED0E1;--sh81-hover:#204569;--sh81-action:#72ADFF;
- --shift78-shell:#07182C;--shift78-paper:#102844;
- --shift78-white:#153453;--shift78-ink:#F0F6FC;--shift78-border:#365A78;
- --shift80-shell:#07182C;--shift80-paper:#102844;
- --shift80-surface:#153453;--shift80-raised:#1B3C5D;
- --shift80-ink:#F0F6FC;--shift80-line:#365A78;
- --shift80-text-subtle:#BED0E1;
- --sh84-fg:#F0F6FC;--sh84-muted:#BED0E1;
- --sh84-panel:#102844;--sh84-card:#153453;--sh84-line:#365A78;
- --sh87-shell:#07182C;--sh87-panel:#102844;--sh87-card:#153453;
- --sh87-soft:#1B3C5D;--sh87-border:#365A78;--sh87-fg:#F0F6FC;
- --sh87-muted:#BED0E1;--sh87-accent:#72ADFF;--sh87-accent-fg:#07182C;
- --sh87-boot-shell:#07182C;--sh87-boot-card:#102844;
- --sh87-boot-soft:#1B3C5D;--sh87-boot-fg:#F0F6FC;
- --sh87-boot-muted:#BED0E1;--sh87-boot-line:#365A78;--sh87-boot-accent:#72ADFF;
+ --sh81-shell:#080F1D;--sh81-panel:#0D192B;--sh81-card:#142238;
+ --sh81-soft:#1A2C43;--sh81-border:#33465F;--sh81-ink:#EBF2FA;
+ --sh81-muted:#B3C4D9;--sh81-hover:#203650;--sh81-action:#829FF0;
+ --shift78-shell:#080F1D;--shift78-paper:#0D192B;
+ --shift78-white:#142238;--shift78-ink:#EBF2FA;--shift78-border:#33465F;
+ --shift80-shell:#080F1D;--shift80-paper:#0D192B;
+ --shift80-surface:#142238;--shift80-raised:#1A2C43;
+ --shift80-ink:#EBF2FA;--shift80-line:#33465F;
+ --shift80-text-subtle:#B3C4D9;
+ --sh84-fg:#EBF2FA;--sh84-muted:#B3C4D9;
+ --sh84-panel:#0D192B;--sh84-card:#142238;--sh84-line:#33465F;
+ --sh87-shell:#080F1D;--sh87-panel:#0D192B;--sh87-card:#142238;
+ --sh87-soft:#1A2C43;--sh87-border:#33465F;--sh87-fg:#EBF2FA;
+ --sh87-muted:#B3C4D9;--sh87-accent:#829FF0;--sh87-accent-fg:#080F1D;
+ --sh87-boot-shell:#080F1D;--sh87-boot-card:#0D192B;
+ --sh87-boot-soft:#1A2C43;--sh87-boot-fg:#EBF2FA;
+ --sh87-boot-muted:#B3C4D9;--sh87-boot-line:#33465F;--sh87-boot-accent:#829FF0;
  color-scheme:dark;
 }
 html[data-shift-theme] :is(body,.app,main,.view){background-color:var(--sh87-shell)!important}
@@ -14264,24 +14264,24 @@ html[data-shift780="ready"][data-shift-theme]{
  --shift88-active-fg:var(--sh87-accent-fg);
 }
 html[data-shift780="ready"][data-shift-theme="light"]{
- --shift88-subpanel:#E0E8F1;
- --shift88-tint:#D8E5F3;
- --shift88-strong:#14263C;
- --shift88-data:#2459B8;
- --shift78-banner:#DFE9F5;
- --shift78-heading:#182C44;
- --shift78-copy:#455D75;
- --shift78-art:#2459B8;
+ --shift88-subpanel:#DCE4EC;
+ --shift88-tint:#D5E0EA;
+ --shift88-strong:#192B43;
+ --shift88-data:#31569B;
+ --shift78-banner:#DAE3ED;
+ --shift78-heading:#1B2B43;
+ --shift78-copy:#465B73;
+ --shift78-art:#31569B;
 }
 html[data-shift780="ready"][data-shift-theme="dark"]{
- --shift88-subpanel:#183856;
- --shift88-tint:#1E4367;
- --shift88-strong:#F5F9FF;
- --shift88-data:#93C4FF;
- --shift78-banner:#102844;
- --shift78-heading:#F0F6FC;
- --shift78-copy:#BED0E1;
- --shift78-art:#72ADFF;
+ --shift88-subpanel:#17263A;
+ --shift88-tint:#21344C;
+ --shift88-strong:#F4F7FC;
+ --shift88-data:#A6BCF7;
+ --shift78-banner:#0D192B;
+ --shift78-heading:#EBF2FA;
+ --shift78-copy:#B3C4D9;
+ --shift78-art:#829FF0;
 }
 /* The v8.7 release contains hard-coded pure white panels. Correct those after
    its cascade, including October, November, full-month and Oncall views. */
@@ -14610,22 +14610,22 @@ html[data-shift780="ready"][data-shift-theme] :is(
 /* The boot overlay runs before data-shift780=ready. Supply the same subdued
    shell here, so opening or reloading the app cannot flash the old bright white. */
 html[data-shift-theme="light"]{
- --sh87-boot-shell:#E5EBF2;
- --sh87-boot-card:#F0F3F7;
- --sh87-boot-soft:#DFE7F0;
- --sh87-boot-fg:#182C44;
- --sh87-boot-muted:#455D75;
- --sh87-boot-line:#B8C8D8;
- --sh87-boot-accent:#2459B8;
+ --sh87-boot-shell:#E8EDF3;
+ --sh87-boot-card:#F1F3F6;
+ --sh87-boot-soft:#DCE3EC;
+ --sh87-boot-fg:#1B2B43;
+ --sh87-boot-muted:#465B73;
+ --sh87-boot-line:#BDCAD8;
+ --sh87-boot-accent:#31569B;
 }
 html[data-shift-theme="dark"]{
- --sh87-boot-shell:#07182C;
- --sh87-boot-card:#102844;
- --sh87-boot-soft:#1B3C5D;
- --sh87-boot-fg:#F0F6FC;
- --sh87-boot-muted:#BED0E1;
- --sh87-boot-line:#365A78;
- --sh87-boot-accent:#72ADFF;
+ --sh87-boot-shell:#080F1D;
+ --sh87-boot-card:#0D192B;
+ --sh87-boot-soft:#1A2C43;
+ --sh87-boot-fg:#EBF2FA;
+ --sh87-boot-muted:#B3C4D9;
+ --sh87-boot-line:#33465F;
+ --sh87-boot-accent:#829FF0;
 }
 
 /* V8.9.1: legacy analytics cards had nth-child pastel/white !important
@@ -14674,6 +14674,284 @@ html[data-shift780="ready"][data-shift-theme] :is(
 ) :is(h2,h3,b,strong){
  color:var(--sh87-fg)!important;
  -webkit-text-fill-color:var(--sh87-fg)!important;
+}
+
+/* SHIFT V9.0 — Deep Midnight Navy / one visual language.
+   Core interaction and roster duty status remain separate from brand decoration. */
+html[data-shift780="ready"][data-shift-theme="dark"]{
+ --shift78-coral:#829FF0;
+ --shift78-cobalt:#829FF0;
+ --shift78-yellow:#C1CDE0;
+ --shift78-ink:#EBF2FA;
+ --shift78-paper:#0D192B;
+ --shift78-white:#142238;
+ --shift78-soft:#B3C4D9;
+ --shift78-border:#33465F;
+ --shift78-banner:#0D192B;
+ --shift78-art:#829FF0;
+ --shift80-surface-alt:#1A2C43;
+ --sh81-shadow:0 8px 24px rgba(0,0,0,.2);
+ --shift88-shadow:0 12px 32px rgba(0,0,0,.2);
+ --shift88-data:#A6BCF7;
+}
+html[data-shift780="ready"][data-shift-theme="light"]{
+ --shift78-coral:#31569B;
+ --shift78-cobalt:#31569B;
+ --shift78-yellow:#C6D2E0;
+ --shift78-ink:#1B2B43;
+ --shift78-paper:#F1F3F6;
+ --shift78-white:#E4E9F0;
+ --shift78-soft:#465B73;
+ --shift78-border:#BDCAD8;
+ --shift78-banner:#DCE4EC;
+ --shift78-art:#31569B;
+ --shift80-surface-alt:#DCE3EC;
+ --shift88-shadow:0 9px 24px rgba(17,32,53,.07);
+}
+/* Avoid leftover fluorescent and pastel fills on live containers. */
+html[data-shift780="ready"][data-shift-theme] :is(
+ .command-bar,.hud-panel,.network-panel,.insights-panel,.analytics-panel,
+ .people-panel,.roster-card,.month-panel,.timeline-panel,
+ #overviewView .v6517-dashboard > .timeline-panel,
+ #shiftNovemberView .shift72-board-section,
+ #shift740FullMonth .s740-roster-panel,
+ #shift740FullMonth .s740-calendar-panel,
+ #oncallView .v655-matrix-scroll,
+ #oncallView .v652-matrix-panel
+){
+ background:var(--sh87-panel)!important;
+ background-image:none!important;
+ border-color:var(--sh87-border)!important;
+ color:var(--sh87-fg)!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #overviewView .v6517-dashboard .roster-card,
+ #dailyView .roster-card,
+ #dailyView .roster-card.day,#dailyView .roster-card.night,#dailyView .roster-card.off,
+ #personView .person-pick:not(.active),
+ #personView .pstat,
+ #oncallView .v655-engineer-card,#oncallView .v655-now-panel,
+ #shiftNovemberView .shift72-position-card,
+ #shiftNovemberView .shift72-overview-card,
+ #shift740FullMonth .s740-stat
+){
+ background:var(--sh87-card)!important;
+ background-image:none!important;
+ color:var(--sh87-fg)!important;
+ border-color:var(--sh87-border)!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] #overviewView .hero-stage,
+html[data-shift780="ready"][data-shift-theme] #dailyView :is(.working-hero,.daily-hero,.focus-banner){
+ background:var(--sh87-panel)!important;
+ background-image:none!important;
+ border:1px solid var(--sh87-border)!important;
+ color:var(--sh87-fg)!important;
+ text-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] #overviewView .hero-stage :is(h1,h2,h3,p,strong,b,span),
+html[data-shift780="ready"][data-shift-theme] #dailyView :is(.working-hero,.daily-hero,.focus-banner) :is(h1,h2,h3,p,strong,b){
+ color:var(--sh87-fg)!important;
+ -webkit-text-fill-color:var(--sh87-fg)!important;
+ text-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .shift78-section-hero,#shift740FullMonth .s740-top,
+ #shiftNovemberView .shift72-command
+){
+ background:var(--shift88-subpanel)!important;
+ background-image:none!important;
+ border-color:var(--sh87-border)!important;
+ color:var(--sh87-fg)!important;
+}
+html[data-shift780="ready"][data-shift-theme] .shift78-section-hero{
+ --shift78-art:var(--sh87-accent)!important;
+ --shift78-banner:var(--shift88-subpanel)!important;
+ --shift78-heading:var(--sh87-fg)!important;
+ --shift78-copy:var(--sh87-muted)!important;
+ min-width:0!important;max-width:100%!important;
+ overflow:hidden!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] .shift78-section-grid{
+ grid-template-columns:minmax(0,1fr) minmax(0,88px)!important;
+ min-width:0!important;gap:clamp(10px,2vw,24px)!important;
+}
+html[data-shift780="ready"][data-shift-theme] .shift78-section-copy{
+ max-width:100%!important;min-width:0!important;
+}
+html[data-shift780="ready"][data-shift-theme] .shift78-section-copy h2{
+ font-size:clamp(24px,3vw,44px)!important;
+ line-height:1.22!important;letter-spacing:-.04em!important;
+ overflow-wrap:anywhere!important;
+}
+html[data-shift780="ready"][data-shift-theme] .shift78-section-art{
+ width:76px!important;height:76px!important;
+ transform:none!important;box-shadow:none!important;
+ background:var(--sh87-accent)!important;
+ color:var(--sh87-accent-fg)!important;
+ border:1px solid var(--sh87-accent)!important;
+}
+html[data-shift780="ready"][data-shift-theme] .shift78-section-art :is(.shift78-stamp,.shift78-stamp-label){
+ color:var(--sh87-accent-fg)!important;
+ -webkit-text-fill-color:var(--sh87-accent-fg)!important;
+}
+html[data-shift780="ready"][data-shift-theme] .shift78-section-art :is(.shift78-art-ring,.shift78-art-spark){
+ display:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .end770-hero-mark{
+ background:var(--sh87-card)!important;
+ background-image:none!important;
+ color:var(--sh87-fg)!important;
+ border:1px solid var(--sh87-border)!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .s740-top .end770-hero-mark :is(b,small){
+ color:var(--sh87-fg)!important;
+ -webkit-text-fill-color:var(--sh87-fg)!important;
+}
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .s740-top :is(
+ h2,h2 span,h2 em,.end770-title,.end770-title span,.end770-title em,
+ p,.s740-kicker,.s740-topcopy p){
+ color:var(--sh87-fg)!important;
+ -webkit-text-fill-color:var(--sh87-fg)!important;
+ -webkit-text-stroke:0!important;
+ text-shadow:none!important;
+}
+/* Clear state hierarchy: selected blue, neutral controls navy; D/N/OFF accents
+   remain semantic, rather than painting unrelated panels neon colors. */
+html[data-shift780="ready"][data-shift-theme] :is(
+ .command-bar .nav-tabs .nav-btn.active,
+ .command-bar .nav-tabs .nav-btn.shift731-active,
+ .command-actions .v65-language button.active,
+ .command-actions .v64-quality button.active,
+ #personView .person-pick.active,
+ #shift740FullMonth .s740-months button[aria-pressed="true"],
+ #shiftNovemberView .shift72-switch-buttons button[aria-pressed="true"]
+){
+ background:var(--sh87-accent)!important;
+ border-color:var(--sh87-accent)!important;
+ color:var(--sh87-accent-fg)!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .command-bar .nav-tabs .nav-btn.active,
+ .command-bar .nav-tabs .nav-btn.shift731-active,
+ #personView .person-pick.active
+) :is(b,strong,small,span){
+ color:var(--sh87-accent-fg)!important;
+ -webkit-text-fill-color:var(--sh87-accent-fg)!important;
+}
+/* Fix overlapping blocks without forcing the 30/31 day matrix into tiny cells. */
+html[data-shift780="ready"][data-shift-theme] :is(
+ #overviewView,#dailyView,#personView,#monthView,#analyticsView,
+ #oncallView,#shiftNovemberView,#shift740FullMonth
+){min-width:0!important;max-width:100%!important}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .v64-op-grid,.v6517-dashboard,.rosters,.daily-grid,
+ .overview-grid,.v6517-shifts,.network-panel,.shift72-board-section,
+ #oncallView .v652-control-deck
+) > *{min-width:0!important;max-width:100%!important}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .shift72-board-viewport,.s740-matrix-viewport,
+ #monthView .heatmap-wrap,#monthView .table-scroll,
+ #oncallView .v655-matrix-scroll
+){
+ max-width:100%!important;min-width:0!important;
+ overflow-x:auto!important;overscroll-behavior-x:contain!important;
+ scrollbar-width:thin!important;
+}
+/* Long names and subtitles may wrap, not clip or overlap neighbors. */
+html[data-shift780="ready"][data-shift-theme] :is(
+ .person-row b,.v6519-full-name,.shift72-person-copy b,
+ .v652-matrix-name,.s740-name b,.v64-transition b,
+ .v64-streak b,.v64-workload-row b
+){
+ white-space:normal!important;overflow-wrap:anywhere!important;
+ text-overflow:clip!important;max-width:100%!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .v64-team-kpis span,.v64-workload-head,.v64-workload-row
+){font-size:clamp(11px,.8vw,13px)!important;line-height:1.45!important}
+html[data-shift780="ready"][data-shift-theme] .v64-workload-balance{
+ max-width:100%!important;overflow-x:auto!important;
+}
+html[data-shift780="ready"][data-shift-theme] .v64-workload-head,
+html[data-shift780="ready"][data-shift-theme] .v64-workload-row{
+ min-width:670px!important;
+ grid-template-columns:minmax(155px,1.8fr) repeat(8,minmax(55px,.55fr))!important;
+}
+html[data-shift780="ready"][data-shift-theme] .v64-workload-head{
+ color:var(--sh87-muted)!important;
+}
+html[data-shift780="ready"][data-shift-theme] .v64-workload-row :is(b,strong,span){
+ font-size:12px!important;
+}
+html[data-shift780="ready"][data-shift-theme] .v64-workload-row strong{
+ color:var(--shift88-data)!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .v64-compare-card,.v64-transition,.v64-streak,.v64-risk
+) :is(span,small){
+ color:var(--sh87-muted)!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .v64-compare-card,.v64-transition,.v64-streak,.v64-risk
+) :is(b,strong){color:var(--sh87-fg)!important}
+html[data-shift780="ready"][data-shift-theme] .v64-risk.critical{
+ border-left-color:#EF8B94!important;
+}
+html[data-shift780="ready"][data-shift-theme] .v64-risk.warning{
+ border-left-color:#DFB56D!important;
+}
+html[data-shift780="ready"][data-shift-theme] .v64-risk.ok{
+ border-left-color:#79BFA1!important;
+}
+html[data-shift780="ready"][data-shift-theme] .v64-palette-box{
+ background:var(--sh87-panel)!important;
+ border:1px solid var(--sh87-border)!important;
+ color:var(--sh87-fg)!important;
+ box-shadow:0 20px 55px rgba(0,0,0,.3)!important;
+}
+html[data-shift780="ready"][data-shift-theme] .v64-palette :is(input,button,small,kbd){
+ color:var(--sh87-fg)!important;
+}
+html[data-shift780="ready"][data-shift-theme] .v64-palette-results button:is(.active,:hover){
+ background:var(--sh87-soft)!important;
+}
+@media(max-width:1000px){
+ html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .end770-hero-mark{
+  display:none!important;
+ }
+ html[data-shift780="ready"][data-shift-theme] .v64-op-grid{
+  grid-template-columns:minmax(0,1fr)!important;
+ }
+}
+@media(max-width:760px){
+ html[data-shift780="ready"][data-shift-theme] .shift78-section-grid{
+  grid-template-columns:minmax(0,1fr)!important;
+ }
+ html[data-shift780="ready"][data-shift-theme] .shift78-section-art{
+  display:none!important;
+ }
+ html[data-shift780="ready"][data-shift-theme] .command-bar .command-actions{
+  min-width:0!important;max-width:100%!important;
+  flex-wrap:wrap!important;overflow:visible!important;
+ }
+ html[data-shift780="ready"][data-shift-theme] .command-bar .command-actions > *{
+  max-width:100%!important;
+ }
+ html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .s740-top{
+  min-height:auto!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  padding:18px!important;
+ }
+ html[data-shift780="ready"][data-shift-theme] #shift740FullMonth h2.end770-title{
+  font-size:clamp(27px,8vw,46px)!important;
+  line-height:1.15!important;
+ }
+ html[data-shift780="ready"][data-shift-theme] .v64-team-kpis{
+  justify-content:flex-start!important;
+ }
 }
 
 </style>
