@@ -63,5 +63,5 @@ test('source is bundled after November view and October is not touched',()=>{
  assert.ok(html.includes(js)&&html.includes(css));
  assert.ok(css.includes('#shiftNovemberView .shift-nov-reference-sheet'));
  assert.ok(html.includes('october-2026-duty-roster.js'));
- assert.ok(read('sw.js').includes("CACHE_NAME='shift-shell-v6.5.20-r19'"));
+ assert.ok(read('sw.js').includes("CACHE_NAME='shift-shell-v6.5.20-r20'"));
 });
