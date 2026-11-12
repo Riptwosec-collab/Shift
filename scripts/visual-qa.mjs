@@ -36,7 +36,13 @@ function colorEvalScript(){
  '#overviewView .v6517-note b','#overviewView .v6517-note span','#overviewView .v6517-oncall-item b',
  '#dailyView .person-row .row-name','#personView .person-pick .row-name',
  '#analyticsView .analytics-card .value','#monthView .heatmap .v6519-full-name',
- '#shift740FullMonth .s740-name b','#shiftNovemberView .shift72-person-copy b'];
+ '#shift740FullMonth .s740-name b','#shiftNovemberView .shift72-person-copy b',
+ '#mobileNav button:not(.active)','.shift-install-dock .shift-pwa-install',
+ '#dailyView .daily-timeline .date-node:not(.active) .dow',
+ '#dailyView .daily-timeline .date-node:not(.active) .mini',
+ '#oncallView .v655-now-panel header strong',
+ '#oncallView .v655-now-panel header small',
+ '#oncallView .v655-engineer-card strong'];
  const problems=[],samples=[];
  const rootMode=document.documentElement.dataset.shiftTheme;
  for(const selector of selectors){
@@ -85,12 +91,19 @@ try{
    for(const view of views){
     await page.evaluate((v)=>{
      try{if(typeof showView==='function')showView(v);else{document.querySelectorAll('.view').forEach(e=>e.classList.toggle('active',e.id===v+'View'))}}catch(e){console.error(e)}
-     window.scrollTo(0,0);
+     document.documentElement.style.scrollBehavior='auto';
+     document.body.style.scrollBehavior='auto';
+     window.scrollTo({top:0,behavior:'instant'});
     },view);
     await page.waitForTimeout(100);
     const report=await page.evaluate(colorEvalScript);
     const name=theme+'-'+width+'-'+view;
     await page.screenshot({path:join(out,name+'.png'),fullPage:false,animations:'disabled'});
+    const focus=view==='overview'?'#overviewView .insights-panel':
+      view==='daily'?'#dailyView .roster-card':
+      view==='oncall'?'#oncallView .v655-selected-day-detail':null;
+    if(focus){const target=page.locator(focus).first();if(await target.isVisible().catch(()=>false))
+     await target.screenshot({path:join(out,name+'-focus.png'),animations:'disabled'}).catch(()=>{});}
     reports.push({theme,width,view,...report,pageErrors:errors.slice(0,5)});
     console.log('VISUAL_QA '+name+' '+JSON.stringify({issues:report.problems,
       samples:report.samples.filter(x=>x.ratio<6).slice(0,6),errorCount:errors.length}));
