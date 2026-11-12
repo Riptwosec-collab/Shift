@@ -47,6 +47,8 @@ test('black-lime is the default and explicit light theme survives reload',()=>{
   assert.equal(dark['--sh87-card'],'#111820');
   assert.match(runtime,/catch\{return 'dark'\}/);
   assert.ok(runtime.includes("getItem(SHIFT81_THEME_KEY)==='light'"));
+  assert.ok(runtime.includes("SHIFT81_THEME_KEY='shift.theme.v11'"));
+  assert.ok(build.includes("getItem('shift.theme.v11')"));
   assert.ok(build.includes("let t='dark'"));
   assert.ok(index.includes("let t='dark'"));
 });
