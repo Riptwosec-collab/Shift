@@ -9369,6 +9369,115 @@ html[data-shift780="ready"] :is(
  .v655-engineer-card,.v655-person-mini){min-width:0!important}
 }
 
+
+/* SHIFT V8.6 — browser screenshot closeout: no Date Rail crop and
+   the legacy Oncall month sheet obeys Light/True Black. */
+html[data-shift780="ready"] #dailyView .daily-timeline{
+ display:grid!important;
+ grid-auto-flow:column!important;
+ grid-auto-columns:100px!important;
+ gap:7px!important;
+ width:100%!important;
+ max-width:100%!important;
+ overflow-x:auto!important;
+ overflow-y:hidden!important;
+ scroll-snap-type:x proximity!important;
+ overscroll-behavior-x:contain!important;
+ scrollbar-width:thin!important;
+ padding:8px 2px 12px!important;
+}
+html[data-shift780="ready"] #dailyView .daily-timeline .date-node{
+ box-sizing:border-box!important;
+ width:100%!important;min-width:0!important;
+ max-width:100%!important;
+ min-height:84px!important;
+ padding:8px 5px!important;
+ overflow:hidden!important;
+ scroll-snap-align:start!important;
+}
+html[data-shift780="ready"] #dailyView .daily-timeline .date-node .mini{
+ display:block!important;width:100%!important;
+ min-width:0!important;
+ white-space:normal!important;
+ word-break:normal!important;
+ overflow-wrap:break-word!important;
+ color:var(--sh84-muted)!important;
+ font-size:10px!important;
+ line-height:1.35!important;
+ letter-spacing:0!important;
+}
+html[data-shift780="ready"] #dailyView .daily-timeline .date-node.active .mini{
+ color:#1B1A20!important;
+}
+html[data-shift780="ready"] #oncallView .v6515-oncall{
+ min-width:0!important;max-width:100%!important;
+ color:var(--sh84-fg)!important;
+}
+html[data-shift780="ready"] #oncallView .v6515-oncall .v6515-oncall-month{
+ background:var(--sh84-panel)!important;
+ background-image:none!important;
+ color:var(--sh84-fg)!important;
+ border:1px solid var(--sh84-line)!important;
+ border-radius:12px!important;
+ box-shadow:none!important;
+ padding:14px!important;
+}
+html[data-shift780="ready"] #oncallView .v6515-oncall-month.current{
+ border-color:var(--sh84-line)!important;
+ border-top:3px solid #FF7959!important;
+}
+html[data-shift780="ready"] #oncallView .v6515-oncall-title strong{
+ color:var(--sh84-fg)!important;
+ -webkit-text-fill-color:var(--sh84-fg)!important;
+ font-size:clamp(16px,1.4vw,19px)!important;
+ line-height:1.4!important;
+}
+html[data-shift780="ready"] #oncallView .v6515-oncall-title small{
+ color:var(--sh84-muted)!important;
+ font-size:11px!important;
+ line-height:1.4!important;
+}
+html[data-shift780="ready"] #oncallView .v6515-oncall-row{
+ background:var(--sh84-card)!important;
+ background-image:none!important;
+ color:var(--sh84-fg)!important;
+ border:1px solid var(--sh84-line)!important;
+ border-radius:9px!important;
+ min-width:0!important;
+ min-height:58px!important;
+ padding:10px 12px!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"] #oncallView .v6515-oncall-row :is(b,strong){
+ color:var(--sh84-fg)!important;
+ -webkit-text-fill-color:var(--sh84-fg)!important;
+ line-height:1.45!important;
+}
+html[data-shift780="ready"] #oncallView .v6515-oncall-row :is(small,em){
+ color:var(--sh84-muted)!important;
+ -webkit-text-fill-color:var(--sh84-muted)!important;
+ font-size:11px!important;
+ line-height:1.4!important;
+}
+html[data-shift780="ready"] #oncallView .v6515-oncall-row.live{
+ border-left:4px solid #87AC39!important;
+}
+html[data-shift780="ready"] #oncallView .v6515-oncall-row.next{
+ border-left:4px solid #5264E8!important;
+}
+html[data-shift780="ready"] #oncallView .v6515-oncall-row.selected{
+ outline:2px solid #FF7959!important;
+ outline-offset:1px!important;
+}
+@media(max-width:520px){
+ html[data-shift780="ready"] #dailyView .daily-timeline{
+  grid-auto-columns:96px!important;
+ }
+ html[data-shift780="ready"] #oncallView .v6515-oncall .v6515-oncall-month{
+  padding:11px!important;
+ }
+}
+
 </style>
 <script id="shift81-theme-preflight">
 (()=>{let t='light';try{t=localStorage.getItem('shift.theme')==='dark'?'dark':'light'}catch{}document.documentElement.dataset.shiftTheme=t;const m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='dark'?'#000000':'#171820')})();

@@ -42,7 +42,11 @@ function colorEvalScript(){
  '#dailyView .daily-timeline .date-node:not(.active) .mini',
  '#oncallView .v655-now-panel header strong',
  '#oncallView .v655-now-panel header small',
- '#oncallView .v655-engineer-card strong'];
+ '#oncallView .v655-engineer-card strong',
+ '#oncallView .v6515-oncall-title strong',
+ '#oncallView .v6515-oncall-row b',
+ '#oncallView .v6515-oncall-row small',
+ '#dailyView .daily-timeline .date-node.active .mini'];
  const problems=[],samples=[];
  const rootMode=document.documentElement.dataset.shiftTheme;
  for(const selector of selectors){
@@ -70,6 +74,10 @@ function colorEvalScript(){
    const across=Math.min(x.b,y.b)-Math.max(x.y,y.y);
    if(overlap>3&&across>3)problems.push({type:'overlap',outer,width:overlap,text:left.textContent.slice(0,40)});
   }
+ }
+ for(const mini of document.querySelectorAll('#dailyView.active .daily-timeline .date-node .mini')){
+  if(mini.scrollWidth>mini.clientWidth+4)
+   problems.push({type:'date-rail-overflow',scroll:mini.scrollWidth,client:mini.clientWidth,text:mini.textContent});
  }
  if(document.documentElement.scrollWidth>innerWidth+10)
   problems.push({type:'horizontal-overflow',px:document.documentElement.scrollWidth-innerWidth});
