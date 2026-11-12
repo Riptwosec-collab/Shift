@@ -51,7 +51,7 @@ let html=fs.readFileSync(path.join(root,'src','legacy-baseline.html'),'utf8');
 html=html.replace("<th class=\"name-col\">${p.name}</th>",()=>"<th class=\"name-col\" scope=\"row\" aria-label=\"${p.name}\"><span class=\"v6519-full-name\">${String(p.name).trim().replace(/\\s+(\\S+)$/, \" $1\")}</span></th>");
 html=html.replace("window.scrollTo({top:0,behavior:'smooth'})",'window.scrollTo(0,0)');
 html=html.replace('let selectedDay=1,selectedPerson=0','let selectedDay=(()=>{const today=new Date();return today.getFullYear()===2026&&today.getMonth()===9?today.getDate():1})(),selectedPerson=0');
-html=html.replace('<html lang="th">','<html lang="th" data-app-version="6.5.20" data-shift-release="7.9" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">');
+html=html.replace('<html lang="th">','<html lang="th" data-app-version="6.5.20" data-shift-release="10.0" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">');
 html=html.replace(/<style id="v621-performance-patch">[\s\S]*?<\/style>/i,'');
 html=html.replace(/let offTimer=0;const offObserver=new MutationObserver\([\s\S]*?offObserver\.observe\(document\.body,\{subtree:true,childList:true\}\);/,'');
 html=html.replace('data-loader-version="6.2.1"','data-loader-version="6.5.20"');
@@ -65,4 +65,4 @@ html=html.replace('</head>',`<style id="shift-v10-professional-style">\n${shiftV
 html=html.replace('</body>',`<script id="v652-engine">(()=>{\n${addJs}\n})();</script>\n</body>`);
 fs.writeFileSync('index.html',html);
 const dist=path.join(root,'dist');fs.rmSync(dist,{recursive:true,force:true});fs.mkdirSync(dist,{recursive:true});fs.writeFileSync(path.join(dist,'index.html'),html);
-console.log(`built v6.5.20 legacy index.html ${Buffer.byteLength(html)} bytes + Shift visual experience V7.1`);
+console.log(`built Shift V10 ${Buffer.byteLength(html)} bytes — unified professional UI`);
