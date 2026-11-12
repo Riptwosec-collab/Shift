@@ -801,3 +801,43 @@ html[data-shift780="ready"][data-shift-theme] .search-row .smart-search input:fo
   display:none!important;
  }
 }
+
+
+/* V8.9.3 — November mode selector was the last beige/orange legacy toolbar.
+   It uses the same input surface and blue selected state as the rest of Shift. */
+html[data-shift780="ready"][data-shift-theme] #shiftNovemberView .shift72-view-switch{
+ background:var(--sh87-panel)!important;background-image:none!important;
+ border:1px solid var(--sh87-border)!important;
+ box-shadow:none!important;
+ border-radius:11px!important;
+ color:var(--sh87-fg)!important;
+}
+html[data-shift780="ready"][data-shift-theme] #shiftNovemberView
+ .shift72-view-switch :is(.shift72-switch-label,strong){
+ color:var(--sh87-fg)!important;
+ text-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] #shiftNovemberView
+ .shift72-view-switch .shift72-switch-buttons button{
+ min-height:42px!important;
+ background:var(--sh87-card)!important;
+ background-image:none!important;
+ border:1px solid var(--sh87-border)!important;
+ border-radius:9px!important;
+ color:var(--sh87-fg)!important;
+ box-shadow:none!important;
+ font-size:12px!important;
+ line-height:1.35!important;
+}
+html[data-shift780="ready"][data-shift-theme] #shiftNovemberView
+ .shift72-view-switch .shift72-switch-buttons button[aria-pressed="true"]{
+ background:var(--sh87-accent)!important;
+ border-color:var(--sh87-accent)!important;
+ color:var(--sh87-accent-fg)!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] #shiftNovemberView
+ .shift72-view-switch .shift72-switch-buttons button:focus-visible{
+ outline:3px solid var(--sh87-accent)!important;
+ outline-offset:2px!important;
+}
