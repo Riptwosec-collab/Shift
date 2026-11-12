@@ -1151,11 +1151,77 @@ html[data-shift780="ready"][data-shift-theme] :is(
 html[data-shift780="ready"][data-shift-theme] :is(
  .shift72-duty-pill.tone-H,.s740-duty.s740-H,.matrix-cell.O
 ) {background:var(--shift10-off-bg)!important;color:var(--shift10-off-text)!important}
+/* Workspace status, search, and data density use the same precise lime design. */
+html[data-shift780="ready"][data-shift-theme] .command-bar #hudStatusBar {
+ background:var(--sh87-panel)!important;
+ background-image:none!important;
+ border:1px solid var(--sh87-border)!important;
+ border-radius:8px!important;
+ box-shadow:none!important;color:var(--sh87-muted)!important;
+ padding:8px 11px!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar #hudStatusBar .live-dot {
+ background:var(--sh87-accent)!important;
+ border-color:var(--sh87-accent)!important;
+ box-shadow:0 0 0 4px var(--shift11-glow)!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar #hudStatusBar b {
+ color:var(--sh87-accent)!important;
+ -webkit-text-fill-color:var(--sh87-accent)!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar #hudStatusBar small {
+ color:var(--sh87-muted)!important;
+ -webkit-text-fill-color:var(--sh87-muted)!important;
+}
+html[data-shift780="ready"][data-shift-theme] .search-row {
+ max-width:100%!important;min-width:0!important;
+ gap:10px!important;
+}
+html[data-shift780="ready"][data-shift-theme] .search-row .smart-search input {
+ background:var(--shift11-input)!important;
+ border:1px solid var(--sh87-border)!important;
+ box-shadow:none!important;color:var(--sh87-fg)!important;
+ min-height:42px!important;border-radius:9px!important;
+}
+html[data-shift780="ready"][data-shift-theme] .search-row .search-icon {
+ color:var(--sh87-muted)!important;opacity:.95!important;
+}
+html[data-shift780="ready"][data-shift-theme] .search-row .fullscreen-label {
+ min-height:42px!important;border-radius:9px!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #overviewView .network-panel h2,#overviewView .insights-panel h2,
+ #analyticsView .analytics-panel h2,#monthView .month-panel h2
+) {
+ color:var(--sh87-fg)!important;
+ font-size:clamp(15px,1.2vw,19px)!important;
+ font-weight:760!important;letter-spacing:-.02em!important;
+}
+/* Avoid relying on 6-9px headings from the original chart and workload CSS. */
+html[data-shift780="ready"][data-shift-theme] :is(
+ .v64-workload-head,.v64-team-kpis span,.v64-relation-strip span,
+ #v64NetworkDetails .v64-network-summary small,
+ #overviewView .v6517-kpi-label
+) {
+ font-size:clamp(11px,.82vw,13px)!important;
+ line-height:1.45!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #analyticsView .workload-row,#overviewView .roster-card,
+ #monthView .month-panel,#oncallView .v655-matrix-scroll
+) {
+ border-color:var(--sh87-border)!important;
+}
+html[data-shift780="ready"][data-shift-theme="light"] #overviewView .hero-stage {
+ background:linear-gradient(112deg,var(--sh87-panel) 0%,var(--sh87-card) 100%)!important;
+}
+
 /* Desktop sidebar inspired by the reference's compact navigation rail.
    Pure layout change: reuse real navigation buttons and existing handlers. */
 @media(min-width:1181px) {
  html[data-shift780="ready"][data-shift-theme] .app {
   width:calc(100% - var(--shift11-sidebar-width))!important;
+  box-sizing:border-box!important;
   max-width:none!important;
   margin:0 0 0 var(--shift11-sidebar-width)!important;
   padding:0 clamp(16px,2vw,34px) 36px!important;
