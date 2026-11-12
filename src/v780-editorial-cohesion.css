@@ -1070,3 +1070,34 @@ html[data-shift780="ready"] :is(.modal-card,.drawer-panel,.v64-palette-box)
   transform:none!important;animation:none!important;transition:none!important;
  }
 }
+
+
+/* V8.0 final art-direction tune: meaningful pastel color blocking rather
+   than an undifferentiated cream grid. All readable text remains ink. */
+html[data-shift780="ready"] #overviewView .v6517-kpi:nth-child(1){
+ background:#F3F9D9!important;
+}
+html[data-shift780="ready"] #overviewView .v6517-kpi:nth-child(2){
+ background:#EDEFFF!important;
+}
+html[data-shift780="ready"] #overviewView .v6517-kpi:nth-child(3){
+ background:#FFF0F3!important;
+}
+html[data-shift780="ready"] #overviewView .v6517-kpi:nth-child(4){
+ background:#FFEADF!important;
+}
+html[data-shift780="ready"] #overviewView .v6517-kpi:nth-child(5){
+ background:#FFF4D5!important;
+}
+html[data-shift780="ready"] #analyticsView .analytics-card:nth-child(1){
+ background:#F3F9D9!important;
+}
+html[data-shift780="ready"] #analyticsView .analytics-card:nth-child(2){
+ background:#EDEFFF!important;
+}
+html[data-shift780="ready"] #analyticsView .analytics-card:nth-child(3){
+ background:#FFF0F3!important;
+}
+html[data-shift780="ready"] #analyticsView .analytics-card:nth-child(4){
+ background:#FFEADF!important;
+}
