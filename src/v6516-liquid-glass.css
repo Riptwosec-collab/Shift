@@ -82,7 +82,7 @@ html[data-v65-mode="HIGH"] .ambient,html[data-v65-mode="BALANCED"] .ambient{disp
 }
 /* Clear, non-translucent text on transparent glass. */
 .smart-search input,.v64-palette-box,.search-results,.v652-person-chip,.v655-detail-person,
-.insight-item,.person-pick,.people-list button,.shift-row,.person-detail button{
+.person-pick,.people-list button,.shift-row,.person-detail button{
  background-color:rgba(20,29,43,.90)!important;color:#f7fbff!important;border-color:rgba(151,209,244,.27)!important;
 }
 .smart-search input::placeholder{color:#aec2d4!important}

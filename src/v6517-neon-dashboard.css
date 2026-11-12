@@ -113,7 +113,7 @@ body,body:where(:not(.whatever)),.app{background:transparent!important;backgroun
 .v6511-duty-bar{border:1px solid rgba(28,197,255,.66)!important;box-shadow:inset 0 1px rgba(191,236,255,.16),0 0 8px rgba(21,132,255,.24)!important}
 .v6511-month-board,.v6511-board-scroll{background:rgba(1,12,28,.88)!important}
 .v6511-day.today,.v655-live{box-shadow:0 0 14px rgba(25,207,255,.59),inset 0 1px rgba(189,244,255,.26)!important}
-.v652-person-chip,.v655-detail-person,.person-pick,.v64-transition,.insight-item,.v6515-person{
+.v652-person-chip,.v655-detail-person,.person-pick,.v64-transition,.v6515-person{
  background:linear-gradient(145deg,rgba(9,42,70,.95),rgba(3,23,42,.93))!important;border-color:rgba(49,174,244,.5)!important;color:#effaff!important;
 }
 #analyticsView .activity-svg path,#analyticsView .activity-svg polyline{filter:drop-shadow(0 0 3px rgba(43,177,255,.6))}

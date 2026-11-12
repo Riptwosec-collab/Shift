@@ -24,7 +24,7 @@ function shift81SetTheme(value,persist=true){
  const mode=value==='dark'?'dark':'light';
  document.documentElement.dataset.shiftTheme=mode;
  const meta=document.querySelector('meta[name="theme-color"]');
- if(meta)meta.setAttribute('content',mode==='dark'?'#11141B':'#171820');
+ if(meta)meta.setAttribute('content',mode==='dark'?'#000000':'#171820');
  if(persist){try{localStorage.setItem(SHIFT81_THEME_KEY,mode)}catch{}}
  shift81SyncThemeButton();
  return mode;

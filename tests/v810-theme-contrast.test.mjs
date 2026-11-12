@@ -37,7 +37,7 @@ test('Theme control persists, restores, is accessible and respects locale',()=>{
  assert.equal(api.read(),'dark');
  assert.equal(api.set('dark'), 'dark');assert.equal(root.dataset.shiftTheme,'dark');
  assert.equal(attrs['aria-pressed'],'true');assert.match(attrs['aria-label'],/ธีมมืด/);
- assert.equal(meta.content,'#11141B');assert.equal(store.value,'dark');
+ assert.equal(meta.content,'#000000');assert.equal(store.value,'dark');
  root.dataset.locale='en';api.sync();assert.equal(button.label.textContent,'Dark');
  assert.equal(api.set('light'),'light');assert.equal(meta.content,'#171820');assert.equal(attrs['aria-pressed'],'false');
 });
