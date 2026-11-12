@@ -43,10 +43,7 @@ html[data-shift750="ready"] .command-bar{
  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
  color:var(--end-ink)!important;
 }
-html[data-shift750="ready"] .command-bar::before{
- content:"";position:absolute;top:-1px;right:25px;width:67px;height:12px;
- background:var(--end-orange);border-radius:0 0 11px 11px;pointer-events:none;
-}
+html[data-shift750="ready"] .command-bar::before{content:none;display:none}
 html[data-shift750="ready"] .command-bar .brand-copy h1{
  color:var(--end-ink)!important;
  font-weight:950!important;letter-spacing:-.055em!important;
@@ -172,11 +169,7 @@ html[data-shift750="ready"] #shift740FullMonth .s740-top{
  color:var(--end-ink)!important;
  border-bottom:2px solid var(--end-ink);
 }
-html[data-shift750="ready"] #shift740FullMonth .s740-top::after{
- content:"";position:absolute;right:-34px;bottom:-98px;pointer-events:none;
- width:245px;height:245px;border:2px solid rgba(27,26,32,.45);
- border-radius:50%;background:transparent;
-}
+html[data-shift750="ready"] #shift740FullMonth .s740-top::after{content:none;display:none}
 html[data-shift750="ready"] #shift740FullMonth .s740-topcopy{
  position:relative;z-index:2;max-width:740px!important;flex:initial!important;
 }

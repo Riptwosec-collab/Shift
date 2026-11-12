@@ -734,3 +734,70 @@ html[data-shift780="ready"][data-shift-theme="light"]
  -webkit-text-fill-color:#162A37!important;
  text-shadow:none!important;
 }
+
+
+/* V8.9.2 — Remove decorative overlap, restore accessible search in both modes.
+   The old orange cap and concentric circle are removed at source V7.5 as well. */
+html[data-shift780="ready"][data-shift-theme] .command-bar::before,
+html[data-shift780="ready"][data-shift-theme] .command-bar::after,
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .s740-top::before,
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .s740-top::after{
+ content:none!important;
+ display:none!important;
+ background:none!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] .search-row{
+ display:grid!important;
+ grid-template-columns:minmax(0,1fr) auto!important;
+ align-items:center!important;
+ gap:8px!important;
+}
+html[data-shift780="ready"][data-shift-theme] .search-row .smart-search{
+ min-width:0!important;width:100%!important;
+}
+html[data-shift780="ready"][data-shift-theme] .search-row .smart-search input{
+ width:100%!important;min-height:43px!important;
+ border:1px solid var(--sh87-border)!important;
+ border-radius:10px!important;
+ background:var(--sh87-panel)!important;
+ background-image:none!important;
+ color:var(--sh87-fg)!important;
+ box-shadow:none!important;
+ font-size:clamp(12px,1vw,14px)!important;
+}
+html[data-shift780="ready"][data-shift-theme] .search-row .smart-search input::placeholder{
+ color:var(--sh87-muted)!important;
+ opacity:1!important;
+}
+html[data-shift780="ready"][data-shift-theme] .search-row .search-icon{
+ color:var(--sh87-muted)!important;
+ opacity:.85!important;
+}
+html[data-shift780="ready"][data-shift-theme] .search-row .fullscreen-label{
+ min-height:43px!important;
+ padding:8px 13px!important;
+ border:1px solid var(--sh87-border)!important;
+ border-radius:10px!important;
+ background:var(--sh87-card)!important;
+ background-image:none!important;
+ color:var(--sh87-fg)!important;
+ font-size:11px!important;font-weight:750!important;
+ letter-spacing:.03em!important;
+ box-shadow:none!important;
+ white-space:nowrap!important;
+ opacity:1!important;
+}
+html[data-shift780="ready"][data-shift-theme] .search-row .fullscreen-label:focus-visible,
+html[data-shift780="ready"][data-shift-theme] .search-row .smart-search input:focus-visible{
+ outline:3px solid var(--sh87-accent)!important;
+ outline-offset:2px!important;
+}
+@media(max-width:520px){
+ html[data-shift780="ready"][data-shift-theme] .search-row{
+  grid-template-columns:minmax(0,1fr)!important;
+ }
+ html[data-shift780="ready"][data-shift-theme] .search-row .fullscreen-label{
+  display:none!important;
+ }
+}

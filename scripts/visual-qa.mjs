@@ -94,6 +94,16 @@ function colorEvalScript(){
      problems.push({type:'header-overlap',between:[nameA,nameB],overX:Math.round(overX),overY:Math.round(overY)});
   }
  }
+
+ const decoChecks=[
+  ['.command-bar','::before'],['#shift740FullMonth .s740-top','::after']
+ ];
+ for(const [selector,pseudo] of decoChecks){
+  const el=document.querySelector(selector);if(!el)continue;
+  const s=getComputedStyle(el,pseudo),v=s.content;
+  if(v&&v!=='none'&&v!=='normal'&&s.display!=='none')
+   problems.push({type:'unwanted-decorative-overlay',selector,pseudo,content:v});
+ }
  const checks=[['#overviewView .roster-card .person-row','.row-copy','.status-badge'],
  ['#dailyView .roster-card .person-row','.row-copy','.status-badge'],
  ['#overviewView .insights-panel .insight-item',':scope > span:nth-child(2)','.insight-value']];
