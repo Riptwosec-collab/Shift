@@ -1,6 +1,7 @@
 /* Shift V8.1 — persistent accessible light / dark switch.
    Only DOM/theme preferences; never touches roster, dates, navigation or data. */
-const SHIFT81_THEME_KEY='shift.theme';
+// New visual generation starts in black-lime; keep future user choices persistent.
+const SHIFT81_THEME_KEY='shift.theme.v11';
 function shift81StoredTheme(){
  try{return localStorage.getItem(SHIFT81_THEME_KEY)==='light'?'light':'dark'}catch{return 'dark'}
 }
