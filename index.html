@@ -7925,6 +7925,671 @@ html[data-shift780="ready"][data-shift-theme="dark"] #shift740FullMonth
 html[data-shift780="ready"][data-shift-theme="dark"] #shift740FullMonth
  .s740-legend .h{background:#FFC4D4!important}
 
+
+/* SHIFT V8.2 — Visual consistency and proportional layout repair.
+   Use V8.1's live light/dark variables, not a third competing palette. */
+html[data-shift780="ready"]{
+ --shift82-paper:var(--sh81-panel);
+ --shift82-card:var(--sh81-card);
+ --shift82-ink:var(--sh81-ink);
+ --shift82-muted:var(--sh81-muted);
+ --shift82-border:var(--sh81-border);
+ --shift82-hover:var(--sh81-hover);
+ --shift82-radius:12px;
+ --shift82-day:#D6F36A;
+ --shift82-night:#5264E8;
+ --shift82-off:#FFC4D4;
+ --shift82-ink-on-color:#1B1A20;
+}
+/* Consistent fluid page margins and no out-of-viewport width leaks. */
+html[data-shift780="ready"] .app{
+ width:min(100%,1660px)!important;
+ max-width:1660px!important;
+ min-width:0!important;
+ padding-inline:clamp(10px,1.55vw,24px)!important;
+}
+html[data-shift780="ready"] :is(
+ .view,.hero-grid,.overview-main,.lower-grid,.shift-columns,
+ .v6517-dashboard,.v6517-main-grid,.v6517-bottom-grid,.v6517-kpis,
+ .person-layout,.analytics-grid,.analytics-main,.v652-control-deck,
+ #shift740FullMonth,#shiftNovemberView){
+ min-width:0;
+}
+html[data-shift780="ready"] :is(
+ #overviewView,#dailyView,#personView,#monthView,#analyticsView,#oncallView
+) :is(.hud-panel,.roster-card,.analytics-panel,.analytics-card,.people-panel,
+ .person-detail,.month-panel,.v6517-glass,.v652-now-card,.v652-stat){
+ box-sizing:border-box;min-width:0;max-width:100%;
+ border-radius:var(--shift82-radius)!important;
+}
+html[data-shift780="ready"] :is(.command-bar,.nav-tabs,.command-actions,.brand){min-width:0}
+html[data-shift780="ready"] .command-bar{
+ gap:clamp(7px,1vw,14px)!important;
+ padding:10px clamp(10px,1.2vw,17px)!important;
+}
+html[data-shift780="ready"] .brand-copy h1{
+ font-size:clamp(15px,1.25vw,22px)!important;
+ line-height:1.28!important;
+ letter-spacing:-.025em!important;
+ text-shadow:none!important;
+}
+html[data-shift780="ready"] .brand-copy :is(p,small){
+ line-height:1.45!important;
+ letter-spacing:0!important;
+}
+html[data-shift780="ready"] .nav-tabs .nav-btn{
+ min-height:42px!important;
+ padding:7px 10px!important;
+ white-space:nowrap;
+}
+html[data-shift780="ready"] .nav-tabs .nav-btn :is(b,span){color:inherit!important}
+html[data-shift780="ready"] .command-actions{
+ display:flex;align-items:center;
+ flex-wrap:nowrap!important;gap:6px!important;
+}
+html[data-shift780="ready"] .command-actions :is(button,.shift81-theme-toggle){
+ flex-shrink:0;
+}
+/* The old V7.9 unconditional display:flex leaked mobile nav onto desktop. */
+@media(min-width:861px){
+ html[data-shift780="ready"] .mobile-nav{display:none!important}
+}
+@media(min-width:861px) and (max-width:1250px){
+ html[data-shift780="ready"] .command-bar{
+  grid-template-columns:minmax(0,1fr) auto!important;
+  align-items:center;
+ }
+ html[data-shift780="ready"] .command-bar .brand{grid-column:1;grid-row:1}
+ html[data-shift780="ready"] .command-bar .command-actions{grid-column:2;grid-row:1}
+ html[data-shift780="ready"] .command-bar .nav-tabs{
+  grid-column:1/-1;grid-row:2;justify-self:stretch;
+  width:100%;max-width:100%;overflow-x:auto;
+ }
+ html[data-shift780="ready"] .nav-tabs .nav-btn{
+  flex:1 0 auto;min-width:0!important;
+ }
+}
+/* Every view uses the same typography ladder; Thai does not tolerate
+   the tight negative letter spacing used on Latin editorial lettering. */
+html[data-shift780="ready"] :is(.shift78-section-copy h2,
+ #shift740FullMonth h2.end770-title,
+ #shiftNovemberView .shift72-command h3){
+ letter-spacing:-.025em!important;
+ line-height:1.2!important;
+ overflow-wrap:break-word;
+ text-shadow:none!important;
+}
+html[data-shift780="ready"] .shift78-section-copy h2{
+ font-size:clamp(25px,2.85vw,42px)!important;
+}
+html[data-shift780="ready"] .shift78-section-copy p{
+ font-size:clamp(12px,.95vw,14px)!important;
+ line-height:1.65!important;
+}
+html[data-shift780="ready"] .shift78-section-kicker,
+html[data-shift780="ready"] .shift78-section-index{
+ font-size:11px!important;line-height:1.35!important;
+}
+html[data-shift780="ready"] .shift78-stamp-label{
+ font-size:9px!important;letter-spacing:.035em!important;
+}
+html[data-shift780="ready"] :is(
+ #overviewView,#dailyView,#personView,#monthView,#analyticsView,#oncallView
+) :is(.section-title,.v6517-panel-header strong,.roster-title b){
+ font-size:clamp(16px,1.2vw,20px)!important;
+ line-height:1.4!important;
+ letter-spacing:-.012em!important;
+}
+html[data-shift780="ready"] :is(
+ #overviewView,#dailyView,#personView,#monthView,#analyticsView,#oncallView
+) :is(.eyebrow,.v6517-caption,.v652-kicker,.v655-kicker,
+ .muted,.hint,.roster-title small,.roster-count small){
+ font-size:clamp(11px,.9vw,13px)!important;
+ line-height:1.5!important;
+ letter-spacing:0!important;
+}
+html[data-shift780="ready"] :is(
+ #overviewView,#dailyView,#personView,#monthView,#analyticsView,#oncallView
+) :is(.row-name,.person-name,.working-name,.person-pick .row-name){
+ line-height:1.45!important;
+ letter-spacing:0!important;
+ text-decoration:none!important;
+ text-shadow:none!important;
+ overflow-wrap:break-word;
+}
+html[data-shift780="ready"] #personView .person-pick .row-name{
+ font-size:clamp(13px,1.1vw,15px)!important;
+ color:var(--shift82-ink)!important;
+}
+html[data-shift780="ready"] #personView .person-pick .row-meta{
+ font-size:12px!important;line-height:1.45!important;
+ color:var(--shift82-muted)!important;
+}
+html[data-shift780="ready"] #personView .person-pick.active .row-meta{
+ color:#2D2328!important;
+}
+/* Neutral surfaces: remove residual neon-on-cream labels.
+   Pastel KPI cards, coral hero and semantic duty cells remain vivid. */
+html[data-shift780="ready"] :is(
+ #overviewView .hud-panel:not(.hero-stage):not(.metric-card),
+ #dailyView .hud-panel,#personView .hud-panel,
+ #monthView .hud-panel,#analyticsView .hud-panel,
+ #oncallView .hud-panel){
+ border-color:var(--shift82-border)!important;
+ color:var(--shift82-ink)!important;
+}
+html[data-shift780="ready"] #overviewView :is(
+ .insights-panel,.network-panel,.month-snapshot){
+ background:var(--shift82-paper)!important;
+ background-image:none!important;
+ color:var(--shift82-ink)!important;
+}
+html[data-shift780="ready"] #overviewView .insights-panel :is(
+ .section-title,.insight-heading h3,.insight-item b,.insight-value,
+ .v6517-panel-header strong){
+ color:var(--shift82-ink)!important;
+}
+html[data-shift780="ready"] #overviewView .insights-panel :is(
+ .insight-item span,.insight-list small,.ratio-legend,.muted){
+ color:var(--shift82-muted)!important;
+}
+html[data-shift780="ready"] #overviewView .insights-panel .insight-tabs button{
+ min-height:40px!important;
+ color:var(--shift82-ink)!important;
+ background:var(--shift82-card)!important;
+ border:1px solid var(--shift82-border)!important;
+ border-radius:8px!important;
+}
+html[data-shift780="ready"] #overviewView .insights-panel .insight-tabs button.active{
+ background:#FF7959!important;color:#1B1A20!important;
+ border-color:#AF5947!important;
+}
+html[data-shift780="ready"] #overviewView .v6517-kpi-icon{
+ background:var(--shift82-card)!important;
+ color:var(--shift82-ink)!important;
+ border:1px solid var(--shift82-border)!important;
+ box-shadow:none!important;filter:none!important;
+}
+html[data-shift780="ready"] #overviewView .v6517-kpi{
+ min-height:112px!important;
+ padding:clamp(11px,1.1vw,17px)!important;
+}
+html[data-shift780="ready"] #overviewView .v6517-kpi :is(
+ .v6517-kpi-value,.v6517-kpi-label){
+ line-height:1.25!important;
+}
+html[data-shift780="ready"] #overviewView .metric-card{
+ border-color:var(--shift82-border)!important;
+ border-radius:var(--shift82-radius)!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"] #overviewView .metric-card :is(
+ .metric-name,.metric-name b,.metric-name span,.metric-foot,.metric-foot span){
+ line-height:1.45!important;
+}
+/* Keep D/N/H/O consistent in the desktop matrix, mobile 8-day preview
+   and weekly view. These colors are state semantics, not decoration. */
+html[data-shift780="ready"] :is(
+ #overviewView .matrix-cell.D,
+ #overviewView .v6517-mobile-row button.D,
+ #monthView .shift-week-cell.D){
+ background:var(--shift82-day)!important;
+ color:#26310F!important;
+ border:1px solid #9DB548!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"] :is(
+ #overviewView .matrix-cell.N,
+ #overviewView .v6517-mobile-row button.N,
+ #monthView .shift-week-cell.N){
+ background:var(--shift82-night)!important;
+ color:#FFFFFF!important;
+ border:1px solid #3244B4!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"] :is(
+ #overviewView .matrix-cell.O,
+ #overviewView .v6517-mobile-row button.O,
+ #monthView .shift-week-cell.O){
+ background:var(--shift82-off)!important;
+ color:#512537!important;
+ border:1px solid #D78BA2!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"] #overviewView .v6517-mobile-name{
+ background:var(--shift82-card)!important;
+ color:var(--shift82-ink)!important;
+ border-right:1px solid var(--shift82-border)!important;
+ text-shadow:none!important;
+ font-size:clamp(10px,2.8vw,12px)!important;
+ line-height:1.3!important;
+}
+html[data-shift780="ready"] #overviewView .v6517-mobile-row{
+ border-bottom:1px solid var(--shift82-border)!important;
+}
+html[data-shift780="ready"] #monthView :is(
+ .shift-week-grid,.v6515-month-days){
+ background:var(--shift82-paper)!important;
+ border-color:var(--shift82-border)!important;
+}
+html[data-shift780="ready"] #monthView .shift-week-name{
+ background:var(--shift82-card)!important;color:var(--shift82-ink)!important;
+ border-color:var(--shift82-border)!important;
+ text-shadow:none!important;
+}
+html[data-shift780="ready"] #monthView :is(
+ .shift-week-heading strong,.shift-calendar-heading b,
+ .v6515-month-title strong,.v6515-shift-head b){
+ color:var(--shift82-ink)!important;
+}
+html[data-shift780="ready"] #monthView :is(
+ .shift-week-heading small,.shift-week-heading span,
+ .shift-calendar-heading small,.v6515-month-title small){
+ color:var(--shift82-muted)!important;
+}
+html[data-shift780="ready"] #monthView .v6515-month-days button:not(.active){
+ background:var(--shift82-card)!important;
+ border-color:var(--shift82-border)!important;
+ color:var(--shift82-ink)!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"] #monthView .v6515-month-days button.active{
+ background:#FF7959!important;color:#1B1A20!important;
+ border-color:#C15C45!important;box-shadow:none!important;
+}
+html[data-shift780="ready"] #monthView .v6515-month-days button.active :is(small,b){
+ color:#1B1A20!important;
+}
+html[data-shift780="ready"] #monthView .v6515-shift-group.day{border-left-color:#95B638!important}
+html[data-shift780="ready"] #monthView .v6515-shift-group.night{border-left-color:#5264E8!important}
+html[data-shift780="ready"] #monthView .v6515-shift-group.off{border-left-color:#D78BA2!important}
+/* The previous full-name widths (1%, 198px, 250px, 272px) collided;
+   one explicit rail width allows Thai names to wrap without clipping. */
+html[data-shift780="ready"]{
+ --shift82-name-rail:clamp(168px,18vw,252px);
+}
+html[data-shift780="ready"] #monthView .table-wrap{
+ max-width:100%!important;
+ overflow-x:auto!important;overflow-y:auto;
+ overscroll-behavior-inline:contain;
+}
+html[data-shift780="ready"] #monthView .heatmap{
+ width:max-content!important;min-width:100%!important;
+ table-layout:auto!important;
+ border-spacing:2px!important;
+}
+html[data-shift780="ready"] #monthView .heatmap :is(
+ thead th.name-col,tbody th.name-col,tfoot td.name-col){
+ position:sticky!important;left:0!important;
+ box-sizing:border-box!important;
+ width:var(--shift82-name-rail)!important;
+ min-width:var(--shift82-name-rail)!important;
+ max-width:var(--shift82-name-rail)!important;
+ padding:9px 11px!important;
+ white-space:normal!important;word-break:normal!important;
+ overflow-wrap:break-word!important;
+ line-height:1.45!important;
+ background:var(--sh81-soft)!important;
+ color:var(--shift82-ink)!important;
+ vertical-align:middle!important;
+ border-right:2px solid var(--shift82-border)!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"] #monthView .heatmap .v6519-full-name{
+ display:block!important;
+ max-width:100%!important;
+ font-size:clamp(12px,1vw,14px)!important;
+ line-height:1.45!important;
+ white-space:normal!important;
+ word-break:normal!important;
+ overflow-wrap:break-word!important;
+ color:var(--shift82-ink)!important;
+ text-overflow:clip!important;
+}
+html[data-shift780="ready"] #monthView .heatmap td.shift{
+ min-width:34px!important;height:42px!important;
+ font-size:12px!important;
+ border-radius:5px!important;
+}
+html[data-shift780="ready"] #monthView .heatmap thead th:not(.name-col){
+ min-width:34px!important;font-size:12px!important;
+}
+html[data-shift780="ready"] #monthView .heatmap .name-col :is(span,b,strong){
+ color:var(--shift82-ink)!important;
+ text-decoration:none!important;
+ -webkit-text-stroke:0 transparent!important;
+ text-shadow:none!important;
+}
+/* October: give the sticky name column enough width to read, remove
+   the pseudo crossing line and make each row accommodate two Thai lines. */
+html[data-shift780="ready"] #shift740FullMonth .s740-matrix .s740-name{
+ width:208px!important;min-width:208px!important;max-width:208px!important;
+ padding:8px 10px!important;
+ min-height:48px!important;
+ background:var(--sh81-soft)!important;
+ color:var(--shift82-ink)!important;
+ border-right:2px solid var(--shift82-border)!important;
+ box-shadow:none!important;
+ text-align:left!important;
+ white-space:normal!important;
+ overflow-wrap:break-word!important;
+}
+html[data-shift780="ready"] #shift740FullMonth .s740-name b{
+ display:block!important;max-width:100%!important;
+ font-size:12px!important;line-height:1.45!important;
+ white-space:normal!important;
+ overflow:visible!important;text-overflow:clip!important;
+ overflow-wrap:break-word!important;
+ color:var(--shift82-ink)!important;
+}
+html[data-shift780="ready"] #shift740FullMonth .s740-name span{
+ color:var(--shift82-muted)!important;
+ font-size:11px!important;line-height:1.4!important;
+}
+html[data-shift780="ready"] #shift740FullMonth .s740-matrix .s740-matrix-date button{
+ min-height:44px!important;
+}
+html[data-shift780="ready"] #shift740FullMonth h2.end770-title{
+ font-size:clamp(34px,4.7vw,64px)!important;
+}
+html[data-shift780="ready"] #shift740FullMonth .s740-topcopy p{
+ font-size:clamp(12px,1.05vw,14px)!important;
+}
+html[data-shift780="ready"] #shift740FullMonth .s740-calendar-day{
+ min-height:56px!important;min-width:0!important;
+}
+html[data-shift780="ready"] #shift740FullMonth .s740-cal-info b{
+ font-size:clamp(9px,.8vw,11px)!important;
+}
+/* November: sticky names and date headers are consistent with October. */
+html[data-shift780="ready"] #shiftNovemberView .shift72-board-table .shift72-person-heading{
+ width:204px!important;min-width:204px!important;max-width:204px!important;
+ min-height:48px!important;
+ padding:8px 9px!important;
+ background:var(--sh81-soft)!important;
+ color:var(--shift82-ink)!important;
+ border-right:2px solid var(--shift82-border)!important;
+ box-shadow:none!important;
+ text-align:left!important;
+ white-space:normal!important;
+}
+html[data-shift780="ready"] #shiftNovemberView .shift72-person-copy{
+ display:inline-flex;vertical-align:middle;
+ max-width:calc(100% - 42px)!important;
+ min-width:0!important;
+}
+html[data-shift780="ready"] #shiftNovemberView .shift72-person-copy b{
+ display:block;font-size:12px!important;line-height:1.4!important;
+ white-space:normal!important;overflow-wrap:break-word!important;
+ color:var(--shift82-ink)!important;
+}
+html[data-shift780="ready"] #shiftNovemberView .shift72-person-copy small{
+ font-size:11px!important;line-height:1.35!important;
+ color:var(--shift82-muted)!important;
+}
+html[data-shift780="ready"] #shiftNovemberView .shift72-date-chip{
+ min-height:46px!important;
+}
+html[data-shift780="ready"] #shiftNovemberView .shift72-date-chip span{
+ font-size:10px!important;
+}
+html[data-shift780="ready"] #shiftNovemberView .shift72-command h3{
+ font-size:clamp(27px,3.1vw,45px)!important;
+}
+/* Analytics and Oncall: no micro labels or uncontrolled 3D text effects. */
+html[data-shift780="ready"] #analyticsView .analytics-card{
+ min-height:132px!important;
+ padding:clamp(12px,1.2vw,18px)!important;
+}
+html[data-shift780="ready"] #analyticsView .analytics-card .value{
+ font-size:clamp(27px,2.4vw,38px)!important;
+ line-height:1.15!important;
+}
+html[data-shift780="ready"] #analyticsView .analytics-card :is(.label,small,span){
+ font-size:clamp(12px,.95vw,14px)!important;
+ line-height:1.45!important;
+ color:var(--shift82-muted)!important;
+}
+html[data-shift780="ready"] #analyticsView .workload-row{
+ min-height:35px!important;
+ grid-template-columns:minmax(90px,1.15fr) minmax(80px,2.2fr) 40px!important;
+ gap:10px!important;
+}
+html[data-shift780="ready"] #analyticsView .workload-row :is(
+ span:first-child,b,strong){
+ color:var(--shift82-ink)!important;
+ font-size:13px!important;
+}
+html[data-shift780="ready"] #oncallView .v652-stat-grid{
+ grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ gap:10px!important;
+}
+html[data-shift780="ready"] #oncallView :is(.v652-stat,.v652-now-card){
+ background:var(--shift82-card)!important;
+ color:var(--shift82-ink)!important;
+ border:1px solid var(--shift82-border)!important;
+ box-shadow:none!important;
+ min-width:0;
+}
+html[data-shift780="ready"] #oncallView .v652-now-card.live{
+ border-color:#89A955!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] #oncallView .v652-now-card.live{
+ background:#273D34!important;border-color:#639A72!important;
+}
+html[data-shift780="ready"] #oncallView :is(
+ .v652-stat b,.v652-stat strong,.v652-now-card strong,
+ .v652-section-head .section-title){
+ color:var(--shift82-ink)!important;
+}
+html[data-shift780="ready"] #oncallView :is(
+ .v652-stat small,.v652-stat strong em,
+ .v652-now-card small,.v652-now-card span,
+ .v652-section-head p,.v652-section-head>span){
+ color:var(--shift82-muted)!important;
+ font-size:clamp(11px,.9vw,13px)!important;
+ line-height:1.45!important;
+}
+html[data-shift780="ready"] #oncallView .v655-matrix{
+ grid-template-columns:178px repeat(var(--v652-days),minmax(42px,1fr))!important;
+}
+html[data-shift780="ready"] #oncallView .v655-matrix .v652-matrix-name b{
+ font-size:12px!important;line-height:1.4!important;
+ white-space:normal!important;overflow-wrap:break-word!important;
+ color:var(--shift82-ink)!important;
+}
+html[data-shift780="ready"] #oncallView .v655-matrix .v652-matrix-name small{
+ font-size:10px!important;line-height:1.3!important;
+ color:var(--shift82-muted)!important;
+}
+html[data-shift780="ready"] #oncallView .v655-matrix .v652-matrix-day small{
+ font-size:9px!important;
+ color:var(--shift82-muted)!important;
+}
+html[data-shift780="ready"] #oncallView .v655-matrix .v652-matrix-cell.active b{
+ font-size:10px!important;
+ line-height:1.25!important;
+ text-shadow:none!important;
+}
+html[data-shift780="ready"] #oncallView :is(.v652-matrix-scroll,.v655-matrix-scroll){
+ overflow-x:auto!important;overscroll-behavior-x:contain;
+}
+/* Shared button and focus proportions; preserve active status tones. */
+html[data-shift780="ready"] :is(
+ .ghost-btn,.filter-btn,.range-btn,.rail-arrow,
+ #shift740FullMonth .s740-actions button,
+ #shiftNovemberView .shift72-board-toolbar button){
+ min-height:38px;
+ border-radius:9px!important;
+ font-size:clamp(12px,.95vw,14px)!important;
+ line-height:1.25!important;
+}
+html[data-shift780="ready"] :is(
+ .ghost-btn,.filter-btn,.range-btn,.rail-arrow,
+ .nav-btn,.person-pick,[data-shift-theme-toggle]
+):focus-visible{
+ outline:3px solid #DB5A3C!important;
+ outline-offset:2px!important;
+}
+html[data-shift780="ready"] :is(
+ .ghost-btn,.filter-btn,.range-btn,.rail-arrow,
+ .nav-btn,.person-pick,[data-shift-theme-toggle]
+):disabled{
+ cursor:not-allowed!important;
+ opacity:.48!important;
+}
+/* Tablet and compact screens. */
+@media(max-width:1100px){
+ html[data-shift780="ready"] #oncallView .v652-stat-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ }
+ html[data-shift780="ready"] #analyticsView .analytics-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ }
+}
+@media(max-width:860px){
+ html[data-shift780="ready"] .app{
+  padding:9px 10px calc(92px + env(safe-area-inset-bottom))!important;
+ }
+ html[data-shift780="ready"] .command-bar{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  padding:10px!important;
+  min-height:64px!important;
+ }
+ html[data-shift780="ready"] .command-bar .brand{min-width:0!important;gap:9px!important}
+ html[data-shift780="ready"] .command-bar .brand-mark{
+  width:39px!important;height:39px!important;
+ }
+ html[data-shift780="ready"] .command-bar .brand-copy h1{
+  font-size:clamp(14px,3.4vw,17px)!important;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+ }
+ html[data-shift780="ready"] .command-bar .brand-copy p{
+  font-size:10px!important;
+ }
+ html[data-shift780="ready"] .command-bar .brand-copy small{display:none!important}
+ html[data-shift780="ready"] .command-bar .nav-tabs{display:none!important}
+ html[data-shift780="ready"] .mobile-nav{
+  display:flex!important;
+  left:10px!important;right:10px!important;
+  max-width:calc(100% - 20px)!important;
+  gap:3px!important;
+  padding:6px!important;
+  overflow-x:auto!important;overflow-y:hidden!important;
+ }
+ html[data-shift780="ready"] .mobile-nav button{
+  flex:1 0 47px!important;
+  min-height:44px!important;
+  padding:5px 3px!important;
+  font-size:clamp(10px,2.7vw,12px)!important;
+  line-height:1.2!important;
+  white-space:normal!important;
+ }
+ html[data-shift780="ready"] .mobile-nav button b{
+  font-size:clamp(13px,3.4vw,16px)!important;
+  line-height:1.2!important;
+ }
+ html[data-shift780="ready"] .shift78-section-grid{
+  grid-template-columns:minmax(0,1fr) 68px!important;
+ }
+ html[data-shift780="ready"] .shift78-section-art{
+  width:64px!important;height:64px!important;
+  max-width:64px;
+ }
+ html[data-shift780="ready"] .shift78-section-copy h2{
+  font-size:clamp(23px,5.4vw,35px)!important;
+  line-height:1.25!important;
+ }
+ html[data-shift780="ready"] .shift78-stamp{font-size:20px!important}
+ html[data-shift780="ready"] .shift78-stamp-label{font-size:8px!important}
+ html[data-shift780="ready"] #personView .people-list{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  max-height:330px!important;
+ }
+ html[data-shift780="ready"] #shift740FullMonth .s740-matrix .s740-name{
+  width:164px!important;min-width:164px!important;max-width:164px!important;
+ }
+ html[data-shift780="ready"] #shiftNovemberView .shift72-board-table .shift72-person-heading{
+  width:164px!important;min-width:164px!important;max-width:164px!important;
+ }
+ html[data-shift780="ready"] #shift740FullMonth .s740-calendar-day{
+  min-height:54px!important;
+ }
+ html[data-shift780="ready"] #shift740FullMonth h2.end770-title{
+  font-size:clamp(31px,7.6vw,48px)!important;
+ }
+ html[data-shift780="ready"] #shiftNovemberView .shift72-command h3{
+  font-size:clamp(26px,6vw,39px)!important;
+ }
+ html[data-shift780="ready"] #analyticsView .analytics-main{
+  grid-template-columns:minmax(0,1fr)!important;
+ }
+}
+@media(max-width:520px){
+ html[data-shift780="ready"] .command-actions .live-pill{display:none!important}
+ html[data-shift780="ready"] .command-actions{gap:4px!important}
+ html[data-shift780="ready"] .shift78-section-hero{
+  padding:14px 12px!important;min-height:0!important;
+ }
+ html[data-shift780="ready"] .shift78-section-grid{
+  grid-template-columns:minmax(0,1fr) 57px!important;gap:7px!important;
+ }
+ html[data-shift780="ready"] .shift78-section-art{
+  width:55px!important;height:55px!important;
+ }
+ html[data-shift780="ready"] .shift78-art-ring{
+  width:66px!important;height:66px!important;
+ }
+ html[data-shift780="ready"] .shift78-stamp{font-size:17px!important}
+ html[data-shift780="ready"] .shift78-stamp-label{font-size:8px!important}
+ html[data-shift780="ready"] .shift78-section-copy h2{
+  font-size:clamp(22px,6.4vw,30px)!important;
+ }
+ html[data-shift780="ready"] #personView .people-list{
+  grid-template-columns:minmax(0,1fr)!important;
+  max-height:300px!important;
+ }
+ html[data-shift780="ready"] #analyticsView .analytics-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:9px!important;
+ }
+ html[data-shift780="ready"] #analyticsView .analytics-card{
+  min-height:116px!important;
+  padding:12px!important;
+ }
+ html[data-shift780="ready"] #analyticsView .workload-row{
+  grid-template-columns:78px minmax(0,1fr) 30px!important;
+  gap:6px!important;
+ }
+ html[data-shift780="ready"] #oncallView .v652-stat-grid{
+  grid-template-columns:minmax(0,1fr)!important;
+ }
+ html[data-shift780="ready"] #shift740FullMonth .s740-top{
+  padding:19px 13px 15px!important;
+ }
+ html[data-shift780="ready"] #shift740FullMonth h2.end770-title{
+  font-size:clamp(29px,8vw,40px)!important;
+ }
+ html[data-shift780="ready"] #shift740FullMonth .s740-cal-info b{
+  font-size:9px!important;
+ }
+ html[data-shift780="ready"] #shift740FullMonth .s740-matrix .s740-name,
+ html[data-shift780="ready"] #shiftNovemberView .shift72-board-table .shift72-person-heading{
+  width:154px!important;min-width:154px!important;max-width:154px!important;
+ }
+ html[data-shift780="ready"] #shiftNovemberView .shift72-person-copy b{
+  font-size:11px!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-shift780="ready"] :is(
+ .shift78-section-hero,.shift78-section-art,.mobile-nav button,
+ .v6517-kpi,.s740-duty,.shift72-duty-pill){
+  animation:none!important;transition:none!important;
+ }
+}
+
 </style>
 <script id="shift81-theme-preflight">
 (()=>{let t='light';try{t=localStorage.getItem('shift.theme')==='dark'?'dark':'light'}catch{}document.documentElement.dataset.shiftTheme=t;const m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='dark'?'#11141B':'#171820')})();
