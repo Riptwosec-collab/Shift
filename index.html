@@ -14628,6 +14628,54 @@ html[data-shift-theme="dark"]{
  --sh87-boot-accent:#72ADFF;
 }
 
+/* V8.9.1: legacy analytics cards had nth-child pastel/white !important
+   rules more specific than the neutral surface rule. Give every KPI one
+   neutral surface and use border color only for semantic categories. */
+html[data-shift780="ready"][data-shift-theme] #analyticsView .analytics-card:nth-child(n),
+html[data-shift780="ready"][data-shift-theme] #overviewView .metric-card:is(.day,.night,.off){
+ background:var(--sh87-card)!important;
+ background-image:none!important;
+ color:var(--sh87-fg)!important;
+ border-color:var(--sh87-border)!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] #overviewView .metric-card:is(.day,.night,.off)
+ :is(.metric-name,.metric-name b,.metric-name span,.metric-num,.metric-num span,
+ .metric-num small,.metric-foot,.metric-foot strong,.metric-foot span){
+ color:var(--sh87-fg)!important;
+ -webkit-text-fill-color:var(--sh87-fg)!important;
+}
+html[data-shift780="ready"][data-shift-theme] #overviewView .metric-card:is(.day,.night,.off)
+ :is(.metric-name span,.metric-num small,.metric-foot span){
+ color:var(--sh87-muted)!important;
+ -webkit-text-fill-color:var(--sh87-muted)!important;
+}
+html[data-shift780="ready"][data-shift-theme] #analyticsView .analytics-card:nth-child(n)
+ :is(h2,h3,strong,b,.value){
+ color:var(--sh87-fg)!important;
+ -webkit-text-fill-color:var(--sh87-fg)!important;
+}
+html[data-shift780="ready"][data-shift-theme] #analyticsView .analytics-card:nth-child(n)
+ :is(small,span,p,.label){
+ color:var(--sh87-muted)!important;
+ -webkit-text-fill-color:var(--sh87-muted)!important;
+}
+/* Light cream title bars were never neutralized by the 8.7 theme. */
+html[data-shift780="ready"][data-shift-theme] #dailyView .roster-title,
+html[data-shift780="ready"][data-shift-theme] #personView :is(.pstat,.person-stats),
+html[data-shift780="ready"][data-shift-theme] #analyticsView :is(.workload-row.head,.v64-workload-head){
+ background:var(--sh87-soft)!important;background-image:none!important;
+ color:var(--sh87-fg)!important;
+ border-color:var(--sh87-border)!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #dailyView .roster-title,#personView .pstat,
+ #analyticsView .workload-row.head
+) :is(h2,h3,b,strong){
+ color:var(--sh87-fg)!important;
+ -webkit-text-fill-color:var(--sh87-fg)!important;
+}
+
 </style>
 </body>
 </html>
