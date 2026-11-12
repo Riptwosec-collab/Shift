@@ -1409,34 +1409,34 @@ html[data-shift780="ready"] #analyticsView .analytics-card :is(.eyebrow,.label){
 /* True-black dark theme, not midnight blue. Container surfaces are stepped
    neutral blacks; original coral/lime/cobalt/blush are semantic accents only. */
 html[data-shift780="ready"][data-shift-theme="dark"]{
- --sh81-shell:#000000;
- --sh81-panel:#090909;
- --sh81-card:#141414;
- --sh81-soft:#1F1F1F;
- --sh81-border:#414141;
- --sh81-ink:#F7F7F7;
- --sh81-muted:#C5C5C5;
- --sh81-hover:#242424;
+ --sh81-shell:#071425;
+ --sh81-panel:#0D2036;
+ --sh81-card:#142940;
+ --sh81-soft:#1C344F;
+ --sh81-border:#344E6B;
+ --sh81-ink:#F1F7FF;
+ --sh81-muted:#BBCDE0;
+ --sh81-hover:#203B59;
  --sh81-action:#FF7959;
  --sh81-shadow:0 7px 22px rgba(0,0,0,.45);
- --shift78-shell:#000000;
- --shift80-shell:#000000;
- --shift78-paper:#090909;
- --shift80-paper:#090909;
- --shift80-surface:#141414;
- --shift80-raised:#1F1F1F;
- --shift80-line:#414141;
- --shift80-ink:#F7F7F7;
- --shift80-text-subtle:#C5C5C5;
+ --shift78-shell:#071425;
+ --shift80-shell:#071425;
+ --shift78-paper:#0D2036;
+ --shift80-paper:#0D2036;
+ --shift80-surface:#142940;
+ --shift80-raised:#1C344F;
+ --shift80-line:#344E6B;
+ --shift80-ink:#F1F7FF;
+ --shift80-text-subtle:#BBCDE0;
  color-scheme:dark!important;
 }
 html[data-shift780="ready"][data-shift-theme="dark"],
 html[data-shift780="ready"][data-shift-theme="dark"] body,
 html[data-shift780="ready"][data-shift-theme="dark"] .app{
- background:#000000!important;
- background-color:#000000!important;
+ background:#071425!important;
+ background-color:#071425!important;
  background-image:none!important;
- color:#F7F7F7!important;
+ color:#F1F7FF!important;
 }
 html[data-shift780="ready"][data-shift-theme="dark"]::before,
 html[data-shift780="ready"][data-shift-theme="dark"]::after,
@@ -1463,10 +1463,10 @@ html[data-shift780="ready"][data-shift-theme="dark"] :is(
  #analyticsView .hud-panel,
  #oncallView .hud-panel,
  .modal-card,.drawer-panel,.v64-palette-box){
- background:#090909!important;
+ background:#0D2036!important;
  background-image:none!important;
- color:#F7F7F7!important;
- border-color:#414141!important;
+ color:#F1F7FF!important;
+ border-color:#344E6B!important;
  box-shadow:none!important;
  color-scheme:dark!important;
 }
@@ -1490,10 +1490,10 @@ html[data-shift780="ready"][data-shift-theme="dark"] :is(
  #shift740FullMonth .s740-post,
  #shiftNovemberView .shift72-position-card,
  #shiftNovemberView .shift72-overview-card){
- background:#141414!important;
+ background:#142940!important;
  background-image:none!important;
- color:#F7F7F7!important;
- border-color:#414141!important;
+ color:#F1F7FF!important;
+ border-color:#344E6B!important;
  box-shadow:none!important;
 }
 html[data-shift780="ready"][data-shift-theme="dark"] :is(
@@ -1506,8 +1506,8 @@ html[data-shift780="ready"][data-shift-theme="dark"] :is(
  #analyticsView .analytics-card:nth-child(2),
  #analyticsView .analytics-card:nth-child(3),
  #analyticsView .analytics-card:nth-child(4)){
- background:#141414!important;
- border-top-color:#414141!important;
+ background:#142940!important;
+ border-top-color:#344E6B!important;
 }
 html[data-shift780="ready"][data-shift-theme="dark"] #overviewView .v6517-kpi:nth-child(1),
 html[data-shift780="ready"][data-shift-theme="dark"] #analyticsView .analytics-card:nth-child(1){border-top:3px solid #D6F36A!important}
@@ -1526,14 +1526,14 @@ html[data-shift780="ready"][data-shift-theme="dark"] #searchResults,
 html[data-shift780="ready"][data-shift-theme="dark"] .command-actions .sys-btn,
 html[data-shift780="ready"][data-shift-theme="dark"] .command-actions .shift81-theme-toggle,
 html[data-shift780="ready"][data-shift-theme="dark"] #shiftMonthTabs button:not(.active){
- background:#141414!important;
+ background:#142940!important;
  background-image:none!important;
- border-color:#414141!important;
- color:#F7F7F7!important;
+ border-color:#344E6B!important;
+ color:#F1F7FF!important;
 }
 html[data-shift780="ready"][data-shift-theme="dark"] .nav-tabs .nav-btn:not(.active),
 html[data-shift780="ready"][data-shift-theme="dark"] .mobile-nav button:not(.active){
- color:#F7F7F7!important;
+ color:#F1F7FF!important;
 }
 html[data-shift780="ready"][data-shift-theme="dark"] .nav-tabs .nav-btn.active,
 html[data-shift780="ready"][data-shift-theme="dark"] .mobile-nav button.active{
@@ -1546,24 +1546,24 @@ html[data-shift780="ready"][data-shift-theme="dark"] :is(
  #oncallView .v655-matrix .v652-matrix-name,
  #oncallView .v655-matrix .v652-matrix-corner,
  #oncallView .v655-matrix .v652-matrix-day){
- background:#1F1F1F!important;
+ background:#1C344F!important;
  background-image:none!important;
- color:#F7F7F7!important;
- border-color:#414141!important;
+ color:#F1F7FF!important;
+ border-color:#344E6B!important;
  box-shadow:none!important;
 }
 html[data-shift780="ready"][data-shift-theme="dark"] #monthView .heatmap .v6519-full-name,
 html[data-shift780="ready"][data-shift-theme="dark"] #shift740FullMonth .s740-name b,
 html[data-shift780="ready"][data-shift-theme="dark"] #shiftNovemberView .shift72-person-copy b{
- color:#F7F7F7!important;-webkit-text-fill-color:#F7F7F7!important;
+ color:#F1F7FF!important;-webkit-text-fill-color:#F1F7FF!important;
  background:transparent!important;
 }
 html[data-shift780="ready"][data-shift-theme="dark"] #shift740FullMonth,
 html[data-shift780="ready"][data-shift-theme="dark"] #shiftNovemberView .shift72-graphic,
 html[data-shift780="ready"][data-shift-theme="dark"] #shiftNovemberView .shift72-graphic-main{
- background:#090909!important;
+ background:#0D2036!important;
  background-image:none!important;
- color:#F7F7F7!important;border-color:#414141!important;
+ color:#F1F7FF!important;border-color:#344E6B!important;
  box-shadow:none!important;
 }
 html[data-shift780="ready"][data-shift-theme="dark"] #shift740FullMonth :is(
@@ -1573,43 +1573,43 @@ html[data-shift780="ready"][data-shift-theme="dark"] #shiftNovemberView :is(
  .shift72-board-section,.shift72-board-viewport,.shift72-overview-cards,
  .shift72-overview-card,.shift72-position-card,.shift72-analytics-chart,
  .shift72-analytics-workload,.shift72-view-switch){
- background:#141414!important;
+ background:#142940!important;
  background-image:none!important;
- border-color:#414141!important;color:#F7F7F7!important;
+ border-color:#344E6B!important;color:#F1F7FF!important;
 }
 html[data-shift780="ready"][data-shift-theme="dark"] #shift740FullMonth .s740-calendar-day,
 html[data-shift780="ready"][data-shift-theme="dark"] #shiftNovemberView .shift72-date-chip{
- background:#1F1F1F!important;color:#F7F7F7!important;
- border-color:#414141!important;
+ background:#1C344F!important;color:#F1F7FF!important;
+ border-color:#344E6B!important;
 }
 html[data-shift780="ready"][data-shift-theme="dark"] #shift740FullMonth .s740-calendar-day.is-selected,
 html[data-shift780="ready"][data-shift-theme="dark"] #shiftNovemberView .shift72-date-heading.is-selected .shift72-date-chip{
  background:#FF7959!important;color:#1B1A20!important;
 }
 html[data-shift780="ready"][data-shift-theme="dark"] #overviewView .insights-panel .insight-item{
- background:#141414!important;
+ background:#142940!important;
  background-image:none!important;
- border-color:#414141!important;
- color:#F7F7F7!important;
+ border-color:#344E6B!important;
+ color:#F1F7FF!important;
 }
 html[data-shift780="ready"][data-shift-theme="dark"] #overviewView .insights-panel .insight-item :is(b,.insight-value){
- color:#F7F7F7!important;-webkit-text-fill-color:#F7F7F7!important;
+ color:#F1F7FF!important;-webkit-text-fill-color:#F1F7FF!important;
 }
 html[data-shift780="ready"][data-shift-theme="dark"] #overviewView .insights-panel .insight-item > span:nth-child(2) > span{
- color:#C5C5C5!important;-webkit-text-fill-color:#C5C5C5!important;
+ color:#BBCDE0!important;-webkit-text-fill-color:#BBCDE0!important;
 }
 html[data-shift780="ready"][data-shift-theme="dark"] #overviewView .insights-panel .insight-icon{
- background:#242424!important;border-color:#414141!important;color:#F7F7F7!important;
+ background:#203B59!important;border-color:#344E6B!important;color:#F1F7FF!important;
 }
 html[data-shift780="ready"][data-shift-theme="dark"] :is(
  #dailyView .person-row:hover,#overviewView .person-row:hover,
  #personView .person-pick:hover:not(.active)){
- background:#242424!important;
+ background:#203B59!important;
 }
 html[data-shift780="ready"][data-shift-theme="dark"] :is(
  #dailyView .roster-card,#overviewView .roster-card){
- background:#090909!important;
- border-color:#414141!important;
+ background:#0D2036!important;
+ border-color:#344E6B!important;
  box-shadow:none!important;
 }
 /* Preserve high-contrast coral editorials and duty colors (not all black).
@@ -1682,8 +1682,8 @@ html[data-shift780="ready"]:not([data-shift-theme="dark"]){
 }
 html[data-shift780="ready"][data-shift-theme="dark"]{
  color-scheme:dark!important;
- --sh84-fg:#F7F7F7;--sh84-muted:#C5C5C5;
- --sh84-panel:#090909;--sh84-card:#141414;--sh84-line:#414141;
+ --sh84-fg:#F1F7FF;--sh84-muted:#BBCDE0;
+ --sh84-panel:#0D2036;--sh84-card:#142940;--sh84-line:#344E6B;
 }
 html[data-shift780="ready"] :is(#overviewView,#dailyView)
  :is(.roster-card,.metric-card,.v6517-glass)::before,
@@ -1760,20 +1760,20 @@ html[data-shift780="ready"] #oncallView .v655-matrix .v652-matrix-day small{
 }
 html[data-shift780="ready"][data-shift-theme="dark"]
  :is(main,.app,.view,.v6517-dashboard){
- background:#000000!important;background-image:none!important;
+ background:#071425!important;background-image:none!important;
 }
 html[data-shift780="ready"][data-shift-theme="dark"] :is(
  #overviewView .v6517-ratio-panel,#overviewView .v6517-shifts-panel,
  #overviewView .v6517-oncall-panel,#overviewView .v6517-trend-panel,
  #overviewView .v6517-insights-panel,#oncallView .v652-oncall,
  #oncallView .v652-hero,#oncallView .v655-oncall-hero){
- background:#090909!important;background-image:none!important;
- color:#F7F7F7!important;border-color:#414141!important;
+ background:#0D2036!important;background-image:none!important;
+ color:#F1F7FF!important;border-color:#344E6B!important;
 }
 html[data-shift780="ready"][data-shift-theme="dark"] #overviewView
  :is(.v6517-note,.v6517-oncall-item,.insight-item){
- background:#141414!important;background-image:none!important;
- color:#F7F7F7!important;border-color:#414141!important;
+ background:#142940!important;background-image:none!important;
+ color:#F1F7FF!important;border-color:#344E6B!important;
 }
 @media(max-width:860px){
  html[data-shift780="ready"] :is(#overviewView,#dailyView) .roster-card .person-row{

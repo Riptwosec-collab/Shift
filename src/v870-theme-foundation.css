@@ -428,3 +428,163 @@ html[data-shift-theme] #bootOverlay .boot613-live{
   animation:none!important;
  }
 }
+
+
+/* SHIFT V8.8 — Real screenshot closeout.
+   Fixed dark legacy literals at their source (V8.3+) and remove sticky header
+   that covered the November heading during navigation/scroll restoration. */
+html[data-shift780="ready"][data-shift-theme] .command-bar{
+ position:relative!important;top:auto!important;
+}
+html[data-shift780="ready"][data-shift-theme] body:has(#overviewView) .command-bar{
+ background:var(--sh87-panel)!important;
+ background-image:none!important;
+ color:var(--sh87-fg)!important;
+ border:1px solid var(--sh87-border)!important;
+ box-shadow:0 8px 25px rgba(18,50,90,.09)!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] body:has(#overviewView) .command-bar{
+ box-shadow:0 12px 30px rgba(0,3,12,.24)!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .nav-tabs{
+ position:relative!important;
+ z-index:1!important;
+}
+/* Light theme: avoid beige remnants and thick ink strokes from V7 panels.
+   Use white raised sheets, pale blue section heroes and delicate borders. */
+html[data-shift780="ready"][data-shift-theme="light"] :is(
+ #shiftNovemberView .shift72-graphic,
+ #shiftNovemberView .shift72-graphic-main,
+ #shiftNovemberView .shift72-overview-cards,
+ #shiftNovemberView .shift72-board-section,
+ #shiftNovemberView .shift72-board-viewport,
+ #shift740FullMonth .s740-calendar-panel,
+ #shift740FullMonth .s740-detail,
+ #shift740FullMonth .s740-roster-panel,
+ #shift740FullMonth .s740-calendar-day,
+ #monthView .month-panel
+){
+ background:#FFFFFF!important;
+ background-image:none!important;
+ color:#15283F!important;
+ border-color:#D4DFEC!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme="light"] #shiftNovemberView :is(
+ .shift72-overview-card,.shift72-position-card,
+ .shift72-calendar-day,.shift72-board-cell,
+ .shift72-day-card,.shift72-analytics-card){
+ background:#F8FBFF!important;
+ background-image:none!important;
+ color:#15283F!important;
+ border-color:#D4DFEC!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme="light"] :is(
+ #shiftNovemberView .shift72-command,
+ #shift740FullMonth .s740-top,
+ #overviewView .shift72-feature-entry
+){
+ background:#DFEBFF!important;
+ background-image:none!important;
+ color:#15283F!important;
+ border-color:#C4D5EE!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme="light"] :is(
+ #shiftNovemberView .shift72-command,
+ #shift740FullMonth .s740-top,
+ #overviewView .shift72-feature-entry
+) :is(h2,h3,h4,em,p,small,strong,b,.shift72-eyebrow){
+ color:#15283F!important;
+ -webkit-text-fill-color:#15283F!important;
+}
+html[data-shift780="ready"][data-shift-theme="light"] :is(
+ #shiftNovemberView .shift72-command .shift72-switch-buttons button,
+ #shift740FullMonth .s740-actions button
+){
+ border-color:#AAC3E8!important;
+}
+html[data-shift780="ready"][data-shift-theme="light"] #shiftNovemberView .shift72-overview-card :is(
+ b,strong,h4,span){
+ color:#15283F!important;
+}
+html[data-shift780="ready"][data-shift-theme="light"] #shiftNovemberView .shift72-overview-card :is(
+ small,em){
+ color:#50667D!important;
+}
+html[data-shift780="ready"][data-shift-theme="light"] :is(
+ .shift78-section-hero,#shift740FullMonth .s740-roster-panel,
+ #shiftNovemberView .shift72-graphic,
+ #shiftNovemberView .shift72-board-section
+){
+ border-width:1px!important;border-color:#D4DFEC!important;
+ border-radius:13px!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme="light"] .shift78-section-hero{
+ background:#EAF2FF!important;background-image:none!important;
+ --shift78-banner:#EAF2FF;--shift78-heading:#15283F;
+ --shift78-copy:#50667D;--shift78-art:#2E66E5;
+}
+html[data-shift780="ready"][data-shift-theme="light"] #shiftNovemberView .shift72-current-day{
+ color:#15283F!important;
+}
+/* Midnight navy panels, including nested screenshot-visible calendar sheets. */
+html[data-shift780="ready"][data-shift-theme="dark"] :is(
+ #shiftNovemberView .shift72-graphic,
+ #shiftNovemberView .shift72-graphic-main,
+ #shiftNovemberView .shift72-overview-cards,
+ #shiftNovemberView .shift72-board-section,
+ #shiftNovemberView .shift72-board-viewport,
+ #shift740FullMonth .s740-calendar-panel,
+ #shift740FullMonth .s740-detail,
+ #shift740FullMonth .s740-roster-panel,
+ #monthView .month-panel,
+ #oncallView .v652-hero,
+ #oncallView .v655-now-panel
+){
+ background:#0D2036!important;
+ background-image:none!important;
+ border-color:#344E6B!important;
+ color:#F1F7FF!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] :is(
+ #shiftNovemberView .shift72-overview-card,
+ #shiftNovemberView .shift72-position-card,
+ #shiftNovemberView .shift72-calendar-day,
+ #shift740FullMonth .s740-calendar-day,
+ #oncallView .v6515-oncall-row,
+ #oncallView .v655-engineer-card
+){
+ background:#142940!important;background-image:none!important;
+ border-color:#344E6B!important;color:#F1F7FF!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] :is(
+ #shiftNovemberView .shift72-command,#shift740FullMonth .s740-top,
+ #overviewView .shift72-feature-entry){
+ background:#173755!important;background-image:none!important;
+ border-color:#344E6B!important;color:#F1F7FF!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] :is(
+ #shiftNovemberView .shift72-command,#shift740FullMonth .s740-top,
+ #overviewView .shift72-feature-entry
+) :is(h2,h3,h4,em,p,small,strong,b,.shift72-eyebrow){
+ color:#F1F7FF!important;-webkit-text-fill-color:#F1F7FF!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] :is(
+ #shiftNovemberView .shift72-overview-card,
+ #shift740FullMonth .s740-calendar-panel
+) :is(b,strong,h3,h4){
+ color:#F1F7FF!important;
+}
+/* Prevent very wide editorial headings from sitting beneath the header. */
+html[data-shift780="ready"][data-shift-theme] :is(
+ #shiftNovemberView .shift72-command h3,
+ #shift740FullMonth .end770-title,
+ .shift78-section-copy h2){
+ max-width:100%!important;
+ overflow-wrap:break-word!important;
+ line-height:1.22!important;
+}

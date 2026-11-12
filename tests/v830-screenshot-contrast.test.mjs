@@ -31,11 +31,11 @@ test('Insight rows no longer inherit mismatched neon gradient and black text',()
   'color:var(--sh81-ink)!important'])
   assert.ok(css.includes(marker),marker);
 });
-test('Dark mode is truly black and uses neutral graphite stepped surfaces',()=>{
+test('Dark mode uses consistent midnight navy instead of obsolete true-black literals',()=>{
  const section=css.slice(css.indexOf('/* SHIFT V8.3'));
- for(const marker of ['--sh81-shell:#000000','--sh81-panel:#090909',
-  '--sh81-card:#141414','--sh81-soft:#1F1F1F','--sh81-ink:#F7F7F7',
-  '--sh81-muted:#C5C5C5','background:#000000!important'])
+ for(const marker of ['--sh81-shell:#071425','--sh81-panel:#0D2036',
+  '--sh81-card:#142940','--sh81-soft:#1C344F','--sh81-ink:#F1F7FF',
+  '--sh81-muted:#BBCDE0','background:#071425!important'])
   assert.ok(section.includes(marker),marker);
  assert.ok(js.includes("mode==='dark'?'#071425':'#EFF4FA'"));
  assert.ok(build.includes("t==='dark'?'#071425':'#EFF4FA'"));
