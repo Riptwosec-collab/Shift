@@ -821,3 +821,252 @@ html[data-shift780="ready"] #dailyView .daily-timeline{
   transition:none!important;animation:none!important;
  }
 }
+
+
+/* SHIFT V8.0 — WHOLE-SITE PALETTE / CONTRAST / COMPONENT COHESION
+   One art direction: warm editorial paper set within a quiet ink canvas.
+   The V7.7 coral/lime/cobalt/blush semantics are retained, without another
+   visual preset, unrelated neon colors, animation loop or external assets. */
+html[data-shift780="ready"]{
+ --shift80-shell:#171820;
+ --shift80-ink:#1B1A20;
+ --shift80-paper:#F7F2E8;
+ --shift80-surface:#FFFCF7;
+ --shift80-surface-alt:#FFF5E9;
+ --shift80-raised:#F0E6DB;
+ --shift80-line:#D5C5BB;
+ --shift80-text-subtle:#584B50;
+ --shift80-hover:#FFE2D5;
+ --shift80-day:#D6F36A;
+ --shift80-night:#5264E8;
+ --shift80-off:#FFC4D4;
+ --shift80-warning:#FFE17C;
+ --shift80-action:#FF6946;
+ --shift80-shadow:3px 3px 0 rgba(27,26,32,.22);
+ --shift80-radius:12px;
+ --shift78-soft:var(--shift80-text-subtle);
+ --shift78-border:var(--shift80-line);
+ accent-color:var(--shift80-action);
+}
+html[data-shift780="ready"] body{
+ background:var(--shift80-shell)!important;
+ background-image:none!important;
+}
+html[data-shift780="ready"] :is(
+ .command-bar,.shift78-section-hero,.mobile-nav,
+ .modal-card,.drawer-panel,.v64-palette-box,
+ #overviewView .v6517-dashboard,
+ #dailyView,#personView,#monthView,#analyticsView,#oncallView,
+ #shift740FullMonth,#shiftNovemberView
+){color-scheme:light}
+html[data-shift780="ready"] .nav-tabs{color-scheme:dark}
+/* Shell, navigation and controls: no competing neon / transparent glass. */
+html[data-shift780="ready"] .command-bar{
+ background:var(--shift80-paper)!important;
+ border-color:var(--shift80-ink)!important;
+ box-shadow:4px 4px 0 var(--shift80-ink)!important;
+ border-radius:var(--shift80-radius)!important;
+}
+html[data-shift780="ready"] .command-bar .brand-copy :is(p,small){
+ color:var(--shift80-text-subtle)!important;
+}
+html[data-shift780="ready"] .nav-tabs .nav-btn:not(.active):hover{
+ background:#403943!important;color:#FFFAF4!important;
+}
+html[data-shift780="ready"] :is(.ghost-btn,.filter-btn,.range-btn,.rail-arrow):not(.active){
+ background:var(--shift80-surface)!important;
+ border-color:#BBAAA0!important;
+ color:var(--shift80-ink)!important;
+}
+html[data-shift780="ready"] :is(.ghost-btn,.filter-btn,.range-btn,.rail-arrow):not(.active):not(:disabled):hover{
+ background:var(--shift80-hover)!important;
+ border-color:var(--shift80-ink)!important;
+}
+html[data-shift780="ready"] .command-actions .v65-language button:not(.active){
+ color:var(--shift80-ink)!important;
+}
+/* Every paper panel uses the same neutrals, line weights and elevation.
+   Role-specific borders and filled duty cells remain distinct. */
+html[data-shift780="ready"] :is(
+ #overviewView .v6517-dashboard>.timeline-panel,
+ #overviewView .v6517-ratio-panel,#overviewView .v6517-shifts-panel,
+ #overviewView .v6517-oncall-panel,#overviewView .v6517-trend-panel,
+ #overviewView .v6517-insights-panel,#overviewView .insights-panel,
+ #overviewView .network-panel,#overviewView .roster-card,
+ #dailyView .daily-header,#dailyView .timeline-panel,
+ #dailyView .working-hero,#dailyView .roster-card,
+ #personView .people-panel,#personView .person-detail,
+ #monthView .month-panel,
+ #analyticsView .analytics-card,#analyticsView .analytics-panel,
+ #oncallView .v652-control-deck,#oncallView .v652-overview-table,
+ #oncallView .v652-matrix-panel,#oncallView .v652-timeline-panel,
+ #oncallView .v655-selected-day-detail
+){
+ background-color:var(--shift80-paper)!important;
+ color:var(--shift80-ink)!important;
+ border-color:var(--shift80-ink)!important;
+ border-radius:var(--shift80-radius)!important;
+ box-shadow:var(--shift80-shadow)!important;
+}
+html[data-shift780="ready"] :is(
+ #overviewView .v6517-dashboard .v6517-note,
+ #overviewView .v6517-dashboard .v6517-oncall-item,
+ #overviewView .v6517-kpi,
+ #personView .person-pick,#personView .ring-card,
+ #personView .person-stats,#personView .subcard,
+ #personView .calendar-card,#personView .pattern-card,
+ #personView .next-shift-card,#personView .streak-card,
+ #oncallView .v652-now-card
+){
+ background:var(--shift80-surface)!important;
+ color:var(--shift80-ink)!important;
+ border-color:var(--shift80-line)!important;
+ border-radius:9px!important;
+ box-shadow:none!important;
+}
+html[data-shift780="ready"] #personView .person-pick.active{
+ background:var(--shift80-action)!important;
+ border-color:var(--shift80-ink)!important;
+}
+html[data-shift780="ready"] #personView .person-pick:hover:not(.active),
+html[data-shift780="ready"] #dailyView .person-row:hover,
+html[data-shift780="ready"] #overviewView .v6517-dashboard .person-row:hover{
+ background:var(--shift80-hover)!important;
+}
+html[data-shift780="ready"] #oncallView .v652-now-card.live{
+ background:#EAF8D6!important;border-color:#91B75D!important;
+}
+/* Kicker/small text must remain legible on cream; coral remains a fill color,
+   not low-contrast microcopy on a light panel. */
+html[data-shift780="ready"] :is(#overviewView,#dailyView,#personView,#monthView,#analyticsView,#oncallView)
+ :is(.muted,.hint,.row-meta,.v6517-kpi-note,.v6517-caption){
+ color:var(--shift80-text-subtle)!important;
+}
+html[data-shift780="ready"] #analyticsView .analytics-card :is(.label,small,span),
+html[data-shift780="ready"] #personView .person-detail :is(p,small,em,.muted){
+ color:var(--shift80-text-subtle)!important;
+}
+html[data-shift780="ready"] #overviewView .v6517-kpi .v6517-kpi-value,
+html[data-shift780="ready"] #analyticsView .analytics-card .value{
+ color:var(--shift80-ink)!important;
+ font-variant-numeric:tabular-nums;
+}
+/* Preserve semantic assignment contrast: D lime, N cobalt, H/O blush.
+   Do not recolor warning / selected markers or overwrite source codes. */
+html[data-shift780="ready"] #monthView .heatmap td.shift.D,
+html[data-shift780="ready"] #shift740FullMonth .s740-duty.s740-D,
+html[data-shift780="ready"] #shiftNovemberView .shift72-duty-pill.tone-D{
+ background:var(--shift80-day)!important;color:#26310F!important;
+}
+html[data-shift780="ready"] #monthView .heatmap td.shift.N,
+html[data-shift780="ready"] #shift740FullMonth .s740-duty.s740-N,
+html[data-shift780="ready"] #shiftNovemberView .shift72-duty-pill.tone-N{
+ background:var(--shift80-night)!important;color:#FFFFFF!important;
+}
+html[data-shift780="ready"] #monthView .heatmap td.shift.O,
+html[data-shift780="ready"] #shift740FullMonth .s740-duty.s740-H,
+html[data-shift780="ready"] #shiftNovemberView .shift72-duty-pill.tone-H{
+ background:var(--shift80-off)!important;color:#512537!important;
+}
+html[data-shift780="ready"] #shift740FullMonth .s740-duty,
+html[data-shift780="ready"] #shiftNovemberView .shift72-duty-pill{
+ border-color:rgba(27,26,32,.26)!important;
+ font-variant-numeric:tabular-nums;
+}
+html[data-shift780="ready"] #shift740FullMonth .s740-duty.warning{
+ border-color:#9A4C28!important;border-style:dashed!important;
+}
+/* Month / November / Oncall tables have a common warm frame, sticky headers
+   and touch-scrolling only in their own viewport. */
+html[data-shift780="ready"] #monthView .table-wrap,
+html[data-shift780="ready"] #oncallView .v652-matrix-scroll{
+ background:var(--shift80-surface)!important;
+ border-color:var(--shift80-line)!important;
+ overscroll-behavior-x:contain;
+ -webkit-overflow-scrolling:touch;
+}
+html[data-shift780="ready"] #monthView .heatmap :is(th,td){
+ border-color:var(--shift80-line)!important;
+}
+html[data-shift780="ready"] #monthView .heatmap thead th,
+html[data-shift780="ready"] #oncallView .v655-matrix :is(.v652-matrix-day,.v652-matrix-name,.v652-matrix-corner){
+ background:var(--shift80-raised)!important;
+ color:var(--shift80-ink)!important;
+}
+html[data-shift780="ready"] #monthView .heatmap .name-col{
+ background:#E7D8CB!important;
+ color:var(--shift80-ink)!important;
+}
+html[data-shift780="ready"] #oncallView .v655-matrix .v652-matrix-cell.active,
+html[data-shift780="ready"] #oncallView .v655-matrix .v652-matrix-cell.active b{
+ color:#3C2552!important;
+}
+html[data-shift780="ready"] #shift740FullMonth .s740-matrix-viewport,
+html[data-shift780="ready"] #shiftNovemberView .shift72-graphic{
+ max-width:100%;
+ overscroll-behavior-x:contain;
+}
+html[data-shift780="ready"] #shift740FullMonth .s740-matrix .s740-name{
+ box-shadow:3px 0 0 var(--shift80-line)!important;
+}
+/* Drawers, forms and selects must not inherit native black-on-black widgets. */
+html[data-shift780="ready"] :is(.modal-card,.drawer-panel,.v64-palette-box){
+ color-scheme:light;
+ background:var(--shift80-paper)!important;
+ color:var(--shift80-ink)!important;
+}
+html[data-shift780="ready"] :is(
+ .modal-card,.drawer-panel,.v64-palette-box,
+ #dailyView,#personView,#monthView,#analyticsView,#oncallView
+) :is(input:not([type="checkbox"]):not([type="radio"]),select,textarea){
+ color-scheme:light;
+ background-color:var(--shift80-surface)!important;
+ color:var(--shift80-ink)!important;
+ border-color:#A58C85!important;
+}
+html[data-shift780="ready"] :is(
+ .modal-card,.drawer-panel,.v64-palette-box,
+ #dailyView,#personView,#monthView,#analyticsView,#oncallView
+) :is(input,textarea)::placeholder{color:#6E5C61;opacity:1}
+html[data-shift780="ready"] :is(.modal-card,.drawer-panel,.v64-palette-box) :is(p,small,.muted,span){
+ color:var(--shift80-text-subtle)!important;
+}
+/* Navigational clarity on narrow screens; no body overflow or invisible hit areas. */
+html[data-shift780="ready"] :is(.app,.view,.shift78-section-hero,#shift740FullMonth,#shiftNovemberView){
+ min-width:0;
+}
+html[data-shift780="ready"] :is(.nav-tabs,.mobile-nav){scrollbar-width:none}
+html[data-shift780="ready"] :is(.nav-tabs,.mobile-nav)::-webkit-scrollbar{display:none}
+html[data-shift780="ready"] .mobile-nav{
+ background:var(--shift80-paper)!important;
+ border-color:var(--shift80-ink)!important;
+ box-shadow:0 -4px 14px rgba(0,0,0,.22)!important;
+}
+html[data-shift780="ready"] .mobile-nav button{min-height:44px!important}
+html[data-shift780="ready"] .mobile-nav button:not(.active):focus-visible{
+ outline:2px solid var(--shift80-ink)!important;outline-offset:-2px!important;
+}
+html[data-shift780="ready"] :is(.modal-card,.drawer-panel,.v64-palette-box)
+ :is(button,a,input,select,textarea):focus-visible{
+ outline:3px solid #A6422A!important;outline-offset:2px!important;
+}
+@media(max-width:520px){
+ html[data-shift780="ready"] .command-bar{
+  box-shadow:2px 2px 0 var(--shift80-ink)!important;
+ }
+ html[data-shift780="ready"] :is(
+  #overviewView .v6517-dashboard,#dailyView .shift-columns,
+  #personView .person-layout,#analyticsView .analytics-main
+ ){min-width:0;max-width:100%}
+ html[data-shift780="ready"] #monthView .table-wrap{
+  max-width:100%;overflow-x:auto!important;
+ }
+ html[data-shift780="ready"] .shift78-section-copy p{
+  line-height:1.6!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-shift780="ready"] :is(.person-row,.person-pick,.nav-btn,.mobile-nav button,.shift72-duty-pill){
+  transform:none!important;animation:none!important;transition:none!important;
+ }
+}
