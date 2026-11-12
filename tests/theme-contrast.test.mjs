@@ -62,3 +62,38 @@ test('contrast repair is present now and persisted through subsequent builds', (
   assert.match(html, /<style id="shift-v88-contrast-style">/);
   assert.match(html, /Specific screenshot regression: Network 2\.0/);
 });
+
+const themeRuntime = readFileSync(new URL('../src/v810-theme.js', import.meta.url), 'utf8');
+
+test('deep midnight navy is the default while explicit light mode remains available', () => {
+  const dark = palette('dark');
+  assert.equal(dark['--sh87-shell'], '#080F1D');
+  assert.equal(dark['--sh87-panel'], '#0D192B');
+  assert.equal(dark['--sh87-card'], '#142238');
+  assert.match(themeRuntime, /catch\{return 'dark'\}/);
+  assert.ok(themeRuntime.includes("getItem(SHIFT81_THEME_KEY)==='light'"));
+  assert.ok(build.includes("let t='dark'"));
+  assert.ok(html.includes("let t='dark'"));
+});
+
+test('muted day/night/off cells and selected dates stay readable after old CSS cascade', () => {
+  assert.match(css, /SHIFT V9\.1 — restrained duty palette/);
+  for (const status of ['--shift9-duty-day', '--shift9-duty-night', '--shift9-duty-off']) {
+    assert.ok(css.includes(status), 'Missing '+status);
+  }
+  for (const selector of [
+    '#shift740FullMonth .s740-calendar-day.is-selected',
+    '#shift740FullMonth .s740-duty.s740-D',
+    '#shiftNovemberView .shift72-duty-pill.tone-N',
+    '#monthView .heatmap td.shift.O',
+  ]) assert.ok(css.includes(selector), 'Missing status surface '+selector);
+});
+
+test('responsive layouts keep long labels and matrices from overlapping', () => {
+  assert.match(css, /\.shift78-section-grid/);
+  assert.match(css, /overflow-wrap:anywhere!important/);
+  assert.match(css, /\.s740-matrix-viewport/);
+  assert.match(css, /\.v64-workload-balance/);
+  assert.match(css, /@media\(max-width:760px\)/);
+  assert.ok(css.includes('.end770-hero-mark'));
+});
