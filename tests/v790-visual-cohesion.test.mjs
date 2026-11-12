@@ -70,5 +70,5 @@ test('built PWA includes the V7.9 stylesheet and bilingual source exactly',()=>{
  assert.match(build,/data-shift-release="7\.9"/);
  assert.ok(html.includes(js)&&html.includes(css));
  assert.ok(build.includes('v780-editorial-cohesion.js')&&build.includes('v780-editorial-cohesion.css'));
- assert.ok(read('sw.js').includes("CACHE_NAME='shift-shell-v6.5.20-r19'"));
+ assert.ok(read('sw.js').includes("CACHE_NAME='shift-shell-v6.5.20-r20'"));
 });
