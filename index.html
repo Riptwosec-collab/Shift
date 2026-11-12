@@ -14954,6 +14954,90 @@ html[data-shift780="ready"][data-shift-theme] .v64-palette-results button:is(.ac
  }
 }
 
+/* SHIFT V9.1 — restrained duty palette; no fluorescent matrix. */
+html[data-shift780="ready"][data-shift-theme="dark"]{
+ --shift9-duty-day:#1B3937;
+ --shift9-duty-day-ink:#BCE3D3;
+ --shift9-duty-night:#263859;
+ --shift9-duty-night-ink:#CFDCFF;
+ --shift9-duty-off:#3C3240;
+ --shift9-duty-off-ink:#ECCBD9;
+ --shift9-selected:#233754;
+ --shift9-selected-ink:#EBF2FA;
+ --shift78-lime:#86B8A2;
+ --shift78-pink:#CBA8BA;
+ --shift78-cobalt:#829FF0;
+ --sh81-day:#86B8A2;--sh81-night:#829FF0;--sh81-off:#CBA8BA;
+}
+html[data-shift780="ready"][data-shift-theme="light"]{
+ --shift9-duty-day:#DBEBE4;
+ --shift9-duty-day-ink:#245447;
+ --shift9-duty-night:#DFE6F6;
+ --shift9-duty-night-ink:#344E87;
+ --shift9-duty-off:#EFE2E9;
+ --shift9-duty-off-ink:#65435A;
+ --shift9-selected:#D2E0F0;
+ --shift9-selected-ink:#1B2B43;
+ --shift78-lime:#85AB9B;
+ --shift78-pink:#D0ABBE;
+ --shift78-cobalt:#31569B;
+ --sh81-day:#85AB9B;--sh81-night:#31569B;--sh81-off:#D0ABBE;
+}
+/* October matrix, November matrix and full-month calendar share 3 duty roles. */
+html[data-shift780="ready"][data-shift-theme] :is(
+ .matrix-cell.D,.v6517-mobile-row button.D,.shift-week-cell.D,
+ #monthView .heatmap td.shift.D,
+ #shift740FullMonth .s740-duty.s740-D,
+ #shiftNovemberView .shift72-duty-pill.tone-D
+){background:var(--shift9-duty-day)!important;color:var(--shift9-duty-day-ink)!important;border-color:var(--sh87-border)!important}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .matrix-cell.N,.v6517-mobile-row button.N,.shift-week-cell.N,
+ #monthView .heatmap td.shift.N,
+ #shift740FullMonth .s740-duty.s740-N,
+ #shiftNovemberView .shift72-duty-pill.tone-N
+){background:var(--shift9-duty-night)!important;color:var(--shift9-duty-night-ink)!important;border-color:var(--sh87-border)!important}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .matrix-cell.O,.v6517-mobile-row button.O,.shift-week-cell.O,
+ #monthView .heatmap td.shift.O,
+ #shift740FullMonth .s740-duty.s740-H,
+ #shiftNovemberView .shift72-duty-pill.tone-H
+){background:var(--shift9-duty-off)!important;color:var(--shift9-duty-off-ink)!important;border-color:var(--sh87-border)!important}
+/* Selected dates must remain selected: legacy .is-selected was not .selected. */
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .s740-calendar-day{
+ background:var(--sh87-card)!important;background-image:none!important;
+ color:var(--sh87-fg)!important;
+ border:1px solid var(--sh87-border)!important;
+}
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .s740-calendar-day.is-selected{
+ background:var(--shift9-selected)!important;
+ color:var(--shift9-selected-ink)!important;
+ border:2px solid var(--sh87-accent)!important;
+ box-shadow:inset 0 0 0 1px var(--sh87-accent)!important;
+}
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .s740-calendar-day :is(.s740-date,.s740-name,.s740-day){
+ color:inherit!important;-webkit-text-fill-color:currentColor!important;
+}
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .s740-duty{
+ min-width:43px;min-height:40px;
+ font-size:11px!important;line-height:1.3!important;
+}
+html[data-shift780="ready"][data-shift-theme] #shiftNovemberView .shift72-duty-pill{
+ font-size:11px!important;line-height:1.3!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #shiftNovemberView .shift72-board-viewport,
+ #shift740FullMonth .s740-matrix-viewport
+){
+ scroll-padding-inline:10px;
+ scrollbar-color:var(--sh87-border) var(--sh87-panel);
+}
+/* Small-screen text should not be painted behind decorative marks. */
+@media(max-width:1100px){
+ html[data-shift780="ready"][data-shift-theme] :is(
+ #shift740FullMonth .end770-hero-mark,.shift78-art-ring,.shift78-art-spark
+ ){display:none!important}
+}
+
 </style>
 </body>
 </html>
