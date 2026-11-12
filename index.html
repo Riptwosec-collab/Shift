@@ -10205,6 +10205,18 @@ html[data-shift780="ready"][data-shift-theme="light"] #shiftNovemberView .shift7
  }
 }
 
+
+/* V8.9.1 — WCAG fix: dark hero's general text rule must not paint its
+   lime count sticker white; explicit descendant specificity takes priority. */
+html[data-shift780="ready"][data-shift-theme="dark"]
+ #shift740FullMonth .s740-top .end770-hero-mark :is(b,small),
+html[data-shift780="ready"][data-shift-theme="light"]
+ #shift740FullMonth .s740-top .end770-hero-mark :is(b,small){
+ color:#162A37!important;
+ -webkit-text-fill-color:#162A37!important;
+ text-shadow:none!important;
+}
+
 </style>
 <script id="shift81-theme-preflight">
 (()=>{let t='light';try{t=localStorage.getItem('shift.theme')==='dark'?'dark':'light'}catch{}document.documentElement.dataset.shiftTheme=t;const m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='dark'?'#071425':'#EFF4FA')})();

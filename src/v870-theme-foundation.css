@@ -722,3 +722,15 @@ html[data-shift780="ready"][data-shift-theme="light"] #shiftNovemberView .shift7
   max-width:100%!important;
  }
 }
+
+
+/* V8.9.1 — WCAG fix: dark hero's general text rule must not paint its
+   lime count sticker white; explicit descendant specificity takes priority. */
+html[data-shift780="ready"][data-shift-theme="dark"]
+ #shift740FullMonth .s740-top .end770-hero-mark :is(b,small),
+html[data-shift780="ready"][data-shift-theme="light"]
+ #shift740FullMonth .s740-top .end770-hero-mark :is(b,small){
+ color:#162A37!important;
+ -webkit-text-fill-color:#162A37!important;
+ text-shadow:none!important;
+}
