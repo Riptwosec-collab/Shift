@@ -1,0 +1,67 @@
+/* SHIFT V8.8 — Midnight Blue / Soft Pearl contrast repair.
+   Loaded after legacy layers to correct cascade, no roster logic changes. */
+html[data-shift-theme="light"]{
+ --sh81-shell:#E5EBF2;--sh81-panel:#F0F3F7;--sh81-card:#EAF0F6;
+ --sh81-soft:#DFE7F0;--sh81-border:#B8C8D8;--sh81-ink:#182C44;
+ --sh81-muted:#455D75;--sh81-hover:#DCE8F6;--sh81-action:#2459B8;
+ --shift78-shell:#E5EBF2;--shift78-paper:#F0F3F7;
+ --shift78-white:#EAF0F6;--shift78-ink:#182C44;--shift78-border:#B8C8D8;
+ --shift80-shell:#E5EBF2;--shift80-paper:#F0F3F7;
+ --shift80-surface:#EAF0F6;--shift80-raised:#DFE7F0;
+ --shift80-ink:#182C44;--shift80-line:#B8C8D8;
+ --shift80-text-subtle:#455D75;
+ --sh84-fg:#182C44;--sh84-muted:#455D75;
+ --sh84-panel:#F0F3F7;--sh84-card:#EAF0F6;--sh84-line:#B8C8D8;
+ --sh87-shell:#E5EBF2;--sh87-panel:#F0F3F7;--sh87-card:#EAF0F6;
+ --sh87-soft:#DFE7F0;--sh87-border:#B8C8D8;--sh87-fg:#182C44;
+ --sh87-muted:#455D75;--sh87-accent:#2459B8;--sh87-accent-fg:#FFFFFF;
+ --sh87-boot-shell:#E5EBF2;--sh87-boot-card:#F0F3F7;
+ --sh87-boot-soft:#DFE7F0;--sh87-boot-fg:#182C44;
+ --sh87-boot-muted:#455D75;--sh87-boot-line:#B8C8D8;--sh87-boot-accent:#2459B8;
+ color-scheme:light;
+}
+html[data-shift-theme="dark"]{
+ --sh81-shell:#07182C;--sh81-panel:#102844;--sh81-card:#153453;
+ --sh81-soft:#1B3C5D;--sh81-border:#365A78;--sh81-ink:#F0F6FC;
+ --sh81-muted:#BED0E1;--sh81-hover:#204569;--sh81-action:#72ADFF;
+ --shift78-shell:#07182C;--shift78-paper:#102844;
+ --shift78-white:#153453;--shift78-ink:#F0F6FC;--shift78-border:#365A78;
+ --shift80-shell:#07182C;--shift80-paper:#102844;
+ --shift80-surface:#153453;--shift80-raised:#1B3C5D;
+ --shift80-ink:#F0F6FC;--shift80-line:#365A78;
+ --shift80-text-subtle:#BED0E1;
+ --sh84-fg:#F0F6FC;--sh84-muted:#BED0E1;
+ --sh84-panel:#102844;--sh84-card:#153453;--sh84-line:#365A78;
+ --sh87-shell:#07182C;--sh87-panel:#102844;--sh87-card:#153453;
+ --sh87-soft:#1B3C5D;--sh87-border:#365A78;--sh87-fg:#F0F6FC;
+ --sh87-muted:#BED0E1;--sh87-accent:#72ADFF;--sh87-accent-fg:#07182C;
+ --sh87-boot-shell:#07182C;--sh87-boot-card:#102844;
+ --sh87-boot-soft:#1B3C5D;--sh87-boot-fg:#F0F6FC;
+ --sh87-boot-muted:#BED0E1;--sh87-boot-line:#365A78;--sh87-boot-accent:#72ADFF;
+ color-scheme:dark;
+}
+html[data-shift-theme] :is(body,.app,main,.view){background-color:var(--sh87-shell)!important}
+html[data-shift-theme] :is(.command-bar,.hud-panel,.month-panel,.insights-panel,.network-panel,.v6517-glass,.month-snapshot,.shift72-board-section,.shift72-roster-panel,.shift72-graphic,.s740-calendar-panel,.s740-detail,.s740-roster-panel){
+ background-color:var(--sh87-panel)!important;
+ border-color:var(--sh87-border)!important;
+ color:var(--sh87-fg)!important;
+}
+html[data-shift-theme] :is(.metric-card,.shift72-overview-card,.shift72-position-card,.shift72-calendar-day,.shift72-board-cell,.shift72-day-card,.shift72-analytics-card,.s740-calendar-day,.person-row,.date-node,.month-cell){
+ border-color:var(--sh87-border)!important;color:var(--sh87-fg)!important;
+}
+html[data-shift-theme="light"] :is(.metric-card,.shift72-overview-card,.shift72-position-card,.shift72-calendar-day,.shift72-board-cell,.shift72-day-card,.shift72-analytics-card,.s740-calendar-day,.person-row,.date-node,.month-cell):not(.active):not(.selected){
+ background-color:var(--sh87-card)!important;background-image:none!important;
+}
+html[data-shift-theme="dark"] :is(.metric-card,.shift72-overview-card,.shift72-position-card,.shift72-calendar-day,.shift72-board-cell,.shift72-day-card,.shift72-analytics-card,.s740-calendar-day,.person-row,.date-node,.month-cell):not(.active):not(.selected){
+ background-color:var(--sh87-card)!important;background-image:none!important;
+}
+html[data-shift-theme] :is(button,input,select,textarea){font-family:inherit}
+html[data-shift-theme] :is(input,select,textarea){background:var(--sh87-card)!important;color:var(--sh87-fg)!important;border-color:var(--sh87-border)!important}
+html[data-shift-theme] :is(input,textarea)::placeholder{color:var(--sh87-muted)!important;opacity:1}
+html[data-shift-theme] :is(button,[role="button"],a,input,select,textarea):focus-visible{outline:2px solid var(--sh87-accent)!important;outline-offset:3px}
+html[data-shift-theme] :is(.hint,.kicker,.section-kicker,.metric-name span,.shift78-section-kicker){color:var(--sh87-muted)!important}
+html[data-shift-theme] :is(.command-bar,.shift78-section-hero,.month-panel,.shift72-board-section){box-shadow:none!important}
+html[data-shift-theme="light"] :is(.command-bar,.hud-panel,.month-panel,.shift72-board-section,.s740-calendar-panel){background-image:none!important}
+html[data-shift-theme] #bootOverlay{background:var(--sh87-boot-shell)!important;color:var(--sh87-boot-fg)!important}
+html[data-shift-theme] .shift81-theme-toggle{background:var(--sh87-card)!important;color:var(--sh87-fg)!important;border-color:var(--sh87-border)!important}
+@media(prefers-reduced-motion:reduce){html[data-shift-theme] *,html[data-shift-theme] *::before,html[data-shift-theme] *::after{scroll-behavior:auto!important}}
