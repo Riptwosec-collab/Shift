@@ -583,6 +583,122 @@ html[data-shift780="ready"][data-shift-theme] :is(
   line-height:1.4!important;
 }
 
+/* Explicit nested foreground repair. Ancestor text color does not override
+   high-specificity fixed legacy colors in individual titles and chart labels. */
+html[data-shift780="ready"][data-shift-theme] :is(
+ #overviewView .v6517-banner,#overviewView .hero-stage,
+ #dailyView .working-hero,#dailyView .daily-hero,
+ #dailyView .focus-banner
+) {
+  background:var(--sh87-panel)!important;background-image:none!important;
+  border-color:var(--sh87-border)!important;color:var(--sh87-fg)!important;
+  box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #overviewView .v6517-banner,#overviewView .hero-stage,
+ #dailyView .working-hero,#dailyView .daily-hero,#dailyView .focus-banner
+) :is(h1,h2,h3,p,b,strong,small,.hero-title,.hero-subtitle) {
+  color:var(--sh87-fg)!important;
+  -webkit-text-fill-color:var(--sh87-fg)!important;
+  text-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] #overviewView .metric-card:nth-child(n)
+ :is(.metric-name,.metric-name b,.metric-num,.metric-num span,.metric-foot,.metric-foot strong) {
+  color:var(--sh87-fg)!important;
+  -webkit-text-fill-color:var(--sh87-fg)!important;
+}
+html[data-shift780="ready"][data-shift-theme] #overviewView .metric-card:nth-child(n)
+ :is(.metric-name span,.metric-num small,.metric-foot span) {
+  color:var(--sh87-muted)!important;
+  -webkit-text-fill-color:var(--sh87-muted)!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #overviewView .network-panel .network-stat,
+ #overviewView .network-panel .network-node,
+ #overviewView .network-panel .network-core
+) {
+  border-color:var(--sh87-border)!important;
+  color:var(--sh87-fg)!important;
+}
+html[data-shift780="ready"][data-shift-theme] #overviewView .network-panel
+ :is(.network-stat,.network-node,.network-core) :is(b,strong) {
+  color:var(--sh87-fg)!important;
+  -webkit-text-fill-color:var(--sh87-fg)!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #shiftNovemberView .shift72-command,
+ #shiftNovemberView .shift72-overview-card,
+ #shiftNovemberView .shift72-position-card,
+ #shiftNovemberView .shift72-section-heading,
+ #shiftNovemberView .shift72-board-legend,
+ #shift740FullMonth .s740-top,
+ #shift740FullMonth .s740-calendar-panel,
+ #shift740FullMonth .s740-detail,
+ #shift740FullMonth .s740-roster-panel
+) :is(h2,h3,h4,b,strong,.shift72-person-heading,.shift72-position-code,.s740-date,.s740-name) {
+  color:var(--sh87-fg)!important;
+  -webkit-text-fill-color:var(--sh87-fg)!important;
+  -webkit-text-stroke:0!important;
+  text-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #shiftNovemberView .shift72-command,
+ #shiftNovemberView .shift72-overview-card,
+ #shiftNovemberView .shift72-position-card,
+ #shiftNovemberView .shift72-section-heading,
+ #shiftNovemberView .shift72-board-legend,
+ #shift740FullMonth .s740-top,
+ #shift740FullMonth .s740-calendar-panel,
+ #shift740FullMonth .s740-detail
+) :is(p,small,.shift72-eyebrow,.shift72-position-footer,.shift72-graph-legend,.shift72-section-heading small,.s740-panel-header small) {
+  color:var(--sh87-muted)!important;
+  -webkit-text-fill-color:var(--sh87-muted)!important;
+  text-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth
+ .s740-calendar-day :is(.s740-date,.s740-cal-info,.s740-coverage,.s740-warning) {
+  color:var(--sh87-fg)!important;
+  -webkit-text-fill-color:var(--sh87-fg)!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #shiftNovemberView .shift72-board-table thead th,
+ #shift740FullMonth .s740-matrix thead th,
+ #monthView .heatmap thead th,
+ #oncallView .v655-matrix thead th
+) {
+  background:var(--sh87-soft)!important;background-image:none!important;
+  color:var(--sh87-fg)!important;border-color:var(--sh87-border)!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #shiftNovemberView .shift72-board-table,
+ #shift740FullMonth .s740-matrix,
+ #monthView .heatmap,#oncallView .v655-matrix
+) :is(th,td) {
+  border-color:var(--sh87-border)!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #shiftNovemberView .shift72-board-table,
+ #shift740FullMonth .s740-matrix,
+ #monthView .heatmap,#oncallView .v655-matrix
+) :is(.name-col,.s740-name,.shift72-person-heading) {
+  background:var(--sh87-soft)!important;
+  color:var(--sh87-fg)!important;
+  box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .v64-compare-card,.v64-transition,.v64-streak,.v64-risk,
+ .v64-workload-row,.v64-team-kpis > span
+) :is(b,strong,.name) {
+  color:var(--sh87-fg)!important;-webkit-text-fill-color:var(--sh87-fg)!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .v64-compare-card,.v64-transition,.v64-streak,.v64-risk,
+ .v64-workload-row,.v64-team-kpis > span
+) :is(small,em,.label,.meta) {
+  color:var(--sh87-muted)!important;
+  -webkit-text-fill-color:var(--sh87-muted)!important;
+}
+
 /* Keep core graph/analytics semantics and remove only expensive decoration. */
 html[data-shift780="ready"][data-shift-theme] :is(
  .shift-v7-aurora,.shift72-ambient,.shift78-art-ring,.shift78-art-spark
