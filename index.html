@@ -13705,6 +13705,9 @@ function shift731InitialMonth(today,search='',saved='10'){
  const query=new URLSearchParams(String(search).replace(/^\?/,''));
  const explicit=query.get('month');
  if(['10','11','12'].includes(explicit))return {month:explicit,openMonth:query.get('view')!=='overview'};
+ // Preserve a deliberate December selection even if the current date is still November.
+ if(today.year===2026&&today.month===11&&saved==='12')
+  return {month:'12',openMonth:query.get('view')==='month'};
  // Current November/December takes priority over stale October preferences.
  if(today.year===2026&&[11,12].includes(today.month))
   return {month:String(today.month),openMonth:query.get('view')==='month'};
@@ -13802,6 +13805,10 @@ const SHIFT740_WEEKDAYS=['อา','จ','อ','พ','พฤ','ศ','ส'];
 const SHIFT740_POSTS=['D1','D2','D3','D4','N1','N2'];
 let shift740Month=11;
 let shift740Day=1;
+const SHIFT740_MONTH_STORAGE='shift740-month-view-2026';
+function shift740StoredMonth(){
+ try{const value=Number(localStorage.getItem(SHIFT740_MONTH_STORAGE));return [10,11,12].includes(value)?value:null}catch{return null}
+}
 let shift740Filter='ALL';
 const shift740Esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 const shift740Days=month=>month===10||month===12?31:30;
@@ -13916,9 +13923,11 @@ function shift740Matrix(month,day){
   const items=Array.from({length:days},(_,j)=>{
    const d=j+1;
    const role=dayModels[j].records[i].code;
-   const tone=role==='H'||role==='O'?'H':role[0],warning=role.includes('?')||(month===11&&d===30&&role==='N1');
+   const tone=role==='H'||role==='O'?'H':role[0],warning=role.includes('?')||(month===11&&d===30&&role==='N1')||(month===12&&role==='N');
+   const notes=month===12&&role==='H'?DECEMBER_2026_SOURCE_HIGHLIGHTS[i]:null;
+   const sourceMark=notes?.red.includes(d)?' source-red':notes?.yellow.includes(d)?' source-yellow':'';
    return '<td data-s740-col="'+d+'" class="s740-cell'+(d===day?' selected':'')+'"><button type="button" '+
-    'data-s740-person="'+i+'" data-s740-day="'+d+'" class="s740-duty s740-'+tone+(warning?' warning':'')+'" '+
+    'data-s740-person="'+i+'" data-s740-day="'+d+'" class="s740-duty s740-'+tone+sourceMark+(warning?' warning':'')+'" '+
     'aria-label="'+shift740Esc(name+' '+d+' '+shift740MonthText(month)+' '+role)+'" '+
     'title="'+shift740Esc(name+' • '+d+' • '+role)+'">'+role+'</button></td>';
   }).join('');
@@ -14010,6 +14019,7 @@ function shift740SetMonth(month){
  month=Number(month);
  if(![10,11,12].includes(month)||month===shift740Month)return;
  shift740Month=month;
+ try{localStorage.setItem(SHIFT740_MONTH_STORAGE,String(month))}catch{}
  const now=shift740Today();
  shift740Day=now.year===2026&&now.month===month?now.day:Math.min(shift740Day,shift740Days(month));
  shift740Render();
@@ -14049,7 +14059,7 @@ function shift740Mount(){
  if(!overview||document.getElementById('shift740FullMonth'))return;
  if(typeof OCTOBER_2026_DUTY_POSITIONS==='undefined'||typeof NOVEMBER_2026_DUTY_POSITIONS==='undefined'||typeof DECEMBER_2026_DUTY_POSITIONS==='undefined')return;
  const now=shift740Today();
- shift740Month=now.year===2026&&[10,11,12].includes(now.month)?now.month:11;
+ shift740Month=shift740StoredMonth()||(now.year===2026&&[10,11,12].includes(now.month)?now.month:11);
  shift740Day=now.year===2026&&now.month===shift740Month?now.day:1;
  const host=document.createElement('section');
  host.id='shift740FullMonth';host.className='s740-board';
@@ -14216,6 +14226,7 @@ function shiftDecRefresh(){
 function shiftDecMarkNavigation(){
  const shown=document.querySelector('#monthView .month-panel')?.dataset.shiftMonth==='12'&&
   document.getElementById('monthView')?.classList.contains('active');
+ document.documentElement.classList.toggle('shift-dec-navigation-active',Boolean(shown));
  document.querySelectorAll('[data-shiftdec-open]').forEach(button=>{
   button.classList.toggle('shift731-active',Boolean(shown));
   button.setAttribute('aria-current',shown?'page':'false');
@@ -14750,6 +14761,37 @@ html[data-shift780="ready"][data-shift-theme] .command-bar .nav-tabs .shift-dec-
  #monthView #shiftDecemberView *,#monthView #shiftDecemberView *::before,#monthView #shiftDecemberView *::after{
   transition:none!important;animation:none!important;
  }
+}
+
+/* Screenshot-highlighted H cells within the overview planner, too. */
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .s740-duty.s740-H.source-yellow{
+ background:#352E16!important;color:#F5E5A7!important;
+ border:1px solid #988140!important;box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .s740-duty.s740-H.source-red{
+ background:#3A2026!important;color:#F2C1CA!important;
+ border:1px solid #A85D69!important;box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme="light"] #shift740FullMonth .s740-duty.s740-H.source-yellow{
+ background:#F0E4BD!important;color:#5F491B!important;border-color:#BDA05D!important;
+}
+html[data-shift780="ready"][data-shift-theme="light"] #shift740FullMonth .s740-duty.s740-H.source-red{
+ background:#F3D9DC!important;color:#793E48!important;border-color:#BB7B84!important;
+}
+/* Avoid simultaneous active highlights for Month and December sidebar buttons. */
+html.shift-dec-navigation-active[data-shift780="ready"][data-shift-theme] .command-bar .nav-tabs .nav-btn[data-view="month"].active{
+ background:transparent!important;border-color:transparent!important;
+ color:var(--sh87-muted)!important;
+}
+html.shift-dec-navigation-active[data-shift780="ready"][data-shift-theme] .command-bar .nav-tabs .nav-btn[data-view="month"].active :is(b,span){
+ color:var(--sh87-muted)!important;-webkit-text-fill-color:var(--sh87-muted)!important;
+}
+html.shift-dec-navigation-active[data-shift780="ready"][data-shift-theme] #mobileNav button[data-view="month"].active{
+ background:transparent!important;border-color:transparent!important;
+ color:var(--sh87-muted)!important;
+}
+html.shift-dec-navigation-active[data-shift780="ready"][data-shift-theme] #mobileNav button[data-view="month"].active b{
+ color:var(--sh87-muted)!important;
 }
 
 </style>
