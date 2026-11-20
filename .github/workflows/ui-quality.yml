@@ -38,5 +38,5 @@ jobs:
             const html=fs.readFileSync('index.html','utf8');
             assert.equal((html.match(/id=\"shift-v10-professional-style\"/g)||[]).length,1);
             assert.ok(!html.includes('shift-v88-contrast-style'));
-            assert.ok(html.includes('data-shift-release=\"10.0\"'));
+            assert.ok(html.includes('data-shift-release=\"12.0\"'));
           "
