@@ -8,16 +8,16 @@ let shift740Month=11;
 let shift740Day=1;
 let shift740Filter='ALL';
 const shift740Esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-const shift740Days=month=>month===10?31:30;
-const shift740MonthText=(month,en=false)=>en?(month===10?'October 2026':'November 2026'):(month===10?'ตุลาคม 2569':'พฤศจิกายน 2569');
-const shift740Source=month=>month===10?OCTOBER_2026_DUTY_POSITIONS:NOVEMBER_2026_DUTY_POSITIONS;
+const shift740Days=month=>month===10||month===12?31:30;
+const shift740MonthText=(month,en=false)=>en?({10:'October 2026',11:'November 2026',12:'December 2026'}[month]||'2026'):({10:'ตุลาคม 2569',11:'พฤศจิกายน 2569',12:'ธันวาคม 2569'}[month]||'2569');
+const shift740Source=month=>({10:OCTOBER_2026_DUTY_POSITIONS,11:NOVEMBER_2026_DUTY_POSITIONS,12:DECEMBER_2026_DUTY_POSITIONS})[month];
 function shift740Today(){
  const parts=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Bangkok',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
  const v={};for(const p of parts)if(['year','month','day'].includes(p.type))v[p.type]=Number(p.value);
  return v;
 }
 function shift740Model(month,day){
- if(![10,11].includes(month)||!Number.isInteger(day)||day<1||day>shift740Days(month))
+ if(![10,11,12].includes(month)||!Number.isInteger(day)||day<1||day>shift740Days(month))
   throw new RangeError('Shift V7.4: invalid period');
  const source=shift740Source(month);
  if(!Array.isArray(source)||!Array.isArray(staff)||source.length!==staff.length)
@@ -143,7 +143,7 @@ function shift740Markup(month,day){
  '<h2 class="end770-title"><span>เวรทั้งทีม.</span><em>ทั้งเดือน.</em></h2>'+
  '<p>ดูทุกวันของทั้งทีมได้ในที่เดียว · D1–D4 / N1–N2 / H · กดวันที่เพื่อดูผู้รับผิดชอบ</p></div>'+
  '<span class="end770-hero-mark" aria-hidden="true"><b>'+total+'</b><small>DAYS<br>2026</small></span>'+ '<div class="s740-control"><div class="s740-months" role="group" aria-label="เลือกเดือนของภาพรวม">'+
- [[10,'ตุลาคม'],[11,'พฤศจิกายน']].map(([value,title])=>
+ [[10,'ตุลาคม'],[11,'พฤศจิกายน'],[12,'ธันวาคม']].map(([value,title])=>
  '<button type="button" data-s740-month="'+value+'" aria-pressed="'+(value===month)+'">'+title+'</button>').join('')+
  '</div><div class="s740-actions"><button type="button" data-s740-action="today">วันนี้</button>'+
  '<button type="button" class="s740-more" data-s740-action="open">เปิดหน้าตารางเวร ↗</button></div></div></div>'+
@@ -152,7 +152,7 @@ function shift740Markup(month,day){
  '<div class="s740-layout">'+shift740Calendar(month,day)+
  '<aside class="s740-detail" id="shift740Detail">'+shift740Crew(shift740Model(month,day))+'</aside></div>'+
  shift740Matrix(month,day)+
- '<p class="s740-source-note">ข้อมูลเวรอ้างอิงตารางจริงเดือนตุลาคมและพฤศจิกายน 2569 • วันที่ 30 พ.ย. มี N1 ซ้ำและไม่มี N2 ตามต้นฉบับ (ยังไม่แก้เอง)</p>';
+ '<p class="s740-source-note">'+(month===12?'ข้อมูลตามภาพอ้างอิงธันวาคม 2569 • วันที่ 1, 6, 7 มีรหัส N ที่ไม่ได้ระบุหมายเลขกะ และช่อง H สีพิเศษแสดงตามภาพ ไม่เติมตำแหน่งเอง':month===11?'ข้อมูลตามภาพอ้างอิงพฤศจิกายน 2569 • วันที่ 30 พ.ย. มี N1 ซ้ำ ไม่มี N2 ตามภาพต้นฉบับ':'ข้อมูลตามภาพอ้างอิงตุลาคม 2569')+'</p>';
 }
 /* Update only the old/new day columns, instead of touching 300–310 roster cells per click. */
 function shift740MarkSelection(scroll=false){
@@ -212,7 +212,7 @@ function shift740Render(){
 }
 function shift740SetMonth(month){
  month=Number(month);
- if(month!==10&&month!==11||month===shift740Month)return;
+ if(![10,11,12].includes(month)||month===shift740Month)return;
  shift740Month=month;
  const now=shift740Today();
  shift740Day=now.year===2026&&now.month===month?now.day:Math.min(shift740Day,shift740Days(month));
@@ -225,7 +225,11 @@ function shift740SetDay(day){
  shift740MarkSelection();
 }
 function shift740OpenDetail(personIndex=null){
- if(shift740Month===11){
+ if(shift740Month===12){
+  if(typeof shift731Open==='function')shift731Open('12',{navigate:true,graphic:false});
+  else{showView('month');shiftNovChangeMonth('12');}
+  if(typeof shiftDecSetDay==='function')shiftDecSetDay(shift740Day,personIndex);
+ }else if(shift740Month===11){
   if(typeof shift731Open==='function')shift731Open('11',{navigate:true,graphic:true});
   else{showView('month');shiftNovChangeMonth('11');}
   if(typeof shiftNovSetDay==='function')shiftNovSetDay(shift740Day,personIndex);
@@ -247,9 +251,9 @@ function shift740AddVisualLab(overview){
 function shift740Mount(){
  const overview=document.getElementById('overviewView');
  if(!overview||document.getElementById('shift740FullMonth'))return;
- if(typeof OCTOBER_2026_DUTY_POSITIONS==='undefined'||typeof NOVEMBER_2026_DUTY_POSITIONS==='undefined')return;
+ if(typeof OCTOBER_2026_DUTY_POSITIONS==='undefined'||typeof NOVEMBER_2026_DUTY_POSITIONS==='undefined'||typeof DECEMBER_2026_DUTY_POSITIONS==='undefined')return;
  const now=shift740Today();
- shift740Month=now.year===2026&&[10,11].includes(now.month)?now.month:11;
+ shift740Month=now.year===2026&&[10,11,12].includes(now.month)?now.month:11;
  shift740Day=now.year===2026&&now.month===shift740Month?now.day:1;
  const host=document.createElement('section');
  host.id='shift740FullMonth';host.className='s740-board';
@@ -266,7 +270,7 @@ function shift740Mount(){
   }
   if(button.dataset.s740Action==='today'){
    const date=shift740Today();
-   if(date.year===2026&&[10,11].includes(date.month)){
+   if(date.year===2026&&[10,11,12].includes(date.month)){
     if(shift740Month===date.month)shift740SetDay(date.day);
     else{shift740Month=date.month;shift740Day=date.day;shift740Render();}
    }else shift740SetMonth(11);
