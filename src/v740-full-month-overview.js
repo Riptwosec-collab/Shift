@@ -6,6 +6,10 @@ const SHIFT740_WEEKDAYS=['อา','จ','อ','พ','พฤ','ศ','ส'];
 const SHIFT740_POSTS=['D1','D2','D3','D4','N1','N2'];
 let shift740Month=11;
 let shift740Day=1;
+const SHIFT740_MONTH_STORAGE='shift740-month-view-2026';
+function shift740StoredMonth(){
+ try{const value=Number(localStorage.getItem(SHIFT740_MONTH_STORAGE));return [10,11,12].includes(value)?value:null}catch{return null}
+}
 let shift740Filter='ALL';
 const shift740Esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 const shift740Days=month=>month===10||month===12?31:30;
@@ -120,9 +124,11 @@ function shift740Matrix(month,day){
   const items=Array.from({length:days},(_,j)=>{
    const d=j+1;
    const role=dayModels[j].records[i].code;
-   const tone=role==='H'||role==='O'?'H':role[0],warning=role.includes('?')||(month===11&&d===30&&role==='N1');
+   const tone=role==='H'||role==='O'?'H':role[0],warning=role.includes('?')||(month===11&&d===30&&role==='N1')||(month===12&&role==='N');
+   const notes=month===12&&role==='H'?DECEMBER_2026_SOURCE_HIGHLIGHTS[i]:null;
+   const sourceMark=notes?.red.includes(d)?' source-red':notes?.yellow.includes(d)?' source-yellow':'';
    return '<td data-s740-col="'+d+'" class="s740-cell'+(d===day?' selected':'')+'"><button type="button" '+
-    'data-s740-person="'+i+'" data-s740-day="'+d+'" class="s740-duty s740-'+tone+(warning?' warning':'')+'" '+
+    'data-s740-person="'+i+'" data-s740-day="'+d+'" class="s740-duty s740-'+tone+sourceMark+(warning?' warning':'')+'" '+
     'aria-label="'+shift740Esc(name+' '+d+' '+shift740MonthText(month)+' '+role)+'" '+
     'title="'+shift740Esc(name+' • '+d+' • '+role)+'">'+role+'</button></td>';
   }).join('');
@@ -214,6 +220,7 @@ function shift740SetMonth(month){
  month=Number(month);
  if(![10,11,12].includes(month)||month===shift740Month)return;
  shift740Month=month;
+ try{localStorage.setItem(SHIFT740_MONTH_STORAGE,String(month))}catch{}
  const now=shift740Today();
  shift740Day=now.year===2026&&now.month===month?now.day:Math.min(shift740Day,shift740Days(month));
  shift740Render();
@@ -253,7 +260,7 @@ function shift740Mount(){
  if(!overview||document.getElementById('shift740FullMonth'))return;
  if(typeof OCTOBER_2026_DUTY_POSITIONS==='undefined'||typeof NOVEMBER_2026_DUTY_POSITIONS==='undefined'||typeof DECEMBER_2026_DUTY_POSITIONS==='undefined')return;
  const now=shift740Today();
- shift740Month=now.year===2026&&[10,11,12].includes(now.month)?now.month:11;
+ shift740Month=shift740StoredMonth()||(now.year===2026&&[10,11,12].includes(now.month)?now.month:11);
  shift740Day=now.year===2026&&now.month===shift740Month?now.day:1;
  const host=document.createElement('section');
  host.id='shift740FullMonth';host.className='s740-board';
