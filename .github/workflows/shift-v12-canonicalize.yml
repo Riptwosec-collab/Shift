@@ -1,0 +1,48 @@
+name: Canonicalize Shift V12 Build
+on:
+  push:
+    branches:
+      - work/shift-v12-canonical-deploy
+    paths:
+      - .github/workflows/shift-v12-canonicalize.yml
+      - src/**
+      - scripts/build.mjs
+
+permissions:
+  contents: write
+
+concurrency:
+  group: shift-v12-canonicalize
+  cancel-in-progress: true
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          ref: work/shift-v12-canonical-deploy
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install
+        run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Regenerate checked-in HTML from canonical source
+        run: npm run build
+      - name: Validate new source and bundled December roster
+        run: |
+          node --test tests/december-2026-roster.test.mjs
+          node --test tests/cloudflare.test.mjs
+      - name: Commit canonical HTML only when changed
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "Generated HTML matches source"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add index.html
+            git commit -m "build: synchronize generated Shift V12 artifact"
+            git push origin HEAD:work/shift-v12-canonical-deploy
+          fi
