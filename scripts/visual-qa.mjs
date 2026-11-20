@@ -83,7 +83,18 @@ function colorEvalScript(){
   const parent=rect(header);
   for(const [name,el] of items){
    const r=rect(el);
-   if(r.x<parent.x-4||r.r>parent.r+4)
+   // Desktop V11 intentionally relocates the brand/navigation into a fixed
+   // 208px left rail. Verify rail geometry rather than comparing it to the
+   // top header's right-hand content rectangle.
+   const rail=name==='brand'||name==='navigation';
+   const railPosition=getComputedStyle(el).position==='fixed';
+   const expectedRail=rail&&innerWidth>=1181&&railPosition&&
+     r.x>=-4&&r.r<=parent.x+4&&r.w>=150&&r.w<=260&&
+     (name==='brand'?Math.abs(r.y)<=4:(r.y>=62&&r.y<=90));
+   if(expectedRail){
+    if(r.r>innerWidth+4||r.b>innerHeight+4||r.y< -4)
+      problems.push({type:'sidebar-viewport-overflow',name,rect:r,parent});
+   }else if(r.x<parent.x-4||r.r>parent.r+4)
      problems.push({type:'header-overflow',name,rect:r,parent});
   }
   for(let i=0;i<items.length;i++)for(let j=i+1;j<items.length;j++){
@@ -101,7 +112,10 @@ function colorEvalScript(){
  for(const [selector,pseudo] of decoChecks){
   const el=document.querySelector(selector);if(!el)continue;
   const s=getComputedStyle(el,pseudo),v=s.content;
-  if(v&&v!=='none'&&v!=='normal'&&s.display!=='none')
+  // Intentional small breadcrumb in the dedicated desktop header rail.
+  const expectedBreadcrumb=selector==='.command-bar'&&pseudo==='::before'&&
+   innerWidth>=1181&&v.includes('SHIFT  /  TEAM WORKSPACE');
+  if(v&&v!=='none'&&v!=='normal'&&s.display!=='none'&&!expectedBreadcrumb)
    problems.push({type:'unwanted-decorative-overlay',selector,pseudo,content:v});
  }
  const checks=[['#overviewView .roster-card .person-row','.row-copy','.status-badge'],
@@ -132,7 +146,7 @@ try{
   for(const width of widths){
    const context=await browser.newContext({viewport:{width,height:860},deviceScaleFactor:1,
     serviceWorkers:'block',reducedMotion:'reduce'});
-   await context.addInitScript((t)=>{localStorage.setItem('shift.theme',t)},theme);
+   await context.addInitScript((t)=>{localStorage.setItem('shift.theme.v11',t)},theme);
    const page=await context.newPage(),errors=[];
    page.on('pageerror',e=>errors.push(String(e.message)));
    await page.goto('http://127.0.0.1:'+port+'/',{waitUntil:'domcontentloaded',timeout:45000});
