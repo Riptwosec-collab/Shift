@@ -1,0 +1,307 @@
+/* December 2569 — spreadsheet-fidelity information architecture in the
+   user's MEK CONTROL black/lime theme. All colors derive from V11 tokens. */
+#monthView .month-panel[data-shift-month="12"] > :not(#shiftMonthTabs):not(#shiftDecemberView){
+ display:none!important;
+}
+#monthView #shiftDecemberView[hidden]{display:none!important}
+#monthView #shiftDecemberView{
+ display:block;width:100%;min-width:0;max-width:100%;
+ padding:clamp(12px,2vw,24px);
+ background:var(--sh87-panel,#0E1219);color:var(--sh87-fg,#F2F5F8);
+ border:1px solid var(--sh87-border,#303846);border-radius:14px;
+ box-sizing:border-box;
+}
+#monthView #shiftDecemberView .shift-dec-title{
+ display:flex;justify-content:space-between;align-items:center;
+ gap:16px;flex-wrap:wrap;margin:0 0 16px;
+}
+#monthView #shiftDecemberView .shift-dec-kicker{
+ display:block;font-size:11px;line-height:1.4;font-weight:800;
+ letter-spacing:.095em;color:var(--sh87-accent,#C8FF47);
+}
+#monthView #shiftDecemberView .shift-dec-title h2{
+ margin:6px 0!important;
+ color:var(--sh87-fg,#F2F5F8)!important;
+ font-size:clamp(20px,2.1vw,29px)!important;
+ line-height:1.28!important;
+ letter-spacing:-.025em!important;overflow-wrap:anywhere;
+}
+#monthView #shiftDecemberView .shift-dec-title p{
+ margin:0;color:var(--sh87-muted,#AEB9C8);
+ font-size:12px;line-height:1.55;
+}
+#monthView #shiftDecemberView :is(.shift-dec-today,.shift-dec-day-controls button){
+ min-height:37px;padding:8px 13px;border:1px solid var(--sh87-border,#303846);
+ border-radius:8px;background:var(--sh87-card,#111820);
+ color:var(--sh87-fg,#F2F5F8);font:inherit;font-size:12px;
+ cursor:pointer;box-shadow:none;
+}
+#monthView #shiftDecemberView .shift-dec-today{
+ background:var(--sh87-accent,#C8FF47);
+ color:var(--sh87-accent-fg,#111609);
+ border-color:var(--sh87-accent,#C8FF47);font-weight:800;
+}
+#monthView #shiftDecemberView .shift-dec-day-controls{
+ display:flex;align-items:center;gap:7px;flex-wrap:wrap;
+}
+#monthView #shiftDecemberView button:disabled{opacity:.4;cursor:not-allowed}
+#monthView #shiftDecemberView button:focus-visible{
+ outline:2px solid var(--sh87-accent,#C8FF47);outline-offset:3px;
+}
+#monthView #shiftDecemberView .shift-dec-source-note{
+ padding:12px 14px;border:1px solid var(--sh87-border,#303846);
+ border-left:3px solid #A98A50;border-radius:9px;
+ background:var(--sh87-soft,#19212C);
+ color:var(--sh87-muted,#AEB9C8);
+ font-size:12px;line-height:1.6;margin:0 0 14px;
+}
+#monthView #shiftDecemberView .shift-dec-scroll-help{
+ color:var(--sh87-muted,#AEB9C8);font-size:12px;
+ line-height:1.5;margin:0 0 10px;
+}
+#monthView #shiftDecemberView .shift-dec-scroll{
+ overflow-x:auto;overflow-y:auto;
+ max-width:100%;width:100%;min-width:0;
+ border:1px solid var(--sh87-border,#303846);border-radius:11px;
+ scrollbar-color:var(--sh87-border,#303846) var(--sh87-panel,#0E1219);
+ scrollbar-width:thin;overscroll-behavior-x:contain;
+ background:var(--sh87-shell,#050508);
+}
+#monthView #shiftDecemberView .shift-dec-table{
+ width:max-content;min-width:100%;
+ table-layout:fixed;border-collapse:separate;border-spacing:1px;
+ font-size:12px;font-variant-numeric:tabular-nums;
+ color:var(--sh87-fg,#F2F5F8);
+}
+#monthView #shiftDecemberView .shift-dec-table :is(th,td){
+ box-sizing:border-box;padding:0;text-align:center;
+ border:1px solid var(--sh87-border,#303846);
+ border-radius:2px;white-space:nowrap;
+}
+#monthView #shiftDecemberView .shift-dec-table thead th{
+ position:sticky;top:0;z-index:2;
+ background:var(--sh87-soft,#19212C);
+ color:var(--sh87-fg,#F2F5F8);
+ min-width:52px;
+}
+#monthView #shiftDecemberView .shift-dec-day.weekend{
+ background:var(--sh87-card,#111820);
+}
+#monthView #shiftDecemberView .shift-dec-table .shift-dec-name{
+ position:sticky;left:0;z-index:3;
+ box-sizing:border-box;min-width:218px;width:218px;max-width:218px;
+ background:var(--sh87-panel,#0E1219);
+ color:var(--sh87-fg,#F2F5F8);
+ text-align:left;padding:9px 12px;
+ font-size:12px;line-height:1.4;font-weight:680;
+ white-space:normal;overflow-wrap:anywhere;
+}
+#monthView #shiftDecemberView .shift-dec-table thead .shift-dec-name{
+ z-index:5;background:var(--sh87-soft,#19212C);
+}
+#monthView #shiftDecemberView .shift-dec-table tfoot .shift-dec-name{
+ background:var(--sh87-soft,#19212C);
+ font-weight:800;
+}
+#monthView #shiftDecemberView .shift-dec-day button{
+ display:flex;flex-direction:column;align-items:center;
+ justify-content:center;gap:4px;width:100%;min-width:51px;
+ min-height:59px;padding:7px 3px;
+ background:transparent;border:0;border-radius:0;
+ color:inherit;font:inherit;cursor:pointer;
+}
+#monthView #shiftDecemberView .shift-dec-day button small{
+ color:var(--sh87-muted,#AEB9C8);
+ font-size:11px;line-height:1.15;
+}
+#monthView #shiftDecemberView .shift-dec-day button b{
+ font-size:13px;line-height:1.2;color:var(--sh87-fg,#F2F5F8);
+}
+#monthView #shiftDecemberView .shift-dec-day.is-selected{
+ border-bottom:3px solid var(--sh87-accent,#C8FF47);
+ background:var(--sh87-soft,#19212C);
+}
+#monthView #shiftDecemberView .shift-dec-cell{
+ min-width:52px;height:41px;
+ background:var(--sh87-card,#111820);
+}
+#monthView #shiftDecemberView .shift-dec-cell button{
+ width:100%;height:40px;min-width:50px;
+ border:0;background:transparent;color:inherit;
+ font:inherit;font-size:12px;font-weight:800;
+ line-height:1.2;cursor:pointer;
+}
+#monthView #shiftDecemberView .shift-dec-cell.D{
+ background:var(--shift10-day-bg,#1B3227);
+ color:var(--shift10-day-text,#C3E7CD);
+}
+#monthView #shiftDecemberView .shift-dec-cell.N{
+ background:var(--shift10-night-bg,#1F2B46);
+ color:var(--shift10-night-text,#C7D8F5);
+}
+#monthView #shiftDecemberView .shift-dec-cell.H{
+ background:var(--shift10-off-bg,#322835);
+ color:var(--shift10-off-text,#E4CADA);
+}
+#monthView #shiftDecemberView .shift-dec-cell.N:has(button:first-child){
+ border-color:var(--sh87-border,#303846);
+}
+/* Source-only color annotations: no invented leave/incident meaning. */
+#monthView #shiftDecemberView .shift-dec-cell.source-yellow{
+ background:#352E16;color:#F5E5A7;border-color:#988140;
+}
+#monthView #shiftDecemberView .shift-dec-cell.source-red{
+ background:#3A2026;color:#F2C1CA;border-color:#A85D69;
+}
+html[data-shift-theme="light"] #shiftDecemberView .shift-dec-cell.source-yellow{
+ background:#F0E4BD;color:#5F491B;border-color:#BDA05D;
+}
+html[data-shift-theme="light"] #shiftDecemberView .shift-dec-cell.source-red{
+ background:#F3D9DC;color:#793E48;border-color:#BB7B84;
+}
+#monthView #shiftDecemberView .shift-dec-cell.is-selected{
+ outline:2px solid var(--sh87-accent,#C8FF47);
+ outline-offset:-2px;position:relative;z-index:1;
+}
+#monthView #shiftDecemberView .shift-dec-cell button:hover{
+ box-shadow:inset 0 0 0 2px var(--sh87-accent,#C8FF47);
+}
+#monthView #shiftDecemberView .shift-dec-total{
+ height:31px;background:var(--sh87-soft,#19212C);
+ color:var(--sh87-fg,#F2F5F8);font-weight:750;
+}
+#monthView #shiftDecemberView .shift-dec-summary{
+ margin-top:16px;padding:clamp(12px,1.7vw,19px);
+ border:1px solid var(--sh87-border,#303846);
+ background:var(--sh87-card,#111820);
+ border-radius:12px;min-width:0;
+}
+#monthView #shiftDecemberView .shift-dec-details-top{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:12px;flex-wrap:wrap;
+}
+#monthView #shiftDecemberView .shift-dec-details-top span{
+ color:var(--sh87-muted,#AEB9C8);font-size:11px;
+ font-weight:800;letter-spacing:.055em;
+}
+#monthView #shiftDecemberView .shift-dec-details-top h3{
+ margin:3px 0 0;color:var(--sh87-fg,#F2F5F8);
+ font-size:clamp(17px,1.7vw,24px);
+}
+#monthView #shiftDecemberView .shift-dec-kpis{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:10px;margin:15px 0;
+}
+#monthView #shiftDecemberView .shift-dec-kpis>div{
+ display:flex;flex-direction:column;align-items:flex-start;
+ padding:13px 15px;min-width:0;
+ background:var(--sh87-panel,#0E1219);
+ border:1px solid var(--sh87-border,#303846);
+ border-radius:10px;
+}
+#monthView #shiftDecemberView .shift-dec-kpis span{
+ color:var(--sh87-muted,#AEB9C8);
+ font-size:11px;font-weight:750;letter-spacing:.06em;
+}
+#monthView #shiftDecemberView .shift-dec-kpis strong{
+ font-size:clamp(24px,3.4vw,35px);line-height:1.15;
+ color:var(--sh87-fg,#F2F5F8);
+}
+#monthView #shiftDecemberView .shift-dec-kpis small{
+ color:var(--sh87-muted,#AEB9C8);font-size:11px;
+}
+#monthView #shiftDecemberView .shift-dec-warning{
+ color:#F1C694;background:#332918;
+ border:1px solid #82643C;border-radius:9px;
+ font-size:12px;line-height:1.6;padding:11px 13px;
+}
+html[data-shift-theme="light"] #shiftDecemberView .shift-dec-warning{
+ color:#6D4B1C;background:#F1E6CD;border-color:#C5A671;
+}
+#monthView #shiftDecemberView .shift-dec-warning small{
+ font-size:11px;color:inherit;
+}
+#monthView #shiftDecemberView .shift-dec-posts{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:10px;margin:14px 0;
+}
+#monthView #shiftDecemberView .shift-dec-post{
+ min-width:0;display:flex;align-items:flex-start;gap:9px;
+ border:1px solid var(--sh87-border,#303846);
+ border-radius:9px;background:var(--sh87-panel,#0E1219);
+ padding:11px;
+}
+#monthView #shiftDecemberView .shift-dec-post b{
+ display:grid;place-items:center;flex-shrink:0;
+ min-width:35px;min-height:31px;
+ background:var(--sh87-soft,#19212C);
+ border:1px solid var(--sh87-border,#303846);
+ color:var(--sh87-fg,#F2F5F8);border-radius:7px;
+}
+#monthView #shiftDecemberView .shift-dec-post>span{
+ min-width:0;font-size:12px;
+ color:var(--sh87-muted,#AEB9C8);overflow-wrap:anywhere;
+}
+#monthView #shiftDecemberView .shift-dec-post-person{
+ background:transparent;color:var(--sh87-fg,#F2F5F8);
+ text-align:left;border:0;cursor:pointer;font:inherit;
+ padding:0;white-space:normal;overflow-wrap:anywhere;
+}
+#monthView #shiftDecemberView .shift-dec-post-person.highlighted{
+ color:var(--sh87-accent,#C8FF47);font-weight:850;
+}
+#monthView #shiftDecemberView .shift-dec-post.unresolved b{
+ border-color:#A98A50;color:#F5DDA0;
+}
+#monthView #shiftDecemberView .shift-dec-rest{
+ display:grid;gap:6px;
+ padding:12px 14px;border-radius:9px;
+ border:1px solid var(--sh87-border,#303846);
+ background:var(--sh87-soft,#19212C);
+ color:var(--sh87-muted,#AEB9C8);
+}
+#monthView #shiftDecemberView .shift-dec-rest b{
+ font-size:12px;color:var(--sh87-fg,#F2F5F8);
+}
+#monthView #shiftDecemberView .shift-dec-rest span{
+ font-size:12px;line-height:1.6;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .nav-tabs .shift-dec-navigation{
+ min-width:108px!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .nav-tabs .shift-dec-navigation.shift731-active,
+html[data-shift780="ready"][data-shift-theme] #mobileNav .shift-dec-mobile-btn.shift731-active{
+ background:var(--sh87-accent,#C8FF47)!important;
+ color:var(--sh87-accent-fg,#111609)!important;
+ border-color:var(--sh87-accent,#C8FF47)!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .nav-tabs .shift-dec-navigation.shift731-active :is(b,span){
+ color:var(--sh87-accent-fg,#111609)!important;
+ -webkit-text-fill-color:var(--sh87-accent-fg,#111609)!important;
+}
+#shiftMonthTabs [data-shift-month="12"].active{
+ background:var(--sh87-accent,#C8FF47)!important;
+ color:var(--sh87-accent-fg,#111609)!important;
+ border-color:var(--sh87-accent,#C8FF47)!important;
+ box-shadow:none!important;
+}
+@media(max-width:900px){
+ #monthView #shiftDecemberView .shift-dec-posts{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:600px){
+ #monthView #shiftDecemberView .shift-dec-table .shift-dec-name{
+  min-width:172px;width:172px;max-width:172px;padding:8px;
+  font-size:11px;
+ }
+ #monthView #shiftDecemberView .shift-dec-posts{grid-template-columns:minmax(0,1fr)}
+ #monthView #shiftDecemberView .shift-dec-kpis{gap:6px}
+ #monthView #shiftDecemberView .shift-dec-kpis>div{padding:10px}
+ #monthView #shiftDecemberView .shift-dec-details-top{align-items:flex-start}
+ #monthView #shiftDecemberView .shift-dec-title{align-items:flex-start}
+ #monthView #shiftDecemberView .shift-dec-day-controls{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+ #monthView #shiftDecemberView *,#monthView #shiftDecemberView *::before,#monthView #shiftDecemberView *::after{
+  transition:none!important;animation:none!important;
+ }
+}
