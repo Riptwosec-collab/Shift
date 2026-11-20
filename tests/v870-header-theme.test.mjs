@@ -21,8 +21,8 @@ test('V8.7 header keeps navigation and actions on separate rows',()=>{
 test('V8.7 loader theme matches runtime and initial browser meta',()=>{
  for(const x of ['#bootOverlay','--sh87-boot-shell:#EFF4FA',
  '--sh87-boot-shell:#071425','.boot613-shell'])assert.ok(css.includes(x),x);
- assert.ok(build.includes("t==='dark'?'#071425':'#EFF4FA'"));
- assert.ok(load('src/v810-theme.js').includes("mode==='dark'?'#071425':'#EFF4FA'"));
+ assert.ok(build.includes("t==='dark'?'#050508':'#E8ECE7'"));
+ assert.ok(load('src/v810-theme.js').includes("mode==='dark'?'#050508':'#E8ECE7'"));
  let depth=0;for(const c of css){if(c==='{')depth++;else if(c==='}')depth--;assert.ok(depth>=0)}
  assert.equal(depth,0);
 });

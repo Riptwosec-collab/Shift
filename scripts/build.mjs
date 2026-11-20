@@ -67,4 +67,4 @@ html=html.replace('</head>',`<style id="shift-v10-professional-style">\n${shiftV
 html=html.replace('</body>',`<script id="v652-engine">(()=>{\n${addJs}\n})();</script>\n</body>`);
 fs.writeFileSync('index.html',html);
 const dist=path.join(root,'dist');fs.rmSync(dist,{recursive:true,force:true});fs.mkdirSync(dist,{recursive:true});fs.writeFileSync(path.join(dist,'index.html'),html);
-console.log(`built Shift V12 ${Buffer.byteLength(html)} bytes — unified professional UI`);
+console.log(`built v6.5.20 legacy shell / Shift V12 ${Buffer.byteLength(html)} bytes — unified professional UI`);

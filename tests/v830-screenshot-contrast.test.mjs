@@ -31,16 +31,20 @@ test('Insight rows no longer inherit mismatched neon gradient and black text',()
   'color:var(--sh81-ink)!important'])
   assert.ok(css.includes(marker),marker);
 });
-test('Dark mode uses consistent midnight navy instead of obsolete true-black literals',()=>{
- const section=css.slice(css.indexOf('/* SHIFT V8.3'));
- for(const marker of ['--sh81-shell:#071425','--sh81-panel:#0D2036',
-  '--sh81-card:#142940','--sh81-soft:#1C344F','--sh81-ink:#F1F7FF',
-  '--sh81-muted:#BBCDE0','background:#071425!important'])
-  assert.ok(section.includes(marker),marker);
- assert.ok(js.includes("mode==='dark'?'#071425':'#EFF4FA'"));
- assert.ok(build.includes("t==='dark'?'#071425':'#EFF4FA'"));
- assert.ok(html.includes("t==='dark'?'#071425':'#EFF4FA'"));
+test('Black-lime V12 final theme overrides historical V8 navy after it in the built cascade',()=>{
+ const current=read('src/shift-v10-design-system.css');
+ for(const marker of ['--sh87-shell:#050508','--sh87-panel:#0E1219',
+  '--sh87-card:#111820','--sh87-fg:#F2F5F8','--sh87-muted:#AEB9C8',
+  '--sh87-accent:#C8FF47','color-scheme:dark!important'])
+  assert.ok(current.includes(marker),marker);
+ assert.ok(js.includes("mode==='dark'?'#050508':'#E8ECE7'"));
+ assert.ok(build.includes("t==='dark'?'#050508':'#E8ECE7'"));
+ assert.ok(html.includes("t==='dark'?'#050508':'#E8ECE7'"));
+ const lastLayer=html.indexOf('id="shift-v10-professional-style"');
+ const oldLayer=html.indexOf('id="v810-theme-style"');
+ assert.ok(oldLayer>0&&lastLayer>oldLayer,'V12 must be last to win cascade');
 });
+
 test('All linked style source blocks match built HTML, CSS balanced',()=>{
  for(const path of ['src/v6516-liquid-glass.css','src/v6517-neon-dashboard.css',
   'src/v810-theme.css','src/v810-theme.js']) assert.ok(html.includes(read(path)),path);

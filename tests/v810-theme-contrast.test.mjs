@@ -14,7 +14,7 @@ test('V8.1 both themes use one role palette across six views plus both full-mont
  assert.ok(html.includes(js),'generated HTML must embed theme JS');
  assert.ok(build.includes('v810-theme.css')&&build.includes('v810-theme.js'));
  assert.ok(html.includes('id="shift81-theme-preflight"'));
- assert.ok(html.includes("localStorage.getItem('shift.theme')"));
+ assert.ok(html.includes("localStorage.getItem('shift.theme.v11')"));
 });
 test('Staff name cells and outlined titles are repaired without hiding source assignments',()=>{
  for(const marker of ['.v6519-full-name','.s740-name','.shift72-person-copy',
@@ -36,10 +36,10 @@ test('Theme control persists, restores, is accessible and respects locale',()=>{
  const api=new Function('document','localStorage',js+';return {set:shift81SetTheme,read:shift81StoredTheme,sync:shift81SyncThemeButton}')(document,store);
  assert.equal(api.read(),'dark');
  assert.equal(api.set('dark'), 'dark');assert.equal(root.dataset.shiftTheme,'dark');
- assert.equal(attrs['aria-pressed'],'true');assert.match(attrs['aria-label'],/ธีมน้ำเงินเข้ม/);
- assert.equal(meta.content,'#071425');assert.equal(store.value,'dark');
+ assert.equal(attrs['aria-pressed'],'true');assert.match(attrs['aria-label'],/ธีมดำไลม์/);
+ assert.equal(meta.content,'#050508');assert.equal(store.value,'dark');
  root.dataset.locale='en';api.sync();assert.equal(button.label.textContent,'Dark');
- assert.equal(api.set('light'),'light');assert.equal(meta.content,'#EFF4FA');assert.equal(attrs['aria-pressed'],'false');
+ assert.equal(api.set('light'),'light');assert.equal(meta.content,'#E8ECE7');assert.equal(attrs['aria-pressed'],'false');
 });
 test('No remote assets, no perpetual animations in theme layer',()=>{
  assert.doesNotMatch(css,/@import|url\(\s*https?:/i);

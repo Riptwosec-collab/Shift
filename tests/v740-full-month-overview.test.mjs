@@ -4,19 +4,21 @@ import fs from 'node:fs';
 import {STAFF} from '../src/data.js';
 import {OCTOBER_2026_DUTY_POSITIONS as october} from '../src/october-2026-duty-roster.js';
 import {NOVEMBER_2026_DUTY_POSITIONS as november} from '../src/november-2026-duty-roster.js';
+import {DECEMBER_2026_DUTY_POSITIONS as december} from '../src/december-2026-duty-roster.js';
 
 const read=path=>fs.readFileSync(path,'utf8');
 const src=read('src/v740-full-month-overview.js');
 const css=read('src/v740-full-month-overview.css');
 const fixture={readyState:'loading',documentElement:{lang:'th'},addEventListener(){}};
-const api=new Function('staff','OCTOBER_2026_DUTY_POSITIONS','NOVEMBER_2026_DUTY_POSITIONS','document',src+
+const api=new Function('staff','OCTOBER_2026_DUTY_POSITIONS','NOVEMBER_2026_DUTY_POSITIONS','DECEMBER_2026_DUTY_POSITIONS','DECEMBER_2026_SOURCE_HIGHLIGHTS','document',src+
  '\nreturn {model:shift740Model,stats:shift740MonthStats,calendar:shift740Calendar,matrix:shift740Matrix,markup:shift740Markup,days:shift740Days};')(
- STAFF,october,november,fixture);
+ STAFF,october,november,december,Array.from({length:10},()=>({red:[],yellow:[]})),fixture);
 
 test('Overview renders complete October 31 days and November 30 days, not only eight dates',()=>{
  assert.equal(api.days(10),31);
  assert.equal(api.days(11),30);
- for(const [month,days] of [[10,31],[11,30]]){
+ assert.equal(api.days(12),31);
+ for(const [month,days] of [[10,31],[11,30],[12,31]]){
   const cal=api.calendar(month,1);
   const matrix=api.matrix(month,1);
   assert.equal((cal.match(/class="s740-calendar-day/g)||[]).length,days);
@@ -28,7 +30,7 @@ test('Overview renders complete October 31 days and November 30 days, not only e
  }
 });
 test('Every full-month position is sourced from the original 10×31 and 10×30 assignments',()=>{
- for(const [month,original] of [[10,october],[11,november]]){
+ for(const [month,original] of [[10,october],[11,november],[12,december]]){
   for(let day=1;day<=api.days(month);day++){
    const d=api.model(month,day);
    assert.equal(d.records.length,STAFF.length);
@@ -47,10 +49,13 @@ test('November 30 source N1 double assignment and absent N2 are presented as an 
  assert.throws(()=>api.model(11,31),RangeError);
  assert.throws(()=>api.model(10,32),RangeError);
 });
-test('Full month overview uses data-derived stats and preserves both months',()=>{
+test('Full month overview derives stats and preserves October, November and December',()=>{
  const nov=api.stats(11),oct=api.stats(10);
  assert.deepEqual(nov,{D:102,N:60,H:138,days:30});
  assert.equal(oct.D+oct.N+oct.H,310);
+ const dec=api.stats(12);
+ assert.equal(dec.D+dec.N+dec.H,310);
+ assert.equal(api.model(12,31).records.length,10);
  assert.equal(api.model(11,11).counts.D,4);
  assert.equal(api.model(11,11).counts.N,2);
  assert.equal(api.model(11,11).counts.H,4);

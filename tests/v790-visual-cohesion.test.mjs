@@ -66,8 +66,8 @@ test('unchanged original staff and both months retain 610 explicit duty entries'
 });
 test('built PWA includes the V7.9 stylesheet and bilingual source exactly',()=>{
  const build=read('scripts/build.mjs');
- assert.match(html,/data-shift-release="7\.9"/);
- assert.match(build,/data-shift-release="7\.9"/);
+ assert.ok(Number(html.match(/data-shift-release="(\d+\.\d+)"/)?.[1])>=7.9);
+ assert.ok(build.includes('data-shift-release="12.0"'));
  assert.ok(html.includes(js)&&html.includes(css));
  assert.ok(build.includes('v780-editorial-cohesion.js')&&build.includes('v780-editorial-cohesion.css'));
  assert.ok(read('sw.js').includes("CACHE_NAME='shift-shell-v6.5.20-r20'"));
