@@ -305,3 +305,34 @@ html[data-shift780="ready"][data-shift-theme] .command-bar .nav-tabs .shift-dec-
   transition:none!important;animation:none!important;
  }
 }
+
+/* Screenshot-highlighted H cells within the overview planner, too. */
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .s740-duty.s740-H.source-yellow{
+ background:#352E16!important;color:#F5E5A7!important;
+ border:1px solid #988140!important;box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme] #shift740FullMonth .s740-duty.s740-H.source-red{
+ background:#3A2026!important;color:#F2C1CA!important;
+ border:1px solid #A85D69!important;box-shadow:none!important;
+}
+html[data-shift780="ready"][data-shift-theme="light"] #shift740FullMonth .s740-duty.s740-H.source-yellow{
+ background:#F0E4BD!important;color:#5F491B!important;border-color:#BDA05D!important;
+}
+html[data-shift780="ready"][data-shift-theme="light"] #shift740FullMonth .s740-duty.s740-H.source-red{
+ background:#F3D9DC!important;color:#793E48!important;border-color:#BB7B84!important;
+}
+/* Avoid simultaneous active highlights for Month and December sidebar buttons. */
+html.shift-dec-navigation-active[data-shift780="ready"][data-shift-theme] .command-bar .nav-tabs .nav-btn[data-view="month"].active{
+ background:transparent!important;border-color:transparent!important;
+ color:var(--sh87-muted)!important;
+}
+html.shift-dec-navigation-active[data-shift780="ready"][data-shift-theme] .command-bar .nav-tabs .nav-btn[data-view="month"].active :is(b,span){
+ color:var(--sh87-muted)!important;-webkit-text-fill-color:var(--sh87-muted)!important;
+}
+html.shift-dec-navigation-active[data-shift780="ready"][data-shift-theme] #mobileNav button[data-view="month"].active{
+ background:transparent!important;border-color:transparent!important;
+ color:var(--sh87-muted)!important;
+}
+html.shift-dec-navigation-active[data-shift780="ready"][data-shift-theme] #mobileNav button[data-view="month"].active b{
+ color:var(--sh87-muted)!important;
+}
