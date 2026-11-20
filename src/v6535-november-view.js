@@ -96,7 +96,7 @@ function shiftNovSetDay(day,personIndex=null){
  shiftNovRevealSelectedDay();
 }
 function shiftNovChangeMonth(month){
- if(month!=='10'&&month!=='11')return;
+ if(!['10','11','12'].includes(month))return;
  shiftMonthDisplay=month;
  const panel=document.querySelector('#monthView .month-panel');
  if(panel)panel.dataset.shiftMonth=month;
@@ -107,7 +107,10 @@ function shiftNovChangeMonth(month){
  });
  const nov=document.getElementById('shiftNovemberView');
  if(nov)nov.hidden=month!=='11';
+ const dec=document.getElementById('shiftDecemberView');
+ if(dec)dec.hidden=month!=='12';
  try{localStorage.setItem('shift-month-view-2026',month)}catch{}
+ if(month==='12'&&typeof shiftDecRefresh==='function')shiftDecRefresh();
  if(month==='11'){
   shiftNovMarkDay();
   shiftNovRenderDetails();
@@ -120,7 +123,7 @@ function shiftNovInit(){
  if(staff.length!==NOVEMBER_2026_DUTY_POSITIONS.length)return;
  if(document.getElementById('shiftMonthTabs'))return;
  const tabs=document.createElement('div');tabs.id='shiftMonthTabs';tabs.className='shift-month-tabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','เลือกเดือนของตารางเวร');
- tabs.innerHTML='<button type="button" role="tab" data-shift-month="10" aria-controls="heatmapTable">ตุลาคม 2569</button><button type="button" role="tab" data-shift-month="11" aria-controls="shiftNovemberView">พฤศจิกายน 2569</button>';
+ tabs.innerHTML='<button type="button" role="tab" data-shift-month="10" aria-controls="heatmapTable">ตุลาคม 2569</button><button type="button" role="tab" data-shift-month="11" aria-controls="shiftNovemberView">พฤศจิกายน 2569</button><button type="button" role="tab" data-shift-month="12" aria-controls="shiftDecemberView">ธันวาคม 2569</button>';
  panel.prepend(tabs);
  const view=document.createElement('section');view.id='shiftNovemberView';view.className='shift-november-panel';view.hidden=true;
  view.innerHTML='<div class="shift-nov-title"><div><div class="eyebrow">MONTHLY HEATMAP • NOVEMBER 2026</div><h2>ตารางเวรทั้งทีม • พฤศจิกายน 2569</h2><p>10 พนักงาน • 30 วัน • D1–D4 / N1–N2 / H (หยุด)</p></div><span class="shift-nov-tag">ข้อมูลจากภาพตารางเวร</span></div>'+
@@ -131,8 +134,8 @@ function shiftNovInit(){
  '<div class="shift-nov-summary" aria-live="polite"></div>';
  panel.appendChild(view);
  shiftNovRenderGrid();
- let preferred='10';try{preferred=localStorage.getItem('shift-month-view-2026')||((new Date().getFullYear()===2026&&new Date().getMonth()===10)?'11':'10')}catch{}
- shiftNovChangeMonth(preferred==='11'?'11':'10');
+ let preferred='10';try{preferred=localStorage.getItem('shift-month-view-2026')||((new Date().getFullYear()===2026&&new Date().getMonth()===11)?'12':((new Date().getFullYear()===2026&&new Date().getMonth()===10)?'11':'10'))}catch{}
+ shiftNovChangeMonth(['10','11','12'].includes(preferred)?preferred:'10');
  panel.addEventListener('click',event=>{
   const button=event.target.closest('button');if(!button||!panel.contains(button))return;
   if(button.hasAttribute('data-shift-month')){shiftNovChangeMonth(button.dataset.shiftMonth);return;}
