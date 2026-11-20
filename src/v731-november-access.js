@@ -10,11 +10,11 @@ function shift731Today(){
 function shift731InitialMonth(today,search='',saved='10'){
  const query=new URLSearchParams(String(search).replace(/^\?/,''));
  const explicit=query.get('month');
- if(explicit==='10'||explicit==='11')return {month:explicit,openMonth:query.get('view')!=='overview'};
- // Nov 2026 takes priority over a stale October preference stored in previous visits.
- if(today.year===2026&&today.month===11)
-  return {month:'11',openMonth:query.get('view')==='month'};
- return {month:saved==='11'?'11':'10',openMonth:query.get('view')==='month'};
+ if(['10','11','12'].includes(explicit))return {month:explicit,openMonth:query.get('view')!=='overview'};
+ // Current November/December takes priority over stale October preferences.
+ if(today.year===2026&&[11,12].includes(today.month))
+  return {month:String(today.month),openMonth:query.get('view')==='month'};
+ return {month:['10','11','12'].includes(saved)?saved:'10',openMonth:query.get('view')==='month'};
 }
 function shift731MarkNavigation(){
  const isNov=document.getElementById('monthView')?.classList.contains('active')&&
@@ -25,8 +25,9 @@ function shift731MarkNavigation(){
  });
 }
 function shift731Open(month='11',{navigate=true,graphic=true}={}){
- if(month!=='10'&&month!=='11')month='11';
+ if(!['10','11','12'].includes(month))month='11';
  if(!document.getElementById('shiftNovemberView')&&typeof shiftNovInit==='function')shiftNovInit();
+ if(month==='12'&&!document.getElementById('shiftDecemberView')&&typeof shiftDecInit==='function')shiftDecInit();
  if(typeof shiftNovChangeMonth==='function')shiftNovChangeMonth(month);
  if(month==='11'&&graphic){
   if(!document.getElementById('shift72Graphic')&&typeof shift72Init==='function')shift72Init();
@@ -92,7 +93,7 @@ function shift731Boot(){
  document.documentElement.dataset.shift731='ready';
  document.documentElement.dataset.shiftRelease='7.3';
  const logo=document.querySelector('.command-bar .brand-copy p');
- if(logo)logo.textContent='October & November 2026 • Shift Viewer';
+ if(logo)logo.textContent='October–December 2026 • Shift Viewer';
 }
 if(typeof document!=='undefined'){
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',shift731Boot,{once:true});
