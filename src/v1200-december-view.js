@@ -130,6 +130,7 @@ function shiftDecRefresh(){
 function shiftDecMarkNavigation(){
  const shown=document.querySelector('#monthView .month-panel')?.dataset.shiftMonth==='12'&&
   document.getElementById('monthView')?.classList.contains('active');
+ document.documentElement.classList.toggle('shift-dec-navigation-active',Boolean(shown));
  document.querySelectorAll('[data-shiftdec-open]').forEach(button=>{
   button.classList.toggle('shift731-active',Boolean(shown));
   button.setAttribute('aria-current',shown?'page':'false');
