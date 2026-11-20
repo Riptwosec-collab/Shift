@@ -1504,3 +1504,184 @@ html[data-shift-theme] #bootOverlay :is(
  button,a,[role="button"]
  ){transition-duration:.01ms!important}
 }
+
+
+/* SHIFT V12.2 — VIVID NEON, CONTROLLED CONTRAST
+   Premium dark-navy canvas + clear luminous signal colors.
+   This layer overrides only visuals; roster codes and handlers unchanged. */
+html[data-shift-theme="dark"] {
+  --sh87-shell:#050A13;
+  --sh87-panel:#0D1727;
+  --sh87-card:#15243A;
+  --sh87-soft:#213552;
+  --sh87-border:#486782;
+  --sh87-fg:#F6FBFF;
+  --sh87-muted:#C8DAEA;
+  --sh87-accent:#D7FF39;
+  --sh87-accent-fg:#142400;
+  --sh87-hover:#294766;
+  --shift-vivid-cyan:#21E6FF;
+  --shift-vivid-blue:#65A9FF;
+  --shift-vivid-green:#35F597;
+  --shift-vivid-pink:#FF78C5;
+  --shift-vivid-coral:#FF7E65;
+  --shift-vivid-amber:#FFD365;
+  --shift10-day-bg:#123F32;--shift10-day-text:#66FFC0;
+  --shift10-night-bg:#173B71;--shift10-night-text:#A5D4FF;
+  --shift10-off-bg:#533052;--shift10-off-text:#FFB8E1;
+  --sh87-boot-shell:#050A13;--sh87-boot-card:#0D1727;
+  --sh87-boot-soft:#15243A;--sh87-boot-fg:#F6FBFF;
+  --sh87-boot-muted:#C8DAEA;--sh87-boot-line:#486782;
+  --sh87-boot-accent:#D7FF39;
+}
+html[data-shift-theme="light"] {
+  --sh87-shell:#EFF5FB;
+  --sh87-panel:#FFFFFF;
+  --sh87-card:#E4EFFA;
+  --sh87-soft:#D3E4F4;
+  --sh87-border:#8AA6C1;
+  --sh87-fg:#14263A;
+  --sh87-muted:#3B5268;
+  --sh87-accent:#B4F31C;
+  --sh87-accent-fg:#142400;
+  --sh87-hover:#C8E2F6;
+  --shift-vivid-cyan:#007C97;
+  --shift-vivid-blue:#1556BA;
+  --shift-vivid-green:#087C47;
+  --shift-vivid-pink:#AB226A;
+  --shift-vivid-coral:#B84025;
+  --shift-vivid-amber:#875700;
+  --shift10-day-bg:#BDF6DB;--shift10-day-text:#07512F;
+  --shift10-night-bg:#C6DEFF;--shift10-night-text:#103E7F;
+  --shift10-off-bg:#F9CFEA;--shift10-off-text:#712354;
+  --sh87-boot-shell:#EFF5FB;--sh87-boot-card:#FFFFFF;
+  --sh87-boot-soft:#E4EFFA;--sh87-boot-fg:#14263A;
+  --sh87-boot-muted:#3B5268;--sh87-boot-line:#8AA6C1;
+  --sh87-boot-accent:#B4F31C;
+}
+/* Active controls remain striking and their nested labels stay legible. */
+html[data-shift780="ready"][data-shift-theme] :is(
+ .nav-tabs .nav-btn.active,.nav-tabs .nav-btn.shift731-active,
+ .filter-btn.active,.range-btn.active,.person-pick.active,
+ #shiftMonthTabs button.active,#mobileNav button.active,
+ #shift740FullMonth .s740-months button[aria-pressed="true"],
+ #shiftNovemberView .shift72-switch-buttons button[aria-pressed="true"],
+ #oncallView .v652-view-tabs button.active
+){
+ background:var(--sh87-accent)!important;
+ border-color:var(--sh87-accent)!important;
+ color:var(--sh87-accent-fg)!important;
+ -webkit-text-fill-color:var(--sh87-accent-fg)!important;
+ box-shadow:0 0 0 1px color-mix(in srgb,var(--sh87-accent),transparent 65%)!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .nav-tabs .nav-btn.active,.nav-tabs .nav-btn.shift731-active,
+ .filter-btn.active,.range-btn.active,.person-pick.active,
+ #shiftMonthTabs button.active,#mobileNav button.active,
+ #shift740FullMonth .s740-months button[aria-pressed="true"],
+ #shiftNovemberView .shift72-switch-buttons button[aria-pressed="true"],
+ #oncallView .v652-view-tabs button.active
+) :is(span,b,strong,small,em,svg){
+ color:var(--sh87-accent-fg)!important;
+ -webkit-text-fill-color:var(--sh87-accent-fg)!important;
+ opacity:1!important;
+}
+/* Make KPIs saturated and differentiated without compromising legibility. */
+html[data-shift780="ready"][data-shift-theme="dark"] #overviewView .v6517-kpi:nth-child(1),
+html[data-shift780="ready"][data-shift-theme="dark"] #analyticsView .analytics-card:nth-child(1){
+ background:linear-gradient(135deg,#154539 0%,#15243A 78%)!important;
+ border-color:#329B72!important;border-top:3px solid #35F597!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] #overviewView .v6517-kpi:nth-child(2),
+html[data-shift780="ready"][data-shift-theme="dark"] #analyticsView .analytics-card:nth-child(2){
+ background:linear-gradient(135deg,#183E79 0%,#15243A 78%)!important;
+ border-color:#457FC1!important;border-top:3px solid #65A9FF!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] #overviewView .v6517-kpi:nth-child(3),
+html[data-shift780="ready"][data-shift-theme="dark"] #analyticsView .analytics-card:nth-child(3){
+ background:linear-gradient(135deg,#563052 0%,#15243A 78%)!important;
+ border-color:#A75C91!important;border-top:3px solid #FF78C5!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] #overviewView .v6517-kpi:nth-child(4),
+html[data-shift780="ready"][data-shift-theme="dark"] #analyticsView .analytics-card:nth-child(4){
+ background:linear-gradient(135deg,#573B34 0%,#15243A 78%)!important;
+ border-color:#B7755D!important;border-top:3px solid #FF7E65!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] #overviewView .v6517-kpi:nth-child(5){
+ background:linear-gradient(135deg,#4B422B 0%,#15243A 78%)!important;
+ border-color:#AC9549!important;border-top:3px solid #FFD365!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] #overviewView .v6517-kpi:nth-child(1) .v6517-kpi-value{color:#72FFBA!important;-webkit-text-fill-color:#72FFBA!important}
+html[data-shift780="ready"][data-shift-theme="dark"] #overviewView .v6517-kpi:nth-child(2) .v6517-kpi-value{color:#A2CEFF!important;-webkit-text-fill-color:#A2CEFF!important}
+html[data-shift780="ready"][data-shift-theme="dark"] #overviewView .v6517-kpi:nth-child(3) .v6517-kpi-value{color:#FFABE0!important;-webkit-text-fill-color:#FFABE0!important}
+html[data-shift780="ready"][data-shift-theme="dark"] #overviewView .v6517-kpi:nth-child(4) .v6517-kpi-value{color:#FFC1A1!important;-webkit-text-fill-color:#FFC1A1!important}
+html[data-shift780="ready"][data-shift-theme="dark"] #overviewView .v6517-kpi:nth-child(5) .v6517-kpi-value{color:#FFE69D!important;-webkit-text-fill-color:#FFE69D!important}
+html[data-shift780="ready"][data-shift-theme="light"] #overviewView .v6517-kpi:nth-child(1){border-top:3px solid #0BA96A!important}
+html[data-shift780="ready"][data-shift-theme="light"] #overviewView .v6517-kpi:nth-child(2){border-top:3px solid #2679EA!important}
+html[data-shift780="ready"][data-shift-theme="light"] #overviewView .v6517-kpi:nth-child(3){border-top:3px solid #D23691!important}
+html[data-shift780="ready"][data-shift-theme="light"] #overviewView .v6517-kpi:nth-child(4){border-top:3px solid #E35A3E!important}
+html[data-shift780="ready"][data-shift-theme="light"] #overviewView .v6517-kpi:nth-child(5){border-top:3px solid #AE8105!important}
+/* Semantic rosters: punchier day / night / off pills, calendar and matrix. */
+html[data-shift780="ready"][data-shift-theme="dark"] #monthView .heatmap td.shift.D{
+ background:#17513F!important;color:#70FFC4!important;
+ box-shadow:inset 0 0 0 1px #2EA775!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] #monthView .heatmap td.shift.N{
+ background:#183F7C!important;color:#B9DFFF!important;
+ box-shadow:inset 0 0 0 1px #477DE1!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] #monthView .heatmap td.shift.O{
+ background:#603258!important;color:#FFC0E5!important;
+ box-shadow:inset 0 0 0 1px #C363A9!important;
+}
+html[data-shift780="ready"][data-shift-theme="light"] #monthView .heatmap td.shift.D{
+ background:#BDF6DB!important;color:#07512F!important;
+ box-shadow:inset 0 0 0 1px #4FAF82!important;
+}
+html[data-shift780="ready"][data-shift-theme="light"] #monthView .heatmap td.shift.N{
+ background:#C6DEFF!important;color:#103E7F!important;
+ box-shadow:inset 0 0 0 1px #5999E8!important;
+}
+html[data-shift780="ready"][data-shift-theme="light"] #monthView .heatmap td.shift.O{
+ background:#F9CFEA!important;color:#712354!important;
+ box-shadow:inset 0 0 0 1px #D46AAA!important;
+}
+/* Color status accents, but not the entire roster container. */
+html[data-shift780="ready"][data-shift-theme] :is(
+ .metric-card.day,.roster-card.day,.shift72-overview-card.shift72-d,
+ .shift72-position-card.shift72-d
+){border-top:3px solid var(--shift-vivid-green)!important}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .metric-card.night,.roster-card.night,.shift72-overview-card.shift72-n,
+ .shift72-position-card.shift72-n
+){border-top:3px solid var(--shift-vivid-blue)!important}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .metric-card.off,.roster-card.off,.shift72-overview-card.shift72-o,
+ .shift72-position-card.shift72-o
+){border-top:3px solid var(--shift-vivid-pink)!important}
+/* Keep secondary labels calm but stronger than the prior grey-on-grey. */
+html[data-shift780="ready"][data-shift-theme] :is(
+ .hint,.row-meta,.muted,.helper,.meta,.subtext,
+ .v6517-caption,.v6517-kpi-note,
+ #shift740FullMonth .s740-source-note,
+ #shiftNovemberView .shift72-scroll-hint,
+ #oncallView .v652-kicker
+){color:var(--sh87-muted)!important;-webkit-text-fill-color:var(--sh87-muted)!important;opacity:1!important}
+html[data-shift780="ready"][data-shift-theme="dark"] #overviewView .v6517-kpi-icon {
+ background:#20394F!important;color:#21E6FF!important;
+ border-color:#4487A4!important;
+}
+/* Sharper focus ring and hover edge without a noisy global neon glow. */
+html[data-shift780="ready"][data-shift-theme] :is(
+ .nav-tabs .nav-btn:not(.active):not(.shift731-active),
+ .command-actions .sys-btn,.ghost-btn,
+ .filter-btn:not(.active),.range-btn:not(.active)
+):hover{border-color:var(--shift-vivid-cyan)!important}
+html[data-shift780="ready"][data-shift-theme] :is(
+ button,[role="button"],a,input,select,textarea
+):focus-visible{outline:3px solid var(--shift-vivid-cyan)!important;outline-offset:2px!important}
+/* Keep loader colors consistent from the very first frame. */
+html[data-shift-theme] #bootOverlay{background:var(--sh87-boot-shell)!important;color:var(--sh87-boot-fg)!important}
+html[data-shift-theme] #bootOverlay :is(.boot613-phase,.boot613-status,.boot613-meta){
+ color:var(--sh87-boot-muted)!important;-webkit-text-fill-color:var(--sh87-boot-muted)!important;
+}
