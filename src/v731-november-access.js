@@ -11,6 +11,9 @@ function shift731InitialMonth(today,search='',saved='10'){
  const query=new URLSearchParams(String(search).replace(/^\?/,''));
  const explicit=query.get('month');
  if(['10','11','12'].includes(explicit))return {month:explicit,openMonth:query.get('view')!=='overview'};
+ // Preserve a deliberate December selection even if the current date is still November.
+ if(today.year===2026&&today.month===11&&saved==='12')
+  return {month:'12',openMonth:query.get('view')==='month'};
  // Current November/December takes priority over stale October preferences.
  if(today.year===2026&&[11,12].includes(today.month))
   return {month:String(today.month),openMonth:query.get('view')==='month'};
