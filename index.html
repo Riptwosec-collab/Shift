@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="th" data-app-version="6.5.20" data-shift-release="11.0" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">
+<html lang="th" data-app-version="6.5.20" data-shift-release="12.0" data-v64-mode="BALANCED" data-v65-mode="BALANCED" data-locale="th" data-v65-booting="1">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -12651,6 +12651,43 @@ const NOVEMBER_2026_DUTY_POSITIONS=Object.freeze([
 ]);
 const NOVEMBER_2026_DUTY_META=Object.freeze({year:2026,month:11,days:30,staffCount:10,source:'user-provided November 2569 roster image',hasUnverifiedNov30NightPosition:true});
 
+// december-2026-duty-roster.js
+/* December 2026 (ธันวาคม 2569) — cell-for-cell transcription from the user's
+   996×376 reference roster screenshot (2026-11-20).
+   Row order matches src/data.js / October / November.
+   Keep unnumbered N exactly where visible; do NOT silently assign N1/N2.
+   Yellow/red source H backgrounds are annotations, not inferred leave codes. */
+const DECEMBER_2026_DUTY_POSITIONS=Object.freeze([
+  Object.freeze("N1 N2 H H H H H H D1 D2 D3 H H D1 D2 D3 D4 D4 H H D4 D3 D2 D1 H H H H N1 N2 N1".split(' ')),
+  Object.freeze("N N1 N2 H H H N1 N2 N1 N2 H H H D2 D3 D4 H H H D2 D3 D4 H H D1 D2 D1 H H H H".split(' ')),
+  Object.freeze("D1 D2 D3 D4 H H H D1 D2 D3 D4 H H H H D1 D2 D3 H H D1 D2 D3 H H H H D1 D2 D3 H".split(' ')),
+  Object.freeze("H D1 D2 H H H D1 D2 D3 H H H H N1 N2 N1 H H H H N1 N2 N1 N2 N1 H H H D1 D2 D1".split(' ')),
+  Object.freeze("D2 D3 H H H D1 D2 D3 H H H N1 N2 N1 H H H N1 N2 N1 H H H D1 D2 H H D2 D3 D4 D2".split(' ')),
+  Object.freeze("D4 H H N1 N2 N H H H D1 D2 D1 D2 H H H D1 D2 D1 H H H D1 D2 D3 H H N2 N2 H H".split(' ')),
+  Object.freeze("H H N1 N2 N1 N2 N H H H N1 N2 N1 H H H N1 N2 N1 N2 H H H H D4 D1 D2 D3 H H H".split(' ')),
+  Object.freeze("H H D4 D3 D1 D2 H N1 N2 N1 N2 H H H N1 N2 N1 H H H H D1 D2 D3 H H H D4 D1 D2 H".split(' ')),
+  Object.freeze("H D4 D1 D2 H H H D1 D2 D3 D4 H H D4 D1 D2 D3 H H H N2 N1 N2 H H N2 N1 N2 H H H".split(' ')),
+  Object.freeze("D3 H H D1 D2 H H H H H H D2 D1 D3 D4 H H D1 D2 D1 D2 H H N2 N1 N2 N1 H H N1 N2".split(' ')),
+]);
+const DECEMBER_2026_SOURCE_HIGHLIGHTS=Object.freeze([
+  Object.freeze({yellow:Object.freeze([4,5,6,7]),red:Object.freeze([])}),
+  Object.freeze({yellow:Object.freeze([]),red:Object.freeze([31])}),
+  Object.freeze({yellow:Object.freeze([25]),red:Object.freeze([7,31])}),
+  Object.freeze({yellow:Object.freeze([10,11,12]),red:Object.freeze([])}),
+  Object.freeze({yellow:Object.freeze([]),red:Object.freeze([])}),
+  Object.freeze({yellow:Object.freeze([]),red:Object.freeze([7,31])}),
+  Object.freeze({yellow:Object.freeze([]),red:Object.freeze([31])}),
+  Object.freeze({yellow:Object.freeze([]),red:Object.freeze([7,31])}),
+  Object.freeze({yellow:Object.freeze([]),red:Object.freeze([7,31])}),
+  Object.freeze({yellow:Object.freeze([6,7,8,9,10,11]),red:Object.freeze([])}),
+]);
+const DECEMBER_2026_DUTY_META=Object.freeze({
+ year:2026,month:12,days:31,staffCount:10,
+ source:'user-supplied December 2569 roster image',
+ unnumberedNightCells:Object.freeze([[1,1],[5,6],[6,7]]),
+ notes:'Unnumbered N cells retained; background-highlighted H cells keep original source annotations.'
+});
+
 // v6535-november-view.js
 /* v6.5.35 — November 2569: independent read-only monthly view.
    October's existing 31-day panels remain untouched. */
@@ -12750,7 +12787,7 @@ function shiftNovSetDay(day,personIndex=null){
  shiftNovRevealSelectedDay();
 }
 function shiftNovChangeMonth(month){
- if(month!=='10'&&month!=='11')return;
+ if(!['10','11','12'].includes(month))return;
  shiftMonthDisplay=month;
  const panel=document.querySelector('#monthView .month-panel');
  if(panel)panel.dataset.shiftMonth=month;
@@ -12761,7 +12798,10 @@ function shiftNovChangeMonth(month){
  });
  const nov=document.getElementById('shiftNovemberView');
  if(nov)nov.hidden=month!=='11';
+ const dec=document.getElementById('shiftDecemberView');
+ if(dec)dec.hidden=month!=='12';
  try{localStorage.setItem('shift-month-view-2026',month)}catch{}
+ if(month==='12'&&typeof shiftDecRefresh==='function')shiftDecRefresh();
  if(month==='11'){
   shiftNovMarkDay();
   shiftNovRenderDetails();
@@ -12774,7 +12814,7 @@ function shiftNovInit(){
  if(staff.length!==NOVEMBER_2026_DUTY_POSITIONS.length)return;
  if(document.getElementById('shiftMonthTabs'))return;
  const tabs=document.createElement('div');tabs.id='shiftMonthTabs';tabs.className='shift-month-tabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','เลือกเดือนของตารางเวร');
- tabs.innerHTML='<button type="button" role="tab" data-shift-month="10" aria-controls="heatmapTable">ตุลาคม 2569</button><button type="button" role="tab" data-shift-month="11" aria-controls="shiftNovemberView">พฤศจิกายน 2569</button>';
+ tabs.innerHTML='<button type="button" role="tab" data-shift-month="10" aria-controls="heatmapTable">ตุลาคม 2569</button><button type="button" role="tab" data-shift-month="11" aria-controls="shiftNovemberView">พฤศจิกายน 2569</button><button type="button" role="tab" data-shift-month="12" aria-controls="shiftDecemberView">ธันวาคม 2569</button>';
  panel.prepend(tabs);
  const view=document.createElement('section');view.id='shiftNovemberView';view.className='shift-november-panel';view.hidden=true;
  view.innerHTML='<div class="shift-nov-title"><div><div class="eyebrow">MONTHLY HEATMAP • NOVEMBER 2026</div><h2>ตารางเวรทั้งทีม • พฤศจิกายน 2569</h2><p>10 พนักงาน • 30 วัน • D1–D4 / N1–N2 / H (หยุด)</p></div><span class="shift-nov-tag">ข้อมูลจากภาพตารางเวร</span></div>'+
@@ -12785,8 +12825,8 @@ function shiftNovInit(){
  '<div class="shift-nov-summary" aria-live="polite"></div>';
  panel.appendChild(view);
  shiftNovRenderGrid();
- let preferred='10';try{preferred=localStorage.getItem('shift-month-view-2026')||((new Date().getFullYear()===2026&&new Date().getMonth()===10)?'11':'10')}catch{}
- shiftNovChangeMonth(preferred==='11'?'11':'10');
+ let preferred='10';try{preferred=localStorage.getItem('shift-month-view-2026')||((new Date().getFullYear()===2026&&new Date().getMonth()===11)?'12':((new Date().getFullYear()===2026&&new Date().getMonth()===10)?'11':'10'))}catch{}
+ shiftNovChangeMonth(['10','11','12'].includes(preferred)?preferred:'10');
  panel.addEventListener('click',event=>{
   const button=event.target.closest('button');if(!button||!panel.contains(button))return;
   if(button.hasAttribute('data-shift-month')){shiftNovChangeMonth(button.dataset.shiftMonth);return;}
@@ -13664,11 +13704,11 @@ function shift731Today(){
 function shift731InitialMonth(today,search='',saved='10'){
  const query=new URLSearchParams(String(search).replace(/^\?/,''));
  const explicit=query.get('month');
- if(explicit==='10'||explicit==='11')return {month:explicit,openMonth:query.get('view')!=='overview'};
- // Nov 2026 takes priority over a stale October preference stored in previous visits.
- if(today.year===2026&&today.month===11)
-  return {month:'11',openMonth:query.get('view')==='month'};
- return {month:saved==='11'?'11':'10',openMonth:query.get('view')==='month'};
+ if(['10','11','12'].includes(explicit))return {month:explicit,openMonth:query.get('view')!=='overview'};
+ // Current November/December takes priority over stale October preferences.
+ if(today.year===2026&&[11,12].includes(today.month))
+  return {month:String(today.month),openMonth:query.get('view')==='month'};
+ return {month:['10','11','12'].includes(saved)?saved:'10',openMonth:query.get('view')==='month'};
 }
 function shift731MarkNavigation(){
  const isNov=document.getElementById('monthView')?.classList.contains('active')&&
@@ -13679,8 +13719,9 @@ function shift731MarkNavigation(){
  });
 }
 function shift731Open(month='11',{navigate=true,graphic=true}={}){
- if(month!=='10'&&month!=='11')month='11';
+ if(!['10','11','12'].includes(month))month='11';
  if(!document.getElementById('shiftNovemberView')&&typeof shiftNovInit==='function')shiftNovInit();
+ if(month==='12'&&!document.getElementById('shiftDecemberView')&&typeof shiftDecInit==='function')shiftDecInit();
  if(typeof shiftNovChangeMonth==='function')shiftNovChangeMonth(month);
  if(month==='11'&&graphic){
   if(!document.getElementById('shift72Graphic')&&typeof shift72Init==='function')shift72Init();
@@ -13746,7 +13787,7 @@ function shift731Boot(){
  document.documentElement.dataset.shift731='ready';
  document.documentElement.dataset.shiftRelease='7.3';
  const logo=document.querySelector('.command-bar .brand-copy p');
- if(logo)logo.textContent='October & November 2026 • Shift Viewer';
+ if(logo)logo.textContent='October–December 2026 • Shift Viewer';
 }
 if(typeof document!=='undefined'){
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',shift731Boot,{once:true});
@@ -13763,16 +13804,16 @@ let shift740Month=11;
 let shift740Day=1;
 let shift740Filter='ALL';
 const shift740Esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-const shift740Days=month=>month===10?31:30;
-const shift740MonthText=(month,en=false)=>en?(month===10?'October 2026':'November 2026'):(month===10?'ตุลาคม 2569':'พฤศจิกายน 2569');
-const shift740Source=month=>month===10?OCTOBER_2026_DUTY_POSITIONS:NOVEMBER_2026_DUTY_POSITIONS;
+const shift740Days=month=>month===10||month===12?31:30;
+const shift740MonthText=(month,en=false)=>en?({10:'October 2026',11:'November 2026',12:'December 2026'}[month]||'2026'):({10:'ตุลาคม 2569',11:'พฤศจิกายน 2569',12:'ธันวาคม 2569'}[month]||'2569');
+const shift740Source=month=>({10:OCTOBER_2026_DUTY_POSITIONS,11:NOVEMBER_2026_DUTY_POSITIONS,12:DECEMBER_2026_DUTY_POSITIONS})[month];
 function shift740Today(){
  const parts=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Bangkok',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
  const v={};for(const p of parts)if(['year','month','day'].includes(p.type))v[p.type]=Number(p.value);
  return v;
 }
 function shift740Model(month,day){
- if(![10,11].includes(month)||!Number.isInteger(day)||day<1||day>shift740Days(month))
+ if(![10,11,12].includes(month)||!Number.isInteger(day)||day<1||day>shift740Days(month))
   throw new RangeError('Shift V7.4: invalid period');
  const source=shift740Source(month);
  if(!Array.isArray(source)||!Array.isArray(staff)||source.length!==staff.length)
@@ -13898,7 +13939,7 @@ function shift740Markup(month,day){
  '<h2 class="end770-title"><span>เวรทั้งทีม.</span><em>ทั้งเดือน.</em></h2>'+
  '<p>ดูทุกวันของทั้งทีมได้ในที่เดียว · D1–D4 / N1–N2 / H · กดวันที่เพื่อดูผู้รับผิดชอบ</p></div>'+
  '<span class="end770-hero-mark" aria-hidden="true"><b>'+total+'</b><small>DAYS<br>2026</small></span>'+ '<div class="s740-control"><div class="s740-months" role="group" aria-label="เลือกเดือนของภาพรวม">'+
- [[10,'ตุลาคม'],[11,'พฤศจิกายน']].map(([value,title])=>
+ [[10,'ตุลาคม'],[11,'พฤศจิกายน'],[12,'ธันวาคม']].map(([value,title])=>
  '<button type="button" data-s740-month="'+value+'" aria-pressed="'+(value===month)+'">'+title+'</button>').join('')+
  '</div><div class="s740-actions"><button type="button" data-s740-action="today">วันนี้</button>'+
  '<button type="button" class="s740-more" data-s740-action="open">เปิดหน้าตารางเวร ↗</button></div></div></div>'+
@@ -13907,7 +13948,7 @@ function shift740Markup(month,day){
  '<div class="s740-layout">'+shift740Calendar(month,day)+
  '<aside class="s740-detail" id="shift740Detail">'+shift740Crew(shift740Model(month,day))+'</aside></div>'+
  shift740Matrix(month,day)+
- '<p class="s740-source-note">ข้อมูลเวรอ้างอิงตารางจริงเดือนตุลาคมและพฤศจิกายน 2569 • วันที่ 30 พ.ย. มี N1 ซ้ำและไม่มี N2 ตามต้นฉบับ (ยังไม่แก้เอง)</p>';
+ '<p class="s740-source-note">'+(month===12?'ข้อมูลตามภาพอ้างอิงธันวาคม 2569 • วันที่ 1, 6, 7 มีรหัส N ที่ไม่ได้ระบุหมายเลขกะ และช่อง H สีพิเศษแสดงตามภาพ ไม่เติมตำแหน่งเอง':month===11?'ข้อมูลตามภาพอ้างอิงพฤศจิกายน 2569 • วันที่ 30 พ.ย. มี N1 ซ้ำ ไม่มี N2 ตามภาพต้นฉบับ':'ข้อมูลตามภาพอ้างอิงตุลาคม 2569')+'</p>';
 }
 /* Update only the old/new day columns, instead of touching 300–310 roster cells per click. */
 function shift740MarkSelection(scroll=false){
@@ -13967,7 +14008,7 @@ function shift740Render(){
 }
 function shift740SetMonth(month){
  month=Number(month);
- if(month!==10&&month!==11||month===shift740Month)return;
+ if(![10,11,12].includes(month)||month===shift740Month)return;
  shift740Month=month;
  const now=shift740Today();
  shift740Day=now.year===2026&&now.month===month?now.day:Math.min(shift740Day,shift740Days(month));
@@ -13980,7 +14021,11 @@ function shift740SetDay(day){
  shift740MarkSelection();
 }
 function shift740OpenDetail(personIndex=null){
- if(shift740Month===11){
+ if(shift740Month===12){
+  if(typeof shift731Open==='function')shift731Open('12',{navigate:true,graphic:false});
+  else{showView('month');shiftNovChangeMonth('12');}
+  if(typeof shiftDecSetDay==='function')shiftDecSetDay(shift740Day,personIndex);
+ }else if(shift740Month===11){
   if(typeof shift731Open==='function')shift731Open('11',{navigate:true,graphic:true});
   else{showView('month');shiftNovChangeMonth('11');}
   if(typeof shiftNovSetDay==='function')shiftNovSetDay(shift740Day,personIndex);
@@ -14002,9 +14047,9 @@ function shift740AddVisualLab(overview){
 function shift740Mount(){
  const overview=document.getElementById('overviewView');
  if(!overview||document.getElementById('shift740FullMonth'))return;
- if(typeof OCTOBER_2026_DUTY_POSITIONS==='undefined'||typeof NOVEMBER_2026_DUTY_POSITIONS==='undefined')return;
+ if(typeof OCTOBER_2026_DUTY_POSITIONS==='undefined'||typeof NOVEMBER_2026_DUTY_POSITIONS==='undefined'||typeof DECEMBER_2026_DUTY_POSITIONS==='undefined')return;
  const now=shift740Today();
- shift740Month=now.year===2026&&[10,11].includes(now.month)?now.month:11;
+ shift740Month=now.year===2026&&[10,11,12].includes(now.month)?now.month:11;
  shift740Day=now.year===2026&&now.month===shift740Month?now.day:1;
  const host=document.createElement('section');
  host.id='shift740FullMonth';host.className='s740-board';
@@ -14021,7 +14066,7 @@ function shift740Mount(){
   }
   if(button.dataset.s740Action==='today'){
    const date=shift740Today();
-   if(date.year===2026&&[10,11].includes(date.month)){
+   if(date.year===2026&&[10,11,12].includes(date.month)){
     if(shift740Month===date.month)shift740SetDay(date.day);
     else{shift740Month=date.month;shift740Day=date.day;shift740Render();}
    }else shift740SetMonth(11);
@@ -14036,6 +14081,221 @@ function shift740Mount(){
 if(typeof document!=='undefined'){
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',shift740Mount,{once:true});
  else shift740Mount();
+}
+
+// v1200-december-view.js
+/* Shift V12 — December 2569 schedule, faithfully using uploaded cell data.
+   This module is presentation-only; existing Oct/Nov source data remains untouched. */
+const SHIFT_DEC_WEEKDAYS=['Su','Mo','Tu','We','Th','Fr','Sa'];
+const SHIFT_DEC_POSTS=['D1','D2','D3','D4','N1','N2'];
+let shiftDecSelectedDay=1;
+let shiftDecFocusPerson=null;
+const shiftDecEsc=x=>String(x??'').replace(/[&<>"']/g,k=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[k]));
+const shiftDecRoster=()=>DECEMBER_2026_DUTY_POSITIONS;
+function shiftDecToday(){
+ const p=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Bangkok',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+ const today={};for(const item of p)if(['year','month','day'].includes(item.type))today[item.type]=Number(item.value);
+ return today.year===2026&&today.month===12?today.day:null;
+}
+function shiftDecHighlight(person,day){
+ const tags=DECEMBER_2026_SOURCE_HIGHLIGHTS[person];
+ if(tags.red.includes(day))return 'source-red';
+ if(tags.yellow.includes(day))return 'source-yellow';
+ return '';
+}
+function shiftDecCounts(day){
+ const roles=shiftDecRoster().map((row,index)=>({index,code:row[day-1],name:staff[index]?.name||'—'}));
+ return {
+  roles,
+  day:roles.filter(r=>r.code.startsWith('D')),
+  night:roles.filter(r=>r.code.startsWith('N')),
+  off:roles.filter(r=>r.code==='H'),
+  unspecified:roles.filter(r=>r.code==='N')
+ };
+}
+function shiftDecTable(){
+ const dates=Array.from({length:31},(_,i)=>i+1);
+ const weekend=day=>[0,6].includes(new Date(2026,11,day).getDay());
+ const heads=dates.map(day=>
+  '<th class="shift-dec-day'+(weekend(day)?' weekend':'')+'" data-shiftdec-day="'+day+'" scope="col">'+
+  '<button type="button" data-shiftdec-day="'+day+'" aria-pressed="'+(day===shiftDecSelectedDay)+'" aria-label="เลือกวันที่ '+day+' ธันวาคม 2569">'+
+  '<small>'+SHIFT_DEC_WEEKDAYS[new Date(2026,11,day).getDay()]+'</small><b>'+day+'</b></button></th>'
+ ).join('');
+ const cells=shiftDecRoster().map((row,index)=>{
+  const person=staff[index]?.name||'—';
+  const name=shiftDecEsc(person);
+  const duty=row.map((code,i)=>{
+   const day=i+1;
+   const tone=code==='H'?'H':code[0];
+   const special=shiftDecHighlight(index,day);
+   const explanation=code==='N'?'N (ต้นฉบับไม่ได้ระบุ N1/N2)':code==='H'?'H (หยุด)':code+' (ตำแหน่งเวร)';
+   return '<td class="shift-dec-cell '+tone+(special?' '+special:'')+(day===shiftDecSelectedDay?' is-selected':'')+
+    '" data-shiftdec-day="'+day+'"><button type="button" data-shiftdec-person="'+index+'" data-shiftdec-day="'+day+'"'+
+    ' title="'+shiftDecEsc(person+' • '+day+' ธันวาคม 2569 • '+explanation)+'"'+
+    ' aria-label="'+shiftDecEsc(person+' วันที่ '+day+' ธันวาคม 2569 '+explanation)+'">'+code+'</button></td>';
+  }).join('');
+  return '<tr><th class="shift-dec-name" scope="row" title="'+name+'"><span>'+name+'</span></th>'+duty+'</tr>';
+ }).join('');
+ const totals=(kind)=>dates.map(day=>{
+  const data=shiftDecCounts(day),n=kind==='D'?data.day.length:kind==='N'?data.night.length:data.off.length;
+  return '<td class="shift-dec-total" data-shiftdec-day="'+day+'">'+n+'</td>';
+ }).join('');
+ return '<div class="shift-dec-scroll-help">เลื่อนในกรอบเพื่อดูวันที่ 1–31 • เลือกช่องเพื่อดูตำแหน่งเวรและรายชื่อ • H = หยุด</div>'+
+ '<div class="shift-dec-scroll" role="region" tabindex="0" aria-label="ตารางเวรธันวาคม 2569 เลื่อนแนวนอนได้">'+
+ '<table class="shift-dec-table" aria-label="ตารางเวรเดือนธันวาคม 2569 จำนวน 10 คน 31 วัน">'+
+ '<thead><tr><th class="shift-dec-name" scope="col">ชื่อพนักงาน</th>'+heads+'</tr></thead>'+
+ '<tbody>'+cells+'</tbody>'+
+ '<tfoot><tr><th class="shift-dec-name" scope="row">DAY • รวมคน</th>'+totals('D')+'</tr>'+
+ '<tr><th class="shift-dec-name" scope="row">NIGHT • รวมคน</th>'+totals('N')+'</tr>'+
+ '<tr><th class="shift-dec-name" scope="row">H • รวมคน</th>'+totals('H')+'</tr></tfoot></table></div>';
+}
+function shiftDecDetails(){
+ const host=document.querySelector('#shiftDecemberView .shift-dec-summary');
+ if(!host)return;
+ const day=shiftDecSelectedDay,m=shiftDecCounts(day);
+ const positions=SHIFT_DEC_POSTS.map(post=>({code:post,people:m.roles.filter(r=>r.code===post)}));
+ const repeated=positions.filter(x=>x.people.length>1);
+ const unknown=m.unspecified.length>0;
+ const warnings=[];
+ if(unknown)warnings.push('มี N ที่ต้นฉบับไม่ได้ระบุหมายเลขกะ: '+m.unspecified.map(p=>p.name).join(', '));
+ if(repeated.length)warnings.push('ตำแหน่งซ้ำ: '+repeated.map(p=>p.code).join(', '));
+ // Missing positions may mean reduced coverage on a public holiday; show without inventing workers.
+ const missing=positions.filter(p=>p.people.length===0);
+ if(missing.length)warnings.push('ไม่มีผู้รับตำแหน่ง '+missing.map(p=>p.code).join(', ')+' ในภาพ');
+ const roster=positions.map(p=>
+  '<div class="shift-dec-post '+p.code[0]+'"><b>'+p.code+'</b>'+
+  '<span>'+(p.people.length?p.people.map(x=>'<button type="button" class="shift-dec-post-person'+(x.index===shiftDecFocusPerson?' highlighted':'')+'" data-shiftdec-person="'+x.index+'" data-shiftdec-day="'+day+'">'+shiftDecEsc(x.name)+'</button>').join(' / '):'— ไม่ปรากฏในภาพ')+'</span></div>'
+ ).join('');
+ const other=unknown?'<div class="shift-dec-post unresolved"><b>N?</b><span>'+m.unspecified.map(p=>shiftDecEsc(p.name)).join(' / ')+'</span></div>':'';
+ const off='<div class="shift-dec-rest"><b>H • หยุด '+m.off.length+' คน</b><span>'+m.off.map(p=>shiftDecEsc(p.name)).join(' • ')+'</span></div>';
+ const notice=warnings.length?'<p class="shift-dec-warning">'+warnings.map(shiftDecEsc).join(' • ')+'<br><small>แสดงค่าตามภาพ ไม่กำหนดกะที่ไม่ได้ระบุเอง</small></p>':'';
+ host.innerHTML='<div class="shift-dec-details-top"><div><span>SELECTED DATE / TEAM COVERAGE</span><h3>'+day+' ธันวาคม 2569</h3></div>'+
+ '<div class="shift-dec-day-controls"><button type="button" data-shiftdec-adjacent="-1"'+(day===1?' disabled':'')+'>‹ ก่อนหน้า</button>'+
+ '<button type="button" data-shiftdec-adjacent="1"'+(day===31?' disabled':'')+'>ถัดไป ›</button></div></div>'+
+ '<div class="shift-dec-kpis"><div><span>DAY</span><strong>'+m.day.length+'</strong><small>ตำแหน่งกลางวัน</small></div>'+
+ '<div><span>NIGHT</span><strong>'+m.night.length+'</strong><small>รวม N ไม่ระบุเลข</small></div>'+
+ '<div><span>HOLIDAY</span><strong>'+m.off.length+'</strong><small>หยุด H</small></div></div>'+
+ notice+'<div class="shift-dec-posts">'+roster+other+'</div>'+off;
+}
+function shiftDecMarkDay(){
+ const view=document.getElementById('shiftDecemberView');
+ if(!view)return;
+ view.querySelectorAll('.shift-dec-table [data-shiftdec-day]').forEach(node=>{
+  const selected=Number(node.dataset.shiftdecDay)===shiftDecSelectedDay;
+  node.classList.toggle('is-selected',selected);
+  if(node.matches('button'))node.setAttribute('aria-pressed',String(selected));
+ });
+ shiftDecDetails();
+}
+function shiftDecRevealDay(){
+ const scroll=document.querySelector('#shiftDecemberView .shift-dec-scroll');
+ const btn=scroll?.querySelector('thead button[data-shiftdec-day="'+shiftDecSelectedDay+'"]');
+ if(!scroll||!btn)return;
+ const rect=scroll.getBoundingClientRect(),dayRect=btn.getBoundingClientRect();
+ const pinned=scroll.querySelector('tbody th.shift-dec-name')?.getBoundingClientRect().width||0;
+ if(dayRect.left<rect.left+pinned+6)scroll.scrollLeft-=rect.left+pinned+6-dayRect.left;
+ else if(dayRect.right>rect.right-8)scroll.scrollLeft+=dayRect.right-(rect.right-8);
+}
+function shiftDecSetDay(value,personIndex=null){
+ const day=Number(value);
+ if(!Number.isInteger(day)||day<1||day>31)return;
+ shiftDecSelectedDay=day;
+ shiftDecFocusPerson=personIndex;
+ shiftDecMarkDay();
+ if(typeof requestAnimationFrame==='function')requestAnimationFrame(shiftDecRevealDay);
+}
+function shiftDecRefresh(){
+ const view=document.getElementById('shiftDecemberView');
+ if(!view)return;
+ if(!view.querySelector('.shift-dec-table')){
+  const grid=view.querySelector('.shift-dec-main');
+  if(grid)grid.innerHTML=shiftDecTable();
+ }
+ shiftDecMarkDay();
+}
+function shiftDecMarkNavigation(){
+ const shown=document.querySelector('#monthView .month-panel')?.dataset.shiftMonth==='12'&&
+  document.getElementById('monthView')?.classList.contains('active');
+ document.querySelectorAll('[data-shiftdec-open]').forEach(button=>{
+  button.classList.toggle('shift731-active',Boolean(shown));
+  button.setAttribute('aria-current',shown?'page':'false');
+ });
+}
+function shiftDecInsertNavigation(){
+ const nav=document.querySelector('.command-bar .nav-tabs');
+ if(nav&&!nav.querySelector('[data-shiftdec-open]')){
+  const btn=document.createElement('button');btn.type='button';
+  btn.className='nav-btn shift-dec-navigation';btn.setAttribute('data-shiftdec-open','');
+  btn.setAttribute('aria-label','เปิดตารางเวรธันวาคม 2569');
+  btn.innerHTML='<b>▦ ธันวาคม</b><span>December 2026</span>';nav.appendChild(btn);
+ }
+ const mobile=document.getElementById('mobileNav');
+ if(mobile&&!mobile.querySelector('[data-shiftdec-open]')){
+  const btn=document.createElement('button');btn.type='button';
+  btn.className='shift-dec-mobile-btn';btn.setAttribute('data-shiftdec-open','');
+  btn.setAttribute('aria-label','เปิดตารางเวรธันวาคม 2569');
+  btn.innerHTML='<b>▦</b>ธ.ค.';
+  const november=mobile.querySelector('[data-shift731-open-nov]');
+  const month=mobile.querySelector('[data-view="month"]');
+  if(november)november.after(btn);
+  else if(month)month.after(btn);
+  else mobile.appendChild(btn);
+ }
+}
+function shiftDecInit(){
+ const panel=document.querySelector('#monthView .month-panel');
+ if(!panel||document.getElementById('shiftDecemberView'))return;
+ if(!Array.isArray(staff)||staff.length!==10||typeof DECEMBER_2026_DUTY_POSITIONS==='undefined'||
+  DECEMBER_2026_DUTY_POSITIONS.length!==10||DECEMBER_2026_DUTY_POSITIONS.some(row=>row.length!==31))return;
+ const tabs=document.getElementById('shiftMonthTabs');
+ if(!tabs&&typeof shiftNovInit==='function')shiftNovInit();
+ const control=document.getElementById('shiftMonthTabs');
+ if(control&&!control.querySelector('[data-shift-month="12"]')){
+  const tab=document.createElement('button');tab.type='button';tab.setAttribute('role','tab');
+  tab.dataset.shiftMonth='12';tab.setAttribute('aria-controls','shiftDecemberView');
+  tab.textContent='ธันวาคม 2569';control.appendChild(tab);
+ }
+ const view=document.createElement('section');
+ view.id='shiftDecemberView';view.className='shift-december-panel';view.hidden=true;
+ view.innerHTML='<div class="shift-dec-title"><div><span class="shift-dec-kicker">TEAM ROSTER / DECEMBER 2026</span>'+
+ '<h2>ตารางเวรทั้งทีม • ธันวาคม 2569</h2>'+
+ '<p>10 พนักงาน • 31 วัน • D1–D4 / N1–N2 / H • ตามภาพต้นฉบับ</p></div>'+
+ '<button class="shift-dec-today" type="button" data-shiftdec-action="today">วันนี้</button></div>'+
+ '<div class="shift-dec-source-note">ตามภาพต้นฉบับ: วันที่ 1, 6 และ 7 มีรหัส N ไม่ระบุหมายเลขกะ; สีเหลือง/แดงของช่อง H เป็นไฮไลต์จากภาพ ไม่ได้ตีความเป็นประเภทลา</div>'+
+ '<div class="shift-dec-main"></div><section class="shift-dec-summary" aria-live="polite"></section>';
+ panel.appendChild(view);
+ const today=shiftDecToday();
+ shiftDecSelectedDay=today||1;
+ shiftDecRefresh();
+ shiftDecInsertNavigation();
+ view.addEventListener('click',event=>{
+  const btn=event.target.closest('button');
+  if(!btn||!view.contains(btn))return;
+  if(btn.dataset.shiftdecAction==='today'){shiftDecSetDay(shiftDecToday()||1);return;}
+  if(btn.hasAttribute('data-shiftdec-adjacent')){
+   shiftDecSetDay(shiftDecSelectedDay+Number(btn.dataset.shiftdecAdjacent));return;
+  }
+  if(btn.hasAttribute('data-shiftdec-day')){
+   shiftDecSetDay(Number(btn.dataset.shiftdecDay),btn.hasAttribute('data-shiftdec-person')?Number(btn.dataset.shiftdecPerson):null);
+  }
+ });
+ document.addEventListener('click',event=>{
+  const direct=event.target.closest?.('[data-shiftdec-open]');
+  if(direct){
+   event.preventDefault();
+   if(typeof shift731Open==='function')shift731Open('12',{navigate:true,graphic:false});
+   else{if(typeof showView==='function')showView('month');shiftNovChangeMonth('12');}
+   queueMicrotask(shiftDecMarkNavigation);
+  }else if(event.target.closest?.('[data-view],[data-shift-month],[data-shift731-open-nov]')){
+   queueMicrotask(shiftDecMarkNavigation);
+  }
+ });
+ if(panel.dataset.shiftMonth==='12')shiftNovChangeMonth('12');
+ shiftDecMarkNavigation();
+}
+if(typeof document!=='undefined'){
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',shiftDecInit,{once:true});
+ else shiftDecInit();
 }
 
 // v780-editorial-cohesion.js
@@ -14183,6 +14443,316 @@ if(typeof document!=='undefined'){
 }
 
 })();</script>
+<style id="v1200-december-view-style">
+/* December 2569 — spreadsheet-fidelity information architecture in the
+   user's MEK CONTROL black/lime theme. All colors derive from V11 tokens. */
+#monthView .month-panel[data-shift-month="12"] > :not(#shiftMonthTabs):not(#shiftDecemberView){
+ display:none!important;
+}
+#monthView #shiftDecemberView[hidden]{display:none!important}
+#monthView #shiftDecemberView{
+ display:block;width:100%;min-width:0;max-width:100%;
+ padding:clamp(12px,2vw,24px);
+ background:var(--sh87-panel,#0E1219);color:var(--sh87-fg,#F2F5F8);
+ border:1px solid var(--sh87-border,#303846);border-radius:14px;
+ box-sizing:border-box;
+}
+#monthView #shiftDecemberView .shift-dec-title{
+ display:flex;justify-content:space-between;align-items:center;
+ gap:16px;flex-wrap:wrap;margin:0 0 16px;
+}
+#monthView #shiftDecemberView .shift-dec-kicker{
+ display:block;font-size:11px;line-height:1.4;font-weight:800;
+ letter-spacing:.095em;color:var(--sh87-accent,#C8FF47);
+}
+#monthView #shiftDecemberView .shift-dec-title h2{
+ margin:6px 0!important;
+ color:var(--sh87-fg,#F2F5F8)!important;
+ font-size:clamp(20px,2.1vw,29px)!important;
+ line-height:1.28!important;
+ letter-spacing:-.025em!important;overflow-wrap:anywhere;
+}
+#monthView #shiftDecemberView .shift-dec-title p{
+ margin:0;color:var(--sh87-muted,#AEB9C8);
+ font-size:12px;line-height:1.55;
+}
+#monthView #shiftDecemberView :is(.shift-dec-today,.shift-dec-day-controls button){
+ min-height:37px;padding:8px 13px;border:1px solid var(--sh87-border,#303846);
+ border-radius:8px;background:var(--sh87-card,#111820);
+ color:var(--sh87-fg,#F2F5F8);font:inherit;font-size:12px;
+ cursor:pointer;box-shadow:none;
+}
+#monthView #shiftDecemberView .shift-dec-today{
+ background:var(--sh87-accent,#C8FF47);
+ color:var(--sh87-accent-fg,#111609);
+ border-color:var(--sh87-accent,#C8FF47);font-weight:800;
+}
+#monthView #shiftDecemberView .shift-dec-day-controls{
+ display:flex;align-items:center;gap:7px;flex-wrap:wrap;
+}
+#monthView #shiftDecemberView button:disabled{opacity:.4;cursor:not-allowed}
+#monthView #shiftDecemberView button:focus-visible{
+ outline:2px solid var(--sh87-accent,#C8FF47);outline-offset:3px;
+}
+#monthView #shiftDecemberView .shift-dec-source-note{
+ padding:12px 14px;border:1px solid var(--sh87-border,#303846);
+ border-left:3px solid #A98A50;border-radius:9px;
+ background:var(--sh87-soft,#19212C);
+ color:var(--sh87-muted,#AEB9C8);
+ font-size:12px;line-height:1.6;margin:0 0 14px;
+}
+#monthView #shiftDecemberView .shift-dec-scroll-help{
+ color:var(--sh87-muted,#AEB9C8);font-size:12px;
+ line-height:1.5;margin:0 0 10px;
+}
+#monthView #shiftDecemberView .shift-dec-scroll{
+ overflow-x:auto;overflow-y:auto;
+ max-width:100%;width:100%;min-width:0;
+ border:1px solid var(--sh87-border,#303846);border-radius:11px;
+ scrollbar-color:var(--sh87-border,#303846) var(--sh87-panel,#0E1219);
+ scrollbar-width:thin;overscroll-behavior-x:contain;
+ background:var(--sh87-shell,#050508);
+}
+#monthView #shiftDecemberView .shift-dec-table{
+ width:max-content;min-width:100%;
+ table-layout:fixed;border-collapse:separate;border-spacing:1px;
+ font-size:12px;font-variant-numeric:tabular-nums;
+ color:var(--sh87-fg,#F2F5F8);
+}
+#monthView #shiftDecemberView .shift-dec-table :is(th,td){
+ box-sizing:border-box;padding:0;text-align:center;
+ border:1px solid var(--sh87-border,#303846);
+ border-radius:2px;white-space:nowrap;
+}
+#monthView #shiftDecemberView .shift-dec-table thead th{
+ position:sticky;top:0;z-index:2;
+ background:var(--sh87-soft,#19212C);
+ color:var(--sh87-fg,#F2F5F8);
+ min-width:52px;
+}
+#monthView #shiftDecemberView .shift-dec-day.weekend{
+ background:var(--sh87-card,#111820);
+}
+#monthView #shiftDecemberView .shift-dec-table .shift-dec-name{
+ position:sticky;left:0;z-index:3;
+ box-sizing:border-box;min-width:218px;width:218px;max-width:218px;
+ background:var(--sh87-panel,#0E1219);
+ color:var(--sh87-fg,#F2F5F8);
+ text-align:left;padding:9px 12px;
+ font-size:12px;line-height:1.4;font-weight:680;
+ white-space:normal;overflow-wrap:anywhere;
+}
+#monthView #shiftDecemberView .shift-dec-table thead .shift-dec-name{
+ z-index:5;background:var(--sh87-soft,#19212C);
+}
+#monthView #shiftDecemberView .shift-dec-table tfoot .shift-dec-name{
+ background:var(--sh87-soft,#19212C);
+ font-weight:800;
+}
+#monthView #shiftDecemberView .shift-dec-day button{
+ display:flex;flex-direction:column;align-items:center;
+ justify-content:center;gap:4px;width:100%;min-width:51px;
+ min-height:59px;padding:7px 3px;
+ background:transparent;border:0;border-radius:0;
+ color:inherit;font:inherit;cursor:pointer;
+}
+#monthView #shiftDecemberView .shift-dec-day button small{
+ color:var(--sh87-muted,#AEB9C8);
+ font-size:11px;line-height:1.15;
+}
+#monthView #shiftDecemberView .shift-dec-day button b{
+ font-size:13px;line-height:1.2;color:var(--sh87-fg,#F2F5F8);
+}
+#monthView #shiftDecemberView .shift-dec-day.is-selected{
+ border-bottom:3px solid var(--sh87-accent,#C8FF47);
+ background:var(--sh87-soft,#19212C);
+}
+#monthView #shiftDecemberView .shift-dec-cell{
+ min-width:52px;height:41px;
+ background:var(--sh87-card,#111820);
+}
+#monthView #shiftDecemberView .shift-dec-cell button{
+ width:100%;height:40px;min-width:50px;
+ border:0;background:transparent;color:inherit;
+ font:inherit;font-size:12px;font-weight:800;
+ line-height:1.2;cursor:pointer;
+}
+#monthView #shiftDecemberView .shift-dec-cell.D{
+ background:var(--shift10-day-bg,#1B3227);
+ color:var(--shift10-day-text,#C3E7CD);
+}
+#monthView #shiftDecemberView .shift-dec-cell.N{
+ background:var(--shift10-night-bg,#1F2B46);
+ color:var(--shift10-night-text,#C7D8F5);
+}
+#monthView #shiftDecemberView .shift-dec-cell.H{
+ background:var(--shift10-off-bg,#322835);
+ color:var(--shift10-off-text,#E4CADA);
+}
+#monthView #shiftDecemberView .shift-dec-cell.N:has(button:first-child){
+ border-color:var(--sh87-border,#303846);
+}
+/* Source-only color annotations: no invented leave/incident meaning. */
+#monthView #shiftDecemberView .shift-dec-cell.source-yellow{
+ background:#352E16;color:#F5E5A7;border-color:#988140;
+}
+#monthView #shiftDecemberView .shift-dec-cell.source-red{
+ background:#3A2026;color:#F2C1CA;border-color:#A85D69;
+}
+html[data-shift-theme="light"] #shiftDecemberView .shift-dec-cell.source-yellow{
+ background:#F0E4BD;color:#5F491B;border-color:#BDA05D;
+}
+html[data-shift-theme="light"] #shiftDecemberView .shift-dec-cell.source-red{
+ background:#F3D9DC;color:#793E48;border-color:#BB7B84;
+}
+#monthView #shiftDecemberView .shift-dec-cell.is-selected{
+ outline:2px solid var(--sh87-accent,#C8FF47);
+ outline-offset:-2px;position:relative;z-index:1;
+}
+#monthView #shiftDecemberView .shift-dec-cell button:hover{
+ box-shadow:inset 0 0 0 2px var(--sh87-accent,#C8FF47);
+}
+#monthView #shiftDecemberView .shift-dec-total{
+ height:31px;background:var(--sh87-soft,#19212C);
+ color:var(--sh87-fg,#F2F5F8);font-weight:750;
+}
+#monthView #shiftDecemberView .shift-dec-summary{
+ margin-top:16px;padding:clamp(12px,1.7vw,19px);
+ border:1px solid var(--sh87-border,#303846);
+ background:var(--sh87-card,#111820);
+ border-radius:12px;min-width:0;
+}
+#monthView #shiftDecemberView .shift-dec-details-top{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:12px;flex-wrap:wrap;
+}
+#monthView #shiftDecemberView .shift-dec-details-top span{
+ color:var(--sh87-muted,#AEB9C8);font-size:11px;
+ font-weight:800;letter-spacing:.055em;
+}
+#monthView #shiftDecemberView .shift-dec-details-top h3{
+ margin:3px 0 0;color:var(--sh87-fg,#F2F5F8);
+ font-size:clamp(17px,1.7vw,24px);
+}
+#monthView #shiftDecemberView .shift-dec-kpis{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:10px;margin:15px 0;
+}
+#monthView #shiftDecemberView .shift-dec-kpis>div{
+ display:flex;flex-direction:column;align-items:flex-start;
+ padding:13px 15px;min-width:0;
+ background:var(--sh87-panel,#0E1219);
+ border:1px solid var(--sh87-border,#303846);
+ border-radius:10px;
+}
+#monthView #shiftDecemberView .shift-dec-kpis span{
+ color:var(--sh87-muted,#AEB9C8);
+ font-size:11px;font-weight:750;letter-spacing:.06em;
+}
+#monthView #shiftDecemberView .shift-dec-kpis strong{
+ font-size:clamp(24px,3.4vw,35px);line-height:1.15;
+ color:var(--sh87-fg,#F2F5F8);
+}
+#monthView #shiftDecemberView .shift-dec-kpis small{
+ color:var(--sh87-muted,#AEB9C8);font-size:11px;
+}
+#monthView #shiftDecemberView .shift-dec-warning{
+ color:#F1C694;background:#332918;
+ border:1px solid #82643C;border-radius:9px;
+ font-size:12px;line-height:1.6;padding:11px 13px;
+}
+html[data-shift-theme="light"] #shiftDecemberView .shift-dec-warning{
+ color:#6D4B1C;background:#F1E6CD;border-color:#C5A671;
+}
+#monthView #shiftDecemberView .shift-dec-warning small{
+ font-size:11px;color:inherit;
+}
+#monthView #shiftDecemberView .shift-dec-posts{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:10px;margin:14px 0;
+}
+#monthView #shiftDecemberView .shift-dec-post{
+ min-width:0;display:flex;align-items:flex-start;gap:9px;
+ border:1px solid var(--sh87-border,#303846);
+ border-radius:9px;background:var(--sh87-panel,#0E1219);
+ padding:11px;
+}
+#monthView #shiftDecemberView .shift-dec-post b{
+ display:grid;place-items:center;flex-shrink:0;
+ min-width:35px;min-height:31px;
+ background:var(--sh87-soft,#19212C);
+ border:1px solid var(--sh87-border,#303846);
+ color:var(--sh87-fg,#F2F5F8);border-radius:7px;
+}
+#monthView #shiftDecemberView .shift-dec-post>span{
+ min-width:0;font-size:12px;
+ color:var(--sh87-muted,#AEB9C8);overflow-wrap:anywhere;
+}
+#monthView #shiftDecemberView .shift-dec-post-person{
+ background:transparent;color:var(--sh87-fg,#F2F5F8);
+ text-align:left;border:0;cursor:pointer;font:inherit;
+ padding:0;white-space:normal;overflow-wrap:anywhere;
+}
+#monthView #shiftDecemberView .shift-dec-post-person.highlighted{
+ color:var(--sh87-accent,#C8FF47);font-weight:850;
+}
+#monthView #shiftDecemberView .shift-dec-post.unresolved b{
+ border-color:#A98A50;color:#F5DDA0;
+}
+#monthView #shiftDecemberView .shift-dec-rest{
+ display:grid;gap:6px;
+ padding:12px 14px;border-radius:9px;
+ border:1px solid var(--sh87-border,#303846);
+ background:var(--sh87-soft,#19212C);
+ color:var(--sh87-muted,#AEB9C8);
+}
+#monthView #shiftDecemberView .shift-dec-rest b{
+ font-size:12px;color:var(--sh87-fg,#F2F5F8);
+}
+#monthView #shiftDecemberView .shift-dec-rest span{
+ font-size:12px;line-height:1.6;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .nav-tabs .shift-dec-navigation{
+ min-width:108px!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .nav-tabs .shift-dec-navigation.shift731-active,
+html[data-shift780="ready"][data-shift-theme] #mobileNav .shift-dec-mobile-btn.shift731-active{
+ background:var(--sh87-accent,#C8FF47)!important;
+ color:var(--sh87-accent-fg,#111609)!important;
+ border-color:var(--sh87-accent,#C8FF47)!important;
+}
+html[data-shift780="ready"][data-shift-theme] .command-bar .nav-tabs .shift-dec-navigation.shift731-active :is(b,span){
+ color:var(--sh87-accent-fg,#111609)!important;
+ -webkit-text-fill-color:var(--sh87-accent-fg,#111609)!important;
+}
+#shiftMonthTabs [data-shift-month="12"].active{
+ background:var(--sh87-accent,#C8FF47)!important;
+ color:var(--sh87-accent-fg,#111609)!important;
+ border-color:var(--sh87-accent,#C8FF47)!important;
+ box-shadow:none!important;
+}
+@media(max-width:900px){
+ #monthView #shiftDecemberView .shift-dec-posts{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:600px){
+ #monthView #shiftDecemberView .shift-dec-table .shift-dec-name{
+  min-width:172px;width:172px;max-width:172px;padding:8px;
+  font-size:11px;
+ }
+ #monthView #shiftDecemberView .shift-dec-posts{grid-template-columns:minmax(0,1fr)}
+ #monthView #shiftDecemberView .shift-dec-kpis{gap:6px}
+ #monthView #shiftDecemberView .shift-dec-kpis>div{padding:10px}
+ #monthView #shiftDecemberView .shift-dec-details-top{align-items:flex-start}
+ #monthView #shiftDecemberView .shift-dec-title{align-items:flex-start}
+ #monthView #shiftDecemberView .shift-dec-day-controls{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+ #monthView #shiftDecemberView *,#monthView #shiftDecemberView *::before,#monthView #shiftDecemberView *::after{
+  transition:none!important;animation:none!important;
+ }
+}
+
+</style>
 <style id="shift-v10-professional-style">
 /* SHIFT V11 / MEK CONTROL BLACK + ACID LIME
    A single final cascade replacing the previous v8.8-v9.1 patches.
