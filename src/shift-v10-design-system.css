@@ -1340,3 +1340,167 @@ html[data-shift780="ready"][data-shift-theme="light"] #overviewView .hero-stage 
   color:var(--sh87-accent-fg)!important;
  }
 }
+
+
+/* SHIFT V12.1 — ACCESSIBLE VIVID CONTRAST PASS
+   Last cascade. Maintain semantic D/N/OFF and selected state foregrounds.
+   Override component ink without flattening the shift meaning. */
+html[data-shift-theme="dark"] {
+  --sh87-shell:#06090F;--sh87-panel:#101824;--sh87-card:#182432;
+  --sh87-soft:#213246;--sh87-border:#40546C;
+  --sh87-fg:#F6FAFF;--sh87-muted:#C1D0E0;
+  --sh87-accent:#C9FF4D;--sh87-accent-fg:#142000;
+  --sh87-hover:#293D50;
+  --shift10-day-bg:#143F31;--shift10-day-text:#8FFFC1;
+  --shift10-night-bg:#1B3566;--shift10-night-text:#BAD8FF;
+  --shift10-off-bg:#443045;--shift10-off-text:#FFD0EA;
+}
+html[data-shift-theme="light"] {
+  --sh87-shell:#F2F5F3;--sh87-panel:#FFFFFF;--sh87-card:#E7EDF1;
+  --sh87-soft:#D9E3E9;--sh87-border:#9CACB9;
+  --sh87-fg:#172736;--sh87-muted:#405569;
+  --sh87-accent:#B3EB2E;--sh87-accent-fg:#162300;
+  --sh87-hover:#CBDCE6;
+  --shift10-day-bg:#CCF5DB;--shift10-day-text:#115334;
+  --shift10-night-bg:#D4E5FF;--shift10-night-text:#183E80;
+  --shift10-off-bg:#F7DDEF;--shift10-off-text:#6D2454;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .command-bar,.hud-panel,.roster-card,.timeline-panel,.network-panel,
+ .insights-panel,.analytics-panel,.people-panel,.person-detail,.month-panel,
+ .v6517-ratio-panel,.v6517-shifts-panel,.v6517-oncall-panel,
+ .v6517-insights-panel,.v6517-trend-panel,.v6517-glass,
+ #shiftNovemberView .shift72-graphic,
+ #shift740FullMonth,#shift740FullMonth .s740-detail,
+ #oncallView .v652-hero,#oncallView .v652-matrix-panel
+){border-color:var(--sh87-border)!important}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .metric-card,.v6517-kpi,.analytics-card,.v6517-note,
+ .v6517-oncall-item,.person-row,.person-pick:not(.active),
+ #shift740FullMonth .s740-stat,
+ #shiftNovemberView .shift72-overview-card,
+ #shiftNovemberView .shift72-position-card,
+ #oncallView .v652-stat,#oncallView .v652-now-card
+){border-color:var(--sh87-border)!important}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .hint,.muted,.row-meta,.meta,.subtext,.helper,
+ .v6517-caption,.v6517-kpi-note,.v6517-kpi-label,
+ .shift72-position-footer,.shift72-person-copy small,
+ .s740-hint,.s740-source-note,.s740-legend span,
+ .v652-kicker,.roster-title small
+){color:var(--sh87-muted)!important;-webkit-text-fill-color:var(--sh87-muted)!important;opacity:1!important}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .section-title,.section-head h2,.roster-title b,
+ .v6517-kpi-value,.metric-num,.metric-name b,
+ .person-name,.row-name,.working-name,
+ #shift740FullMonth .s740-panel-header h3,
+ #shiftNovemberView .shift72-section-heading h4
+){color:var(--sh87-fg)!important;-webkit-text-fill-color:var(--sh87-fg)!important;text-shadow:none!important}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .nav-tabs .nav-btn:not(.active):not(.shift731-active),
+ .command-actions .sys-btn,.ghost-btn,.filter-btn:not(.active),
+ .range-btn:not(.active),.shift81-theme-toggle,
+ #oncallView .v652-view-tabs button:not(.active),
+ #shiftNovemberView .shift72-switch-buttons button:not([aria-pressed="true"])
+){color:var(--sh87-fg)!important;-webkit-text-fill-color:var(--sh87-fg)!important;border-color:var(--sh87-border)!important}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .nav-tabs .nav-btn.active,.nav-tabs .nav-btn.shift731-active,
+ .filter-btn.active,.range-btn.active,
+ .person-pick.active,#shiftMonthTabs button.active,
+ #shift740FullMonth .s740-months button[aria-pressed="true"],
+ #shiftNovemberView .shift72-switch-buttons button[aria-pressed="true"],
+ #oncallView .v652-view-tabs button.active,
+ #mobileNav button.active
+){
+ background:var(--sh87-accent)!important;
+ color:var(--sh87-accent-fg)!important;
+ -webkit-text-fill-color:var(--sh87-accent-fg)!important;
+ border-color:var(--sh87-accent)!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .nav-tabs .nav-btn.active,.nav-tabs .nav-btn.shift731-active,
+ .filter-btn.active,.range-btn.active,.person-pick.active,
+ #shiftMonthTabs button.active,
+ #shift740FullMonth .s740-months button[aria-pressed="true"],
+ #shiftNovemberView .shift72-switch-buttons button[aria-pressed="true"],
+ #oncallView .v652-view-tabs button.active,#mobileNav button.active
+) :is(b,strong,span,small,em){
+ color:var(--sh87-accent-fg)!important;
+ -webkit-text-fill-color:var(--sh87-accent-fg)!important;
+ opacity:1!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ .nav-tabs .nav-btn:not(.active):not(.shift731-active),
+ .command-actions .sys-btn,.ghost-btn,.filter-btn:not(.active),
+ .range-btn:not(.active)
+):hover{background:var(--sh87-hover)!important}
+html[data-shift780="ready"][data-shift-theme] :is(
+ input:not([type="checkbox"]):not([type="radio"]),select,textarea
+){background:var(--sh87-card)!important;color:var(--sh87-fg)!important;border:1px solid var(--sh87-border)!important}
+html[data-shift780="ready"][data-shift-theme] :is(input,textarea)::placeholder{
+ color:var(--sh87-muted)!important;opacity:1!important;
+}
+html[data-shift780="ready"][data-shift-theme] :is(
+ button,a,[role="button"],input,select,textarea
+):focus-visible{outline:3px solid var(--sh87-accent)!important;outline-offset:2px!important}
+/* Readable labels inside roster grids, retaining shift-code-specific colors. */
+html[data-shift780="ready"][data-shift-theme] :is(
+ #monthView .heatmap,#shift740FullMonth .s740-matrix,
+ #shiftNovemberView .shift72-board-table,
+ #oncallView .v652-matrix-scroll
+) :is(th,td){border-color:var(--sh87-border)!important}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #monthView .heatmap .name-col,#shift740FullMonth .s740-matrix .s740-name,
+ #shiftNovemberView .shift72-board-table .shift72-person-heading
+){background:var(--sh87-soft)!important;color:var(--sh87-fg)!important}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #monthView .heatmap .v6519-full-name,
+ #shift740FullMonth .s740-name b,
+ #shiftNovemberView .shift72-person-copy b
+){color:var(--sh87-fg)!important;-webkit-text-fill-color:var(--sh87-fg)!important}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #shiftNovemberView .shift72-date-heading.is-selected .shift72-date-chip,
+ #shift740FullMonth .s740-calendar-day.is-selected,
+ #shift740FullMonth .s740-matrix .s740-matrix-date.selected button
+){background:var(--sh87-accent)!important;border-color:var(--sh87-accent)!important;
+ color:var(--sh87-accent-fg)!important}
+html[data-shift780="ready"][data-shift-theme] :is(
+ #shiftNovemberView .shift72-date-heading.is-selected .shift72-date-chip,
+ #shift740FullMonth .s740-calendar-day.is-selected,
+ #shift740FullMonth .s740-matrix .s740-matrix-date.selected button
+) :is(b,strong,span,small,.s740-date,.s740-cal-info b){
+ color:var(--sh87-accent-fg)!important;-webkit-text-fill-color:var(--sh87-accent-fg)!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] #monthView .heatmap td.shift.D{
+ background:#20503E!important;color:#AAFFD0!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] #monthView .heatmap td.shift.N{
+ background:#254677!important;color:#D1E6FF!important;
+}
+html[data-shift780="ready"][data-shift-theme="dark"] #monthView .heatmap td.shift.O{
+ background:#523951!important;color:#FFD4EB!important;
+}
+html[data-shift780="ready"][data-shift-theme="light"] #monthView .heatmap td.shift.D{
+ background:#CCF5DB!important;color:#115334!important;
+}
+html[data-shift780="ready"][data-shift-theme="light"] #monthView .heatmap td.shift.N{
+ background:#D4E5FF!important;color:#183E80!important;
+}
+html[data-shift780="ready"][data-shift-theme="light"] #monthView .heatmap td.shift.O{
+ background:#F7DDEF!important;color:#6D2454!important;
+}
+/* Do not let the base global .d/.n/.o color override selected calendar cells. */
+html[data-shift780="ready"][data-shift-theme] #monthView .heatmap td.shift :is(b,span,button){
+ color:inherit!important;-webkit-text-fill-color:currentColor!important;
+}
+html[data-shift-theme] #bootOverlay :is(
+ .boot613-phase,.boot613-status,.boot613-meta,small,p
+){color:var(--sh87-boot-muted)!important}
+html[data-shift-theme] #bootOverlay :is(
+ h1,h2,.boot613-title,.boot613-pct
+){color:var(--sh87-boot-fg)!important}
+@media (prefers-reduced-motion:reduce){
+ html[data-shift780="ready"][data-shift-theme] :is(
+ button,a,[role="button"]
+ ){transition-duration:.01ms!important}
+}
