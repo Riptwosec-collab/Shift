@@ -20,7 +20,9 @@ test('URL can explicitly open either source month without losing the legacy Octo
  assert.deepEqual(resolve({year:2026,month:11,day:12},'?month=10','11'),{month:'10',openMonth:true});
  assert.deepEqual(resolve({year:2026,month:10,day:12},'?month=11','10'),{month:'11',openMonth:true});
  assert.deepEqual(resolve({year:2026,month:10,day:12},'','10'),{month:'10',openMonth:false});
- assert.deepEqual(resolve({year:2026,month:12,day:1},'?view=month','11'),{month:'11',openMonth:true});
+ assert.deepEqual(resolve({year:2026,month:12,day:1},'?view=month','11'),{month:'12',openMonth:true});
+ assert.deepEqual(resolve({year:2026,month:11,day:20},'?month=12','11'),{month:'12',openMonth:true});
+ assert.deepEqual(resolve({year:2026,month:11,day:20},'','12'),{month:'12',openMonth:false});
 });
 test('November shortcut is visible in desktop tabs, mobile nav and header',()=>{
  for(const marker of ['.nav-tabs','.command-actions','mobileNav','data-shift731-open-nov',
